@@ -1,0 +1,91 @@
+// Place all the styles related to the update_histories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#history-area {
+  background-color: rgba(255,255,255,.5);
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  padding: 10px;
+  width: 780px;
+}
+
+.diff {
+  overflow:auto;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+
+  ul {
+    background:#fff;
+    background: rgba(255,255,255,.5);
+    overflow:auto;
+    font-size:13px;
+    list-style:none;
+    margin:0;
+    padding: 10px;
+    display:table;
+    border-radius: 6px;
+  }
+
+  del,
+  ins {
+    display:block;
+    text-decoration:none;
+
+  }
+
+  li {
+    padding:0;
+    display:table-row;
+    margin: 0;
+    height:1em;
+
+    &.ins {
+      background:#dfd;
+      background: rgba(235,255,235,.7);
+      color:#080
+    }
+
+    &.del {
+      background:#fee;
+      background: rgba(255,235,235,.7);
+      color:#b00
+    }
+
+    &:hover {
+      background:#ffc
+    }
+
+    &.diff-comment {
+      display: none;
+
+    }
+
+    &.diff-block-info {
+      background: none repeat scroll 0 0 gray;
+
+    }
+  }
+
+  /* try 'whitespace:pre; ' if you don't want lines to wrap */
+  del,
+  ins,
+  span {
+    white-space:pre-wrap;
+    font-family:courier;
+
+  }
+
+  del {
+    strong{
+      font-weight:normal;
+      background:#fcc;
+    }
+  }
+
+  ins {
+    strong {
+      font-weight:normal;
+      background:#9f9;
+    }
+  }
+}

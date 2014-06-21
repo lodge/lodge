@@ -1,0 +1,513 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= stub ignore/ie
+ *
+ *= require_tree .
+ *= require_self
+ */
+$g-font-size: 14px;
+$g-error-text-color: #a20;
+
+body,
+p,
+ol,
+ul,
+td,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    "ヒラギノ角ゴ ProN W3",
+    "Hiragino Kaku Gothic ProN",
+    "メイリオ",
+    Ricty,
+    Meiryo,sans-serif;
+}
+
+body,
+p,
+ol,
+ul,
+td {
+  font-size: $g-font-size;
+  line-height: 1.5em;
+}
+
+html,
+body {
+  margin: 0;
+  background-color: #cb8;
+  background-image: url(background.png);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  word-break: break-all;
+  margin: 20px 0;
+}
+
+pre {
+  font-size: $g-font-size;
+}
+
+code {
+  background-color: rgba(230,230,230,.6);
+  border: 1px solid #aaa;
+  padding: 2px;
+  margin: 3px;
+  border-radius: 3px;
+}
+
+table {
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid #aaa;
+    padding: 5px;
+  }
+}
+
+a {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+img,
+.user-icon {
+  vertical-align: middle;
+  border: none;
+  width: 20px;
+  height: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#main-container {
+  $article-list-area-width: 800px;
+  $navigation-area-width: 200px;
+  $area-margin: 50px;
+
+  background-color: rgba(255,255,255,.6);
+  box-shadow: 1px 1px 15px #666;
+  height: 100%;
+  margin: 0 auto;
+  padding: 15px;
+  width: $article-list-area-width + $navigation-area-width + $area-margin;
+  word-break: break-all;
+
+  %area-style {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+  }
+
+  #header-area {
+    background-image: url(header.png);
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    font-size: 30px;
+    line-height: 80px;
+    height: 80px;
+    padding: 10px 20px;
+
+    &,
+    a {
+      color: #fff;
+    }
+
+    #application-title {
+      a {
+        &,
+        &:hover,
+        &:visited {
+          color: #753;
+          background-color: transparent;
+          text-decoration: none;
+          text-shadow: 1px 1px #cb8;
+        }
+      }
+
+      margin-top: 0;
+      float: left;
+    }
+
+    #current-user-info {
+      margin: 0;
+      text-align: right;
+
+      p {
+        margin: 0 0 10px 0;
+      }
+
+      .user-name {
+        font-weight: bold;
+      }
+
+      #num-of-notification {
+        background-color: #aaa;
+        box-shadow: 1px 1px 5px #444;
+        color: #ddd;
+        display: inline-block;
+        font-size: 120%;
+        font-weight: bold;
+        border-radius: 3px;
+        height: 20px;
+        margin: 0 5px;
+        min-width: 10px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 0 5px;
+
+        &.new-notifications {
+          color: #fff;
+          background-color: #a00;
+        }
+      }
+    }
+  }
+
+  #notifications-area {
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    background-color: rgba(255,255,255,.9);
+    box-shadow: 3px 3px 10px #444;
+    display: none;
+    padding: 0;
+    list-style: none;
+    width: 500px;
+    max-height: 600px;
+    overflow-y: auto;
+    position: absolute;
+    
+    li {
+      border-bottom: 1px solid #aaa;
+
+      &:last-child {
+        border: none;
+      }
+
+      a {
+        padding: 5px;
+        display: block;
+
+        &:hover {
+          height: 100%;
+          background-color: rgba(240, 240, 255,.6);
+          color: #666;
+        }
+      }
+
+      img {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      span {
+        width: 400px;
+        display: inline-block;
+        margin: 10px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  #notice-area {
+    margin: 2em 0;
+  }
+
+  #article-search-area {
+    text-align: right;
+    height: 30px;
+  }
+
+  #contents-area {
+    @extend %area-style;
+    width: $article-list-area-width;
+  }
+
+  #navigation-area {
+    @extend %area-style;
+    margin-top: 30px;
+    margin-left: $area-margin - 10px;
+    list-style: none;
+    width: $navigation-area-width;
+
+    li {
+      margin-bottom: 5px;
+    }
+  }
+
+  #user-info-area {
+    position: absolute;
+    width: 400px;
+    vertical-align: middle;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: rgba(255,255,255,.9);
+    display: none;
+    list-style: none;
+
+    #user-info-icon,
+    #user-info-basic-area {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 5px;
+      max-width: 300px;
+    }
+
+    #user-info-icon {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
+
+.num-of-contribution {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.user-name {
+  &:hover {
+    background-color: transparent;
+    color: #000;
+  }
+}
+
+.list-table {
+  width: 100%;
+  margin: 10px 0;
+
+  th,
+  td {
+    border-width: 1px 0;
+    white-space: nowrap;
+  }
+}
+
+.tag {
+  font-size: 80%;
+  text-shadow: 1px 1px #ddd;
+  background-color: #bbb;
+  border: 1px solid #aaa;
+  vertical-align: middle;
+  border-radius: 3px;
+  padding: 1px 3px;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &,
+  &:visited {
+    color: #444;
+  }
+
+  &:hover {
+    background-color: #ccc;
+    color: #666;
+  }
+}
+
+.article-tags-column {
+  white-space: normal !important;
+
+  div {
+    width: 140px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.alert {
+  color: $g-error-text-color;
+}
+
+.more-display-area {
+  text-align: right;
+}
+
+.pagination {
+  text-align: center;
+
+  .first,
+  .prev,
+  .page,
+  .next,
+  .last {
+    display: inline-block;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    margin: 0 5px;
+    $size: 25px;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    box-shadow: inset 1px 1px 3px #fff;
+
+    &.gap {
+      border: none;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    &.current,
+    a:active {
+      box-shadow: inset 1px 1px 3px #888;
+    }
+
+    a {
+      vertical-align: middle;
+      text-decoration: none;
+      display: block;
+      width: $size;
+      height: $size;
+
+      &:hover {
+        border-radius: 3px;
+        color: inherit;
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+// redcarpet
+.markdown {
+  p {
+    letter-spacing: 1px;
+  }
+
+  blockquote {
+    border-left: 3px solid rgba(200,200,200,.7);
+    padding-left: 15px;
+    margin-left: 30px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
+  }
+
+  h1 {
+    text-shadow: 1px 1px 1px #eee;
+    line-height: 1.5em;
+    background-color: rgba(190,190,190,.6);
+  }
+
+  h2 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #aaa;
+  }
+
+  h3 {
+    border-bottom: 1px dotted #aaa;
+  }
+
+  h4,
+  h5,
+  h6 {
+    text-decoration: underline;
+  }
+
+  em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  strong {
+    color: #f00;
+  }
+
+  pre {
+    background: transparent;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+  }
+}
+
+// CodeRay
+.CodeRay {
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  border-collapse: separate;
+  margin: 0 0 10px 5px;
+
+  .code-filename-row {
+    text-align: left;
+
+    th {
+      border: none;
+      border-bottom: 1px solid #aaa;
+      background-color: rgba(255,255,255,.5);
+      padding: 0 5px;
+      margin: 0;
+    }
+  }
+
+  td {
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  pre {
+    background-color: inherit;
+    border: none;
+    line-height: 1.2em;
+    margin: 0;
+    padding: 5px;
+  }
+
+  .code pre{
+    max-width: 700px;
+    overflow: auto;
+  }
+
+}
+
+li {
+  .CodeRay .code pre {
+    max-width: 640px;
+  }
+}
+
+li li {
+  .CodeRay .code pre {
+    max-width: 600px;
+  }
+}
+
+li li li {
+  .CodeRay .code pre {
+    max-width: 560px;
+  }
+}

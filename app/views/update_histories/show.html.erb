@@ -1,0 +1,22 @@
+<% history = @update_history %>
+
+<div id="history-area">
+  <h2><%= tc :current_article, article_title: @article.title %></h2>
+  <h2><%= t "activerecord.attributes.article.title" %></h2>
+  <p>
+    <%= diff(history.old_title, history.new_title) %>
+  </p>
+  <h2><%= t "activerecord.attributes.article.tags" %></h2>
+  <p>
+    <%= diff(history.old_tags, history.new_tags) %>
+  </p>
+  <h2><%= t "activerecord.attributes.article.body" %></h2>
+  <p>
+    <%= diff(history.old_body, history.new_body) %>
+  </p>
+
+</div>
+
+<p>
+  <%= link_to tco(:back), update_histories_path(@update_history.article_id) %>
+</p>

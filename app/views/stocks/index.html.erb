@@ -1,0 +1,24 @@
+<h1>Listing stocks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Article</th>
+      <th>User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @stocks.blank? %>
+      <tr>
+        <td colspan="2">Nothing...</td>
+      </tr>
+    <% end %>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= link_to stock.article.title, stock.article %></td>
+        <td><%= stock.article.user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

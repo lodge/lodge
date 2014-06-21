@@ -1,0 +1,31 @@
+<% action = params[:action] %>
+<% is_index_action = action == "index" %>
+<h1><%= tco :tag_list_title %></h1>
+
+<%= paginate @tags %>
+
+<table id="tags-table" class="list-table">
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= link_to tag.name, articles_by_tag_path(tag.name), title: tag.name %></td>
+        <td class="counts-column"><%= tag.taggings_count %></td>
+        <td class="follow-column">
+          <% if @following_tags.map{|ft|ft.tag}.include?(tag) %>
+            <%= link_to tc(:unfollow), following_tag_path(tag_id: tag.id), method: :delete %>
+          <% else %>
+            <%= link_to tc(:follow), following_tags_path(tag_id: tag.id), method: :post %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tags %>
+
+<% unless is_index_action %>
+  <p>
+    <%= link_to tc("to_list"), @tags_path %>
+  </p>
+<% end %>

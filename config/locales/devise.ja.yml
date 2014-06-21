@@ -1,0 +1,59 @@
+# Additional translations at https://github。com/plataformatec/devise/wiki/I18n
+
+ja:
+  devise:
+    confirmations:
+      confirmed: "アカウント認証が完了しました。"
+      send_instructions: "確認メールを送信しました。 メール内のリンクをクリックして認証を完了してください。"
+      send_paranoid_instructions: "あなたのメールアドレスが既に登録されている場合, 確認メールが届きます。"
+    failure:
+      already_authenticated: "あなたは既にログインしています"
+      inactive: "あなたのアカウントは有効化されていません。"
+      invalid: "メールアドレス又はパスワードが違います。"
+      locked: "あなたのアカウントはロックされています。"
+      last_attempt: "もう1度間違えると、アカウントはロックされます。"
+      not_found_in_database: "メールアドレス又はパスワードが違います。"
+      timeout: "あなたのセッションはタイムアウトしました。 再度ログインし直してください。"
+      unauthenticated: "この処理を継続するには, ログインまたは会員登録をする必要があります。"
+      unconfirmed: "この処理を継続するには, アカウントを認証する必要があります。"
+    mailer:
+      confirmation_instructions:
+        subject: "アカウントの確認"
+      reset_password_instructions:
+        subject: "パスワードのリセット"
+      unlock_instructions:
+        subject: "セキュリティロックの解除"
+    omniauth_callbacks:
+      failure: "%{kind} での認証ができませんでした。 理由: \"%{reason}\"。"
+      success: " %{kind} での認証に成功しました。"
+    passwords:
+      no_token: "URLが不正です。"
+      send_instructions: "パスワード変更案内のメールを送信しました。"
+      send_paranoid_instructions: "パスワード変更用のリンクを含むメールを送信しました。"
+      updated: "パスワードの変更が完了しました。"
+      updated_not_active: "パスワードの変更が完了しました。"
+    registrations:
+      destroyed: "退会が完了しました。"
+      signed_up: "ようこそ！会員登録が完了しました。"
+      signed_up_but_inactive: "アカウントが無効化されています。"
+      signed_up_but_locked: "あなたのアカウントはセキュリティロックされています。"
+      signed_up_but_unconfirmed: "確認メールを送信しました。 メール内のリンクをクリックして認証を完了してください。"
+      update_needs_confirmation: "新しいメールアドレスに認証メールを送信しました。"
+      updated: "会員情報の更新が完了しました。"
+    sessions:
+      signed_in: "ログインが完了しました。"
+      signed_out: "ログアウトが完了しました。"
+    unlocks:
+      send_instructions: "セキュリティロック解除方法案内のメールを送信しました。"
+      send_paranoid_instructions: "セキュリティロック解除用のリンクを含むメールを送信しました。"
+      unlocked: "セキュリティロックの解除に成功しました。"
+  errors:
+    messages:
+      already_confirmed: "既に認証済みです。 ログインしてください。"
+      confirmation_period_expired: "認証の有効期限が切れました: %{period}, 認証メールを再送してください。"
+      expired: "有効期限が切れました。"
+      not_found: "存在しません。"
+      not_locked: "ロックされていません。"
+      not_saved:
+        one: "%{resource} の保存について, 1 個のエラーがあります。"
+        other: "%{resource} の保存について, %{count} 個のエラーがあります。"

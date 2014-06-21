@@ -1,0 +1,20 @@
+<h2><%= tco :sign_in %></h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "devise-form"}) do |f| %>
+  <dl>
+    <dt><%= tc :email %></dt>
+    <dd><%= f.email_field :email, autofocus: true %></dd>
+    <dt><%= tc :password %></dt>
+    <dd><%= f.password_field :password, autocomplete: "off" %></dd>
+  </dl>
+
+  <% if devise_mapping.rememberable? -%>
+    <div id="remember-checkbox-area">
+      <label><%= f.check_box :remember_me %> <%= tc :remember_me %></label>
+    </div>
+  <% end -%>
+
+  <div><%= f.submit tco(:sign_in) %></div>
+<% end %>
+
+<%= render "users/shared/links" %>

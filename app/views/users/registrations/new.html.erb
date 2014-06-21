@@ -1,0 +1,20 @@
+<h2><%= tco :sign_up %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "devise-form"}) do |f| %>
+  <%= devise_error_messages! %>
+
+  <dl>
+    <dt><%= f.label :name %></dt>
+    <dd><%= f.text_field :name, autofocus: true %></dd>
+    <dt><%= f.label :email %></dt>
+    <dd><%= f.email_field :email %></dd>
+    <dt><%= f.label :password %></dt>
+    <dd><%= f.password_field :password, autocomplete: "off" %></dd>
+    <dt><%= f.label :password_confirmation %></dt>
+    <dd><%= f.password_field :password_confirmation, autocomplete: "off" %></dd>
+  </dl>
+
+  <div><%= f.submit tco(:sign_up) %></div>
+<% end %>
+
+<%= render "users/shared/links" %>

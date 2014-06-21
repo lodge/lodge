@@ -1,0 +1,54 @@
+<% action = params[:action] %>
+<% is_index_action = action == "index" %>
+<h1>
+  <% case action 
+  when "index" %>
+    <%= tco("recent_article_list_title") %>
+  <% when "by_tag" %>
+    <%= tc("list_title_by_tag", :tag_name => params[:tag_name]) %>
+  <% when "by_stocks" %>
+    <%= tco "stocked_article_list_title" %>
+  <% when "search" %>
+    <%= tc("list_title_by_search", :query => params[:query]) %>
+  <% when "by_user" %>
+    <%= tco :user_article_list_title %>
+  <% when "feed" %>
+    <%= tco :feed_article_list_title %>
+  <% end %>
+</h1>
+
+<% if action == "by_tag" %>
+  <% if current_user.follow?(@tag) %> 
+    <%= link_to tc(:unfollow_this_tag), following_tag_path(tag_id: @tag.id), method: :delete %>
+  <% else %>
+    <%= link_to tc(:follow_this_tag), following_tags_path(tag_id: @tag.id), method: :post %>
+  <% end %>
+<% end %>
+
+
+<p class="article-new-link-area">
+  <%= link_to tco('new'), new_article_path %>
+</p>
+
+<% if @articles.length == 0 %>
+  <p>
+    <% case action 
+      when "feed" %>
+        <%= tc(:feed_introduction).html_safe %>
+    <% when "by_stocks" %>
+        <%= tc(:stocks_introduction).html_safe %>
+    <% end %>
+  </p>
+<% end %>
+
+<%= render "article_list", articles: @articles %>
+
+<p class="article-new-link-area">
+  <%= link_to tco('new'), new_article_path %>
+</p>
+
+<% unless is_index_action %>
+  <p>
+    <%= link_to tc("to_list"), articles_path %>
+  </p>
+<% end %>

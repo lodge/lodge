@@ -1,0 +1,2 @@
+class ArticleNotification < Notification
+end

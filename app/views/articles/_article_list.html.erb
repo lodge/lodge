@@ -1,0 +1,25 @@
+<%= paginate articles %>
+
+<table id="articles-table" class="list-table">
+  <tbody>
+    <% articles.each do |article| %>
+      <tr>
+        <td class="article-title-column">
+          <p><%= link_to article.title, article, title: article.title %></p>
+        </td>
+        <td class="article-tags-column">
+          <div>
+            <% article.tags.each do |tag| %>
+              <%= link_to tag.name, articles_by_tag_path(tag.name), class: :tag %>
+            <% end %>
+          </div>
+        </td>
+        <td><%= stock_and_comment_count(article) %></td>
+        <td><%= user_name_with_icon(article.user) %></td>
+        <td><%= article.updated_at.to_s(:date) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate articles %>

@@ -1,0 +1,34 @@
+<%= form_for(@article, html: {id: "article-form"}) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+        <% @article.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :tags %><%= tc :tags_hint %><br>
+    <%= f.text_field :tags, :value => get_tags, :placeholder => tc("tags_example") %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body, id: "article-body-textarea" %>
+  </div>
+  <div class="actions">
+    <%= button_tag tc(:preview), type: :button, class: "preview-button" %>
+  </div>
+  <div class="preview-area markdown"></div>
+  <div class="actions">
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.submit %>
+  </div>
+<% end %>

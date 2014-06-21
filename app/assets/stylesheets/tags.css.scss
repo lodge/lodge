@@ -1,0 +1,15 @@
+// Place all the styles related to the tags controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#tags-table {
+  .follow-column,
+  .counts-column {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .follow-column {
+    width: 100px;
+    text-align: right;
+  }
+}

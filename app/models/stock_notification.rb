@@ -1,0 +1,2 @@
+class StockNotification < Notification
+end

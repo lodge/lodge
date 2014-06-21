@@ -1,0 +1,88 @@
+<div id="article-area">
+  <% if @article.user == current_user %>
+    <div id="operation-area">
+      <%= link_to tco('edit'), edit_article_path(@article) %>
+      |
+      <%= link_to tco('destroy'), @article, method: :delete, data: { confirm: tco(:are_you_sure)} %>
+    </div>
+  <% end %>
+
+  <h1 id="article-title">
+    <%= @article.title %>
+  </h1>
+
+  <div id="article-info-area">
+    <div id="article-timestamp-area">
+      <span><%= tco :created_at %>: <%= @article.created_at %></span>
+      <% if @article.created_at != @article.updated_at %>
+        <span>|</span>
+        <span><%= tco :updated_at %>: <%= @article.updated_at %></span>
+        <span>-</span>
+        <span><%= link_to "#{tc(:update_histories)}(#{@article.update_histories.size})", update_histories_path(@article) %></span>
+      <% end %>
+    </div>
+    <% @article.tags.each do |tag| %>
+      <%= link_to tag.name, articles_by_tag_path(tag.name), class: :tag %>
+    <% end %>
+    <%= user_name_with_icon @article.user %>
+    <%= stock_and_comment_count(@article) %>
+    <p>
+      <% if @stocked_users.size() > 0 %>
+        <%= tc :stocked_users %>
+        <% @stocked_users.each do |user| %>
+          <%= gravatar(user) %>
+        <% end %>
+      <% end %>
+      
+      <%# if @stocked_users.size() > 10 %>
+        <%#= tco :more_display %>
+      <%# end %>
+    </p>
+    <p>
+      <% if @stock %>
+        <%= link_to tc('unstock'), @stock, :method => :delete %>
+      <% else %>
+        <%= link_to tc('stock'), {:controller => "stocks", :article_id => @article.id}, :method => :post %>
+      <% end %>
+    </p>
+  </div>
+
+  <div id="article-body-area" class="markdown">
+    <%= markdown(@article.body).html_safe %>
+  </div>
+</div>
+
+<h2><%= tc :comments_title %></h2>
+
+<% if @article.comments.blank? %>
+  <dt>Nothing...</dt>
+<% else %>
+  <dl id="comment-list">
+    <% @article.comments.each do |comment| %>
+      <% user = comment.user %>
+      <dt style="position: relative;" data-comment-id="<%= comment.id %>">
+        <%= user_name_with_icon user %>
+        <span class="comment-info">
+          <%= comment.updated_at %>
+          <% if comment.user == current_user %> 
+            |
+            <%= content_tag :a, tco('edit'), class: "comment-edit-link" %>
+            |
+            <%= link_to tco('destroy'), comment, method: :delete, data: { confirm: tco(:are_you_sure)} %>
+          <% end %>
+        </span>
+      </dt>
+      <dd class="markdown">
+        <%= markdown(comment.body).html_safe %>
+        <%= render 'comment_form', hide: true, comment: comment %>
+      </dd>
+    <% end %>
+  </dl>
+<% end %>
+
+<h2><%= tc :comment_form_title %></h2>
+<%= render 'comment_form', hide: false, comment: Comment.new %>
+
+<p>
+  <%= link_to tco(:back), @pre_accessable_url %>
+</p>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% if params[:controller] == "articles" && [:show, :edit].include?(params[:action].to_sym)   %>
+    <title><%= @article.title %> - Lodge</title>
+  <% else %>
+    <title>Lodge</title>
+  <% end %>
+  <%= favicon_link_tag %>
+  <%= javascript_tag "var ROOT_PATH = '#{root_path}';" %>
+  <script type="text/javascript" charset="utf-8">var ROOT_PATH = '<%= root_path %>';</script>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'notification', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <!--[if (lt IE 9) & (!IEMobile)]>
+    <%= stylesheet_link_tag 'ignore/ie', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'externals/html5shiv', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'externals/renspond.min', 'data-turbolinks-track' => true %>
+  <![endif]-->
+</head>
+<body>
+
+  <div id="main-container">
+
+    <div id="header-area">
+      <h1 id="application-title"><%= link_to "Lodge", root_path %></h1>
+
+      <div id="current-user-info">
+        <% if user_signed_in? %>
+          <p>
+            <%= t "users.logged_in_as" %>
+            <%= user_name_with_icon(current_user) %>
+            <% notification_class = %!class="new-notifications"!.html_safe if @notifications.length >= 1 %>
+            <a id="num-of-notification" <%= notification_class %>><%= @notifications.length %></a>
+            <%= link_to t("users.edit_profile"), edit_user_registration_path, :class => 'navbar-link' %> |
+            <%= link_to t("users.logout"), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          </p>
+          <p>
+            <span class="num-of-contribution"><%= current_user.contribution %></span> <%= tco :contribution %>
+          </p>
+        <% else %>
+          <p>
+            <%= link_to t("users.sign_up"), new_user_registration_path, :class => 'navbar-link'  %> |
+            <%= link_to t("users.login"), new_user_session_path, :class => 'navbar-link'  %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+    <ul id="notifications-area">
+      <% @notifications.each do |notification| %>
+        <%= notification_message_line(notification) %>
+      <% end %>
+    </ul>
+
+    <div id="notice-area">
+      <% if notice %>
+        <p id="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-error"><%= alert %></p>
+      <% end %>
+    </div>
+
+    <article id="contents-area">
+      <% if current_user %>
+        <%= form_tag articles_search_path, :method => :get, :id => "article-search-area" do %>
+          <%= text_field_tag "query", params[:query], "placeholder" => tco("article_search") %> 
+          <%= submit_tag tco("search") %>
+        <% end %>
+      <% end %>
+
+      <%= yield %>
+    </article>
+    
+    <% if current_user %>
+      <nav id="navigation-area">
+        <% # Stocked article list %>
+        <h2><%= tco("menu") %></h2>
+        <ul id="menu">
+          <li><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></li>
+          <li><%= link_to tco(:recent_article_list_title), articles_path %></li>
+          <li><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></li> 
+          <li><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></li> 
+          <li><%= link_to tco("tag_list_title"), tags_path %></li>
+        </ul>
+
+        <% # Stocked article list %>
+        <h2><%= tco("stocked_article_list_title") %></h2>
+        <ol id="stocked-article-list">
+          <% @stocked_articles.each do |article| %>
+            <li><%= link_to article.title, article_path(article) %></li>
+          <% end %>
+        </ol>
+        <% unless @stocked_articles.empty? %>
+        <div class="more-display-area">
+          <%= link_to tco("more_display"), articles_by_stocks_path %> 
+        </div>
+        <% end %>
+
+        <% # Your article list %>
+        <h2><%= tco("user_article_list_title") %></h2>
+        <ol id="user-article-list">
+          <% @user_articles.each do |article| %>
+            <li><%= link_to "#{article.title} #{}", article %></li>
+          <% end %>
+        </ol>
+        <% unless @user_articles.empty? %>
+          <div class="more-display-area">
+            <%= link_to tco("more_display"), articles_by_user_path(current_user.id) %> 
+          </div>
+        <% end %>
+
+      </nav>
+
+      <ul id="user-info-area">
+        <li>
+          <img id="user-info-icon" src="" alt="">
+          <div id="user-info-basic-area">
+            <h3 id="user-info-name"></h3>
+            <p id="user-info-contribution"><span class="num-of-contribution"></span> <%= tco :contribution %></p>
+          </div>
+        </li>
+        <li id="user-info-article-list">
+          <h3><%= tco :recent_article_list_title %></h3>
+          <ol>
+          </ol>
+        </li>
+      </dl>
+    <% end %>
+  </div>
+
+</body>
+</html>

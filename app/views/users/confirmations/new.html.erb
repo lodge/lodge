@@ -1,0 +1,14 @@
+<h2><%= tc :resend_title %></h2>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "devise-form" }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <dl>
+    <dt><%= f.label :email %></dt>
+    <dd><%= f.email_field :email, autofocus: true %></dd>
+  </dl>
+
+  <div><%= f.submit tc(:submit_button) %></div>
+<% end %>
+
+<%= render "users/shared/links" %>

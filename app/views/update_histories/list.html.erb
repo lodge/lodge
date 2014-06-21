@@ -1,0 +1,23 @@
+<h2><%= tc :current_article, article_title: @article.title %></h2>
+
+<table class="list-table">
+  <tbody>
+    <% @update_histories.each do |update_history| %>
+      <tr>
+        <td><%= link_to update_history.new_title, update_history %></td>
+        <td class="article-tags-column">
+          <div>
+            <% update_history.new_tags.split(",").each do |tag| %>
+              <%= content_tag :span, tag, class: :tag %>
+            <% end %>
+          </div>
+        </td>
+        <td><%= update_history.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to tco(:back), article_path(params[:article_id]) %>
+</p>

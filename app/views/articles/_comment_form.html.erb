@@ -1,0 +1,13 @@
+<% style = hide ? "display: none" : "" %>
+<%= form_for(comment, html: {class: "comment-form", style: style}) do |f| %>
+  <%= f.text_area :body, class: "article-comment-textarea" %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.hidden_field :article_id, :value => @article.id %>
+  <div class="actions">
+    <%= button_tag tc(:preview), type: :button, class: "preview-button" %>
+  </div>
+  <div class="preview-area markdown"></div>
+  <div class="actions">
+    <%= submit_tag :comment %>
+  </div>
+<% end %>
