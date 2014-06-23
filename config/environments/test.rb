@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -39,17 +40,7 @@ Rails.application.configure do
 
   # Devise Settings
   # 以下は主にユーザのパスワード忘れの際のメール送信で利用する設定です。
+
   # メールに記載する本サービスのURL
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  # SMTPの指定
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com", # SMTPサーバ
-    :port => 587, # ポート
-    :domain => 'gmail.com', # gmail.com以外のドメイン名の場合はそれに合わせて変更してください。
-    :user_name => "", # ユーザ名
-    :password => "", # パスワード
-    :authentication => 'plain', # 認証方式
-    :enable_starttls_auto => true,
-  }
 end
