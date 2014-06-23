@@ -90,39 +90,26 @@ http://lodge-sample.herokuapp.com/
     ```
 
 1. `rake db:create` の後、 `rake db:migrate` を実行します。これでDBは完成です。
-1. `config/environments/production.example.rb` を `config/environments/production.rb` としてコピーし、ファイル最下部にある以下の部分を編集します。通常はproduction.rbを利用します。各コメントを参考に設定してください。
+1. `.env.example` を `.env.example` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。
 
     ```ruby
-    # Devise Settings
-    # 以下は主にユーザ登録やパスワード忘れの際のメール送信で利用する設定です。
-    # メールに記載する本サービスのURL
-    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-    # SMTPの指定
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com", # SMTPサーバ
-      :port => 587, # ポート
-      :domain => 'gmail.com', # gmail.com以外のドメイン名の場合はそれに合わせて変更してください。
-      :user_name => "", # ユーザ名
-      :password => "", # パスワード
-      :authentication => 'plain', # 認証方式
-      :enable_starttls_auto => true,
-    }
+    # productionモードで動かす為には、secret_keyを設定します。
+    # `rake secret` により生成するのがオススメです。
+    SECRET_KEY_BASE   = __some_random_string__
+
+    # 認証キーの設定
+    # ランダムな文字列を指定します。
+    DEVISE_SECRET_KEY = __some_random_string__
+
+    # アプリケーションのドメインを設定します。
+    LODGE_DOMAIN      = lodge-sample.herokuapp.com
+
+    # メールの設定します。
+    STMP_ADDRESS      = smtp.gmail.com
+    STMP_PORT         = 587
+    STMP_USERNAME     = username
+    STMP_PASSWORD     = password
     ```
-
-1. productionモードで動かす為には、secret_keyを設定します(developmentモードでは必要ありません)。これは実行する環境の環境変数に設定しますので、`~/.bashrc` 等に書いておくと便利です。
-
-bashの場合
-
-```bash
-echo "export SECRET_KEY_BASE=\"`rake secret`\"" >> ~/.bashrc; source ~/.bashrc
-```
-
-zshの場合
-
-```bash
-echo "export SECRET_KEY_BASE=\"`rake secret`\"" >> ~/.zshrc; source ~/.zshrc
-```
 
 ## 起動
 
