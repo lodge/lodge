@@ -1,20 +1,19 @@
 <% history = @update_history %>
 
-<div id="history-area">
-  <h2><%= tc :current_article, article_title: @article.title %></h2>
-  <h2><%= t "activerecord.attributes.article.title" %></h2>
-  <p>
-    <%= diff(history.old_title, history.new_title) %>
-  </p>
-  <h2><%= t "activerecord.attributes.article.tags" %></h2>
-  <p>
-    <%= diff(history.old_tags, history.new_tags) %>
-  </p>
-  <h2><%= t "activerecord.attributes.article.body" %></h2>
-  <p>
-    <%= diff(history.old_body, history.new_body) %>
-  </p>
-
+<h3 class="lead"><strong><%= tc :current_article, article_title: @article.title %></strong></h3>
+<div id="history-area" class="well">
+  <dl>
+    <dt><%= t "activerecord.attributes.article.title" %></dt>
+    <dd><%= diff(history.old_title, history.new_title) %></dd>
+  </dl>
+  <dl>
+    <dt><%= t "activerecord.attributes.article.tags" %></dt>
+    <dd><%= diff(history.old_tags, history.new_tags) %></dd>
+  </dl>
+  <dl>
+    <dt><%= t "activerecord.attributes.article.body" %></dt>
+    <dd><%= diff(history.old_body, history.new_body) %></dd>
+  </dl>
 </div>
 
 <p>

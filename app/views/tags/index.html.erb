@@ -4,13 +4,15 @@
 
 <%= paginate @tags %>
 
-<table id="tags-table" class="list-table">
+<table class="tag-table list-table table">
+  <colgroup span="1"/>
+  <colgroup span="2"/>
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
         <td><%= link_to tag.name, articles_by_tag_path(tag.name), title: tag.name %></td>
-        <td class="counts-column"><%= tag.taggings_count %></td>
-        <td class="follow-column">
+        <td class="counts-column text-right"><%= tag.taggings_count %></td>
+        <td class="follow-column text-right">
           <% if @following_tags.map{|ft|ft.tag}.include?(tag) %>
             <%= link_to tc(:unfollow), following_tag_path(tag_id: tag.id), method: :delete %>
           <% else %>
