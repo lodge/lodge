@@ -86,6 +86,17 @@
           <li><%= link_to tco("tag_list_title"), tags_path %></li>
         </ul>
 
+        <% # Pupular article list %>
+        <h2><%= tco("popular_article_list_title") %></h2>
+        <ol id="popular-article-list">
+          <% @popular_articles.each do |article| %>
+            <li>
+              <%= link_to "#{article.title}", article_path(article) %>
+              <%= stock_and_count_link(article) %>
+            </li>
+          <% end %>
+        </ol>
+
         <% # Stocked article list %>
         <h2><%= tco("stocked_article_list_title") %></h2>
         <ol id="stocked-article-list">

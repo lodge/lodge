@@ -3,18 +3,24 @@ require 'coderay'
 
 module ArticlesHelper
   def stock_and_comment_count(article)
-    stock_info = ""
+    stock_info = stock_and_count_link(article)
+    comment_info = comment_image_and_count(article)
+    %!#{stock_info} #{comment_info}!.html_safe
+  end
+
+  def stock_and_count_link(article)
     user_stock = article.stocks.find{ |stock| stock.user_id == current_user.id}
     if user_stock
-      stock_image_and_count = %!#{image_tag("stocked.png")}#{article.stocks.size}!.html_safe
-      stock_info = link_to stock_image_and_count, user_stock, method: :delete, class: "stock-link"
+      link_to %!#{image_tag("stocked.png")}#{article.stocks.size}!.html_safe, user_stock, method: :delete, class: "stock-link", title: tco(:unstock)
     else
-      stock_image_and_count = %!#{image_tag("unstocked.png")}#{article.stocks.size}!.html_safe
-      stock_info = link_to stock_image_and_count, {controller: "stocks", article_id: article.id}, method: :post, class: "stock-link"
+      link_to %!#{image_tag("unstocked.png")}#{article.stocks.size}!.html_safe, {controller: "stocks", article_id: article.id}, method: :post, class: "stock-link", title: tco(:stock)
     end
+  end
 
-    comment_info = %!#{image_tag("comment.png")}#{article.comments.size}!.html_safe
-    %!#{stock_info} #{comment_info}!.html_safe
+  def comment_image_and_count(article)
+    content_tag :span, title: tco(:comment) do
+      %!#{image_tag("comment.png")}#{article.comments.size}!.html_safe
+    end
   end
 
   def get_tags

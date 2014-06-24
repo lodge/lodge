@@ -31,6 +31,9 @@ ja:
     search: 検索
     created_at: 作成
     updated_at: 更新
+    stock: ストック
+    unstock: ストック解除
+    comment: コメント
     back: 戻る
     freeze: 凍結
     more_display: 一覧を見る
@@ -40,6 +43,7 @@ ja:
     tag_list_title: タグ一覧
     user_article_list_title: 投稿した記事
     stocked_article_list_title: ストックした記事
+    popular_article_list_title: 最近の人気記事
     are_you_sure: 本当に実行しますか？
     menu: メニュー
     sign_in: ログイン

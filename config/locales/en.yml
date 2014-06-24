@@ -31,6 +31,9 @@ en:
     search: Search
     created_at: Created at
     updated_at: Updated at
+    stock: Stock
+    unstock: Unstock
+    comment: Comments
     back: Back
     freeze: Freeze
     more_display: More
@@ -40,6 +43,7 @@ en:
     tag_list_title: Tags
     user_article_list_title: Your posts
     stocked_article_list_title: Stocks
+    popular_article_list_title: Recent popular
     are_you_sure: Are you sure?
     menu: Menu
     sign_in: Sign in
