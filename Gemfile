@@ -65,8 +65,9 @@ require 'yaml'
 database_file = File.join(File.dirname(__FILE__), "config/database.yml")
 if File.exist?(database_file)
   database_config = YAML::load(ERB.new(IO.read(database_file)).result)
-  if not database_config["adapter"].nil?
-    case database_config["adapter"]
+  adapter = database_config["default"]["adapter"]
+  unless adapter.nil?
+    case adapter
     when 'mysql2'
       gem "mysql2"
     when 'mysql'
