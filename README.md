@@ -70,7 +70,6 @@ http://lodge-sample.herokuapp.com/
     git clone https://github.com/m-yamashita/lodge.git
     ```
 
-1. `bundle install` を実行します(DBにSQLite3をご利用の場合はGemfile内のsqlite3のコメントを外してから行なってください)。
 1. `config/database.example.yml` を `config/database.yml` としてコピーし、以下のように編集します(SQLite3もしくはMySQLをご利用になる場合はコメントアウトを外して設定すると楽です)。
 
     ```yml
@@ -89,6 +88,7 @@ http://lodge-sample.herokuapp.com/
       pool: 5
     ```
 
+1. `bundle install` を実行します。
 1. `rake db:create` の後、 `rake db:migrate` を実行します。これでDBは完成です。
 1. `config/environments/production.example.rb` を `config/environments/production.rb` としてコピーし、ファイル最下部にある以下の部分を編集します。通常はproduction.rbを利用します。各コメントを参考に設定してください。
 
