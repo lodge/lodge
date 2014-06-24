@@ -93,11 +93,11 @@ Rails.application.configure do
   # SMTPの指定
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => ENV["STMP_ADDRESS"],
-    :port                 => ENV["STMP_PORT"],
+    :address              => ENV["SMTP_ADDRESS"],
+    :port                 => ENV["SMTP_PORT"],
     :domain               => ENV['LODGE_DOMAIN'],
-    :user_name            => ENV["STMP_USERNAME"],
-    :password             => ENV["STMP_PASSWORD"],
+    :user_name            => ENV["SMTP_USERNAME"],
+    :password             => ENV["SMTP_PASSWORD"],
     :authentication       => 'plain',
     :enable_starttls_auto => true,
   }

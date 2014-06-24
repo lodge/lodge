@@ -105,10 +105,10 @@ http://lodge-sample.herokuapp.com/
     LODGE_DOMAIN      = lodge-sample.herokuapp.com
 
     # メールの設定します。
-    STMP_ADDRESS      = smtp.gmail.com
-    STMP_PORT         = 587
-    STMP_USERNAME     = username
-    STMP_PASSWORD     = password
+    SMTP_ADDRESS      = smtp.gmail.com
+    SMTP_PORT         = 587
+    SMTP_USERNAME     = username
+    SMTP_PASSWORD     = password
     ```
 
 ## 起動
