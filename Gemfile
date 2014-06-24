@@ -52,6 +52,8 @@ gem 'activerecord-import'
 gem 'counter_culture', '~> 0.1.18'
 gem 'rails_config'
 gem 'dotenv-rails'
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
 #gem 'whenever', :require => false
 
 group :development do
