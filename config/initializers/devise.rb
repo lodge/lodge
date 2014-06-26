@@ -15,7 +15,7 @@ Devise.setup do |config|
 
   # パスワードリセットの際に、ユーザへ送信されるメールヘッダに含まれる
   # 差出人のメールアドレスの設定です。
-  config.mailer_sender = ENV['LODGE_DOMAIN']
+  config.mailer_sender = ENV['MAIL_SENDER']
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
