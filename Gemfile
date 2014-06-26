@@ -54,6 +54,7 @@ gem 'rails_config'
 gem 'dotenv-rails'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
+gem 'compass-rails'
 #gem 'whenever', :require => false
 
 group :development do

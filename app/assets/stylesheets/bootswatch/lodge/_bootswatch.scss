@@ -1,0 +1,24 @@
+@import "compass/css3";
+@import "bootswatch/lodge/variables";
+
+body {
+  background-image: url(background.png);
+}
+
+.page-header {
+  background-image: url(header.png);
+  padding: 10px;
+  border-bottom-color: lighten(#000, 20%);
+  @include border-radius(6px);
+  @include box-shadow(lighten(#000, 20%) 2px 2px 0.5em);
+
+  a:visited {
+    color: lighten($brand-primary, 10%);
+  }
+  h1 {
+    @include text-shadow(1px 1px #cb8);
+    a:visited {
+      color: $brand-primary;
+    }
+  }
+}

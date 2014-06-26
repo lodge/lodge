@@ -16,8 +16,8 @@
  *= require_self
  */
 
-@import "bootswatch/<%= ENV["LODGE_THEME"] %>/variables";
+@import "bootswatch/<%= ENV["LODGE_THEME"] || "lodge" %>/variables";
 @import "bootstrap";
 
-@import "bootswatch/<%= ENV["LODGE_THEME"] %>/bootswatch";
+@import "bootswatch/<%= ENV["LODGE_THEME"] || "lodge" %>/bootswatch";
 
