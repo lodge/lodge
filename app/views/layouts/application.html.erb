@@ -21,33 +21,33 @@
 </head>
 <body>
 
-  <div id="main-container" class="container">
 
-    <div id="header-area" class="page-header">
-      <h1 id="application-title"><%= link_to "Lodge", root_path %></h1>
+  <div id="header-area" class="navbar navbar-default">
+    <div class="container">
+      <div id="application-title" class="navbar-header"><%= link_to "Lodge", root_path, class: ["navbar-brand"] %></div>
 
-      <div id="current-user-info">
+      <ul id="current-user-info" class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <p>
+          <li>
             <%= t "users.logged_in_as" %>
             <%= user_name_with_icon(current_user) %>
             <% notification_class = %!class="new-notifications"!.html_safe if @notifications.length >= 1 %>
             <a id="num-of-notification" <%= notification_class %>><%= @notifications.length %></a>
             <%= link_to t("users.edit_profile"), edit_user_registration_path, :class => 'navbar-link' %> |
             <%= link_to t("users.logout"), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-          </p>
-          <p>
+          </li>
+          <li>
             <span class="num-of-contribution"><%= current_user.contribution %></span> <%= tco :contribution %>
-          </p>
+          </li>
         <% else %>
-          <p>
-            <%= link_to t("users.sign_up"), new_user_registration_path, :class => 'navbar-link'  %> |
-            <%= link_to t("users.login"), new_user_session_path, :class => 'navbar-link'  %>
-          </p>
+          <li><%= link_to t("users.sign_up"), new_user_registration_path, :class => 'navbar-link'  %></li>
+          <li><%= link_to t("users.login"), new_user_session_path, :class => 'navbar-link'  %></li>
         <% end %>
-      </div>
+      </ul>
     </div>
+  </div>
 
+  <div id="main-container" class="container">
     <ul id="notifications-area">
       <% @notifications.each do |notification| %>
         <%= notification_message_line(notification) %>
