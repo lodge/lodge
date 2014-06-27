@@ -5,16 +5,16 @@
 
   <dl>
     <dt><%= f.label :name %></dt>
-    <dd><%= f.text_field :name, autofocus: true %></dd>
+    <dd><%= f.text_field :name, autofocus: true, class: ["form-control"] %></dd>
     <dt><%= f.label :email %></dt>
-    <dd><%= f.email_field :email %></dd>
+    <dd><%= f.email_field :email, class: ["form-control"] %></dd>
     <dt><%= f.label :password %></dt>
-    <dd><%= f.password_field :password, autocomplete: "off" %></dd>
+    <dd><%= f.password_field :password, autocomplete: "off", class: ["form-control"] %></dd>
     <dt><%= f.label :password_confirmation %></dt>
-    <dd><%= f.password_field :password_confirmation, autocomplete: "off" %></dd>
+    <dd><%= f.password_field :password_confirmation, autocomplete: "off", class: ["form-control"] %></dd>
   </dl>
 
-  <div><%= f.submit tco(:sign_up) %></div>
+  <div><%= f.submit tco(:sign_up), class: ["btn btn-success"] %></div>
 <% end %>
 
 <%= render "users/shared/links" %>
