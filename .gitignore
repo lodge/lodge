@@ -19,7 +19,7 @@
 /config/database.yml
 
 /Gemfile.lock
-/vendor/bundler
+/vendor/bundle
 lodge_development
 lodge_test
 lodge_production
