@@ -1,7 +1,7 @@
 <%= form_for(@article, html: {id: "article-form"}) do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <h2><%= t("errors.template.header.#{@article.errors.count == 1 ? 'one' : 'other'}", model: Article.model_name.human) %></h2>
 
       <ul>
         <% @article.errors.full_messages.each do |message| %>
@@ -29,6 +29,7 @@
   <div class="preview-area markdown"></div>
   <div class="actions">
     <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :lock_version %>
     <%= f.submit %>
   </div>
 <% end %>

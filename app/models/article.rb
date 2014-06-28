@@ -17,6 +17,16 @@ class Article < ActiveRecord::Base
   attr_accessor :old_title, :old_body, :old_tags, :new_tags
 
   acts_as_taggable
+  alias_method :__save, :save
+
+  def save
+    begin
+      __save
+    rescue ActiveRecord::StaleObjectError
+      errors.add :lock_version, :article_already_updated
+      false
+    end
+  end
 
   def create_history
     UpdateHistory.create!(
