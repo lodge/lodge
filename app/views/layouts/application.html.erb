@@ -38,22 +38,30 @@
                     <%= current_user.name %>
                     <i class="caret"></i>
                   </a>
-                  <div class="dropdown-menu" role="menu">
-                    <ul id="user-info-area">
-                      <li>
-                        <img id="user-info-icon" src="" alt="">
-                        <div id="user-info-basic-area">
-                          <h3 id="user-info-name"></h3>
-                          <p id="user-info-contribution"><span class="num-of-contribution"></span> <%= tco :contribution %></p>
-                        </div>
-                      </li>
-                      <li id="user-info-article-list">
-                        <h3><%= tco :recent_article_list_title %></h3>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="row" role="presentation">
+                      <div class="col-xs-4">
+                        <%= gravatar(current_user, 80) %>
+                      </div>
+                      <div class="col-xs-8">
+                        <p class="lead"><%= current_user.name %><br /></p>
+                        <p>
+                          <strong ><%= current_user.contribution %></strong>
+                          <%= tco :contribution %>
+                        </p>
+                      </div>
+                    </li>
+                    <li class="row" role="presentation">
+                      <div class="col-xs-12">
+                        <p class="lead"><%= tco :recent_article_list_title %></p>
                         <ol>
+                          <% current_user.recent_articles(5).each do |article| %>
+                            <li><%= link_to article.title, article_path(id: article.id) %></li>
+                          <% end %>
                         </ol>
-                      </li>
-                    </ul>
-                  </div>
+                      </div>
+                    </li>
+                  </ul>
                 </li>
                 <li>
                   <a id="num-of-notification">

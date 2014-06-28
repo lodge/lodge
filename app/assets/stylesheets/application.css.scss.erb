@@ -16,19 +16,29 @@
  *= require_self
  */
 
+@import "compass/css3";
 @import "bootstrap/variables";
 @import "bootswatch/<%= ENV["LODGE_THEME"] %>/variables";
 @import "bootstrap";
 
-.navbar .navbar-header .navbar-brand {
-  padding-top: $navbar-padding-vertical + $navbar-height / 2;
-}
-.navbar .col-xs-4 {
-  height: $navbar-height * 2;
-}
-
-[role="navigation"] .col-xs-8 .row {
-  margin-right: 0;
+.navbar {
+  .navbar-header .navbar-brand {
+    padding-top: $navbar-padding-vertical + $navbar-height / 2;
+  }
+  .col-xs-4 {
+    height: $navbar-height * 2;
+  }
+  .col-xs-8 .row {
+    margin-right: 0;
+  }
+  .dropdown .dropdown-menu {
+    width: 320px;
+    padding: $padding-base-horizontal $padding-base-vertical;
+    @include border-corner-radius(top, left, $border-radius-base);
+    .row {
+      margin-left: 0;
+    }
+  }
 }
 
 @import "bootswatch/<%= ENV["LODGE_THEME"] %>/bootswatch";
