@@ -13,6 +13,10 @@ $navbar-default-link-color: $navbar-default-color;
 $navbar-default-link-hover-color: darken($navbar-default-link-color, 10%);
 $nav-link-padding: 10px 5px;
 
+$state-success-bg: rgba(#dff0d8, .6);
+$state-info-bg: rgba(#d9edf7, .6);
+$state-warning-bg: rgba(#fcf8e3, .6);
+$state-danger-bg: rgba(#f2dede, .6);
 
 // Colors
 $gray-darker: lighten(#000, 13.5%);
@@ -261,16 +265,16 @@ $jumbotron-font-size: ceil(($font-size-base * 1.5));
 
 // Form states and alerts
 $state-success-text: #3c763d;
-$state-success-bg: #dff0d8;
+//$state-success-bg: #dff0d8;
 $state-success-border: darken(adjust-hue($state-success-bg, -10), 5%);
 $state-info-text: #31708f;
-$state-info-bg: #d9edf7;
+//$state-info-bg: #d9edf7;
 $state-info-border: darken(adjust-hue($state-info-bg, -10), 7%);
 $state-warning-text: #8a6d3b;
-$state-warning-bg: #fcf8e3;
+//$state-warning-bg: #fcf8e3;
 $state-warning-border: darken(adjust-hue($state-warning-bg, -10), 5%);
 $state-danger-text: #a94442;
-$state-danger-bg: #f2dede;
+//$state-danger-bg: #f2dede;
 $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%);
 
 // Tooltips
