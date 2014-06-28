@@ -21,6 +21,7 @@
 </head>
 <body>
 
+<div class="container">
   <div id="header-area" class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="row">
@@ -97,7 +98,7 @@
     </div>
   </div>
 
-  <div id="main-container" class="container">
+  <div id="main-container" class="container-fluid">
     <% if @notifications.present? %>
       <div class="alert alert-info">
         <ul id="notifications-area">
@@ -117,70 +118,73 @@
       <% end %>
     </div>
 
-    <article id="contents-area">
+    <div>
+      <article id="contents-area" class="col-xs-8">
+        <% if current_user %>
+          <%= form_tag articles_search_path, :method => :get, :id => "article-search-area" do %>
+            <%= text_field_tag "query", params[:query], "placeholder" => tco("article_search") %> 
+            <%= submit_tag tco("search") %>
+          <% end %>
+        <% end %>
+  
+        <%= yield %>
+      </article>
+      
       <% if current_user %>
-        <%= form_tag articles_search_path, :method => :get, :id => "article-search-area" do %>
-          <%= text_field_tag "query", params[:query], "placeholder" => tco("article_search") %> 
-          <%= submit_tag tco("search") %>
-        <% end %>
-      <% end %>
-
-      <%= yield %>
-    </article>
-    
-    <% if current_user %>
-      <nav id="navigation-area">
-        <% # Stocked article list %>
-        <h2><%= tco("menu") %></h2>
-        <ul id="menu">
-          <li><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></li>
-          <li><%= link_to tco(:recent_article_list_title), articles_path %></li>
-          <li><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></li> 
-          <li><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></li> 
-          <li><%= link_to tco("tag_list_title"), tags_path %></li>
-        </ul>
-
-        <% # Pupular article list %>
-        <h2><%= tco("popular_article_list_title") %></h2>
-        <ol id="popular-article-list">
-          <% @popular_articles.each do |article| %>
-            <li>
-              <%= link_to "#{article.title}", article_path(article) %>
-              <%= stock_and_count_link(article) %>
-            </li>
-          <% end %>
-        </ol>
-
-        <% # Stocked article list %>
-        <h2><%= tco("stocked_article_list_title") %></h2>
-        <ol id="stocked-article-list">
-          <% @stocked_articles.each do |article| %>
-            <li><%= link_to article.title, article_path(article) %></li>
-          <% end %>
-        </ol>
-        <% unless @stocked_articles.empty? %>
-        <div class="more-display-area">
-          <%= link_to tco("more_display"), articles_by_stocks_path %> 
-        </div>
-        <% end %>
-
-        <% # Your article list %>
-        <h2><%= tco("user_article_list_title") %></h2>
-        <ol id="user-article-list">
-          <% @user_articles.each do |article| %>
-            <li><%= link_to "#{article.title} #{}", article %></li>
-          <% end %>
-        </ol>
-        <% unless @user_articles.empty? %>
+        <nav id="navigation-area" class="col-xs-4">
+          <% # Stocked article list %>
+          <h2><%= tco("menu") %></h2>
+          <ul id="menu">
+            <li><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></li>
+            <li><%= link_to tco(:recent_article_list_title), articles_path %></li>
+            <li><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></li> 
+            <li><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></li> 
+            <li><%= link_to tco("tag_list_title"), tags_path %></li>
+          </ul>
+  
+          <% # Pupular article list %>
+          <h2><%= tco("popular_article_list_title") %></h2>
+          <ol id="popular-article-list">
+            <% @popular_articles.each do |article| %>
+              <li>
+                <%= link_to "#{article.title}", article_path(article) %>
+                <%= stock_and_count_link(article) %>
+              </li>
+            <% end %>
+          </ol>
+  
+          <% # Stocked article list %>
+          <h2><%= tco("stocked_article_list_title") %></h2>
+          <ol id="stocked-article-list">
+            <% @stocked_articles.each do |article| %>
+              <li><%= link_to article.title, article_path(article) %></li>
+            <% end %>
+          </ol>
+          <% unless @stocked_articles.empty? %>
           <div class="more-display-area">
-            <%= link_to tco("more_display"), articles_by_user_path(current_user.id) %> 
+            <%= link_to tco("more_display"), articles_by_stocks_path %> 
           </div>
-        <% end %>
-
-      </nav>
-
-    <% end %>
+          <% end %>
+  
+          <% # Your article list %>
+          <h2><%= tco("user_article_list_title") %></h2>
+          <ol id="user-article-list">
+            <% @user_articles.each do |article| %>
+              <li><%= link_to "#{article.title} #{}", article %></li>
+            <% end %>
+          </ol>
+          <% unless @user_articles.empty? %>
+            <div class="more-display-area">
+              <%= link_to tco("more_display"), articles_by_user_path(current_user.id) %> 
+            </div>
+          <% end %>
+  
+        </nav>
+  
+      <% end %>
+    </div>
   </div>
+</div>
 
 </body>
 </html>
