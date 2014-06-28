@@ -1,5 +1,9 @@
 @import "compass/css3";
 
+html, body, body > .container {
+  min-height: 100%;
+}
+
 body {
   background-image: url(background.png);
 }
