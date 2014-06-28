@@ -121,9 +121,13 @@
     <div>
       <article id="contents-area" class="col-xs-8">
         <% if current_user %>
-          <%= form_tag articles_search_path, :method => :get, :id => "article-search-area" do %>
-            <%= text_field_tag "query", params[:query], "placeholder" => tco("article_search") %> 
-            <%= submit_tag tco("search") %>
+          <%= form_tag articles_search_path, method: :get, id: "article-search-area", role: "search" do %>
+            <div class="input-group col-xs-5">
+              <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
+              <span class="input-group-btn">
+                <%= button_tag "", type: "submit", class: ["btn", "btn-default", "glyphicon", "glyphicon-search"] %>
+              </span>
+            </div>
           <% end %>
         <% end %>
   
