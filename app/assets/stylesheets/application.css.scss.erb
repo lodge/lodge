@@ -16,8 +16,20 @@
  *= require_self
  */
 
+@import "bootstrap/variables";
 @import "bootswatch/<%= ENV["LODGE_THEME"] %>/variables";
 @import "bootstrap";
+
+.navbar .navbar-header .navbar-brand {
+  padding-top: $navbar-padding-vertical + $navbar-height / 2;
+}
+.navbar .col-xs-4 {
+  height: $navbar-height * 2;
+}
+
+[role="navigation"] .col-xs-8 .row {
+  margin-right: 0;
+}
 
 @import "bootswatch/<%= ENV["LODGE_THEME"] %>/bootswatch";
 

@@ -7,11 +7,11 @@ $font-family-monospace: Ricty, Menlo, Monaco, Consolas, "Courier New", monospace
 
 $border-radius-base: 6px;
 
-$navbar-height: 90px;
 $navbar-default-bg: #AE844B;
 $navbar-default-color: #fff;
 $navbar-default-link-color: $navbar-default-color;
 $navbar-default-link-hover-color: darken($navbar-default-link-color, 10%);
+$nav-link-padding: 10px 5px;
 
 
 // Colors
@@ -54,7 +54,6 @@ $headings-line-height: 1.1;
 $headings-color: inherit;
 
 // Iconography
-$icon-font-path: "bootstrap/";
 $icon-font-name: "glyphicons-halflings-regular";
 $icon-font-svg-id: "glyphicons_halflingsregular";
 
@@ -170,7 +169,7 @@ $container-large-desktop: ((1140px + $grid-gutter-width));
 $container-lg: $container-large-desktop;
 
 // Navbar
-//$navbar-height: 50px;
+$navbar-height: 50px;
 $navbar-margin-bottom: $line-height-computed;
 $navbar-border-radius: $border-radius-base;
 $navbar-padding-horizontal: floor(($grid-gutter-width / 2));
@@ -210,7 +209,7 @@ $navbar-inverse-toggle-icon-bar-bg: #fff;
 $navbar-inverse-toggle-border-color: #333;
 
 // Navs
-$nav-link-padding: 10px 15px;
+//$nav-link-padding: 10px 15px;
 $nav-link-hover-bg: $gray-lighter;
 $nav-disabled-link-color: $gray-light;
 $nav-disabled-link-hover-color: $gray-light;
@@ -263,16 +262,16 @@ $jumbotron-font-size: ceil(($font-size-base * 1.5));
 // Form states and alerts
 $state-success-text: #3c763d;
 $state-success-bg: #dff0d8;
-$state-success-border: darken(adjust-hue($state-success-bg, -10deg), 5%);
+$state-success-border: darken(adjust-hue($state-success-bg, -10), 5%);
 $state-info-text: #31708f;
 $state-info-bg: #d9edf7;
-$state-info-border: darken(adjust-hue($state-info-bg, -10deg), 7%);
+$state-info-border: darken(adjust-hue($state-info-bg, -10), 7%);
 $state-warning-text: #8a6d3b;
 $state-warning-bg: #fcf8e3;
-$state-warning-border: darken(adjust-hue($state-warning-bg, -10deg), 5%);
+$state-warning-border: darken(adjust-hue($state-warning-bg, -10), 5%);
 $state-danger-text: #a94442;
 $state-danger-bg: #f2dede;
-$state-danger-border: darken(adjust-hue($state-danger-bg, -10deg), 5%);
+$state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%);
 
 // Tooltips
 $tooltip-max-width: 200px;

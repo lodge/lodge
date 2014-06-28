@@ -22,28 +22,69 @@
 <body>
 
 
-  <div id="header-area" class="navbar navbar-default">
-    <div class="container">
-      <div id="application-title" class="navbar-header"><%= link_to "Lodge", root_path, class: ["navbar-brand"] %></div>
-
-      <ul id="current-user-info" class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-          <li>
-            <%= t "users.logged_in_as" %>
-            <%= user_name_with_icon(current_user) %>
-            <% notification_class = %!class="new-notifications"!.html_safe if @notifications.length >= 1 %>
-            <a id="num-of-notification" <%= notification_class %>><%= @notifications.length %></a>
-            <%= link_to t("users.edit_profile"), edit_user_registration_path, :class => 'navbar-link' %> |
-            <%= link_to t("users.logout"), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-          </li>
-          <li>
-            <span class="num-of-contribution"><%= current_user.contribution %></span> <%= tco :contribution %>
-          </li>
-        <% else %>
-          <li><%= link_to t("users.sign_up"), new_user_registration_path, :class => 'navbar-link'  %></li>
-          <li><%= link_to t("users.login"), new_user_session_path, :class => 'navbar-link'  %></li>
-        <% end %>
-      </ul>
+  <div id="header-area" class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-4">
+          <div id="application-title" class="navbar-header"><%= link_to "Lodge", root_path, class: ["nav", "navbar-brand"] %></div>
+        </div>
+        <div class="col-xs-8">
+          <div class="row">
+            <ul id="current-user-info" class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= gravatar(current_user) %>
+                    <%= current_user.name %>
+                    <i class="caret"></i>
+                  </a>
+                  <div class="dropdown-menu" role="menu">
+                    <ul id="user-info-area">
+                      <li>
+                        <img id="user-info-icon" src="" alt="">
+                        <div id="user-info-basic-area">
+                          <h3 id="user-info-name"></h3>
+                          <p id="user-info-contribution"><span class="num-of-contribution"></span> <%= tco :contribution %></p>
+                        </div>
+                      </li>
+                      <li id="user-info-article-list">
+                        <h3><%= tco :recent_article_list_title %></h3>
+                        <ol>
+                        </ol>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <a id="num-of-notification">
+                    <%= content_tag :span, class: ["badge", @notifications.present?? "alert-info" : ""] do %>
+                      <%= @notifications.length %>
+                    <% end %>
+                  </a>
+                </li>
+                <li>
+                  <%= link_to t("users.edit_profile"), edit_user_registration_path, :class => 'navbar-link' %>
+                </li>
+                <li><span class="navbar-text">|</span></li>
+                <li>
+                  <%= link_to t("users.logout"), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+                </li>
+              <% else %>
+                <li><%= link_to t("users.sign_up"), new_user_registration_path, :class => 'navbar-link'  %></li>
+                <li><span class="navbar-text">|</span></li>
+                <li><%= link_to t("users.login"), new_user_session_path, :class => 'navbar-link'  %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="row">
+            <p class="navbar-text navbar-right">
+              <% if user_signed_in? %>
+                <strong class="num-of-contribution"><%= current_user.contribution %></strong> <%= tco :contribution %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -125,20 +166,6 @@
 
       </nav>
 
-      <ul id="user-info-area">
-        <li>
-          <img id="user-info-icon" src="" alt="">
-          <div id="user-info-basic-area">
-            <h3 id="user-info-name"></h3>
-            <p id="user-info-contribution"><span class="num-of-contribution"></span> <%= tco :contribution %></p>
-          </div>
-        </li>
-        <li id="user-info-article-list">
-          <h3><%= tco :recent_article_list_title %></h3>
-          <ol>
-          </ol>
-        </li>
-      </dl>
     <% end %>
   </div>
 
