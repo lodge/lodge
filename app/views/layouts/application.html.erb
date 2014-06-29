@@ -59,7 +59,7 @@
                       <h4><%= tco :recent_article_list_title %></h4>
                       <ol>
                         <% current_user.recent_articles(5).each do |article| %>
-                          <li><%= link_to article.title, article_path(id: article.id) %></li>
+                          <li><u><%= link_to article.title, article_path(article) %></u></li>
                         <% end %>
                       </ol>
                     </li>
@@ -141,11 +141,11 @@
             <h4 class="media-heading"><strong><%= tco("menu") %></strong></h4>
             <div class="media-body">
               <ul id="menu">
-                <li><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></li>
-                <li><%= link_to tco(:recent_article_list_title), articles_path %></li>
-                <li><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></li> 
-                <li><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></li> 
-                <li><%= link_to tco("tag_list_title"), tags_path %></li>
+                <li><u><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></u></li>
+                <li><u><%= link_to tco(:recent_article_list_title), articles_path %></u></li>
+                <li><u><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></u></li> 
+                <li><u><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></u></li> 
+                <li><u><%= link_to tco("tag_list_title"), tags_path %></u></li>
               </ul>
             </div>
 
@@ -157,7 +157,7 @@
               <ol id="popular-article-list">
                 <% @popular_articles.each do |article| %>
                   <li>
-                    <%= link_to "#{article.title}", article_path(article) %>
+                    <u><%= link_to article.title, article_path(article) %></u>
                     <%= stock_and_count_link(article) %>
                   </li>
                 <% end %>
@@ -171,7 +171,7 @@
             <div class="media-body">
               <ol id="stocked-article-list">
                 <% @stocked_articles.each do |article| %>
-                  <li><%= link_to article.title, article_path(article) %></li>
+                  <li><u><%= link_to article.title, article_path(article) %></u></li>
                 <% end %>
               </ol>
               <% unless @stocked_articles.empty? %>
@@ -188,7 +188,7 @@
             <div class="media-body">
               <ol id="user-article-list">
                 <% @user_articles.each do |article| %>
-                  <li><%= link_to "#{article.title} #{}", article %></li>
+                  <li><u><%= link_to article.title, article_path(article) %></u></li>
                 <% end %>
               </ol>
               <% unless @user_articles.empty? %>
