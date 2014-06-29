@@ -99,108 +99,116 @@
   </div>
 
   <div id="main-container" class="container-fluid">
-    <% if @notifications.present? %>
-      <div class="alert alert-info">
-        <ul id="notifications-area">
-          <% @notifications.each do |notification| %>
-            <%= notification_message_line(notification) %>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <div class="row">
+      <% if @notifications.present? %>
+        <div class="alert alert-info">
+          <ul id="notifications-area">
+            <% @notifications.each do |notification| %>
+              <%= notification_message_line(notification) %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-    <div id="notice-area">
-      <% if notice %>
-        <p id="notice" class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
+      <div id="notice-area">
+        <% if notice %>
+          <p id="notice" class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+      </div>
     </div>
 
     <div>
       <% if current_user %>
-        <%= form_tag articles_search_path, method: :get, id: "article-search-area", role: "search" do %>
-          <div class="input-group col-xs-4 col-xs-offset-5">
-            <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
-            <span class="input-group-btn">
-              <%= button_tag "", type: "submit", class: ["btn", "btn-default", "glyphicon", "glyphicon-search"] %>
-            </span>
-          </div>
-        <% end %>
+        <div class="row">
+          <%= form_tag articles_search_path, method: :get, id: "article-search-area", role: "search" do %>
+            <div class="input-group col-xs-4 col-xs-offset-5">
+              <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
+              <span class="input-group-btn">
+                <%= button_tag "", type: "submit", class: ["btn", "btn-default", "glyphicon", "glyphicon-search"] %>
+              </span>
+            </div>
+          <% end %>
+        </div>
       <% end %>
   
-      <article id="contents-area" class="col-xs-9">
-        <%= yield %>
-      </article>
-      
-      <% if current_user %>
-        <nav id="navigation-area" class="col-xs-3 media">
-          <div class="media-body">
-            <% # Stocked article list %>
-            <h4 class="media-heading"><strong><%= tco("menu") %></strong></h4>
-            <div class="media-body">
-              <ul id="menu">
-                <li><u><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></u></li>
-                <li><u><%= link_to tco(:recent_article_list_title), articles_path %></u></li>
-                <li><u><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></u></li> 
-                <li><u><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></u></li> 
-                <li><u><%= link_to tco("tag_list_title"), tags_path %></u></li>
-              </ul>
-            </div>
+      <div class="row"><hr /></div>
 
-            <hr />
-  
-            <% # Pupular article list %>
-            <h4 class="media-heading"><strong><%= tco("popular_article_list_title") %></strong></h4>
+      <div class="row">
+        <article id="contents-area" class="col-xs-9">
+          <%= yield %>
+        </article>
+        
+        <% if current_user %>
+          <nav id="navigation-area" class="col-xs-3 media">
             <div class="media-body">
-              <ol id="popular-article-list">
-                <% @popular_articles.each do |article| %>
-                  <li>
-                    <u><%= link_to article.title, article_path(article) %></u>
-                    <%= stock_and_count_link(article) %>
-                  </li>
-                <% end %>
-              </ol>
-            </div>
-
-            <hr />
-  
-            <% # Stocked article list %>
-            <h4 class="media-heading"><strong><%= tco("stocked_article_list_title") %></strong></h4>
-            <div class="media-body">
-              <ol id="stocked-article-list">
-                <% @stocked_articles.each do |article| %>
-                  <li><u><%= link_to article.title, article_path(article) %></u></li>
-                <% end %>
-              </ol>
-              <% unless @stocked_articles.empty? %>
-              <div class="more-display-area pull-right">
-                <%= link_to tco("more_display"), articles_by_stocks_path %> 
+              <% # Stocked article list %>
+              <h4 class="media-heading"><strong><%= tco("menu") %></strong></h4>
+              <div class="media-body">
+                <ul id="menu">
+                  <li><u><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></u></li>
+                  <li><u><%= link_to tco(:recent_article_list_title), articles_path %></u></li>
+                  <li><u><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></u></li> 
+                  <li><u><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></u></li> 
+                  <li><u><%= link_to tco("tag_list_title"), tags_path %></u></li>
+                </ul>
               </div>
-              <% end %>
-            </div>
-
-            <hr />
   
-            <% # Your article list %>
-            <h4 class="media-heading"><strong><%= tco("user_article_list_title") %></strong></h4>
-            <div class="media-body">
-              <ol id="user-article-list">
-                <% @user_articles.each do |article| %>
-                  <li><u><%= link_to article.title, article_path(article) %></u></li>
-                <% end %>
-              </ol>
-              <% unless @user_articles.empty? %>
+              <hr />
+    
+              <% # Pupular article list %>
+              <h4 class="media-heading"><strong><%= tco("popular_article_list_title") %></strong></h4>
+              <div class="media-body">
+                <ol id="popular-article-list">
+                  <% @popular_articles.each do |article| %>
+                    <li>
+                      <u><%= link_to article.title, article_path(article) %></u>
+                      <%= stock_and_count_link(article) %>
+                    </li>
+                  <% end %>
+                </ol>
+              </div>
+  
+              <hr />
+    
+              <% # Stocked article list %>
+              <h4 class="media-heading"><strong><%= tco("stocked_article_list_title") %></strong></h4>
+              <div class="media-body">
+                <ol id="stocked-article-list">
+                  <% @stocked_articles.each do |article| %>
+                    <li><u><%= link_to article.title, article_path(article) %></u></li>
+                  <% end %>
+                </ol>
+                <% unless @stocked_articles.empty? %>
                 <div class="more-display-area pull-right">
-                  <%= link_to tco("more_display"), articles_by_user_path(current_user.id) %> 
+                  <%= link_to tco("more_display"), articles_by_stocks_path %> 
                 </div>
-              <% end %>
-            </div>
-          </div>
-        </nav>
+                <% end %>
+              </div>
   
-      <% end %>
+              <hr />
+    
+              <% # Your article list %>
+              <h4 class="media-heading"><strong><%= tco("user_article_list_title") %></strong></h4>
+              <div class="media-body">
+                <ol id="user-article-list">
+                  <% @user_articles.each do |article| %>
+                    <li><u><%= link_to article.title, article_path(article) %></u></li>
+                  <% end %>
+                </ol>
+                <% unless @user_articles.empty? %>
+                  <div class="more-display-area pull-right">
+                    <%= link_to tco("more_display"), articles_by_user_path(current_user.id) %> 
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </nav>
+    
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
