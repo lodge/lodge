@@ -1,6 +1,7 @@
 <% action = params[:action] %>
 <% is_index_action = action == "index" %>
-<h1>
+<h3>
+  <strong>
   <% case action 
   when "index" %>
     <%= tco("recent_article_list_title") %>
@@ -15,7 +16,8 @@
   <% when "feed" %>
     <%= tco :feed_article_list_title %>
   <% end %>
-</h1>
+  </strong>
+</h3>
 
 <% if action == "by_tag" %>
   <% if current_user.follow?(@tag) %> 
@@ -26,24 +28,26 @@
 <% end %>
 
 
-<p class="article-new-link-area">
+<p class="article-new-link-area pull-right">
   <%= link_to tco('new'), new_article_path %>
 </p>
 
 <% if @articles.length == 0 %>
-  <p>
+  <p class="media">
+    <div class="media-body">
     <% case action 
       when "feed" %>
         <%= tc(:feed_introduction).html_safe %>
     <% when "by_stocks" %>
         <%= tc(:stocks_introduction).html_safe %>
     <% end %>
+  </div>
   </p>
 <% end %>
 
 <%= render "article_list", articles: @articles %>
 
-<p class="article-new-link-area">
+<p class="article-new-link-area pull-right">
   <%= link_to tco('new'), new_article_path %>
 </p>
 
