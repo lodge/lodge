@@ -90,7 +90,7 @@ http://lodge-sample.herokuapp.com/
 
 1. `bundle install` を実行します。
 1. `rake db:create` の後、 `rake db:migrate` を実行します。これでDBは完成です。
-1. `.env.example` を `.env.example` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。
+1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。
 
     ```ruby
     # productionモードで動かす為には、secret_keyを設定します。
