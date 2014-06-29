@@ -37,6 +37,7 @@ en:
         title: Title
         tags: Tags
         body: Body
+        is_public_editable: public editable
       comment:
         body: Comment
     errors:

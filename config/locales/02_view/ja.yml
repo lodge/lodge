@@ -31,6 +31,7 @@ ja:
     search: 検索
     created_at: 作成
     updated_at: 更新
+    last_update: 最終更新
     stock: ストック
     unstock: ストック解除
     comment: コメント
@@ -53,6 +54,7 @@ ja:
     didnt_receive_confirmation: 確認のメールが届きませんか？
     notification:
       article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
+      article_update_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' を編集しました。"
       comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"
       comment_create_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' にコメントしました。"
       comment_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' のコメントを編集しました。"
@@ -95,6 +97,7 @@ ja:
   articles:
     list_title_by_tag: "'%{tag_name}'のタグが付けられた記事一覧"
     list_title_by_search: "'%{query}'の検索結果"
+    not_public_editable: ※この記事は共同編集不可に設定されています。
     update_histories: 編集履歴
     new_title: 新規作成
     edit_title: "'%{article_title}'の編集"

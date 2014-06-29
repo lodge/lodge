@@ -23,6 +23,12 @@
     <%= f.label :body %><br>
     <%= f.text_area :body, id: "article-body-textarea" %>
   </div>
+  <% if @article.user == current_user %>
+    <div class="field">
+      <%= f.check_box :is_public_editable %>
+      <%= f.label :is_public_editable %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= button_tag tc(:preview), type: :button, class: "preview-button" %>
   </div>

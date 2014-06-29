@@ -19,12 +19,12 @@ class ApplicationController < ActionController::Base
   def read_stocks
     @stocked_articles = []
     return unless current_user
-    @stocked_articles = current_user.stocked_articles.order("stocks.updated_at desc").limit(RIGHT_LIST_SIZE)
+    @stocked_articles = current_user.stocked_articles.reorder("stocks.updated_at desc").limit(RIGHT_LIST_SIZE)
   end
 
   def read_user_articles
     return unless current_user
-    @user_articles = current_user.articles.order("articles.updated_at desc").limit(RIGHT_LIST_SIZE)
+    @user_articles = current_user.articles.limit(RIGHT_LIST_SIZE)
   end
 
   def read_popular_articles
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     popular_stocks = Stock.joins(:article)
       .where("articles.created_at > ?", 2.week.ago)
       .group("stocks.article_id")
-      .order("count_article_id desc, articles.updated_at desc")
+      .order("count_article_id desc, articles.created_at desc")
       .limit(RIGHT_LIST_SIZE)
       .count(:article_id)
     popular_articles = Article.includes(:stocks).where(id: popular_stocks.keys)

@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628063218) do
+ActiveRecord::Schema.define(version: 20140629055323) do
 
   create_table "articles", force: true do |t|
-    t.integer  "user_id",                                null: false
-    t.string   "title",          limit: 100,             null: false
-    t.text     "body",                                   null: false
+    t.integer  "user_id",                                       null: false
+    t.string   "title",              limit: 100,                null: false
+    t.text     "body",                                          null: false
+    t.boolean  "is_public_editable",             default: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "comments_count",             default: 0, null: false
-    t.integer  "lock_version",               default: 0
+    t.integer  "comments_count",                 default: 0,    null: false
+    t.integer  "lock_version",                   default: 0
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140628063218) do
 
   create_table "update_histories", force: true do |t|
     t.integer  "article_id", null: false
+    t.integer  "user_id",    null: false
     t.string   "new_title",  null: false
     t.string   "new_tags"
     t.text     "new_body",   null: false
@@ -112,6 +114,7 @@ ActiveRecord::Schema.define(version: 20140628063218) do
   end
 
   add_index "update_histories", ["article_id"], name: "index_update_histories_on_article_id", using: :btree
+  add_index "update_histories", ["user_id"], name: "index_update_histories_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name",                               null: false
