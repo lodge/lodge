@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a role="tab" data-toggle="tab" class="editor-tab"><%= tco :edit %></a></li>
+  <li><a role="tab" data-toggle="tab" class="preview-tab"><%= tc :preview %></a></li>
+</ul>
+<div class="tab-content markdown-editor">
+  <div class="tab-pane active form-group" role="editor">
+    <%= form.text_area :body, class: ["editor-textarea", "form-control"] %>
+  </div>
+  <div class="tab-pane panel" role="preview">
+    <div class="preview-area markdown panel-body"></div>
+  </div>
+</div>
