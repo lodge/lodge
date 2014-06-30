@@ -61,7 +61,7 @@ module ApplicationHelper
   def gravatar(user, size=20, opt={})
     opt = { class: ["user-icon"] }.merge(opt)
     url = "http://www.gravatar.com/avatar/" + user.gravatar + "?size=" + size.to_s
-    image_tag url, title: user.name, "data-user-id" => user.id, **opt
+    image_tag url, opt.merge(title: user.name, "data-user-id" => user.id)
   end
 
   # tのキー先頭にコントローラ名を自動的に付与したもの。
