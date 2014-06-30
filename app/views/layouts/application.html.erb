@@ -33,37 +33,7 @@
             <ul id="current-user-info" class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <%= gravatar(current_user) %>
-                    <%= current_user.name %>
-                    <i class="caret"></i>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li role="presentation">
-                      <div class="media">
-                        <div class="pull-left">
-                          <%= gravatar(current_user, 80, class: ["media-object"]) %>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><%= current_user.name %></h4>
-                          <br />
-                          <p>
-                            <strong><%= current_user.contribution %></strong>
-                            <%= tco :contribution %>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li role="presentation">
-                      <h4><%= tco :recent_article_list_title %></h4>
-                      <ol>
-                        <% current_user.recent_articles(5).each do |article| %>
-                          <li><u><%= link_to article.title, article_path(article) %></u></li>
-                        <% end %>
-                      </ol>
-                    </li>
-                  </ul>
+                  <%= render partial: "users/info_dropdown", locals: {user: current_user} %>
                 </li>
                 <li>
                   <a id="num-of-notification">
