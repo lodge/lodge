@@ -66,7 +66,7 @@
     <% @article.comments.each do |comment| %>
       <li class="list-group-item">
         <p class="list-group-item-heading">
-          <%= user_name_with_icon comment.user %>
+          <div class="dropdown"><%= render partial: "users/info_dropdown", locals: {user: comment.user} %></div>
           <span class="comment-info pull-right">
             <%= comment.updated_at %>
             <% if comment.user == current_user %> 
