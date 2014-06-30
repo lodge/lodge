@@ -4,6 +4,13 @@
 
 ready = ->
   # Markdown preview
+  url = '<%= Rails.application.routes.url_helpers.articles_preview_path %>'
+  textarea = $('#comment-editor')
+  preview = $('#comment-preview')
+  $('[role="tablist"] [href="#comment-preview"]').on 'click', ()->
+    preview.load url,
+      body: textarea.val()
+###
   (() ->
     preview = (event) ->
       closestForm = $(event.target).closest("form")
@@ -22,16 +29,7 @@ ready = ->
     input = $(".preview-button")
     input.on "click", input.parent(), preview
   )()
-
-  # Display comment edit form
-  (() ->
-    displayCommentEditForm = (event) ->
-      dt = $(event.target).closest("dt")
-      dt.next("dd").find(".comment-form").show();
-
-    editLink = $(".comment-edit-link")
-    editLink.on "click", editLink.parent(), displayCommentEditForm
-  )()
+###
 
 # for turbolinks
 $(document).ready(ready)

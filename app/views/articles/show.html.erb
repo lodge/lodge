@@ -79,7 +79,6 @@
         </p>
         <p class="list-group-body">
         <%= markdown(comment.body).html_safe %>
-        <%= render 'comment_form', hide: true, comment: comment %>
         </p>
       </li>
     <% end %>

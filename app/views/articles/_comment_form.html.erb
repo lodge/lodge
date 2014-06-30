@@ -1,13 +1,25 @@
 <% style = hide ? "display: none" : "" %>
-<%= form_for(comment, html: {class: "comment-form", style: style}) do |f| %>
-  <%= f.text_area :body, class: "article-comment-textarea" %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-  <%= f.hidden_field :article_id, :value => @article.id %>
-  <div class="actions">
-    <%= button_tag tc(:preview), type: :button, class: "preview-button" %>
+<%= form_for(comment, html: {class: "comment-form", style: style, role: "form"}) do |f| %>
+  <%= f.hidden_field :user_id, :value => current_user.id, class: ["form-control"] %>
+  <%= f.hidden_field :article_id, :value => @article.id, class: ["form-control"] %>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#comment-editor" role="tab" data-toggle="tab"><%= tco :edit %></a></li>
+    <li><a href="#comment-preview" role="tab" data-toggle="tab"><%= tc :preview %></a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active form-group" id="comment-editor">
+      <%= f.text_area :body, class: ["article-comment-textarea", "form-control"] %>
+    </div>
+    <div class="tab-pane panel" id="comment-preview">
+      <div class="preview-area markdown panel-body"></div>
+    </div>
   </div>
-  <div class="preview-area markdown"></div>
-  <div class="actions">
-    <%= submit_tag :comment %>
+  <div class="form-group">
+    <div class="actions">
+      <%= button_tag tc(:preview), type: :button, class: ["btn", "btn-default", "preview-button"] %>
+    </div>
+    <div class="actions">
+      <%= submit_tag :comment, class: ["btn", "btn-success"] %>
+    </div>
   </div>
 <% end %>
