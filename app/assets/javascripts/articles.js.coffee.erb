@@ -5,31 +5,11 @@
 ready = ->
   # Markdown preview
   url = '<%= Rails.application.routes.url_helpers.articles_preview_path %>'
-  textarea = $('#comment-editor')
-  preview = $('#comment-preview')
+  textarea = $('#comment-editor textarea')
+  preview = $('#comment-preview .markdown')
   $('[role="tablist"] [href="#comment-preview"]').on 'click', ()->
     preview.load url,
       body: textarea.val()
-###
-  (() ->
-    preview = (event) ->
-      closestForm = $(event.target).closest("form")
-      body = closestForm.find("textarea").val()
-      $.ajax({
-        url: ROOT_PATH + "articles/preview",
-        type: "post",
-        data: {body: body},
-        dataType: "text",
-        success: (data) ->
-          previewArea = closestForm.find(".preview-area")
-          previewArea.html(data)
-          previewArea.show()
-      })
-
-    input = $(".preview-button")
-    input.on "click", input.parent(), preview
-  )()
-###
 
 # for turbolinks
 $(document).ready(ready)
