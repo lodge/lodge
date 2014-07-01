@@ -2,7 +2,7 @@
 
   <div class="panel-heading">
     <% if @article.user == current_user %>
-      <div id="operation-area" class="pull-right">
+      <div class="pull-right">
         <%= link_to tco('edit'), edit_article_path(@article) %>
         |
         <%= link_to tco('destroy'), @article, method: :delete, data: { confirm: tco(:are_you_sure)} %>
@@ -15,8 +15,8 @@
   </div>
   
   <div class="panel-body">
-    <div id="article-info-area" class="pull-right text-right">
-      <div id="article-timestamp-area">
+    <div class="pull-right text-right">
+      <div>
         <span><%= tco :created_at %>: <%= @article.created_at %></span>
         <% if @article.created_at != @article.updated_at %>
           <span>|</span>
@@ -51,7 +51,7 @@
       </p>
     </div>
   
-    <div id="article-body-area" class="markdown">
+    <div class="markdown">
       <%= markdown(@article.body).html_safe %>
     </div>
   </div>

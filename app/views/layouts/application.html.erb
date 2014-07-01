@@ -22,15 +22,15 @@
 <body>
 
 <div class="container">
-  <div id="header-area" class="navbar navbar-default" role="navigation">
+  <div class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="row">
         <div class="col-xs-4">
-          <div id="application-title" class="navbar-header"><%= link_to "Lodge", root_path, class: ["nav", "navbar-brand"] %></div>
+          <div class="navbar-header"><%= link_to "Lodge", root_path, class: ["nav", "navbar-brand"] %></div>
         </div>
         <div class="col-xs-8">
           <div class="row">
-            <ul id="current-user-info" class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
                 <li class="dropdown">
                   <%= render partial: "users/info_dropdown", locals: {user: current_user} %>
@@ -80,7 +80,7 @@
         </div>
       <% end %>
 
-      <div id="notice-area">
+      <div>
         <% if notice %>
           <p id="notice" class="alert alert-success"><%= notice %></p>
         <% end %>
@@ -107,17 +107,17 @@
       <div class="row"><hr /></div>
 
       <div class="row">
-        <article id="contents-area" class="col-xs-9">
+        <article class="col-xs-9">
           <%= yield %>
         </article>
         
         <% if current_user %>
-          <nav id="navigation-area" class="col-xs-3 media">
+          <nav class="col-xs-3 media">
             <div class="media-body">
               <% # Stocked article list %>
               <h4 class="media-heading"><strong><%= tco("menu") %></strong></h4>
               <div class="media-body">
-                <ul id="menu">
+                <ul>
                   <li><u><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></u></li>
                   <li><u><%= link_to tco(:recent_article_list_title), articles_path %></u></li>
                   <li><u><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></u></li> 
@@ -131,7 +131,7 @@
               <% # Pupular article list %>
               <h4 class="media-heading"><strong><%= tco("popular_article_list_title") %></strong></h4>
               <div class="media-body">
-                <ol id="popular-article-list">
+                <ol>
                   <% @popular_articles.each do |article| %>
                     <li>
                       <u><%= link_to article.title, article_path(article) %></u>
@@ -146,7 +146,7 @@
               <% # Stocked article list %>
               <h4 class="media-heading"><strong><%= tco("stocked_article_list_title") %></strong></h4>
               <div class="media-body">
-                <ol id="stocked-article-list">
+                <ol>
                   <% @stocked_articles.each do |article| %>
                     <li><u><%= link_to article.title, article_path(article) %></u></li>
                   <% end %>
@@ -163,7 +163,7 @@
               <% # Your article list %>
               <h4 class="media-heading"><strong><%= tco("user_article_list_title") %></strong></h4>
               <div class="media-body">
-                <ol id="user-article-list">
+                <ol>
                   <% @user_articles.each do |article| %>
                     <li><u><%= link_to article.title, article_path(article) %></u></li>
                   <% end %>
