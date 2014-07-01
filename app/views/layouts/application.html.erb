@@ -14,7 +14,6 @@
   <%= javascript_include_tag 'notification', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <!--[if (lt IE 9) & (!IEMobile)]>
-    <%= stylesheet_link_tag 'ignore/ie', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'externals/html5shiv', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'externals/renspond.min', 'data-turbolinks-track' => true %>
   <![endif]-->
@@ -68,7 +67,7 @@
     </div>
   </div>
 
-  <div id="main-container" class="container-fluid">
+  <div class="container-fluid">
     <div class="row">
       <% if @notifications.present? %>
         <div class="alert alert-info">
