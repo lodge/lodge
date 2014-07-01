@@ -41,12 +41,39 @@
   .tab-pane, .editor-textarea, .markdown {
     min-height: 320px;
   }
+
 }
 
 // bootstrap bug fix
 .input-group-btn .btn.glyphicon {
   top: auto;
 }
+
+
+// CodeRay
+.CodeRay {
+  .line-numbers {
+    pre {
+      @include border-top-right-radius(0);
+      @include border-bottom-right-radius(0);
+      border-right: none;
+      text-align: right;
+      a {
+        border-bottom: solid 1px $brand-primary;
+        color: $brand-primary;
+        text-decoration: none;
+      }
+    }
+  }
+  .code {
+    pre {
+      @include border-top-left-radius(0);
+      @include border-bottom-left-radius(0);
+      border-left: none;
+    }
+  }
+}
+
 
 @import "bootswatch/<%= ENV["LODGE_THEME"] %>/bootswatch";
 
