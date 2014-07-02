@@ -71,15 +71,18 @@
             <%= comment.updated_at %>
             <% if comment.user == current_user %> 
               |
-              <%= content_tag :a, tco('edit'), class: "comment-edit-link" %>
+              <%= content_tag :a, tco('edit'), class: "comment-edit-link", "data-toggle" => "collapse", "data-target" => "[action='#{comment_path(comment)}']" %>
               |
               <%= link_to tco('destroy'), comment, method: :delete, data: { confirm: tco(:are_you_sure)} %>
             <% end %>
           </span>
         </p>
         <p class="list-group-body">
-        <%= markdown(comment.body).html_safe %>
+          <%= markdown(comment.body).html_safe %>
         </p>
+        <% if comment.user == current_user %> 
+          <%= render 'comment_form', hide: true, comment: comment %>
+        <% end %>
       </li>
     <% end %>
   <% end %>

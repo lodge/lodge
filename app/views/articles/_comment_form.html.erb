@@ -1,5 +1,4 @@
-<% style = hide ? "display: none" : "" %>
-<%= form_for(comment, html: {class: "comment-form", style: style, role: "form"}) do |f| %>
+<%= form_for(comment, html: {class: ["comment-form", "collapse", hide ? "" : "in"], role: "form"}) do |f| %>
   <%= f.hidden_field :user_id, :value => current_user.id, class: ["form-control"] %>
   <%= f.hidden_field :article_id, :value => @article.id, class: ["form-control"] %>
   <%= render partial: "layouts/editor", locals: {form: f} %>
