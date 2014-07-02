@@ -81,7 +81,7 @@
           <%= markdown(comment.body).html_safe %>
         </p>
         <% if comment.user == current_user %> 
-          <%= render 'comment_form', hide: true, comment: comment %>
+          <%= render 'comments/form', hide: true, comment: comment %>
         <% end %>
       </li>
     <% end %>
@@ -89,7 +89,7 @@
 </ul>
 
 <p class="lead"><%= tc :comment_form_title %></p>
-<%= render 'comment_form', hide: false, comment: Comment.new %>
+<%= render 'comments/form', hide: false, comment: Comment.new %>
 
 <p>
   <%= link_to tco(:back), @pre_accessable_url %>
