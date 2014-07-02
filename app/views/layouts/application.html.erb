@@ -150,8 +150,8 @@
                 <% end %>
               </ol>
               <% unless @stocked_articles.empty? %>
-              <div class="more-display-area pull-right">
-                <%= link_to tco("more_display"), articles_by_stocks_path %> 
+              <div class="clearfix">
+                <%= link_to tco("more_display"), articles_by_stocks_path, class: ["pull-right"] %> 
               </div>
               <% end %>
             </div>
@@ -167,8 +167,8 @@
                 <% end %>
               </ol>
               <% unless @user_articles.empty? %>
-                <div class="more-display-area pull-right">
-                  <%= link_to tco("more_display"), articles_by_user_path(current_user.id) %> 
+                <div class="clearfix">
+                  <%= link_to tco("more_display"), articles_by_user_path(current_user.id), class: ["pull-right"] %> 
                 </div>
               <% end %>
             </div>
