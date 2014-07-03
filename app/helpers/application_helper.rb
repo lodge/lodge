@@ -82,22 +82,20 @@ module ApplicationHelper
     tco(*args)
   end
 
+  def notification_message(notification)
+    localize_key = current_user == notification.article.user ?
+      notification.localize_key_for_owner :
+      notification.localize_key
+
+    tcn(localize_key,
+        user_name: notification.user.name,
+        article_title: notification.article.title)
+  end
+
   def notification_message_line(notification)
-    article = notification.article
-    user_name = notification.user.name
-    localize_key = ""
-    case notification.type
-    when "ArticleNotification"
-      localize_key = "article_update"
-    when "CommentNotification"
-      localize_key = "comment_#{notification.state}"
-    when "StockNotification"
-      localize_key = "stock"
-    end
-    localize_key += "_for_owner" if current_user == article.user
-    message = content_tag :span, tcn(localize_key, user_name: user_name, article_title: article.title)
-    html = gravatar(notification.user, 40) + message
-    content_tag(:li, link_to(html, article_path(article)))
+    message = content_tag :span, notification_message(notification)
+    html = gravatar(notification.user, 40) + " " + message
+    content_tag(:li, link_to(html, article_path(notification.article)))
   end
 
   def parse_filename(text)
