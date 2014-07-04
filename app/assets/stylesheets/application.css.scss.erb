@@ -30,8 +30,12 @@
   }
 }
 
-.navbar .dropdown .dropdown-menu {
+.dropdown .dropdown-menu.user-info {
   width: 320px;
+  @include border-top-left-radius($border-radius-base);
+}
+.dropdown .dropdown-menu.notification {
+  width: 480px;
   @include border-top-left-radius($border-radius-base);
 }
 

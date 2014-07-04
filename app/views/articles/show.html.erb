@@ -28,7 +28,9 @@
       <% @article.tags.each do |tag| %>
         <%= link_to tag.name, articles_by_tag_path(tag.name), class: ["label", "label-default"] %>
       <% end %>
-      <%= user_name_with_icon @article.user %>
+      <span class="dropdown">
+        <%= render partial: "users/info_dropdown", locals: {user: @article.user} %>
+      </span>
       <%= stock_and_comment_count(@article) %>
       <p>
         <% if @stocked_users.size() > 0 %>
