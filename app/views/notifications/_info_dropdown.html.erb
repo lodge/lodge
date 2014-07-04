@@ -11,7 +11,11 @@
           <%= gravatar(notification.user, 40, class: ["media-object"]) %>
         </div>
         <div class="media-body">
-          <p><%= notification_message notification %></p>
+          <p>
+            <%= link_to article_path(notification.article) do %>
+              <%= notification_message(notification) %>
+            <% end %>
+          </p>
         </div>
       </div>
     </li>
