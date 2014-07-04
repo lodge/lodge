@@ -59,6 +59,18 @@ group :development do
   gem 'rack-mini-profiler'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'database_cleaner'
+end
+
 # Include database gems for the adapters found in the database
 # configuration file
 require 'erb'
