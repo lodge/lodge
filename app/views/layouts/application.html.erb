@@ -34,12 +34,8 @@
                 <li class="dropdown">
                   <%= render partial: "users/info_dropdown", locals: {user: current_user} %>
                 </li>
-                <li>
-                  <a id="num-of-notification">
-                    <%= content_tag :span, class: ["badge", @notifications.present?? "alert-info" : ""] do %>
-                      <%= @notifications.length %>
-                    <% end %>
-                  </a>
+                <li class="dropdown">
+                  <%= render partial: "notifications/info_dropdown", locals: {notifications: @notifications} %>
                 </li>
                 <li>
                   <%= link_to t("users.edit_profile"), edit_user_registration_path, :class => 'navbar-link' %>
@@ -69,16 +65,6 @@
 
   <div class="container-fluid">
     <div class="row">
-      <% if @notifications.present? %>
-        <div class="alert alert-info">
-          <ul id="notifications-area">
-            <% @notifications.each do |notification| %>
-              <%= notification_message_line(notification) %>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
       <div>
         <% if notice %>
           <p id="notice" class="alert alert-success"><%= notice %></p>

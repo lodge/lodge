@@ -1,0 +1,19 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  <%= content_tag :span, class: ["label", @notifications.present?? "label-info" : ""] do %>
+    <%= @notifications.length %>
+  <% end %>
+</a>
+<ul class="dropdown-menu well" role="menu">
+  <% notifications.each do |notification| %>
+    <li role="presentation">
+      <div class="media">
+        <div class="pull-left">
+          <%= gravatar(notification.user, 40, class: ["media-object"]) %>
+        </div>
+        <div class="media-body">
+          <p><%= notification_message notification %></p>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>
