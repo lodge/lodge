@@ -16,13 +16,10 @@
 /log/*.log
 /tmp
 
-/config/environments/development.rb
-/config/environments/production.rb
-/config/environments/test.rb
 /config/database.yml
 
 /Gemfile.lock
-/vendor/bundler
+/vendor/bundle
 lodge_development
 lodge_test
 lodge_production
@@ -30,3 +27,5 @@ lodge_production
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+.env

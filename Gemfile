@@ -51,6 +51,7 @@ gem 'yaml_db', git: 'https://github.com/jetthoughts/yaml_db', ref: 'fb4b6bd7e12d
 gem 'activerecord-import'
 gem 'counter_culture', '~> 0.1.18'
 gem 'rails_config'
+gem 'dotenv-rails'
 #gem 'whenever', :require => false
 
 group :development do
@@ -65,19 +66,21 @@ require 'yaml'
 database_file = File.join(File.dirname(__FILE__), "config/database.yml")
 if File.exist?(database_file)
   database_config = YAML::load(ERB.new(IO.read(database_file)).result)
-  adapter = database_config["default"]["adapter"]
-  unless adapter.nil?
-    case adapter
-    when 'mysql2'
-      gem "mysql2"
-    when 'mysql'
-      gem "mysql"
-    when /postgresql/
-      gem "pg"
-    when /sqlite3/
-      gem "sqlite3"
-    else
-      warn("Unknown database adapter `#{adapter}` found in config/database.yml")
+  adapters = database_config.values.map {|c| c['adapter']}.compact.uniq
+  if adapters.any?
+    adapters.each do |adapter|
+      case adapter
+      when 'mysql2'
+        gem "mysql2"
+      when 'mysql'
+        gem "mysql"
+      when /postgresql/
+        gem "pg"
+      when /sqlite3/
+        gem "sqlite3"
+      else
+        warn("Unknown database adapter `#{adapter}` found in config/database.yml")
+      end
     end
   else
     warn("No adapter found in config/database.yml, please configure it first")
