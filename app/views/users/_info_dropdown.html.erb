@@ -1,7 +1,10 @@
+<% icon_only ||= false %>
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
   <%= gravatar(user) %>
-  <%= user.name %>
-  <i class="caret"></i>
+  <% if not icon_only %>
+    <%= user.name %>
+    <i class="caret"></i>
+  <% end %>
 </a>
 <ul class="dropdown-menu well user-info" role="menu">
   <li role="presentation">

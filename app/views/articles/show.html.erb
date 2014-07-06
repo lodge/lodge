@@ -32,18 +32,20 @@
         <%= render partial: "users/info_dropdown", locals: {user: @article.user} %>
       </span>
       <%= stock_and_comment_count(@article) %>
-      <p>
+      <div>
         <% if @stocked_users.size() > 0 %>
           <%= tc :stocked_users %>
           <% @stocked_users.each do |user| %>
-            <%= gravatar(user) %>
+            <span class="dropdown">
+              <%= render partial: "users/info_dropdown", locals: {user: user, icon_only: true} %>
+            </span>
           <% end %>
         <% end %>
         
         <%# if @stocked_users.size() > 10 %>
           <%#= tco :more_display %>
         <%# end %>
-      </p>
+      </div>
       <p>
         <% if @stock %>
           <%= link_to tc('unstock'), @stock, :method => :delete %>
