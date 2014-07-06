@@ -1,18 +1,18 @@
 <div class="panel">
 
-  <div class="panel-heading">
+  <div class="panel-heading clearfix">
     <% if @article.user == current_user %>
-      <div class="pull-right">
+      <div class="pull-right clearfix">
         <%= link_to tco('edit'), edit_article_path(@article) %>
         |
         <%= link_to tco('destroy'), @article, method: :delete, data: { confirm: tco(:are_you_sure)} %>
       </div>
     <% end %>
   
-    <h1 class="panel-title">
-      <%= @article.title %>
-    </h1>
+    <h1><%= @article.title %></h1>
+    <hr />
   </div>
+
   
   <div class="panel-body">
     <div class="pull-right text-right">
@@ -54,10 +54,10 @@
         <% end %>
       </p>
     </div>
-  
-    <div class="markdown">
-      <%= markdown(@article.body).html_safe %>
-    </div>
+  </div>
+
+  <div class="panel-body markdown">
+    <%= markdown(@article.body).html_safe %>
   </div>
 </div>
 
