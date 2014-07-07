@@ -1,0 +1,104 @@
+#!/bin/bash
+#
+# Modified by jay@gooby.org http://github.com/jaygooby
+# based on http://gist.github.com/308216 by http://github.com/mguterl
+#
+# Modified by comutt http://github.com/comutt
+
+RAILS_ENV=<%= @node['lodge']['rails']['environment'] %>
+RAILS_ROOT=<%= @node['lodge']['rails']['root'] %>
+UNICORN_USER=<%= @node['lodge']['unicorn']['user'] %>
+UNICORN_SUDO="sudo -u $UNICORN_USER -i bash -c"
+UNICORN_CMD="unicorn -c $RAILS_ROOT/config/unicorn.rb -E $RAILS_ENV -D"
+PID=<%= @node['lodge']['unicorn']['pid_path'] %>
+OLD_PID="$PID.oldbin"
+STOP_TIMEOUT=30
+
+sig () {
+  test -s "$PID" && kill -$1 $(cat "$PID")
+}
+
+oldsig () {
+  test -s "$OLD_PID" && kill -$1 $(cat "$OLD_PID")
+}
+
+start_server () {
+   sig 0 && echo >&2 "Already running" && return 0
+   echo -n "Starting ."
+   $UNICORN_SUDO "$UNICORN_CMD" &
+   declare cmd_pid=$!
+   while sudo kill -0 $cmd_pid >/dev/null 2>&1; do
+     echo -n "."
+     sleep 1
+   done
+
+   echo "done" && return 0
+}
+
+stop_server () {
+  echo -n "Stopping ."
+
+  if [ -f "$PID" ]; then
+    declare current_pid=$(cat "$PID")
+  else
+    echo >&2 "$PID: not found" && return 1
+  fi
+
+  sig QUIT 
+  
+  for ((i=0; $i<$STOP_TIMEOUT; i+=1)); do
+    if ! kill -0 $current_pid >/dev/null 2>&1; then 
+      echo "done" && return 0
+    fi
+    echo -n "."
+    sleep 1
+  done 
+
+  echo >&2 "failed" && return 1
+}
+
+main () {
+  echo -n "RAILS_ROOT=$RAILS_ROOT (RAILS_ENV=$RAILS_ENV): "  
+
+  case $1 in
+    start)
+      start_server
+      exit $?
+      ;;
+
+    stop)
+      stop_server
+      exit $?
+      ;;  
+
+    force-stop)
+      sig TERM && echo "Forcing a stop" && exit 0
+      echo >&2 "Not running"
+      ;;  
+
+    reload)
+      sig USR2 && echo "Reloaded" && exit 0
+      echo >&2 "Reload failed" && exit 1
+      ;;  
+
+    restart)
+      stop_server
+      echo a
+      start_server
+      exit $?
+      ;;  
+
+    rotate)
+      sig USR1 && echo rotated logs OK && exit 0
+      echo >&2 "Couldn't rotate logs" && exit 1
+      ;;  
+
+    *)  
+      echo >&2 "Usage: $0 <start|stop|restart|rotate|force-stop>"
+      exit 1
+      ;;  
+
+    esac
+}
+
+main $*

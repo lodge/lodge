@@ -90,39 +90,26 @@ http://lodge-sample.herokuapp.com/
 
 1. `bundle install` を実行します。
 1. `rake db:create` の後、 `rake db:migrate` を実行します。これでDBは完成です。
-1. `config/environments/production.example.rb` を `config/environments/production.rb` としてコピーし、ファイル最下部にある以下の部分を編集します。通常はproduction.rbを利用します。各コメントを参考に設定してください。
+1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。
 
     ```ruby
-    # Devise Settings
-    # 以下は主にユーザ登録やパスワード忘れの際のメール送信で利用する設定です。
-    # メールに記載する本サービスのURL
-    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-    # SMTPの指定
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com", # SMTPサーバ
-      :port => 587, # ポート
-      :domain => 'gmail.com', # gmail.com以外のドメイン名の場合はそれに合わせて変更してください。
-      :user_name => "", # ユーザ名
-      :password => "", # パスワード
-      :authentication => 'plain', # 認証方式
-      :enable_starttls_auto => true,
-    }
+    # productionモードで動かす為には、secret_keyを設定します。
+    # `rake secret` により生成するのがオススメです。
+    SECRET_KEY_BASE   = __some_random_string__
+
+    # 認証キーの設定
+    # ランダムな文字列を指定します。
+    DEVISE_SECRET_KEY = __some_random_string__
+
+    # アプリケーションのドメインを設定します。
+    LODGE_DOMAIN      = lodge-sample.herokuapp.com
+
+    # メールの設定します。
+    SMTP_ADDRESS      = smtp.gmail.com
+    SMTP_PORT         = 587
+    SMTP_USERNAME     = username
+    SMTP_PASSWORD     = password
     ```
-
-1. productionモードで動かす為には、secret_keyを設定します(developmentモードでは必要ありません)。これは実行する環境の環境変数に設定しますので、`~/.bashrc` 等に書いておくと便利です。
-
-bashの場合
-
-```bash
-echo "export SECRET_KEY_BASE=\"`rake secret`\"" >> ~/.bashrc; source ~/.bashrc
-```
-
-zshの場合
-
-```bash
-echo "export SECRET_KEY_BASE=\"`rake secret`\"" >> ~/.zshrc; source ~/.zshrc
-```
 
 ## 起動
 
@@ -130,6 +117,41 @@ echo "export SECRET_KEY_BASE=\"`rake secret`\"" >> ~/.zshrc; source ~/.zshrc
 サーバが立ち上がり、Lodgeが利用できるようになります。
 
 ※Apache+Passengerや、nginx+Unicorn等でも起動できますので、より高速に動かしたい場合等はそちらをオススメします(設定方法等は割愛)。
+
+## Vagrant up
+
+[VirtualBox](https://www.virtualbox.org/) と [Vagrant](http://www.vagrantup.com/) を使って、
+``vagrant up`` することで、VM上に手早く開発環境を用意することができます。
+
+### 手順
+
+1. VirtualBox をインストール
+1. Vagrant をインストール
+1. ``vagrant plugin install vagrant-vbguest``
+1. ``vagrant plugin install vagrant-librarian-chef``
+1. ``git clone https://github.com/m-yamashita/lodge``
+1. ``cd lodge``
+1. ``vagrant up``
+1. VMが起動するまで待つ
+1. http://localhost:3000/ にアクセスして Lodge の画面を見ることができたら成功です
+
+### 諸々の情報
+
+* アクセス URL
+    * http://localhost:3000/
+* DB
+    * MySQL
+* メールサーバ
+    * VM 内の Postfix
+* Lodge の起動スクリプト
+    * ``/etc/init.d/lodge`` （Unicorn を起動）
+* RAILS_ROOT
+    * ``/vagrant`` (実態は ``git clone`` したローカルリポジトリ）
+* RAILS_ENV
+    * ``development``
+* ログ
+    * ``/vagrant/log/unicorn.stdout.log``
+    * ``/vagrant/log/unicorn.stderr.log``
 
 ## 最後に
 
