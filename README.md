@@ -157,7 +157,7 @@ http://lodge-sample.herokuapp.com/
 * Lodge の起動スクリプト
     * ``/etc/init.d/lodge`` （Unicorn を起動）
 * RAILS_ROOT
-    * ``/vagrant`` (実態は ``git clone`` したローカルリポジトリ）
+    * ``/vagrant``
 * RAILS_ENV
     * ``development``
 * ログ
