@@ -135,6 +135,24 @@ http://lodge-sample.herokuapp.com/
 1. VMが起動するまで待つ
 1. http://localhost:3000/ にアクセスして Lodge の画面を見ることができたら成功です
 
+### 諸々の情報
+
+* アクセス URL
+    * http://localhost:3000/
+* DB
+    * MySQL
+* メールサーバ
+    * VM 内の Postfix
+* Lodge の起動スクリプト
+    * ``/etc/init.d/lodge`` （Unicorn を起動）
+* RAILS_ROOT
+    * ``/vagrant`` (実態は ``git clone`` したローカルリポジトリ）
+* RAILS_ENV
+    * ``development``
+* ログ
+    * ``/vagrant/log/unicorn.stdout.log``
+    * ``/vagrant/log/unicorn.stderr.log``
+
 ## 最後に
 
 ### 開発にご協力頂ける方を募集しています。
