@@ -12,8 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.cpus = 2
   end
 
-  config.vm.synced_folder ".", "/vagrant", type: "rsync",
-      rsync__exclude: ".git/"
+  config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: [ ".git/", ".bundle/", "vendor/", "tmp/", "log/" ]
 
   config.vm.network "private_network", type: "dhcp"
   config.vm.network "forwarded_port", guest: 3000, host: 3000
@@ -53,6 +52,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       },
       tz: "Asia/Tokyo"
     }
+  end
+
+  # Configure the window for gatling to coalesce writes.
+  if Vagrant.has_plugin?("vagrant-gatling-rsync")
+    config.gatling.latency = 2.5
   end
 
 end
