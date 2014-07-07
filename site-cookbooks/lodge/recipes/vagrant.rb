@@ -5,10 +5,10 @@ bash 'create /etc/postfix/transport' do
   EOH
 end
 
-cookbook_file '/home/vagrant/.gemrc' do
+cookbook_file '/etc/gemrc' do
   source '.gemrc'
-  owner 'vagrant'
-  group 'vagrant'
+  owner 'root'
+  group 'root'
   mode '0644'
 end
 
