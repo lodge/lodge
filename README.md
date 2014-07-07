@@ -132,29 +132,13 @@ http://lodge-sample.herokuapp.com/
 1. ``git clone https://github.com/m-yamashita/lodge``
 1. ``cd lodge``
 1. ``vagrant up``
-    * ホストのディレクトリをNFSとしてマウントするため([VirtualBox の共有ディレクトリ機能がパフォーマンスが非常に悪いため](http://docs.vagrantup.com/v2/synced-folders/nfs.html))、 ``sudo`` のパスワード入力が以下のように求められます。
-      ゲストではなく、ホストの ``sudo`` パスワードを入力してください。
-
-      ```
-      ==> default: Machine booted and ready!
-      GuestAdditions 4.3.12 running --- OK.
-      ==> default: Checking for guest additions in VM...
-      ==> default: Configuring and enabling network interfaces...
-      ==> default: Exporting NFS shared folders...
-      ==> default: Preparing to edit /etc/exports. Administrator privileges will be required...
-      Password:
-      The nfsd service does not appear to be running.
-      Starting the nfsd service
-      ==> default: Mounting NFS shared folders...
-      ==> default: Mounting shared folders...
-          default: /tmp/vagrant-chef-3/chef-solo-1/cookbooks => /Users/someone/dev/lodge/lodge/cookbooks
-          default: /tmp/vagrant-chef-3/chef-solo-2/cookbooks => /Users/someone/dev/lodge/lodge/site-cookbooks
-      ==> default: Running provisioner: chef_solo...
-      Generating chef JSON and uploading...
-      ==> default: Running chef-solo...
-      ```
-
 1. VMが起動するまで待つ
+1. ``vagrant rsync-auto``
+    * ホスト上の ``git clone`` したソースコードを自動的にVM上の ``/vagrant`` に同期するために必要です
+    * [公式ドキュメントのNFSの項目](https://docs.vagrantup.com/v2/synced-folders/nfs.html) に書かれていますが、VirtualBox の共有フォルダはパフォーマンスが悪いため使用していません。
+
+      > In some cases the default shared folder implementations (such as VirtualBox shared folders) have high performance penalties. 
+
 1. http://localhost:3000/ にアクセスして Lodge の画面を見ることができたら成功です
 
 ### 諸々の情報
