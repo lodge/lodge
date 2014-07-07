@@ -118,6 +118,23 @@ http://lodge-sample.herokuapp.com/
 
 ※Apache+Passengerや、nginx+Unicorn等でも起動できますので、より高速に動かしたい場合等はそちらをオススメします(設定方法等は割愛)。
 
+## Vagrant up
+
+[VirtualBox](https://www.virtualbox.org/) と [Vagrant](http://www.vagrantup.com/) を使って、
+``vagrant up`` することで、VM上に手早く開発環境を用意することができます。
+
+### 手順
+
+1. VirtualBox をインストール
+1. Vagrant をインストール
+1. ``vagrant plugin install vagrant-vbguest``
+1. ``vagrant plugin install vagrant-librarian-chef``
+1. ``git clone https://github.com/m-yamashita/lodge``
+1. ``cd lodge``
+1. ``vagrant up``
+1. VMが起動するまで待つ
+1. http://localhost:3000/ にアクセスして Lodge の画面を見ることができたら成功です
+
 ## 最後に
 
 ### 開発にご協力頂ける方を募集しています。
