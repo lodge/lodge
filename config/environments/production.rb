@@ -98,7 +98,7 @@ Rails.application.configure do
     :domain               => ENV["LODGE_DOMAIN"],
     :user_name            => ENV["SMTP_USERNAME"],
     :password             => ENV["SMTP_PASSWORD"],
-    :authentication       => ENV["SMTP_AUTH_METHOD"],
+    :authentication       => ENV["SMTP_AUTH_METHOD"].to_sym,
     :enable_starttls_auto => ENV["SMTP_ENABLE_STARTTLS_AUTO"],
   }
 end
