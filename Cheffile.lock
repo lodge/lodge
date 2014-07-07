@@ -7,6 +7,7 @@ SITE
       yum-mysql-community (>= 0.0.0)
     postfix (3.3.1)
     ruby_build (0.8.0)
+    timezone-ii (0.2.0)
     vim (1.1.2)
     yum (3.2.2)
     yum-epel (0.3.6)
@@ -39,5 +40,6 @@ DEPENDENCIES
   postfix (>= 0)
   rbenv (>= 0)
   ruby_build (>= 0)
+  timezone-ii (>= 0)
   vim (>= 0)
 
