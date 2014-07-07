@@ -91,14 +91,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => ENV['LODGE_DOMAIN'] }
 
   # SMTPの指定
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = ENV["DELIVERY_METHOD"].to_sym
   config.action_mailer.smtp_settings = {
     :address              => ENV["SMTP_ADDRESS"],
     :port                 => ENV["SMTP_PORT"],
-    :domain               => ENV['LODGE_DOMAIN'],
+    :domain               => ENV["LODGE_DOMAIN"],
     :user_name            => ENV["SMTP_USERNAME"],
     :password             => ENV["SMTP_PASSWORD"],
-    :authentication       => 'plain',
-    :enable_starttls_auto => true,
+    :authentication       => ENV["SMTP_AUTH_METHOD"],
+    :enable_starttls_auto => ENV["SMTP_ENABLE_STARTTLS_AUTO"],
   }
 end
