@@ -137,7 +137,7 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    if @article.user_id == current_user.id
+    if @article and @article.user_id == current_user.id
       params.require(:article).permit(:user_id, :title, :body, :lock_version, :is_public_editable)
     else
       params.require(:article).permit(:user_id, :title, :body, :lock_version)
