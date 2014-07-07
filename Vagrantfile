@@ -8,12 +8,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.memory = 2048
+    vb.cpus = 2
   end
 
   config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   config.vm.provision :chef_solo do |chef|
+    chef.log_level = :debug
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
 
     chef.add_recipe "apt"
@@ -22,8 +24,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "rbenv::user"
     chef.add_recipe "rbenv::vagrant"
     chef.add_recipe "vim"
+    chef.add_recipe "postfix"
     chef.add_recipe "mysql::server"
     chef.add_recipe "mysql::client"
+    chef.add_recipe "lodge::vagrant"
 
     chef.json = {
       rbenv: {
@@ -33,13 +37,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           global: "2.1.2",
           gems: {
             "2.1.2" => [
-              { name: "bundler" }
+              { name: "bundler" },
+              { name: "unicorn" }
             ]
           }
         }]
       },
       mysql: {
-        server_root_password: ''
+        server_root_password: ""
       }
     }
   end
