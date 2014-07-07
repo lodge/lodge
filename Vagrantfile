@@ -12,6 +12,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.cpus = 2
   end
 
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+
   config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   config.vm.provision :chef_solo do |chef|
