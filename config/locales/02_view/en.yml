@@ -95,6 +95,7 @@ en:
   articles:
     list_title_by_tag: "Listing articles of '%{tag_name}'"
     list_title_by_search: "Listing articles of '%{query}' query"
+    not_public_editable: This article is not public editable.
     update_histories: Update histories
     new_title: New article
     edit_title: "Edit of '%{article_title}'"
@@ -144,49 +145,3 @@ en:
     aliases: Aliases
   update_histories:
     current_article: "Update history of '%{article_title}'"
-  activerecord:
-    attributes:
-      user:
-        name: Name
-        email: E-Mail
-        password: New password
-        password_confirmation: New password(confirmation)
-        current_password: Current password
-      article:
-        title: Title
-        tags: Tags
-        body: Body
-      comment:
-        body: Comment
-    errors:
-      messages:
-        record_invalid: Invalid data.
-      models:
-        validate_common: &validate_common
-          blank: is blank.
-          too_short: is too short.
-          too_long: is too long.
-          confirmation: is not the same confirmation.
-        article:
-          attributes:
-            title:
-              <<: *validate_common
-            body:
-              <<: *validate_common
-        comment:
-          attributes:
-            body:
-              <<: *validate_common
-        user:
-          attributes:
-            name:
-              <<: *validate_common
-            email:
-              <<: *validate_common
-              taken: is taken.
-            password:
-              <<: *validate_common
-            password_confirmation:
-              <<: *validate_common
-            current_password:
-              <<: *validate_common
