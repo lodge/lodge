@@ -19,11 +19,12 @@ template '/vagrant/config/database.yml' do
   mode '0644'
 end
 
-template '/vagrant/config/environments/development.rb' do
-  source 'config/environments/development.rb.erb'
+template '/vagrant/.env' do
+  source '.env.erb'
   owner 'vagrant'
   group 'vagrant'
   mode '0644'
+  not_if { File.exists?('/vagrant/.env') }
 end
 
 template '/vagrant/config/unicorn.rb' do
@@ -42,7 +43,7 @@ end
 
 bash 'bundle install' do
   code <<-EOH
-  sudo -u vagrant -i bash -c 'cd /vagrant && bundle install --path vendor/bundler'
+  sudo -u vagrant -i bash -c 'cd /vagrant && bundle install --path vendor/bundle'
   EOH
 end
 
