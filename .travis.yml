@@ -4,6 +4,8 @@ rvm:
 before_script:
     - mysql -e 'create database lodge_test'
     - cp config/database.example.yml config/database.yml
+    - sed -i -e "/^default/a\    adapter: mysql2" config/database.yml
+    - bundle install
 script:
-    - bundle exec rake db:migrate
+    - RAILS_ENV=test bundle exec rake db:migrate --trace
 
