@@ -1,16 +1,11 @@
 <div id="article-area">
-  <div id="operation-area">
-    <% unless @article.is_public_editable %>
-      <div id="is-not-public-editable"><%= tc(:not_public_editable) %></div>
-    <% end %>
-    <% if @article.user == current_user || @article.is_public_editable %>
+  <% if @article.user == current_user %>
+    <div id="operation-area">
       <%= link_to tco('edit'), edit_article_path(@article) %>
-    <% end %>
-    <% if @article.user == current_user %>
       |
       <%= link_to tco('destroy'), @article, method: :delete, data: { confirm: tco(:are_you_sure)} %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <h1 id="article-title">
     <%= @article.title %>
@@ -21,12 +16,7 @@
       <span><%= tco :created_at %>: <%= @article.created_at %></span>
       <% if @article.created_at != @article.updated_at %>
         <span>|</span>
-        <span>
-          <%= tco :last_update %>
-          :
-          <%= gravatar(@article.update_histories.first.user) %> 
-          <%= @article.updated_at %>
-        </span>
+        <span><%= tco :updated_at %>: <%= @article.updated_at %></span>
         <span>-</span>
         <span><%= link_to "#{tc(:update_histories)}(#{@article.update_histories.size})", update_histories_path(@article) %></span>
       <% end %>

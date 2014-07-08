@@ -95,7 +95,6 @@ en:
   articles:
     list_title_by_tag: "Listing articles of '%{tag_name}'"
     list_title_by_search: "Listing articles of '%{query}' query"
-    not_public_editable: This article is not public editable.
     update_histories: Update histories
     new_title: New article
     edit_title: "Edit of '%{article_title}'"

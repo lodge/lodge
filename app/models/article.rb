@@ -1,10 +1,8 @@
 class Article < ActiveRecord::Base
-  order_by_updated_at_desc = ->{ order(updated_at: :desc) }
-  order_by_updated_at_asc = ->{ order(updated_at: :asc) }
   belongs_to :user
   has_many :stocks
-  has_many :comments, order_by_updated_at_asc
-  has_many :update_histories, order_by_updated_at_desc
+  has_many :comments
+  has_many :update_histories
   has_many :notifications
   before_update :create_history
   before_update :create_notification
@@ -16,12 +14,10 @@ class Article < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
 
-  attr_accessor :old_title, :old_body, :old_tags, :new_tags, :update_user_id
+  attr_accessor :old_title, :old_body, :old_tags, :new_tags
 
   acts_as_taggable
   alias_method :__save, :save
-
-  default_scope { order(created_at: :desc) }
 
   def save
     begin
@@ -35,7 +31,6 @@ class Article < ActiveRecord::Base
   def create_history
     UpdateHistory.create!(
       article_id: self.id,
-      user_id: self.update_user_id,
       old_title: self.old_title,
       old_tags: self.old_tags,
       old_body: self.old_body,
@@ -47,7 +42,7 @@ class Article < ActiveRecord::Base
 
   def create_notification
     notification = ArticleNotification.create!(
-      user_id: self.update_user_id,
+      user_id: self.user_id,
       state: :update,
       article_id: self.id,
     )

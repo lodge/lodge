@@ -2,13 +2,6 @@
 
 <div id="history-area">
   <h2><%= tc :current_article, article_title: @article.title %></h2>
-  <div id="article-timestamp-area">
-    <span>
-      <%= user_name_with_icon(@update_history.user) %> 
-      -
-      <%= @update_history.updated_at %>
-    </span>
-  </div>
   <h2><%= t "activerecord.attributes.article.title" %></h2>
   <p>
     <%= diff(history.old_title, history.new_title) %>

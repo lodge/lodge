@@ -11,18 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629055323) do
+ActiveRecord::Schema.define(version: 20140628063218) do
 
   create_table "articles", force: true do |t|
-    t.integer  "user_id",                                        null: false
-    t.string   "title",              limit: 100,                 null: false
-    t.text     "body",                                           null: false
+    t.integer  "user_id",                                null: false
+    t.string   "title",          limit: 100,             null: false
+    t.text     "body",                                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "comments_count",                 default: 0,     null: false
-    t.integer  "lock_version",                   default: 0
-    t.boolean  "is_private",                     default: false
-    t.boolean  "is_public_editable",             default: true
+    t.integer  "comments_count",             default: 0, null: false
+    t.integer  "lock_version",               default: 0
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
@@ -110,7 +108,6 @@ ActiveRecord::Schema.define(version: 20140629055323) do
     t.text     "old_body",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   add_index "update_histories", ["article_id"], name: "index_update_histories_on_article_id"

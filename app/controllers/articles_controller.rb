@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
     @articles = Article
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
+      .order(:updated_at => :desc)
   end
 
   # GET /articles
@@ -20,6 +21,7 @@ class ArticlesController < ApplicationController
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
       .tagged_with(following_tag_names, any: true)
+      .order(:updated_at => :desc)
     render :index
   end
 
@@ -28,28 +30,28 @@ class ArticlesController < ApplicationController
   def search
     query = "%#{params[:query].gsub(/([%_])/){"\\" + $1}}%"
     @articles = Article.where("title like ?", query)
-        .page(params[:page]).per(PER_SIZE)
+        .page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
     render :index
   end
 
   # GET /articles/stocks
   # GET /articles/stocks.json
   def by_stocks
-    @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE)
+    @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
     render :index
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def by_user
-    @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE)
+    @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
     render :index
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def by_tag
-    @articles = Article.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag_name])
+    @articles = Article.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag_name]).order(:updated_at => :desc)
     @tag = Tag.find_by_name(params[:tag_name])
     render :index
   end
@@ -104,11 +106,8 @@ class ArticlesController < ApplicationController
     @article.old_tags = @article.tag_list.join(",")
     @article.tag_list = params[:article][:tags]
     @article.new_tags = @article.tag_list.join(",")
-    @article.update_user_id = current_user.id
-    attributes = article_params
-    attributes.delete(:user_id)
     respond_to do |format|
-      if @article.update(attributes)
+      if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
@@ -137,16 +136,12 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    if @article and @article.user_id == current_user.id
-      params.require(:article).permit(:user_id, :title, :body, :lock_version, :is_public_editable)
-    else
-      params.require(:article).permit(:user_id, :title, :body, :lock_version)
-    end
+    params.require(:article).permit(:user_id, :title, :body, :lock_version)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def check_permission
-    return if @article.user_id == current_user.id || @article.is_public_editable
+    return if @article.user_id == current_user.id
     redirect_to articles_url
   end
 end
