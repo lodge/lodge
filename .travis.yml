@@ -4,3 +4,6 @@ rvm:
 before_script:
     - mysql -e 'create database lodge_test'
     - cp config/database.example.yml config/database.yml
+script:
+    - bundle exec rake db:migrate
+
