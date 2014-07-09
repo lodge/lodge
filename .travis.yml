@@ -7,5 +7,5 @@ before_script:
     - cp .env.example .env
     - bundle install
 script:
-    - RAILS_ENV=test bundle exec rake db:migrate --trace
-    - RAILS_ENV=test bundle exec rake spec --trace
+    - RAILS_ENV=test bin/rake db:migrate --trace
+    - RAILS_ENV=test bin/rake spec --trace
