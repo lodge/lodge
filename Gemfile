@@ -62,6 +62,8 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'coveralls', :require => false
+  gem 'simplecov'
 end
 
 group :test do
