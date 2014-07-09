@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :stock do
+    user
+    article
   end
 end

@@ -6,7 +6,6 @@ RSpec.describe User, :type => :model do
   it { should have_many(:stocked_articles) }
   it { should have_many(:stocks) }
   it { should have_many(:comments) }
-  it { should have_many(:tags) }
   it { should have_many(:notification_targets) }
   it { should have_many(:notifications) }
 

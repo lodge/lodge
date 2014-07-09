@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :article do
+    title "title"
+    body "body"
+    user
   end
 end
