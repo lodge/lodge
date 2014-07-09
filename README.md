@@ -1,4 +1,4 @@
-Lodge
+Lodge [![Gitter chat](https://badges.gitter.im/m-yamashita/lodge.png)](https://gitter.im/m-yamashita/lodge) [![Build Status](https://travis-ci.org/m-yamashita/lodge.svg?branch=develop)](https://travis-ci.org/m-yamashita/lodge)  [![Coverage Status](https://coveralls.io/repos/m-yamashita/lodge/badge.png?branch=develop)](https://coveralls.io/r/m-yamashita/lodge?branch=develop)
 =====
 
 ## これは何？
