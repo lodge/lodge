@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
     :source => :article
   has_many :stocks
   has_many :comments
-  has_many :tags
   has_many :notification_targets
   has_many :notifications,
     -> {order "notifications.updated_at desc"},
