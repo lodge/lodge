@@ -12,5 +12,13 @@ FactoryGirl.define do
       old_tags "old_tag1,old_tag2"
       new_tags "new_tag1,new_tag2"
     end
+
+    factory :article_with_three_notifications do
+      after_build do |article|
+        3.times do
+          article.notifications << FactoryGirl.build(:article_notification)
+        end
+      end
+    end
   end
 end

@@ -12,17 +12,6 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:stocked_users) }
   it { should have_many(:tags) }
 
-  describe :create_history do
-    let(:article) { FactoryGirl.create(:edited_article) }
-
-    it "should create new update_history" do
-      expect { article.create_history }.to change(UpdateHistory, :count).by(1)
-    end
-    it "should be related with the new update_history" do
-      expect(article.create_history.article).to be_eql(article)
-    end
-  end
-
   describe :save do
     let(:article) { FactoryGirl.create(:edited_article) }
     before do
@@ -52,5 +41,44 @@ RSpec.describe Article, :type => :model do
         expect(article.errors.size).to be_eql(1)
       end
     end
+  end
+
+  describe :create_history do
+    let(:article) { FactoryGirl.create(:edited_article) }
+
+    it "should create new update_history" do
+      expect { article.create_history }.to change(UpdateHistory, :count).by(1)
+    end
+    it "should be related with the new update_history" do
+      expect(article.create_history.article).to be_eql(article)
+    end
+  end
+
+  describe :create_notification do
+    let(:article) { FactoryGirl.create(:article) }
+
+    it "should create new notification" do
+      expect { article.create_notification }.to change(Notification, :count).by(1)
+    end
+
+    it "should be related with the notification" do
+      expect(article.create_notification.article).to be_eql(article)
+    end
+
+    it "should create article notification" do
+      expect(article.create_notification).to be_instance_of(ArticleNotification)
+    end
+
+    it "should create update-notification" do
+      expect(article.create_notification.state).to be_eql(:update)
+    end
+  end
+
+  describe :remove_user_notification do
+    let(:article) {
+      article = FactoryGirl.build(:article)
+      article.tag_list = "tag1,tag2"
+      article.save
+    }
   end
 end

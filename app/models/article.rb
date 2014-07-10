@@ -47,6 +47,7 @@ class Article < ActiveRecord::Base
       article_id: self.id,
     )
     notification.create_targets_for_stocked_user_by_article(self)
+    notification
   end
 
   def remove_user_notification(current_user)
