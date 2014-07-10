@@ -1,6 +1,9 @@
 <%= paginate articles %>
 
-<table id="articles-table" class="list-table">
+<table class="list-table table article-table">
+  <colgroup span="1"></colgroup>
+  <colgroup span="4"></colgroup>
+  
   <tbody>
     <% articles.each do |article| %>
       <tr>
@@ -10,12 +13,14 @@
         <td class="article-tags-column">
           <div>
             <% article.tags.each do |tag| %>
-              <%= link_to tag.name, articles_by_tag_path(tag.name), class: :tag %>
+                <%= link_to articles_by_tag_path(tag.name), class: :tag do %>
+                  <span class="label label-default"><%= tag.name %></span>
+                <% end %>
             <% end %>
           </div>
         </td>
         <td><%= stock_and_comment_count(article) %></td>
-        <td><%= user_name_with_icon(article.user) %></td>
+        <td><div class="dropdown"><%= render partial: "users/info_dropdown", locals: {user: article.user} %></div></td>
         <td><%= article.updated_at.to_s(:date) %></td>
       </tr>
     <% end %>

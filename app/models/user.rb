@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
   def contribution
     Stock.joins(:article).where("articles.user_id = ? AND stocks.user_id != ?", self.id, self.id).count
   end
+
+  def recent_articles(count=20)
+    articles.order(updated_at: :desc).limit(count)
+  end
 end

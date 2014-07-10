@@ -5,17 +5,17 @@
 
   <dl>
     <dt><%= tc :name %></dt>
-    <dd><%= f.text_field :name, autofocus: true %></dd>
+    <dd><%= f.text_field :name, autofocus: true, class: ["form-control"] %></dd>
     <dt><%= tc :email %></dt>
-    <dd><%= f.email_field :email %></dd>
+    <dd><%= f.email_field :email, class: ["form-control"] %></dd>
     <dt><%= tc :current_password %></dt>
-    <dd><%= f.password_field :current_password, autocomplete: "off" %></dd>
+    <dd><%= f.password_field :current_password, autocomplete: "off", class: ["form-control"] %></dd>
   </dl>
   <dl id="new-password-area">
     <dt><%= tc :password %><i></i></dt>
-    <dd><%= f.password_field :password, autocomplete: "off" %></dd>
+    <dd><%= f.password_field :password, autocomplete: "off", class: ["form-control"] %></dd>
     <dt><%= tc :password_confirmation %></dt>
-    <dd><%= f.password_field :password_confirmation, autocomplete: "off" %></dd>
+    <dd><%= f.password_field :password_confirmation, autocomplete: "off", class: ["form-control"] %></dd>
   </dl>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -23,13 +23,13 @@
   <% end %>
 
 
-  <p><%= f.submit tco :update %></p>
+  <p><%= f.submit tco(:update), class: ["btn", "btn-success"] %></p>
 <% end %>
 
 <h3><%= tc :freeze_account %></h3>
 
 <p>
-  <%= button_to tco(:freeze), registration_path(resource_name), data: { confirm: tc(:account_delete_confirm) }, method: :delete %>
+  <%= button_to tco(:freeze), registration_path(resource_name), data: { confirm: tc(:account_delete_confirm) }, method: :delete, class: ["btn", "btn-danger"] %>
 </p>
 
 <%= link_to tco(:back), :back %>

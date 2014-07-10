@@ -1,0 +1,115 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootswatch/<%= ENV["LODGE_THEME"] %>/variables";
+@import "bootstrap";
+
+@import "compass/css3";
+.navbar {
+  .navbar-header .navbar-brand {
+    padding-top: $navbar-padding-vertical + $navbar-height / 2;
+  }
+  .col-xs-4 {
+    height: $navbar-height * 2;
+  }
+  .col-xs-8 .row {
+    margin-right: 0;
+  }
+}
+
+.dropdown .dropdown-menu.user-info {
+  width: 320px;
+  @include border-top-left-radius($border-radius-base);
+}
+.dropdown .dropdown-menu.notification {
+  width: 480px;
+  @include border-top-left-radius($border-radius-base);
+}
+
+// bootstrap bug fix
+.input-group-btn .btn.glyphicon {
+  top: auto;
+}
+
+.markdown {
+
+  h1 { font-size: $font-size-h1 * 0.7; }
+  h2 { font-size: $font-size-h2 * 0.7; }
+  h3 { font-size: $font-size-h3 * 0.7; }
+  h4 { font-size: $font-size-h4 * 0.7; }
+  h5 { font-size: $font-size-h5 * 0.7; }
+  h6 { font-size: $font-size-h6 * 0.7; }
+
+  h1 { line-height: $font-size-h1 * 0.9; }
+  h2 { line-height: $font-size-h2 * 0.9; }
+  h3 { line-height: $font-size-h3 * 0.9; }
+  h4 { line-height: $font-size-h4 * 0.9; }
+  h5 { line-height: $font-size-h5 * 0.9; }
+  h6 { line-height: $font-size-h6 * 0.9; }
+
+  h1 {
+    background-color: rgba($gray-light, 0.6);
+  }
+  h2 {
+    border-bottom: solid 1px $gray-light;
+  }
+  h3 {
+    border-bottom: dotted 1px $gray-light;
+  }
+  h4, h5, h6 {
+    text-decoration: underline;
+  }
+
+  em, strong {
+    font-weight: bold;
+  }
+  strong {
+    color: $state-danger-text;
+  }
+
+  blockquote {
+    font-size: 1em;
+  }
+
+  table:not(.CodeRay) {
+    th, td {
+      border: solid 1px $gray;
+      padding: $table-cell-padding;
+    }
+  }
+
+  // fix CodeRay design
+  .CodeRay {
+    pre {
+      border: none;
+      @include border-radius(0);
+    }
+  }
+}
+
+.markdown-editor.tab-content {
+  min-height: 320px;
+  .tab-pane, .editor-textarea, .markdown {
+    min-height: 320px;
+  }
+}
+
+// Diffy
+<% require "diffy" %>
+<%= Diffy::CSS %>
+
+@import "bootswatch/<%= ENV["LODGE_THEME"] %>/bootswatch";
+

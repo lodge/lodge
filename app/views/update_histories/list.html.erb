@@ -1,6 +1,8 @@
-<h2><%= tc :current_article, article_title: @article.title %></h2>
+<h3><strong><%= tc :current_article, article_title: @article.title %></strong></h3>
 
-<table class="list-table">
+<table class="table update-history-table">
+  <colgroup span="1"></colgroup>
+  <colgroup span="2"></colgroup>
   <tbody>
     <% @update_histories.each do |update_history| %>
       <tr>
@@ -8,7 +10,7 @@
         <td class="article-tags-column">
           <div>
             <% update_history.new_tags.split(",").each do |tag| %>
-              <%= content_tag :span, tag, class: :tag %>
+              <%= content_tag :span, tag, class: ["label", "label-default"] %>
             <% end %>
           </div>
         </td>
