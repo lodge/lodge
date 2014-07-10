@@ -118,6 +118,52 @@ http://lodge-sample.herokuapp.com/
 
 ※Apache+Passengerや、nginx+Unicorn等でも起動できますので、より高速に動かしたい場合等はそちらをオススメします(設定方法等は割愛)。
 
+## Vagrant up
+
+[VirtualBox](https://www.virtualbox.org/) と [Vagrant](http://www.vagrantup.com/) を使って、
+``vagrant up`` することで、VM上に手早く開発環境を用意することができます。
+
+### 手順
+
+1. VirtualBox をインストール
+1. Vagrant をインストール
+1. ``vagrant plugin install vagrant-vbguest``
+1. ``vagrant plugin install vagrant-librarian-chef``
+1. ``vagrant plugin install vagrant-vmware-fusion``
+1. ``vagrant plugin install vagrant-gatling-rsync``
+1. ``vagrant plugin uninstall vagrant-vmware-fusion``
+    * vagrant-gatling-rsync をインストールするために必要だが、VMWare のライセンスを持っていないとエラーになるため削除します
+1. ``git clone https://github.com/m-yamashita/lodge``
+1. ``cd lodge``
+1. ``vagrant up``
+1. VMが起動するまで待つ
+1. ``vagrant gatling-rsync-auto``
+    * ホスト上の ``git clone`` したソースコードを自動的にVM上の ``/vagrant`` に同期するために必要です
+    * ``vagrant rsync-auto`` がなぜか ``rsync__exclude`` を使ってくれないため、 ``vagrant-gatling-rsync`` を利用します
+    * [公式ドキュメントのNFSの項目](https://docs.vagrantup.com/v2/synced-folders/nfs.html) に書かれていますが、VirtualBox の共有フォルダはパフォーマンスが悪いため使用していません。
+
+      > In some cases the default shared folder implementations (such as VirtualBox shared folders) have high performance penalties. 
+
+1. http://localhost:3000/ にアクセスして Lodge の画面を見ることができたら成功です
+
+### 諸々の情報
+
+* アクセス URL
+    * http://localhost:3000/
+* DB
+    * MySQL
+* メールサーバ
+    * VM 内の Postfix
+* Lodge の起動スクリプト
+    * ``/etc/init.d/lodge`` （Unicorn を起動）
+* RAILS_ROOT
+    * ``/vagrant``
+* RAILS_ENV
+    * ``development``
+* ログ
+    * ``/vagrant/log/unicorn.stdout.log``
+    * ``/vagrant/log/unicorn.stderr.log``
+
 ## 最後に
 
 ### 開発にご協力頂ける方を募集しています。
