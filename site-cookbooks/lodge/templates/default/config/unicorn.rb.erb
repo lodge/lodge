@@ -1,0 +1,32 @@
+worker_processes <%= @node['lodge']['unicorn']['worker_processes'] %>
+timeout <%= @node['lodge']['unicorn']['timeout'] %>
+preload_app <%= @node['lodge']['unicorn']['preload_app'] %>
+listen "<%= @node['lodge']['unicorn']['listen'] %>", :tcp_nopush => <%= @node['lodge']['unicorn']['tcp_nopush'] %>
+
+working_directory "<%= @node['lodge']['rails']['root'] %>"
+
+stderr_path "<%= @node['lodge']['unicorn']['stderr_path'] %>"
+stdout_path "<%= @node['lodge']['unicorn']['stdout_path'] %>"
+
+pid "<%= @node['lodge']['unicorn']['pid_path'] %>"
+
+GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
+
+before_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end

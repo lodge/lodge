@@ -7,6 +7,12 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore vagrant directory.
+/.vagrant
+
+# Ignore cookbooks directory.
+/cookbooks
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
