@@ -13,7 +13,7 @@ module ArticlesHelper
     if user_stock
       link_to %!#{image_tag("stocked.png")}#{article.stocks.size}!.html_safe, user_stock, method: :delete, class: "stock-link", title: tco(:unstock)
     else
-      link_to %!#{image_tag("unstocked.png")}#{article.stocks.size}!.html_safe, {controller: "stocks", article_id: article.id}, method: :post, class: "stock-link", title: tco(:stock)
+      link_to %!#{image_tag("unstocked.png")}#{article.stocks.size}!.html_safe, {controller: "/stocks", article_id: article.id}, method: :post, class: "stock-link", title: tco(:stock)
     end
   end
 
