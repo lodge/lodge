@@ -11,4 +11,12 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:comments) }
   it { should have_many(:stocked_users) }
   it { should have_many(:tags) }
+
+  context :create_history do
+    let(:edited) { FactoryGirl.create(:edited_article) }
+
+    it "should make update_history new" do
+      expect { edited.create_history }.to change(UpdateHistory, :count).by(1)
+    end
+  end
 end
