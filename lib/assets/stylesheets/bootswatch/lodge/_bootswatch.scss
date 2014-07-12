@@ -1,5 +1,7 @@
 @import "compass/css3";
 
+$border-style-base: 1px solid #ccc;
+
 body {
   background-image: url(background.png);
 }
@@ -28,3 +30,48 @@ nav.well {
   border: 0;
   @include box-shadow(none);
 }
+
+.panel {
+  border: $border-style-base;
+}
+
+.tab-content {
+  .editor-textarea {
+    box-shadow: none;
+  }
+}
+
+.nav.nav-tabs {
+  margin-left: 5px;
+  border-bottom: #FDF7EF;
+
+  li {
+    margin-left: 5px;
+    > a {
+      padding: 7px 10px;
+      border: $border-style-base;
+      border-bottom: none;
+      border-radius: $border-radius-small $border-radius-small 0 0;
+
+      &:hover {
+        background-color: #fff;
+        border: $border-style-base;
+        border-bottom: none;
+      }
+    }
+
+    &.active {
+      > a {
+        &.preview-tab {
+          background-image: linear-gradient(to bottom, $pane-color-base 90%, #fdf7ef);
+          background-color: transparent;
+        }
+
+        &.editor-tab {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
