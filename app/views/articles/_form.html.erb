@@ -20,7 +20,7 @@
     <%= f.text_field :tags, :value => get_tags, :placeholder => tc("tags_example") %>
   </div>
   <div class="field">
-    <%= f.label :body %><br>
+    <%= f.label :body, for: "article-body-textarea" %><br>
     <%= f.text_area :body, id: "article-body-textarea" %>
   </div>
   <div class="actions">
