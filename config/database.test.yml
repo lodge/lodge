@@ -5,18 +5,7 @@
 #   gem 'sqlite3'
 #
 default: &default
-  # === sqlite3 ===
-#  adapter: sqlite3
-#  encoding: utf8
-#  pool: 5
-
-  # === mysql ===
-#  adapter: mysql2
-#  host: localhost
-#  username: root
-#  password: 
-#  encoding: utf8
-#  pool: 5
+    adapter: mysql2
 
 development:
   <<: *default
