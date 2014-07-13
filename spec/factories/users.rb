@@ -8,5 +8,6 @@ FactoryGirl.define do
     name
     email
     password "password"
+    confirmed_at Time.zone.now
   end
 end
