@@ -1,6 +1,4 @@
-<%= form_for @article, html: {id: "article-form", class: ["article-form"], role: "form"} do |f| %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-
+<%= form_for(@article, html: {id: "article-form"}) do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2><%= t("errors.template.header.#{@article.errors.count == 1 ? 'one' : 'other'}", model: Article.model_name.human) %></h2>
@@ -13,18 +11,25 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title, class: ["form-control"] %>
+    <%= f.text_field :title %>
   </div>
-  <div class="form-group">
+  <div class="field">
     <%= f.label :tags %><%= tc :tags_hint %><br>
-    <%= f.text_field :tags, :value => get_tags, :placeholder => tc("tags_example"), class: ["form-control"] %>
+    <%= f.text_field :tags, :value => get_tags, :placeholder => tc("tags_example") %>
   </div>
-  <div class="form-group">
-    <%= render partial: "layouts/editor", locals: {form: f} %>
+  <div class="field">
+    <%= f.label :body, for: "article-body-textarea" %><br>
+    <%= f.text_area :body, id: "article-body-textarea" %>
   </div>
   <div class="actions">
-    <%= f.submit class: ["btn", "btn-success"] %>
+    <%= button_tag tc(:preview), type: :button, class: "preview-button" %>
+  </div>
+  <div class="preview-area markdown"></div>
+  <div class="actions">
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :lock_version %>
+    <%= f.submit %>
   </div>
 <% end %>
