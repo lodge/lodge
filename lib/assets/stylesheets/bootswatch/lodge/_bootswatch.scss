@@ -36,8 +36,9 @@ nav.well {
 }
 
 .tab-content {
-  .editor-textarea {
-    box-shadow: none;
+  .editor-textarea,
+  .preview-area{
+    box-shadow: 1px -1px 3px #ddd;
   }
 }
 
@@ -62,6 +63,7 @@ nav.well {
 
     &.active {
       > a {
+        box-shadow: 1px -1px 3px #ddd;
         &.preview-tab {
           background-image: linear-gradient(to bottom, $pane-color-base 90%, #fdf7ef);
           background-color: transparent;
