@@ -89,8 +89,8 @@ http://lodge-sample.herokuapp.com/
     ```
 
 1. `bundle install` を実行します。
-1. `rake db:create` の後、 `rake db:migrate` を実行します。これでDBは完成です。
-1. `config/environments/production.example.rb` を `config/environments/production.rb` としてコピーし、ファイル最下部にある以下の部分を編集します。通常はproduction.rbを利用します。各コメントを参考に設定してください。
+1. `rake db:create RAILS_ENV=production` の後、 `rake db:migrate RAILS_ENV=production` を実行します。これでDBは完成です。
+1. `config/environments/production.example.rb` を `config/environments/production.rb` としてコピーし、ファイル最下部にある以下の部分を編集します。各コメントを参考に設定してください。
 
     ```ruby
     # Devise Settings
