@@ -11,6 +11,7 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:comments) }
   it { should have_many(:stocked_users) }
   it { should have_many(:tags) }
+  it { should have_many(:article_notifications) }
 
   describe :save do
     let(:article) { FactoryGirl.create(:edited_article) }

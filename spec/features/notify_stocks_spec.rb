@@ -21,7 +21,7 @@ feature "NotifyStocks", :type => :feature do
 
     login_as(article.user)
     visit root_path
-    click_link "1"
+    find("#num-of-notification").click # TODO: to write more declarative
     expect(page).to have_content(I18n.t("common.notification.stock_for_owner", user_name: user.name, article_title: article.title))
   end
 end
