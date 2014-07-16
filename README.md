@@ -1,4 +1,4 @@
-Lodge [![Gitter chat](https://badges.gitter.im/m-yamashita/lodge.png)](https://gitter.im/m-yamashita/lodge) [![Build Status](https://travis-ci.org/m-yamashita/lodge.svg?branch=develop)](https://travis-ci.org/m-yamashita/lodge)  [![Coverage Status](https://coveralls.io/repos/m-yamashita/lodge/badge.png?branch=develop)](https://coveralls.io/r/m-yamashita/lodge?branch=develop)
+Lodge [![Gitter chat](https://badges.gitter.im/lodge/lodge.png)](https://gitter.im/lodge/lodge) [![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=develop)](https://travis-ci.org/lodge/lodge)
 =====
 
 ## これは何？
@@ -89,7 +89,7 @@ http://lodge-sample.herokuapp.com/
     ```
 
 1. `bundle install` を実行します。
-1. `rake db:create` の後、 `rake db:migrate` を実行します。これでDBは完成です。
+1. `rake db:create RAILS_ENV=production` の後、 `rake db:migrate RAILS_ENV=production` を実行します。これでDBは完成です。
 1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。
 
     ```ruby
