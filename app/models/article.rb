@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   has_many :comments
   has_many :update_histories
   has_many :notifications
+  has_many :article_notifications
   before_update :create_history
   before_update :create_notification
   has_many :stocked_users,
