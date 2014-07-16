@@ -49,7 +49,20 @@ RSpec.configure do |config|
 
   config.include Warden::Test::Helpers, type: :feature
 
+  Capybara.configure do |config|
+    config.default_driver = :poltergeist
+    config.default_wait_time = 8
+  end
+
   config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:suite, js: true) do
+    Capybara.default_wait_time = 5
     DatabaseCleaner.clean_with(:truncation)
   end
 
@@ -57,7 +70,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, js: true) do
+  config.before(:each, type: :feature) do
     DatabaseCleaner.strategy = :truncation
   end
 
