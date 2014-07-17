@@ -57,6 +57,7 @@ gem 'dotenv-rails'
 group :development do
   gem 'bullet'
   gem 'rack-mini-profiler'
+  gem 'letter_opener'
 end
 
 group :development, :test do
