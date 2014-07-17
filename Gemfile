@@ -62,6 +62,7 @@ gem 'compass-rails', '~> 2.0'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave'
+gem 'jquery-fileupload-rails'
 
 group :development do
   gem 'bullet'
