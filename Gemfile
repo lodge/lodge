@@ -66,7 +66,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-rescue'
-  gem 'awesome_print'
 end
 
 group :test do
