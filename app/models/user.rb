@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :lockable
+         :confirmable, :lockable, :omniauthable
   validates_presence_of :name
   before_save :generate_gravatar
 
