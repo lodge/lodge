@@ -61,6 +61,7 @@ gem 'autoprefixer-rails', '~> 2.2'
 gem 'compass-rails', '~> 2.0'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2', '~> 0.2'
+gem 'carrierwave'
 
 group :development do
   gem 'bullet'
