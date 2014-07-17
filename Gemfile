@@ -62,6 +62,11 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-rescue'
+  gem 'awesome_print'
 end
 
 group :test do
