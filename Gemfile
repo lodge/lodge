@@ -59,12 +59,15 @@ group :development do
   gem 'rack-mini-profiler'
 end
 
+ruby_versions = RUBY_VERSION.split('.')
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'
-  gem 'pry-byebug'
+  if ruby_versions[0].to_i >= 2 then
+    gem 'pry-byebug'
+  end
   gem 'pry-rescue'
 end
 
