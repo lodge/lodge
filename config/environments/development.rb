@@ -56,8 +56,18 @@ Rails.application.configure do
   # Devise Settings
   # 以下は主にユーザのパスワード忘れの際のメール送信で利用する設定です。
 
-  config.action_mailer.delivery_method = :letter_opener
-
   # メールに記載する本サービスのURL
   config.action_mailer.default_url_options = { :host => ENV['LODGE_DOMAIN'] }
+
+  # SMTPの指定
+  config.action_mailer.delivery_method = ENV["DELIVERY_METHOD"].to_sym
+  config.action_mailer.smtp_settings = {
+    :address              => ENV["SMTP_ADDRESS"],
+    :port                 => ENV["SMTP_PORT"],
+    :domain               => ENV["LODGE_DOMAIN"],
+    :user_name            => ENV["SMTP_USERNAME"],
+    :password             => ENV["SMTP_PASSWORD"],
+    :authentication       => ENV["SMTP_AUTH_METHOD"].to_sym,
+    :enable_starttls_auto => ENV["SMTP_ENABLE_STARTTLS_AUTO"],
+  }
 end
