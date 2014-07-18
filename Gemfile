@@ -56,6 +56,7 @@ gem 'dotenv-rails'
 gem 'omniauth-google-oauth2'
 gem 'carrierwave'
 gem 'jquery-fileupload-rails'
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'bullet'
