@@ -63,6 +63,7 @@ gem 'compass-rails', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave'
 gem 'jquery-fileupload-rails'
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'bullet'
