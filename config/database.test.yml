@@ -16,7 +16,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: lodge_test
+  database: lodge_test_%%%RUBY_VERSION%%%
 
 production:
   <<: *default
