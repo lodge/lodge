@@ -6,6 +6,7 @@ rvm:
 before_script:
     - mysql -e 'create database lodge_test'
     - cp config/database.test.yml config/database.yml
+    - RUBY_VERSION=$(ruby -e 'puts RUBY_VERSION.tr(".", "")') && sed -ri "s/%%%RUBY_VERSION%%%/${RUBY_VERSION}/" config/database.yml
     - cp .env.example .env
     - bundle install
 script:
