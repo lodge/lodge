@@ -93,15 +93,16 @@ a {
   }
 }
 
-img,
-.user-icon {
-  vertical-align: middle;
-  border: none;
-  width: 20px;
-  height: 20px;
+img {
+  &.user-icon {
+    vertical-align: middle;
+    border: none;
+    width: 20px;
+    height: 20px;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -202,7 +203,7 @@ img,
     max-height: 600px;
     overflow-y: auto;
     position: absolute;
-    
+
     li {
       border-bottom: 1px solid #aaa;
 

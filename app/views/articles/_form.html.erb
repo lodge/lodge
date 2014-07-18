@@ -19,7 +19,7 @@
     <%= f.label :tags %><%= tc :tags_hint %><br>
     <%= f.text_field :tags, :value => get_tags, :placeholder => tc("tags_example") %>
   </div>
-  <div class="field">
+  <div class="field" id='fileupload'>
     <%= f.label :body, for: "article-body-textarea" %><br>
     <%= f.text_area :body, id: "article-body-textarea" %>
   </div>

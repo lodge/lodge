@@ -54,6 +54,9 @@ gem 'rails_config'
 gem 'dotenv-rails'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2'
+gem 'carrierwave'
+gem 'jquery-fileupload-rails'
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'bullet'
