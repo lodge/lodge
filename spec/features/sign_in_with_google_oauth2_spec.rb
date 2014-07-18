@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 describe 'GoogleOauthでの認証' do
   before do
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
