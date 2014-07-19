@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 #
 default: &default
-    adapter: mysql2
+    adapter: sqlite3
 
 development:
   <<: *default

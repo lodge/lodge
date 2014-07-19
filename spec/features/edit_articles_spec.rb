@@ -26,6 +26,8 @@ feature "EditArticles", :type => :feature do
     expect(page).to have_content("body")
 
     click_link I18n.t("articles.update_histories")
+    expect(page).to have_content(I18n.t("update_histories.current_article", article_title: "new article"))
+
     first(:link,"new article").click
     expect(page).to have_content(I18n.t("update_histories.current_article", article_title: "new article"))
     expect(page).to have_content("-old article")
