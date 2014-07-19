@@ -3,6 +3,10 @@ rvm:
     - 1.9.3
     - 2.0.0
     - 2.1.2
+env:
+    - DB=sqlite
+    - DB=mysql
+    - DB=postgresql
 before_script:
     - cp config/database.test.yml config/database.yml
     - cp .env.example .env
