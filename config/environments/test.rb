@@ -42,5 +42,5 @@ Rails.application.configure do
   # 以下は主にユーザのパスワード忘れの際のメール送信で利用する設定です。
 
   # メールに記載する本サービスのURL
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'example.com' }
 end

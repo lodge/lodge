@@ -56,15 +56,24 @@ gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'compass-rails'
 #gem 'whenever', :require => false
+gem 'omniauth-google-oauth2'
 
 group :development do
   gem 'bullet'
   gem 'rack-mini-profiler'
+  gem 'letter_opener'
 end
 
+ruby_versions = RUBY_VERSION.split('.')
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'pry'
+  gem 'pry-rails'
+  if ruby_versions[0].to_i >= 2 then
+    gem 'pry-byebug'
+  end
+  gem 'pry-rescue'
 end
 
 group :test do
