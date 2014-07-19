@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     Stock.joins(:article).where("articles.user_id = ? AND stocks.user_id != ?", self.id, self.id).count
   end
 
+  def recent_articles(count=20)
+    articles.order(updated_at: :desc).limit(count)
+  end
+
   def self.find_for_google_oauth2(auth)
     user = User.where(email: auth.info.email).first
 
