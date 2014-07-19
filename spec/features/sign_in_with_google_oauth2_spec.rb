@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-describe 'GoogleOauthでの認証' do
+require 'rails_helper'
+
+describe 'GoogleOauthでの認証', :type => :feature do
   before do
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
       :provider => user.provider,
