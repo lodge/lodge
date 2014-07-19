@@ -35,10 +35,10 @@ class ApplicationController < ActionController::Base
       .order("count_article_id desc", "articles.updated_at desc")
       .limit(RIGHT_LIST_SIZE)
       .count(:article_id)
-    popular_articles = Article.includes(:stocks).where(id: popular_stocks.keys)
+    popular_articles = Article.includes(:stocks).where(id: popular_stocks.keys.map{|x| x.first})
     @popular_articles = []
     popular_stocks.each do |keys, count|
-      @popular_articles << popular_articles.select {|a| a.id == keys[0]}.first
+      @popular_articles << popular_articles.select {|a| a.id == keys.first}.first
     end
   end
 
