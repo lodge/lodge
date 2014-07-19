@@ -21,8 +21,8 @@ feature "EditArticles", :type => :feature do
     click_button I18n.t("helpers.submit.update")
 
     expect(page).to have_content("new article")
-    expect(page).to have_content("tag1")
-    expect(page).to have_content("tag2")
+    expect(page).to have_link("tag1")
+    expect(page).to have_link("tag2")
     expect(page).to have_content("body")
 
     click_link I18n.t("articles.update_histories")
