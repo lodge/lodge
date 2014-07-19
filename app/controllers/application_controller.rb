@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     popular_articles = Article.includes(:stocks).where(id: popular_stocks.keys.map{|x| x.first})
     @popular_articles = []
     popular_stocks.each do |keys, count|
-      @popular_articles << popular_articles.select {|a| a.id == keys[0]}.first
+      @popular_articles << popular_articles.select {|a| a.id == keys.first}.first
     end
   end
 
