@@ -4,7 +4,6 @@ rvm:
     - 2.0.0
     - 2.1.2
 before_script:
-    - mysql -e 'create database lodge_test'
     - cp config/database.test.yml config/database.yml
     - cp .env.example .env
     - bundle install
