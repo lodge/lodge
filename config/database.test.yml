@@ -1,11 +1,26 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
+# We currently support 3 databases
+
+sqlite: &sqlite
+  adapter: sqlite3
+
+mysql: &mysql
+  adapter: mysql2
+  username: root
+  password:
+
+postgresql: &postgresql
+  adapter: postgresql
+  username: postgres
+  password:
+
+# Switch a database by ENV['DB'].
+# If ENV['DB'] is not set, sqlite is used.
+
 default: &default
-    adapter: sqlite3
+  <<: *<%= ENV['DB'] || "sqlite" %>
+  host: localhost
+  pool: 5
+  timeout: 5000
 
 development:
   <<: *default
@@ -20,5 +35,4 @@ test:
 
 production:
   <<: *default
-  #database: lodge_production
   database: lodge_production
