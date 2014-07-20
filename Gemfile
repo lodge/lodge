@@ -57,6 +57,7 @@ gem 'bootswatch-rails'
 gem 'compass-rails'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2'
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'bullet'

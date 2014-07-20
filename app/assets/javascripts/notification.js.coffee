@@ -19,9 +19,8 @@ ready = ->
     target = $("#notifications-area")
     counter = $("#num-of-notification.new-notifications")
     counter.on "click", counter.parent(), showNotification
-    $(document).on "click", hideNotification
+    $(document).on "click.turbo", hideNotification
   )()
 
 # for turbolinks
 $(document).ready(ready)
-$(document).on('page:load', ready)
