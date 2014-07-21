@@ -18,6 +18,16 @@
 @import "bootstrap";
 
 @import "compass/css3";
+
+body {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.actions {
+  margin-bottom: 2em;
+}
+
 .navbar {
   .navbar-header .navbar-brand {
     padding-top: $navbar-padding-vertical + $navbar-height / 2;
@@ -30,13 +40,36 @@
   }
 }
 
+.dropdown-toggle {
+  &:hover,
+  &:visited,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
+.dropdown-menu {
+  white-space: normal;
+}
 .dropdown .dropdown-menu.user-info {
-  width: 320px;
-  @include border-top-left-radius($border-radius-base);
+  padding: 19px;
+  width: 400px;
+  @include border-radius($border-radius-base);
 }
 .dropdown .dropdown-menu.notification {
   width: 480px;
-  @include border-top-left-radius($border-radius-base);
+  @include border-radius($border-radius-base);
+}
+.dropdown .dropdown-menu.user-menu {
+  padding: 0;
+  width: 150px;
+  overflow: hidden;
+  @include border-radius($border-radius-base);
+
+  a {
+    padding: 10px;
+    background-clip: padding-box;
+  }
 }
 
 // bootstrap bug fix
@@ -84,13 +117,6 @@
     font-size: 1em;
   }
 
-  table:not(.CodeRay) {
-    th, td {
-      border: solid 1px $gray;
-      padding: $table-cell-padding;
-    }
-  }
-
   // fix CodeRay design
   .CodeRay {
     pre {
@@ -104,6 +130,17 @@
   min-height: 320px;
   .tab-pane, .editor-textarea, .markdown {
     min-height: 320px;
+  }
+}
+
+.article-table {
+  td {
+    white-space: nowrap;
+
+    &.article-title-column,
+    &.article-tags-column {
+      white-space: normal;
+    }
   }
 }
 

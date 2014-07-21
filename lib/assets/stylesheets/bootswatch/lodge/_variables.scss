@@ -1,6 +1,6 @@
 $body-bg: #cb8;
 $brand-primary: #753;
-$brand-success: #b8b85c;
+$brand-success: #b95;
 $border-color-base: #ccc;
 
 $navbar-height: 35px;
@@ -27,7 +27,7 @@ $pane-color-base: rgba(#fff, .6);
 $gray-darker: lighten(#000, 13.5%);
 $gray-dark: lighten(#000, 20%);
 $gray: lighten(#000, 33.5%);
-$gray-light: lighten(#000, 46.7%);
+$gray-light: lighten(#000, 76.7%);
 $gray-lighter: lighten(#000, 93.5%);
 //$brand-primary: #428bca;
 //$brand-success: #5cb85c;
@@ -139,9 +139,9 @@ $dropdown-fallback-border: #ccc;
 $dropdown-divider-bg: #e5e5e5;
 $dropdown-link-color: $gray-dark;
 $dropdown-link-hover-color: darken($gray-dark, 5%);
-$dropdown-link-hover-bg: #f5f5f5;
-$dropdown-link-active-color: $component-active-color;
-$dropdown-link-active-bg: $component-active-bg;
+$dropdown-link-hover-bg: #eef;
+$dropdown-link-active-color: white;
+$dropdown-link-active-bg: transparent;
 $dropdown-link-disabled-color: $gray-light;
 $dropdown-header-color: $gray-light;
 $dropdown-caret-color: #000;
@@ -191,11 +191,11 @@ $navbar-default-border: darken($navbar-default-bg, 6.5%);
 //$navbar-default-link-hover-color: #333;
 $navbar-default-link-hover-bg: transparent;
 $navbar-default-link-active-color: #555;
-$navbar-default-link-active-bg: darken($navbar-default-bg, 6.5%);
+$navbar-default-link-active-bg: transparent;
 $navbar-default-link-disabled-color: #ccc;
 $navbar-default-link-disabled-bg: transparent;
 $navbar-default-brand-color: $navbar-default-link-color;
-$navbar-default-brand-hover-color: darken($navbar-default-brand-color, 10%);
+$navbar-default-brand-hover-color: darken($brand-primary, 3%);
 $navbar-default-brand-hover-bg: transparent;
 $navbar-default-toggle-hover-bg: #ddd;
 $navbar-default-toggle-icon-bar-bg: #888;
@@ -303,13 +303,13 @@ $popover-arrow-outer-color: fadein($popover-border-color, 5%);
 $popover-arrow-outer-fallback-color: darken($popover-fallback-border-color, 20%);
 
 // Labels
-$label-default-bg: $gray-light;
+$label-default-bg: #ccc;
 $label-primary-bg: $brand-primary;
 $label-success-bg: $brand-success;
 $label-info-bg: $brand-info;
 $label-warning-bg: $brand-warning;
 $label-danger-bg: $brand-danger;
-$label-color: #fff;
+$label-color: #444;
 $label-link-hover-color: #fff;
 
 // Modals
@@ -367,7 +367,7 @@ $list-group-disabled-bg: $gray-lighter;
 $list-group-disabled-text-color: $list-group-disabled-color;
 $list-group-link-color: #555;
 $list-group-link-hover-color: $list-group-link-color;
-$list-group-link-heading-color: #333;
+$list-group-link-heading-color: $link-color;
 
 // Panels
 $panel-bg: $pane-color-base;

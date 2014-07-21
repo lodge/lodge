@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "CreateArticles", :type => :feature do
-  let (:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
   background do
     login_as user, scope: :user
   end

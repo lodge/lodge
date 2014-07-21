@@ -11,6 +11,13 @@ body > .container {
   @include box-shadow(lighten(#000, 40%) 1px 1px 0.8em);
 }
 
+p {
+  margin: 10px 0;
+}
+
+.navbar-text {
+  margin: 7px 5px;
+}
 .navbar-default {
   background-image: url(header.png);
   @include box-shadow(lighten(#000, 20%) 2px 2px 0.5em);
@@ -20,7 +27,6 @@ body > .container {
     font-size: 48px;
     font-weight: bold;
     color: $brand-primary;
-    &:hover { color: lighten($brand-primary, 5%); }
     @include text-shadow(1px 1px #cb8);
   }
 }
@@ -77,3 +83,140 @@ nav.well {
   }
 }
 
+.btn {
+  box-shadow: inset 1px 1px 15px -5px #fff;
+}
+
+.panel-heading {
+  h1 {
+    text-shadow: 1px 1px 6px #ccc;
+  }
+}
+
+.markdown {
+  h1 {
+    padding: 3px 10px;
+    text-shadow: 1px 1px #eee;
+  }
+}
+
+.label.label-default{
+  border: 1px solid #aaa;
+  border-radius: $border-radius-small;
+  text-shadow: 1px 1px #eee;
+  &:hover {
+    color: inherit;
+  }
+}
+
+.num-of-notification {
+  $bg-color: #a00;
+  background-color: $bg-color;
+  color: #fff;
+  display: block;
+  box-shadow: 1px 1px 3px #444;
+  font-size: 100%;
+  margin-top: -1px;
+  padding: 5px 7px;
+  
+  &:hover {
+    background-color: darken($bg-color, 3%);
+  }
+}
+
+.notification {
+  padding: 0;
+  overflow-y: auto;
+  max-height: 500px;
+
+  > li {
+    padding: 0;
+
+    > a {
+      padding: 5px 15px;
+      white-space: normal;
+
+      &:first-child {
+        padding-top: 15px;
+      }
+
+      &:last-child {
+        padding-bottom: 15px;
+      }
+
+
+      > img,
+      > span {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 5px;
+      }
+
+      > span {
+        max-width: 350px;
+      }
+    }
+  }
+}
+
+.devise-form .new-password-area {
+  margin-bottom: 1em;
+}
+
+.pagination {
+  display: block;
+  text-align: center;
+
+  .first,
+  .prev,
+  .page,
+  .next,
+  .last {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    box-shadow: inset 1px 1px 3px #fff;
+    box-sizing: content-box;
+    display: inline-block;
+    margin: 0 5px;
+    $size: 25px;
+    height: $size;
+    line-height: $size;
+    width: $size;
+
+    &.gap {
+      border: none;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    &.current,
+    a:active {
+      box-shadow: inset 1px 1px 3px #888;
+    }
+
+    a {
+      vertical-align: middle;
+      text-decoration: none;
+      display: block;
+      width: $size;
+      height: $size;
+
+      &:hover {
+        border-radius: 3px;
+        color: inherit;
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+.table.list-table {
+  td {
+    vertical-align: middle;
+  }
+}
+
+.tag {
+  display: inline-block;
+  margin-bottom: 5px;
+}

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature "NotifyStocks", :type => :feature do
-  let (:article) { FactoryGirl.create(:article) }
-  let (:user) { FactoryGirl.create(:user) }
+  let(:article) { FactoryGirl.create(:article) }
+  let(:user) { FactoryGirl.create(:user) }
   background do
     login_as user, scope: :user
   end

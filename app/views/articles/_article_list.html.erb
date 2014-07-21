@@ -11,13 +11,10 @@
           <p><%= link_to article.title, article, title: article.title %></p>
         </td>
         <td class="article-tags-column">
-          <div>
-            <% article.tags.each do |tag| %>
-                <%= link_to articles_by_tag_path(tag.name), class: :tag do %>
-                  <span class="label label-default"><%= tag.name %></span>
-                <% end %>
-            <% end %>
-          </div>
+          <% article.tags.each do |tag| %>
+            <% tag_name = %!<span class="label label-default">#{tag.name}</span>!.html_safe %>
+            <%= link_to tag_name, articles_by_tag_path(tag.name), class: :tag %>
+          <% end %>
         </td>
         <td><%= stock_and_comment_count(article) %></td>
         <td><div class="dropdown"><%= render partial: "users/info_dropdown", locals: {user: article.user} %></div></td>

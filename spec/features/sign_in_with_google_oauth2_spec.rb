@@ -37,6 +37,7 @@ describe 'GoogleOauthでの認証', :type => :feature do
       expect(page).to have_link('Sign in with Google Oauth2')
       click_link 'Sign in with Google Oauth2'
 
+      find(".glyphicon-cog").click
       expect(page).to have_link('ログアウト')
       click_link 'ログアウト'
 

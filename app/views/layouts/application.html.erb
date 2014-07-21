@@ -32,17 +32,21 @@
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
                 <li class="dropdown">
+                  <%= render partial: "notifications/info_dropdown", locals: {notifications: @notifications} %>
+                </li>
+                <li class="dropdown">
                   <%= render partial: "users/info_dropdown", locals: {user: current_user} %>
                 </li>
                 <li class="dropdown">
-                  <%= render partial: "notifications/info_dropdown", locals: {notifications: @notifications} %>
-                </li>
-                <li>
-                  <%= link_to t("users.edit_profile"), edit_user_registration_path, :class => 'navbar-link' %>
-                </li>
-                <li><span class="navbar-text">|</span></li>
-                <li>
-                  <%= link_to t("users.logout"), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+                  <%= link_to "", "#", class: ["glyphicon", "glyphicon-cog", "dropdown-toggle"], "data-toggle" => "dropdown" %>
+                  <ul class="user-menu dropdown-menu">
+                    <li>
+                      <%= link_to t("users.edit_profile"), edit_user_registration_path, :class => '' %>
+                    </li>
+                    <li>
+                      <%= link_to t("users.logout"), destroy_user_session_path, method: :delete, :class => ''  %>
+                    </li>
+                  </ul>
                 </li>
               <% else %>
                 <li><%= link_to t("users.sign_up"), new_user_registration_path, :class => 'navbar-link'  %></li>
@@ -50,6 +54,8 @@
                 <li><%= link_to t("users.login"), new_user_session_path, :class => 'navbar-link'  %></li>
               <% end %>
             </ul>
+            <% if user_signed_in? %>
+            <% end %>
           </div>
           <div class="row">
             <p class="navbar-text navbar-right">
