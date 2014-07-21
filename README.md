@@ -133,16 +133,29 @@ http://lodge-sample.herokuapp.com/
    cd <lodgeをクローンしたディレクトリ>
    ```
 
-1. サーバ (Unicorn) を起動します。
+1. サーバを起動します。
+  * Unicorn を使う場合
 
-   ```
-   bundle exec unicorn -c config/unicorn.rb -E production
-   ```
+    ```
+    bundle exec unicorn -c config/unicorn.rb -E production
+    ```
+
+  * WEBrick を使う場合
+
+    ```
+    bundle exec rails server -e production
+    ```
 
 1. ブラウザで http://localhost:3000 にアクセスできたら起動成功です
 1. ログファイルは以下の場所に吐き出されます
-  * `<lodgeをクローンしたディレクトリ>/log/unicorn.stdout.log`
-  * `<lodgeをクローンしたディレクトリ>/log/unicorn.stderr.log`
+
+  * Unicorn の場合
+
+    * `<lodgeをクローンしたディレクトリ>/log/unicorn.production.log`
+
+  * WEBrick の場合
+
+    * `<lodgeをクローンしたディレクトリ>/log/production.log`
 
 ## Vagrant up
 
