@@ -110,17 +110,26 @@ nav.well {
 }
 
 .num-of-notification {
-  $bg-color: #a00;
-  background-color: $bg-color;
-  color: #fff;
   display: block;
   box-shadow: 1px 1px 3px #444;
   font-size: 100%;
   margin-top: -1px;
   padding: 5px 7px;
   
-  &:hover {
-    background-color: darken($bg-color, 3%);
+  &.label-default {
+    &:hover {
+      color: #444;
+    }
+  }
+
+  &.label-info {
+    $bg-color: #a00;
+    background-color: $bg-color;
+    color: #fff;
+
+    &:hover {
+      background-color: darken($bg-color, 3%);
+    }
   }
 }
 
