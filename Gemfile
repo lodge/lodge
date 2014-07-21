@@ -62,6 +62,8 @@ group :development do
   gem 'bullet'
   gem 'rack-mini-profiler'
   gem 'letter_opener'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 ruby_versions = RUBY_VERSION.split('.')
