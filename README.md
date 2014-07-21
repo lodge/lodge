@@ -63,12 +63,25 @@ http://lodge-sample.herokuapp.com/
     - Gem 2.2以上
     - MySQL (MySQLを利用する場合)
     - sqlite3 (sqlite3を利用する場合)
+    - Bundler
 
 1. まずは本プロジェクトをcloneしてきます。
 
     ```bash
     git clone https://github.com/m-yamashita/lodge.git
     ```
+
+1. カレントディレクトリを移動します
+
+   ```
+   cd lodge
+   ```
+
+1. Bundler をインストールします
+
+   ```
+   gem install bundler
+   ```
 
 1. `config/database.example.yml` を `config/database.yml` としてコピーし、以下のように編集します(SQLite3もしくはMySQLをご利用になる場合はコメントアウトを外して設定すると楽です)。
 
@@ -88,8 +101,9 @@ http://lodge-sample.herokuapp.com/
       pool: 5
     ```
 
-1. `bundle install` を実行します。
-1. `rake db:create RAILS_ENV=production` の後、 `rake db:migrate RAILS_ENV=production` を実行します。これでDBは完成です。
+1. `bundle install --path vendor/bundle` を実行し、依存ライブラリをインストールします。
+1. `bundle exec rake db:create RAILS_ENV=production` を実行し、データベースを作成します。
+1. `bundle exec rake db:migrate RAILS_ENV=production` を実行し、テーブルを作成します。
 1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。
 
     ```ruby
@@ -113,10 +127,22 @@ http://lodge-sample.herokuapp.com/
 
 ## 起動
 
-`rails server -e production` を叩けばOKです。
-サーバが立ち上がり、Lodgeが利用できるようになります。
+1. カレントディレクトリを移動します。
 
-※Apache+Passengerや、nginx+Unicorn等でも起動できますので、より高速に動かしたい場合等はそちらをオススメします(設定方法等は割愛)。
+   ```
+   cd <lodgeをクローンしたディレクトリ>
+   ```
+
+1. サーバ (Unicorn) を起動します。
+
+   ```
+   bundle exec unicorn -c config/unicorn.rb -E production
+   ```
+
+1. ブラウザで http://localhost:3000 にアクセスできたら起動成功です
+1. ログファイルは以下の場所に吐き出されます
+  * `<lodgeをクローンしたディレクトリ>/log/unicorn.stdout.log`
+  * `<lodgeをクローンしたディレクトリ>/log/unicorn.stderr.log`
 
 ## Vagrant up
 

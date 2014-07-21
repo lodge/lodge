@@ -18,7 +18,7 @@
     <div class="pull-right text-right">
       <div>
         <span><%= tco :created_at %>: <%= @article.created_at %></span>
-        <% if @article.created_at != @article.updated_at %>
+        <% if @article.update_histories.size > 0 %>
           <span>|</span>
           <span><%= tco :updated_at %>: <%= @article.updated_at %></span>
           <span>-</span>
