@@ -14,6 +14,7 @@
 #= stub externals/respond.min
 #
 #= require jquery
+#= require jquery.turbolinks
 #= require jquery_ujs
 #= require bootstrap
 #= require turbolinks
@@ -31,7 +32,7 @@ $(document).on 'click', '[role="tablist"] .preview-tab', ()->
       body: tabcontent.find('[role="editor"] textarea').val()
 
 # initialize editor context
-$(document).on 'ready page:load', ()->
+$ ->
   $('[role="tablist"]').each ()->
     tablist = $(this)
     tabcontent = tablist.next('.tab-content')

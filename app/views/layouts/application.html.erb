@@ -7,11 +7,8 @@
     <title>Lodge</title>
   <% end %>
   <%= favicon_link_tag %>
-  <%= javascript_tag "var ROOT_PATH = '#{root_path}';" %>
-  <script type="text/javascript" charset="utf-8">var ROOT_PATH = '<%= root_path %>';</script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'notification', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <!--[if (lt IE 9) & (!IEMobile)]>
     <%= javascript_include_tag 'externals/html5shiv', 'data-turbolinks-track' => true %>
