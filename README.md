@@ -194,8 +194,7 @@ http://lodge-sample.herokuapp.com/
 * RAILS_ENV
     * ``development``
 * ログ
-    * ``/vagrant/log/unicorn.stdout.log``
-    * ``/vagrant/log/unicorn.stderr.log``
+    * ``/vagrant/log/unicorn.development.log``
 
 ## 最後に
 
