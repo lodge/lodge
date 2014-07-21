@@ -15,6 +15,5 @@ default['lodge']['unicorn']['timeout'] = 15
 default['lodge']['unicorn']['preload_app'] = true
 default['lodge']['unicorn']['listen'] = '0.0.0.0:3000'
 default['lodge']['unicorn']['tcp_nopush'] = true
-default['lodge']['unicorn']['stderr_path'] = default['lodge']['rails']['root'] + '/log/unicorn.stderr.log'
-default['lodge']['unicorn']['stdout_path'] = default['lodge']['rails']['root'] + '/log/unicorn.stdout.log'
+default['lodge']['unicorn']['log_dir'] = default['lodge']['rails']['root'] + '/log'
 default['lodge']['unicorn']['pid_path'] = default['lodge']['rails']['root'] + '/tmp/unicorn.pid'
