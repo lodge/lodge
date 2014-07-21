@@ -3,12 +3,12 @@ timeout 15
 preload_app true
 listen "0.0.0.0:3000", :tcp_nopush => true
 
-working_directory "/vagrant"
+working_directory "."
 
-stderr_path "/vagrant/log/unicorn.stderr.log"
-stdout_path "/vagrant/log/unicorn.stdout.log"
+stderr_path "log/unicorn.stderr.log"
+stdout_path "log/unicorn.stdout.log"
 
-pid "/vagrant/tmp/unicorn.pid"
+pid "tmp/unicorn.pid"
 
 GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
 
