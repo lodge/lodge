@@ -93,7 +93,7 @@ ja:
     new_password_title: パスワードの再設定
     submit_button: メール送信
   articles:
-    list_title_by_tag: "'%{tag_name}'のタグが付けられた記事一覧"
+    list_title_by_tag: "'%{tag}'のタグが付けられた記事一覧"
     list_title_by_search: "'%{query}'の検索結果"
     update_histories: 編集履歴
     new_title: 新規作成

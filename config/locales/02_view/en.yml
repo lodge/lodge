@@ -93,7 +93,7 @@ en:
     new_password_title: Forgot your password?
     submit_buttoin: Send me reset password instructions
   articles:
-    list_title_by_tag: "Listing articles of '%{tag_name}'"
+    list_title_by_tag: "Listing articles of '%{tag}'"
     list_title_by_search: "Listing articles of '%{query}' query"
     update_histories: Update histories
     new_title: New article

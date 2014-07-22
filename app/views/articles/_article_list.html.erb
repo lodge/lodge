@@ -12,8 +12,9 @@
         </td>
         <td class="article-tags-column">
           <% article.tags.each do |tag| %>
-            <% tag_name = %!<span class="label label-default">#{tag.name}</span>!.html_safe %>
-            <%= link_to tag_name, articles_by_tag_path(tag.name), class: :tag %>
+            <%= link_to articles_by_tag_path(tag.name), class: :tag do %>
+              <span class="label label-default"><%= tag.name %></span>
+            <% end %>
           <% end %>
         </td>
         <td><%= stock_and_comment_count(article) %></td>

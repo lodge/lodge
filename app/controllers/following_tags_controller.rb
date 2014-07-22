@@ -1,15 +1,13 @@
 class FollowingTagsController < ApplicationController
-  before_action :set_following_tag, only: [:destroy]
   before_action :check_permission, only: [:destroy]
   before_action :following_tag_params, only: [:create, :destroy]
 
   # POST /articles
   # POST /articles.json
   def create
-    @following_tag = FollowingTag.new(following_tag_params)
-    @following_tag.user_id = current_user.id
+    current_user.following_tag_list << following_tag_params[:tag]
     respond_to do |format|
-      if @following_tag.save
+      if current_user.save
         format.html { redirect_to :back, notice: 'Tag was successfully followed.' }
         format.json { render :show, status: :created, location: @following_tag }
       else
@@ -22,7 +20,8 @@ class FollowingTagsController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    @following_tag.destroy
+    current_user.following_tag_list.remove(following_tag_params[:tag])
+    current_user.save
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Tag was successfully unfollowed.' }
       format.json { head :no_content }
@@ -33,17 +32,12 @@ class FollowingTagsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def following_tag_params
-    params.permit(:tag_id)
+    params.permit(:tag)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def check_permission
-    return if @following_tag.user_id == current_user.id
+    return if current_user.follow? following_tag_params[:tag]
     redirect_to articles_url
-  end
-
-  def set_following_tag
-    @following_tag = FollowingTag.where(tag_id: params[:tag_id], user_id: current_user.id).first
-    ap @following_tag
   end
 end

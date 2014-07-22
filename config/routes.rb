@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   match "tags", to: 'tags#index', via: :get
-  match "following_tag", to: 'following_tags#destroy', via: :delete, require: :tag_id
+  match "following_tag", to: 'following_tags#destroy', via: :delete, require: :tag
   resources :following_tags, :only => [:create]
   resources :stocks, :only => [:index, :create, :destroy]
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   match "articles/feed", :to => 'articles#feed', :via => :get, :as => :articles_feed
   resources :articles
   match "articles/:id/comment", :to => 'articles#create_comment', :via => :post
-  match "articles/tag/:tag_name", :to => 'articles#by_tag', :via => :get, :as => :articles_by_tag, :constraints => {tag_name: /.+/}
+  match "articles/tag/:tag", :to => 'articles#by_tag', :via => :get, :as => :articles_by_tag, :constraints => {tag: /.+/}
   match "articles/user/:user_id", :to => 'articles#by_user', :via => :get, :as => :articles_by_user
   resources :comments, :only => [:create, :update, :destroy]
 

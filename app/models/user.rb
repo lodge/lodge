@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   before_save :generate_gravatar
 
-  has_many :following_tags
   has_many :articles
   has_many :stocked_articles,
     -> {order "stocks.updated_at desc"},
@@ -22,13 +21,14 @@ class User < ActiveRecord::Base
     :through => :notification_targets,
     :source => :notification
 
+  acts_as_taggable_on :following_tags
+
   def generate_gravatar
     self.gravatar = Digest::MD5.hexdigest(self.email)
   end
 
   def follow?(tag)
-    tag_ids = self.following_tags.map { |ft| ft.tag_id }
-    tag_ids.include? tag.id
+    following_tag_list.include? tag
   end
 
   def contribution

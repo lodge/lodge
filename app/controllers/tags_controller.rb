@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.page(params[:page]).per(PER_SIZE).where("taggings_count > ?", 0).order(id: :desc)
-    @following_tags = FollowingTag.includes(:tag).where(user_id: current_user.id)
+    @tags = Kaminari.paginate_array(Article.tag_counts.order(id: :desc)).page(params[:page]).per(PER_SIZE)
+    @following_tags = current_user.following_tag_list
   end
 end
