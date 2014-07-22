@@ -1,6 +1,13 @@
 source 'https://rubygems.org'
 
 
+# This is a temporary gem,
+# due to nokogiri 1.6.3 build issue on OSX
+# https://github.com/sparklemotion/nokogiri/issues/1130
+# https://github.com/sparklemotion/nokogiri/pull/1115
+gem 'nokogiri', :git => 'https://github.com/comutt/nokogiri.git',
+                :branch => 'v1.6.3+pr-1131'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 # Use SCSS for stylesheets
