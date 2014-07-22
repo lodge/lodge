@@ -86,16 +86,6 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
-  case ENV['DB']
-  when 'sqlite'
-    gem 'sqlite3'
-  when 'mysql'
-    gem 'mysql2'
-  when 'postgresql'
-    gem 'pg'
-  else
-    gem 'sqlite3'
-  end
 end
 
 # Include database gems for the adapters found in the database
