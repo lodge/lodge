@@ -22,13 +22,4 @@ module ArticlesHelper
       %!#{image_tag("comment.png")}#{article.comments.size}!.html_safe
     end
   end
-
-  def get_tags
-    tag_value = ""
-    if params[:article].present? 
-      tag_value = params[:article][:tags] 
-    else 
-      tag_value = @article.tags.map {|tag| tag.name }.join(", ") 
-    end 
-  end
 end
