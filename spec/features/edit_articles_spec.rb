@@ -13,10 +13,10 @@ feature "EditArticles", :type => :feature do
     login_as user, scope: :user
   end
 
-  scenario "edit article and notify editiong to stocked user" do
+  scenario "edit article and notify stocked user" do
     visit edit_article_path(article)
     fill_in I18n.t("activerecord.attributes.article.title"), with: "new article"
-    fill_in I18n.t("activerecord.attributes.article.tags"), with: "tag1,tag2"
+    fill_in I18n.t("activerecord.attributes.article.tag_list"), with: "tag1,tag2"
     fill_in I18n.t("activerecord.attributes.article.body"), with: "body"
     click_button I18n.t("helpers.submit.update")
 
@@ -33,7 +33,7 @@ feature "EditArticles", :type => :feature do
     expect(page).to have_content("-old article")
     expect(page).to have_content("+new article")
     expect(page).to have_content("-old_tag")
-    expect(page).to have_content("+tag1,tag2")
+    expect(page).to have_content("+tag1, tag2")
     expect(page).to have_content("-old body")
     expect(page).to have_content("+body")
     logout

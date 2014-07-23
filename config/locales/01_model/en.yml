@@ -35,7 +35,7 @@ en:
         current_password: Current password
       article:
         title: Title
-        tags: Tags
+        tag_list: Tags
         body: Body
       comment:
         body: Comment

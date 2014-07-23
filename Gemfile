@@ -72,6 +72,7 @@ end
 ruby_versions = RUBY_VERSION.split('.')
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rspec-its'
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'

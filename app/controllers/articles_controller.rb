@@ -83,7 +83,6 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-    @article.tag_list = params[:article][:tags]
 
     respond_to do |format|
       if @article.save
@@ -99,11 +98,6 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    @article.old_title = @article.title
-    @article.old_body = @article.body
-    @article.old_tags = @article.tag_list.join(",")
-    @article.tag_list = params[:article][:tags]
-    @article.new_tags = @article.tag_list.join(",")
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -134,7 +128,7 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:user_id, :title, :body, :lock_version)
+    params.require(:article).permit(:user_id, :title, :body, :tag_list, :lock_version)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
