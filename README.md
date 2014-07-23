@@ -139,6 +139,11 @@ http://lodge-sample.herokuapp.com/
     ```
     bundle exec unicorn -c config/unicorn.rb -E production
     ```
+  * Thin を使う場合
+
+    ```
+    bundle exec rails server thin -e production
+    ```
   * WEBrick を使う場合
 
     ```
@@ -148,7 +153,7 @@ http://lodge-sample.herokuapp.com/
 1. ログファイルは以下の場所に吐き出されます
   * Unicorn の場合
     * `<lodgeをクローンしたディレクトリ>/log/unicorn.production.log`
-  * WEBrick の場合
+  * Thin, WEBrick の場合
     * `<lodgeをクローンしたディレクトリ>/log/production.log`
 
 ## Vagrant up
