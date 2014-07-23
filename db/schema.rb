@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717003617) do
+ActiveRecord::Schema.define(version: 20140723040835) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id",                                null: false
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.integer  "lock_version",               default: 0
   end
 
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id"
 
   create_table "comments", force: true do |t|
     t.integer  "user_id",    null: false
@@ -33,19 +33,8 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
-  create_table "following_tags", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "tag_id",     null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "following_tags", ["tag_id"], name: "index_following_tags_on_tag_id", using: :btree
-  add_index "following_tags", ["user_id", "tag_id"], name: "index_following_tags_on_user_id_and_tag_id", unique: true, using: :btree
-  add_index "following_tags", ["user_id"], name: "index_following_tags_on_user_id", using: :btree
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "notification_targets", force: true do |t|
     t.integer  "user_id",         null: false
@@ -54,8 +43,8 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.datetime "updated_at"
   end
 
-  add_index "notification_targets", ["notification_id"], name: "index_notification_targets_on_notification_id", using: :btree
-  add_index "notification_targets", ["user_id"], name: "index_notification_targets_on_user_id", using: :btree
+  add_index "notification_targets", ["notification_id"], name: "index_notification_targets_on_notification_id"
+  add_index "notification_targets", ["user_id"], name: "index_notification_targets_on_user_id"
 
   create_table "notifications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -66,8 +55,8 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.datetime "updated_at"
   end
 
-  add_index "notifications", ["article_id"], name: "notifications_article_id_fk", using: :btree
-  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+  add_index "notifications", ["article_id"], name: "notifications_article_id_fk"
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "stocks", force: true do |t|
     t.integer  "user_id",    null: false
@@ -76,9 +65,9 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.datetime "updated_at"
   end
 
-  add_index "stocks", ["article_id"], name: "index_stocks_on_article_id", using: :btree
-  add_index "stocks", ["user_id", "article_id"], name: "index_stocks_on_user_id_and_article_id", unique: true, using: :btree
-  add_index "stocks", ["user_id"], name: "index_stocks_on_user_id", using: :btree
+  add_index "stocks", ["article_id"], name: "index_stocks_on_article_id"
+  add_index "stocks", ["user_id", "article_id"], name: "index_stocks_on_user_id_and_article_id", unique: true
+  add_index "stocks", ["user_id"], name: "index_stocks_on_user_id"
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -90,14 +79,14 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
 
   create_table "tags", force: true do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
   create_table "update_histories", force: true do |t|
     t.integer  "article_id", null: false
@@ -111,7 +100,7 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.datetime "updated_at"
   end
 
-  add_index "update_histories", ["article_id"], name: "index_update_histories_on_article_id", using: :btree
+  add_index "update_histories", ["article_id"], name: "index_update_histories_on_article_id"
 
   create_table "users", force: true do |t|
     t.string   "name",                               null: false
@@ -141,23 +130,8 @@ ActiveRecord::Schema.define(version: 20140717003617) do
     t.string   "token"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
-
-  add_foreign_key "articles", "users", name: "articles_user_id_fk", dependent: :delete
-
-  add_foreign_key "following_tags", "users", name: "following_tags_user_id_fk", dependent: :delete
-
-  add_foreign_key "notification_targets", "notifications", name: "notification_targets_notification_id_fk", dependent: :delete
-  add_foreign_key "notification_targets", "users", name: "notification_targets_user_id_fk", dependent: :delete
-
-  add_foreign_key "notifications", "articles", name: "notifications_article_id_fk", dependent: :delete
-  add_foreign_key "notifications", "users", name: "notifications_user_id_fk", dependent: :delete
-
-  add_foreign_key "stocks", "articles", name: "stocks_article_id_fk", dependent: :delete
-  add_foreign_key "stocks", "users", name: "stocks_user_id_fk", dependent: :delete
-
-  add_foreign_key "update_histories", "articles", name: "update_histories_article_id_fk", dependent: :delete
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
 
 end

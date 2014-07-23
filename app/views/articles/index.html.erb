@@ -6,7 +6,7 @@
   when "index" %>
     <%= tco("recent_article_list_title") %>
   <% when "by_tag" %>
-    <%= tc("list_title_by_tag", :tag_name => params[:tag_name]) %>
+    <%= tc("list_title_by_tag", :tag => params[:tag]) %>
   <% when "by_stocks" %>
     <%= tco "stocked_article_list_title" %>
   <% when "search" %>
@@ -21,9 +21,9 @@
 
 <% if action == "by_tag" %>
   <% if current_user.follow?(@tag) %> 
-    <%= link_to tc(:unfollow_this_tag), following_tag_path(tag_id: @tag.id), method: :delete %>
+    <%= link_to tc(:unfollow_this_tag), following_tag_path(tag: @tag), method: :delete %>
   <% else %>
-    <%= link_to tc(:follow_this_tag), following_tags_path(tag_id: @tag.id), method: :post %>
+    <%= link_to tc(:follow_this_tag), following_tags_path(tag: @tag), method: :post %>
   <% end %>
 <% end %>
 

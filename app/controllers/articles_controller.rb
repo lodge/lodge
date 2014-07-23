@@ -15,12 +15,10 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def feed
-    following_tags = FollowingTag.includes(:tag).where(user_id: current_user.id)
-    following_tag_names = following_tags.map {|f| f.tag.name } unless following_tags.nil?
     @articles = Article
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
-      .tagged_with(following_tag_names, any: true)
+      .tagged_with(current_user.following_tag_list, any: true)
       .order(:updated_at => :desc)
     render :index
   end
@@ -51,8 +49,8 @@ class ArticlesController < ApplicationController
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def by_tag
-    @articles = Article.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag_name]).order(:updated_at => :desc)
-    @tag = Tag.find_by_name(params[:tag_name])
+    @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
+    @tag = params[:tag]
     render :index
   end
 
