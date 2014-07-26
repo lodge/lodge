@@ -6,10 +6,7 @@ feature "EditArticles", :type => :feature do
   let(:stocked_user) { FactoryGirl.create(:user) }
 
   background do
-    login_as stocked_user, scope: :user
-    visit article_path(article)
-    click_link I18n.t("articles.stock")
-    logout
+    stocked_user.stock(article)
     login_as user, scope: :user
   end
 

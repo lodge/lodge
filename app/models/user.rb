@@ -39,6 +39,20 @@ class User < ActiveRecord::Base
     articles.order(updated_at: :desc).limit(count)
   end
 
+  def stock?(article)
+    stocked_articles.include?(article)
+  end
+
+  def stock(article)
+    stocked_articles << article
+    save
+  end
+
+  def unstock(article)
+    stocked_articles.delete(article)
+    save
+  end
+
   def self.find_for_google_oauth2(auth)
     user = User.where(email: auth.info.email).first
 

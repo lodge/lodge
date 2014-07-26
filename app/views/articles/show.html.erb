@@ -33,26 +33,9 @@
       </span>
       <%= render partial: "articles/stock_count", locals: {article: @article} %>
       <%= render partial: "articles/comment_count", locals: {article: @article} %>
-      <div>
-        <% if @stocked_users.size() > 0 %>
-          <%= tc :stocked_users %>
-          <% @stocked_users.each do |user| %>
-            <span class="dropdown">
-              <%= render partial: "users/info_dropdown", locals: {user: user, icon_only: true} %>
-            </span>
-          <% end %>
-        <% end %>
-        
-        <%# if @stocked_users.size() > 10 %>
-          <%#= tco :more_display %>
-        <%# end %>
-      </div>
+      <%= render partial: "articles/stock_users", locals: {article: @article} %>
       <p>
-        <% if @stock %>
-          <%= link_to tc('unstock'), @stock, :method => :delete %>
-        <% else %>
-          <%= link_to tc('stock'), {:controller => "stocks", :article_id => @article.id}, :method => :post %>
-        <% end %>
+        <%= render partial: "articles/stock_text", locals: {article: @article} %>
       </p>
     </div>
   </div>
