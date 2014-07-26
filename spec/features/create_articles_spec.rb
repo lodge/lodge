@@ -10,7 +10,7 @@ feature "CreateArticles", :type => :feature do
     expect {
       visit new_article_path
       fill_in I18n.t("activerecord.attributes.article.title"), with: "new article"
-      fill_in I18n.t("activerecord.attributes.article.tags"), with: "tag1,tag2"
+      fill_in I18n.t("activerecord.attributes.article.tag_list"), with: "tag1,tag2"
       fill_in I18n.t("activerecord.attributes.article.body"), with: "body"
       click_button I18n.t("helpers.submit.create")
     }.to change(Article, :count).by(1)

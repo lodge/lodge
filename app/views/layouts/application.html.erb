@@ -122,7 +122,7 @@
                 <% @popular_articles.each do |article| %>
                   <li>
                     <u><%= link_to article.title, article_path(article) %></u>
-                    <%= stock_and_count_link(article) %>
+                    <%= render partial: "articles/stock_count", locals: {article: article} %> 
                   </li>
                 <% end %>
               </ol>

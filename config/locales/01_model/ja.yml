@@ -35,7 +35,7 @@ ja:
         current_password: 現在のパスワード
       article:
         title: タイトル
-        tags: タグ
+        tag_list: タグ
         body: 本文
         lock_version: ""
       comment:

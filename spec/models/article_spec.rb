@@ -14,7 +14,7 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:article_notifications) }
 
   describe :save do
-    let(:article) { FactoryGirl.create(:edited_article) }
+    let(:article) { FactoryGirl.create(:article) }
     before do
       article.title = "edited title"
     end
@@ -28,9 +28,6 @@ RSpec.describe Article, :type => :model do
     context "when article is locked" do
       before do
         same_article = Article.find(article.id)
-        same_article.old_title = same_article.title
-        same_article.old_body = same_article.body
-        same_article.old_tags = same_article.tag_list.to_s
         same_article.title = "new title"
         same_article.body = "new body"
         same_article.tag_list = "newtag1,newtag2"
@@ -45,13 +42,31 @@ RSpec.describe Article, :type => :model do
   end
 
   describe :create_history do
-    let(:article) { FactoryGirl.create(:edited_article) }
+    let(:article) { FactoryGirl.create(:article, title: "old title", body: "old body", tag_list: "oldtag") }
+
+    before do
+      article.title = "new title"
+      article.body = "new body"
+      article.tag_list = "newtag1,newtag2"
+    end
 
     it "should create new update_history" do
       expect { article.create_history }.to change(UpdateHistory, :count).by(1)
     end
+
     it "should be related with the new update_history" do
       expect(article.create_history.article).to be_eql(article)
+    end
+
+    context :created_update_history do
+      subject { article.create_history }
+
+      its(:old_title) { should eq 'old title' }
+      its(:old_body) { should eq 'old body' }
+      its(:old_tags) { should eq 'oldtag' }
+      its(:new_title) { should eq 'new title' }
+      its(:new_body) { should eq 'new body' }
+      its(:new_tags) { should eq 'newtag1, newtag2' }
     end
   end
 
