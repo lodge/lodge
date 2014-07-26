@@ -1,6 +1,6 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :stock, :unstock]
   before_action :check_permission, only: [:edit, :update, :destroy]
 
   # GET /articles
@@ -117,6 +117,14 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url }
       format.json { head :no_content }
     end
+  end
+
+  def stock
+    current_user.stock(@article)
+  end
+
+  def unstock
+    current_user.unstock(@article)
   end
 
   private

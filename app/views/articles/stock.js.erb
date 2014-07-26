@@ -1,0 +1,8 @@
+$('a.stock-link[href="<%= escape_javascript(stock_article_path @article) %>"]')
+  .html('<%= escape_javascript(render partial: "articles/stock_count", locals: {article: @article}) %>');
+
+$('a.stock-text-link[href="<%= escape_javascript(stock_article_path @article) %>"]')
+  .html('<%= escape_javascript(render partial: "articles/stock_text", locals: {article: @article}) %>');
+
+$('.stock-users')
+  .html('<%= escape_javascript(render partial: "articles/stock_users", locals: {article: @article}) %>');

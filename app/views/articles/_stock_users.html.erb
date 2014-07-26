@@ -1,0 +1,15 @@
+<% users = article.stocked_users %>
+<div class="stock-users">
+  <% if users.size() > 0 %>
+    <%= tc :stocked_users %>
+    <% users.each do |user| %>
+      <span class="dropdown">
+        <%= render partial: "users/info_dropdown", locals: {user: user, icon_only: true} %>
+      </span>
+    <% end %>
+  <% end %>
+  
+  <%# if users.size > 10 %>
+    <%#= tco :more_display %>
+  <%# end %>
+</div>

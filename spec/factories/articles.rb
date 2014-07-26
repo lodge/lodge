@@ -13,5 +13,11 @@ FactoryGirl.define do
         end
       end
     end
+
+    trait :with_stock do |article|
+      after(:build) do |article|
+        article.stocks << FactoryGirl.create(:stock)
+      end
+    end
   end
 end

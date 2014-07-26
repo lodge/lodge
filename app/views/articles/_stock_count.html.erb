@@ -1,9 +1,9 @@
-<% user_stock = article.stocks.find {|stock| stock.user_id == current_user.id } %>
-<% if user_stock %>
-  <%= link_to user_stock, method: :delete, class: "stock-link", title: tco(:unstock) do %>
+<% if current_user.stock?(article) %>
+  <%= link_to unstock_article_path(article), method: :post, class: "stock-link", title: tco(:unstock), remote: true do %>
     <%= image_tag "stocked.png" %><%= article.stocks.size %>
   <% end %>
 <% else %>
-  <% img = image_tag("unstocked.png") + article.stocks.size %>
-  <%= link_to img.html_safe, {controller: "/stocks", article_id: article.id}, {method: :post, class: "stock-link", title: tco(:unstock)} %>
+  <%= link_to stock_article_path(article), method: :post, class: "stock-link", title: tco(:stock), remote: true do %>
+    <%= image_tag "unstocked.png" %><%= article.stocks.size %>
+  <% end %>
 <% end %>
