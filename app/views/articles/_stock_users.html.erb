@@ -1,6 +1,6 @@
 <% users = article.stocked_users %>
 <div class="stock-users">
-  <% if users.size() > 0 %>
+  <% if users.size > 0 %>
     <%= tc :stocked_users %>
     <% users.each do |user| %>
       <span class="dropdown">
