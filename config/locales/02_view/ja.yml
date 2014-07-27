@@ -111,8 +111,8 @@ ja:
     comment_form_title: コメントの投稿
     preview: プレビュー
     stocked_users: "ストック中:"
-    follow_this_tag: このタグをフォロー
-    unfollow_this_tag: フォロー解除
+    follow: このタグをフォロー
+    unfollow: フォロー解除
     feed_introduction:
       <h3>まだタグをフォローしていません。</h3>
       <p>

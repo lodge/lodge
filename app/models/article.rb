@@ -57,4 +57,11 @@ class Article < ActiveRecord::Base
       notification.destroy! if notification.notification_targets.length == 0
     end
   end
+
+  def self.tag_counts
+    ActsAsTaggableOn::Tag
+      .includes(:taggings)
+      .references(:taggings)
+      .where(taggings: {taggable_type: 'Article', context: 'tags'})
+  end
 end

@@ -19,5 +19,9 @@ FactoryGirl.define do
         article.stocks << FactoryGirl.create(:stock)
       end
     end
+
+    trait :with_tag do
+      tag_list 'tag'
+    end
   end
 end

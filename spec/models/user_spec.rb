@@ -62,4 +62,32 @@ RSpec.describe User, :type => :model do
       expect(user.stock?(article)).to be_falsy
     end
   end
+
+  describe "follow" do
+    let (:article) { FactoryGirl.create(:article, :with_tag) }
+
+    before do
+      user.follow(article.tag_list.first)
+    end
+
+    it "follow tag" do
+      expect(user.following_tag_list).to eq([article.tag_list.first])
+    end
+  end
+
+  describe "unfollow" do
+    let (:article) { FactoryGirl.create(:article, :with_tag) }
+
+    before do
+      user.following_tag_list << article.tag_list.first
+      user.save
+
+      user.unfollow(article.tag_list)
+    end
+
+    it "follow tag" do
+      expect(user.following_tag_list).to eq([])
+    end
+  end
+
 end

@@ -31,6 +31,16 @@ class User < ActiveRecord::Base
     following_tag_list.include? tag
   end
 
+  def follow(tag)
+    following_tag_list << tag
+    save
+  end
+
+  def unfollow(tag)
+    following_tag_list.remove(tag)
+    save
+  end
+
   def contribution
     Stock.joins(:article).where("articles.user_id = ? AND stocks.user_id != ?", self.id, self.id).count
   end

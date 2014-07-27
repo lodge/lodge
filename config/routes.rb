@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [:show]
-
-  match "tags", to: 'tags#index', via: :get
-  match "following_tag", to: 'following_tags#destroy', via: :delete, require: :tag
-  resources :following_tags, :only => [:create]
+  resources :tags, only: [:index], param: :tag do
+    member do
+      post "follow"
+      post "unfollow"
+    end
+  end
 
   match "articles/preview", :to => 'articles#preview', :via => :post
   match "articles/stocks", :to => 'articles#by_stocks', :via => :get, :as => :articles_by_stocks
