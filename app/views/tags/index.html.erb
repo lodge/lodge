@@ -11,13 +11,9 @@
     <% @tags.each do |tag| %>
       <tr>
         <td><%= link_to tag.name, articles_by_tag_path(tag.name), title: tag.name %></td>
-        <td class="counts-column text-right"><%= tag.taggings_count %></td>
+        <td class="counts-column text-right"><%= tag.taggings.size %></td>
         <td class="follow-column text-right">
-          <% if @following_tags.include?(tag.name) %>
-            <%= link_to tc(:unfollow), following_tag_path(tag: tag.name), method: :delete %>
-          <% else %>
-            <%= link_to tc(:follow), following_tags_path(tag: tag.name), method: :post %>
-          <% end %>
+          <%= render partial: "tags/follow", locals: {tag: tag.name} %>
         </td>
       </tr>
     <% end %>

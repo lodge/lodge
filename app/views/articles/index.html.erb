@@ -20,11 +20,7 @@
 </h3>
 
 <% if action == "by_tag" %>
-  <% if current_user.follow?(@tag) %> 
-    <%= link_to tc(:unfollow_this_tag), following_tag_path(tag: @tag), method: :delete %>
-  <% else %>
-    <%= link_to tc(:follow_this_tag), following_tags_path(tag: @tag), method: :post %>
-  <% end %>
+  <%= render partial: "tags/follow", locals: {tag: @tag} %>
 <% end %>
 
 
