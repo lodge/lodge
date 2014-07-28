@@ -4,33 +4,34 @@ source 'https://rubygems.org'
 gem 'nokogiri', '~> 1.6.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails', '~> 4.1.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 2.5.3'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.1'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.1.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 2.2.2'
+gem 'jquery-turbolinks', '~> 2.0.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.1.3'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+gem 'spring', '~> 1.1.3',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-gem 'unicorn'
+gem 'unicorn', '~> 4.8.3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -38,28 +39,27 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'devise'
-gem 'awesome_print'
-gem 'foreigner'
-gem 'railroady'
-gem 'acts-as-taggable-on'
-gem 'coderay'
-gem 'redcarpet'
-gem 'thin'
-gem 'kaminari'
-gem 'coderay_bash'
-gem 'diffy'
+gem 'devise', '~> 3.2.4'
+gem 'awesome_print', '~> 1.2.0'
+gem 'foreigner', '~> 1.6.1'
+gem 'railroady', '~> 1.1.1'
+gem 'acts-as-taggable-on', '~> 3.3.0'
+gem 'redcarpet', '~> 3.1.2'
+gem 'thin', '~> 1.6.2'
+gem 'kaminari', '~> 0.16.1'
+gem 'coderay', '~> 1.1.0'
+gem 'coderay_bash', '~> 1.0.5'
+gem 'diffy', '~> 3.0.6'
 gem 'yaml_db', git: 'https://github.com/jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
-gem 'activerecord-import'
-gem 'counter_culture', '~> 0.1.18'
-gem 'rails_config'
-gem 'dotenv-rails'
-gem 'bootstrap-sass'
-gem 'bootswatch-rails'
-gem 'compass-rails'
+gem 'activerecord-import', '~> 0.5.0'
+gem 'counter_culture', '~> 0.1.24'
+gem 'rails_config', '~> 0.4.2'
+gem 'dotenv-rails', '~> 0.11.1'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootswatch-rails', '~> 3.2.0'
+gem 'compass-rails', '~> 2.0.0'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2'
-gem 'jquery-turbolinks'
 
 group :development do
   gem 'bullet'
