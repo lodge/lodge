@@ -12,6 +12,6 @@ def log_task_end(task_name)
   @rake_log.info("Task `#{task_name}' succeeded")
 end
 
-def log_task_failed(task_name)
-  @rake_log.error("Task `#{task_name}' failed")
+def log_task_failed(task_name, e)
+  @rake_log.error("Task `#{task_name}' failed, #{e}")
 end
