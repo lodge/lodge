@@ -3,6 +3,7 @@
 @rake_log.formatter = proc { |severity, datetime, progname, msg|
     "%s  %5s  %s\n" % [datetime.strftime('%Y-%m-%d %H:%M:%S,%L'), severity, msg]
   }
+@root_path = File.expand_path('../..', __FILE__)
 
 def log_task_start(task_name)
   @rake_log.info("Task `#{task_name}' started")
