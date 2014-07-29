@@ -101,13 +101,11 @@ if File.exist?(database_file)
     adapters.each do |adapter|
       case adapter
       when 'mysql2'
-        gem "mysql2"
-      when 'mysql'
-        gem "mysql"
+        gem "mysql2", '~> 0.3'
       when /postgresql/
-        gem "pg"
+        gem "pg", '~> 0.17'
       when /sqlite3/
-        gem "sqlite3"
+        gem "sqlite3", '~> 1.3'
       else
         warn("Unknown database adapter `#{adapter}` found in config/database.yml")
       end
