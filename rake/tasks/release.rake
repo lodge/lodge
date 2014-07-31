@@ -10,7 +10,7 @@ namespace :lodge do
       log_task_start :release
 
       Dir.chdir(@root_path) do
-        git_status = `git status 2>&1`
+        git_status = `git status -s 2>&1`
         if $?.exitstatus != 0 or not git_status.empty?
           raise "git status failed: #{git_status}"
         end
