@@ -14,6 +14,13 @@ namespace :lodge do
         if $?.exitstatus != 0 or not git_status.empty?
           raise "git status failed: #{git_status}"
         end
+
+        bundle_install = `bundle install 2>&1`
+        if $?.exitstatus != 0
+          raise "bundle install failed: #{bundle_install}"
+        else
+          puts bundle_install
+        end
       end
 
       lockfile_path = File.expand_path('Gemfile.lock', LodgeRake.root_path)
