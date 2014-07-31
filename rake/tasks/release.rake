@@ -9,6 +9,13 @@ namespace :lodge do
     task :prepare do
       log_task_start :release
 
+      Dir.chdir(@root_path) do
+        git_status = `git status 2>&1`
+        if $?.exitstatus != 0 or not git_status.empty?
+          raise "git status failed: #{git_status}"
+        end
+      end
+
       lockfile_path = File.expand_path('Gemfile.lock', @root_path)
       lockfile = Bundler::LockfileParser::new(Bundler.read_file(lockfile_path))
       gems = {}
