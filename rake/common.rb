@@ -1,18 +1,26 @@
-namespace :lodge do
+class LodgeRake
 
-  @rake_log = Logger.new(STDOUT)
-  @rake_log.level = Logger::INFO
-  @rake_log.formatter = proc { |severity, datetime, progname, msg|
+  @@log = Logger.new(STDOUT)
+  @@log.level = Logger::INFO
+  @@log.formatter = proc { |severity, datetime, progname, msg|
       "%s  %5s  %s\n" % [datetime.strftime('%Y-%m-%d %H:%M:%S,%L'), severity, msg]
     }
-  @root_path = File.expand_path('../..', __FILE__)
+  @@root_path = File.expand_path('../..', __FILE__)
 
-  def log_task_start(task_name)
-    @rake_log.info("Task `#{task_name}' started")
+  def self.log
+    @@log
   end
 
-  def log_task_end(task_name)
-    @rake_log.info("Task `#{task_name}' succeeded")
+  def self.root_path
+    @@root_path
+  end
+
+  def self.log_task_start(task_name)
+    @@log.info("Task `#{task_name}' started")
+  end
+
+  def self.log_task_end(task_name)
+    @@log.info("Task `#{task_name}' succeeded")
   end
 
 end

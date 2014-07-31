@@ -7,9 +7,9 @@ namespace :lodge do
 
     desc 'Lock gemfile version to release'
     task :prepare do
-      log_task_start :release
+      LodgeRake.log_task_start :release
 
-      Dir.chdir(@root_path) do
+      Dir.chdir(LodgeRake.root_path) do
         git_status = `git status -s 2>&1`
         if $?.exitstatus != 0 or not git_status.empty?
           raise "git status failed: #{git_status}"
@@ -23,14 +23,14 @@ namespace :lodge do
         end
       end
 
-      lockfile_path = File.expand_path('Gemfile.lock', @root_path)
+      lockfile_path = File.expand_path('Gemfile.lock', LodgeRake.root_path)
       lockfile = Bundler::LockfileParser::new(Bundler.read_file(lockfile_path))
       gems = {}
       lockfile.specs.each do |s|
         gems[s.name] = s.version.to_s
       end
 
-      gemfile_path = File.expand_path('Gemfile', @root_path)
+      gemfile_path = File.expand_path('Gemfile', LodgeRake.root_path)
 
       replaced_gemfile_contents = ''
       File.open(gemfile_path).each_line do |l|
@@ -47,7 +47,7 @@ namespace :lodge do
         f << replaced_gemfile_contents
       end
 
-      log_task_end :release
+      LodgeRake.log_task_end :release
     end
 
   end
