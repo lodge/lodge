@@ -57,6 +57,7 @@ gem 'rails_config', '~> 0.4'
 gem 'dotenv-rails', '~> 0.11'
 gem 'bootstrap-sass', '~> 3.2'
 gem 'bootswatch-rails', '~> 3.2'
+gem 'autoprefixer-rails', '~> 2.2'
 gem 'compass-rails', '~> 2.0'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2', '~> 0.2'
