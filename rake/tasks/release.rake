@@ -16,7 +16,7 @@ task :release do
 
   replaced_gemfile_contents = ''
   File.open(gemfile_path).each_line do |l|
-    gem_pattern = /^(.*gem\s+["'])([^"']+)(["'],\s*["'])([^"']+)(["'].*)$/
+    gem_pattern = /^(.*gem\s+["'])([^"']+)(["']\s*,\s*["'])([^"']+)(["'].*)$/
     if m = gem_pattern.match(l)
       locked_version = gems[m[2]]
       replaced_gemfile_contents << l.gsub(gem_pattern, "#{m[1]}#{m[2]}#{m[3]}#{locked_version}#{m[5]}")
