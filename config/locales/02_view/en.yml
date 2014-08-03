@@ -48,9 +48,11 @@ en:
     menu: Menu
     sign_in: Sign in
     sign_up: Sign up
+    sign_in_by_other_means: Other means
     contribution: Contribution
     forgot_your_password: Forgot your password?
     didnt_receive_confirmation: Didn't receive confirmation instructions?
+    sign_in_with: "Sign in with %{provider}"
     notification:
       article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
       comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"
