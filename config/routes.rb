@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   resources :tags, only: [:index], param: :tag do
+    collection do
+      get "list"
+    end
     member do
       post "follow"
       post "unfollow"

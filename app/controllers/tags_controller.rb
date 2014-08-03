@@ -17,9 +17,20 @@ class TagsController < ApplicationController
     render :follow
   end
 
+  def list
+    tags = Article.tag_counts.where("name LIKE ?", "%#{params[:q]}%")
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => tags.select(:id, :name, :taggings_count) }
+    end
+  end
+
 private
 
   def set_tag
     @tag = params[:tag]
   end
+
+
 end

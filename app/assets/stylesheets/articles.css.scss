@@ -10,3 +10,20 @@
     width: 60%;
   }
 }
+
+#tag-input-container {
+  .tag-group {
+    display: inline-block;
+    margin-right: 5px;
+    .btn {
+      margin-bottom: -12px;
+    }
+    .form-control {
+      display: inline-block;
+      width: inherit;
+    }
+  }
+  #js-add-tag-btn {
+    margin-bottom: -12px;
+  }
+}
