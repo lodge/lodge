@@ -48,9 +48,11 @@ ja:
     menu: メニュー
     sign_in: ログイン
     sign_up: 新規登録
+    sign_in_by_other_means: その他の方法
     contribution: Contribution
     forgot_your_password: パスワードをお忘れですか？
     didnt_receive_confirmation: 確認のメールが届きませんか？
+    sign_in_with: "%{provider} でログイン"
     notification:
       article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
       comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"

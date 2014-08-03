@@ -33,15 +33,18 @@ describe 'GoogleOauthでの認証', :type => :feature do
     it 'Google Accountsでログイン／ログアウトできる' do
       visit root_path
 
-      expect(page).to have_link('ログイン')
-      expect(page).to have_link('Sign in with Google Oauth2')
-      click_link 'Sign in with Google Oauth2'
+      message_sign_in = I18n.t("common.sign_in")
+      message_sign_out = I18n.t("users.logout")
+      message_sign_in_with = I18n.t("common.sign_in_with", provider: 'Google Oauth2')
+      expect(page).to have_link(message_sign_in)
+      expect(page).to have_link(message_sign_in_with)
+      click_link message_sign_in_with
 
       find(".glyphicon-cog").click
-      expect(page).to have_link('ログアウト')
-      click_link 'ログアウト'
+      expect(page).to have_link(message_sign_out)
+      click_link message_sign_out
 
-      expect(page).to have_link('ログイン')
+      expect(page).to have_link(message_sign_in)
     end
   end
 end
