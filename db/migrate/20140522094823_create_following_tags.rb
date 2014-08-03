@@ -8,6 +8,6 @@ class CreateFollowingTags < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :following_tags, [:user_id, :tag_id], :unique => true
+    add_index :following_tags, [:user_id, :tag_id], unique: true
   end
 end
