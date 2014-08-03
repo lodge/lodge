@@ -15,8 +15,12 @@ RSpec.describe Article, :type => :model do
 
   describe :save do
     let(:article) { FactoryGirl.create(:article) }
+    let(:before_user) { FactoryGirl.create(:user) }
+    let(:after_user) { FactoryGirl.create(:user) }
+
     before do
       article.title = "edited title"
+      article.update_user_id = before_user.id
     end
 
     context "when article is free" do
@@ -31,6 +35,7 @@ RSpec.describe Article, :type => :model do
         same_article.title = "new title"
         same_article.body = "new body"
         same_article.tag_list = "newtag1,newtag2"
+        same_article.update_user_id = after_user.id
         same_article.save
         article.save
       end
@@ -43,11 +48,13 @@ RSpec.describe Article, :type => :model do
 
   describe :create_history do
     let(:article) { FactoryGirl.create(:article, title: "old title", body: "old body", tag_list: "oldtag") }
+    let(:user) { FactoryGirl.create(:user) }
 
     before do
       article.title = "new title"
       article.body = "new body"
       article.tag_list = "newtag1,newtag2"
+      article.update_user_id = user.id
     end
 
     it "should create new update_history" do

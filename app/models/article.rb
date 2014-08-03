@@ -15,6 +15,8 @@ class Article < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
 
+  attr_accessor :update_user_id
+
   acts_as_taggable
   alias_method :__save, :save
 
@@ -29,6 +31,7 @@ class Article < ActiveRecord::Base
 
   def create_history
     update_histories.create(
+      user_id: update_user_id,
       old_title: title_was,
       old_tags: tag_list_was.to_s,
       old_body: body_was,

@@ -1,7 +1,7 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :stock, :unstock]
-  before_action :check_permission, only: [:edit, :update, :destroy]
+  before_action :check_permission, only: [:destroy]
 
   # GET /articles
   # GET /articles.json
@@ -99,6 +99,7 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
+      @article.update_user_id = current_user.id
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
