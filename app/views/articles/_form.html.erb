@@ -17,15 +17,9 @@
     <%= f.text_field :title, class: ["form-control"] %>
   </div>
 
-  <div id="tag-input-container" class="form-group">
+  <div class="form-group">
     <%= f.label :tag_list %><br>
-    <% tag_list = @article.tag_list.presence || [""] %>
-    <% tag_list.each do |tag| %>
-      <div class="tag-group">
-        <input class="typeahead js-tag-names form-control" name="article[tag_list][]" type="text" placeholder="タグ" value="<%=tag %>"><button class="btn btn-xs js-remove-tag-btn" type="button">&times;</button>
-      </div>
-    <% end %>
-    <button id="js-add-tag-btn" class="btn btn-xs btn-primary" type="button">+</button>
+    <%= f.text_field :tag_list, class: ["form-control", "js-tag-names"] %>
   </div>
 
   <div class="form-group">

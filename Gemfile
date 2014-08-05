@@ -88,6 +88,7 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'launchy'
 end
 
 # Include database gems for the adapters found in the database

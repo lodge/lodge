@@ -7,17 +7,21 @@ feature "CreateArticles", :type => :feature do
   end
 
   scenario "create new article" do
+
+    tags = %w(tag0 tag1 tag2 tag3 tag4 tag5 tag6 tag7 tag8 tag9)
+
     expect {
       visit new_article_path
       fill_in I18n.t("activerecord.attributes.article.title"), with: "new article"
-      fill_in I18n.t("activerecord.attributes.article.tag_list"), with: "tag1,tag2"
+      fill_in_autocomplete("#article_tag_list", tags.join(","))
       fill_in I18n.t("activerecord.attributes.article.body"), with: "body"
       click_button I18n.t("helpers.submit.create")
     }.to change(Article, :count).by(1)
 
     expect(page).to have_content("new article")
-    expect(page).to have_link("tag1")
-    expect(page).to have_link("tag2")
+    tags.each do |tag|
+      expect(page).to have_link(tag, href: articles_by_tag_path(tag: tag))
+    end
     expect(page).to have_content("body")
 
     click_link I18n.t("common.user_article_list_title")
