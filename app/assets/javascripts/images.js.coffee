@@ -14,11 +14,11 @@ $ ->
       obj.get(0).setSelectionRange currentPosition, currentPosition
 
   $("#fileupload").fileupload
-    dropZone: $('#article-body-textarea')
+    dropZone: $('#article_body')
     url: '/images.json'
     sequentialUploads: true
     dataType: 'json'
     done: (e, data) ->
       $.each data.files, (index, file) ->
         text = '![' + file.name + '](' + data.result.image_url + ')'
-        insertAtCaret('#article-body-textarea', text)
+        insertAtCaret('#article_body', text)
