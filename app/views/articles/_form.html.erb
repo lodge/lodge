@@ -16,10 +16,12 @@
     <%= f.label :title %><br>
     <%= f.text_field :title, class: ["form-control"] %>
   </div>
+
   <div class="form-group">
-    <%= f.label :tag_list %><%= tc :tags_hint %><br>
-    <%= f.text_field :tag_list, :placeholder => tc("tags_example"), class: ["form-control"] %>
+    <%= f.label :tag_list %><br>
+    <%= f.text_field :tag_list, class: ["form-control", "js-tag-names"] %>
   </div>
+
   <div class="form-group">
     <%= render partial: "layouts/editor", locals: {form: f} %>
   </div>

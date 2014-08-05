@@ -11,15 +11,19 @@ feature "EditArticles", :type => :feature do
   end
 
   scenario "edit article and notify stocked user" do
+
+    tags = %w(tag0 tag1 tag2 tag3 tag4 tag5 tag6 tag7 tag8 tag9)
+
     visit edit_article_path(article)
     fill_in I18n.t("activerecord.attributes.article.title"), with: "new article"
-    fill_in I18n.t("activerecord.attributes.article.tag_list"), with: "tag1,tag2"
+    fill_in_autocomplete("#article_tag_list", tags.join(","))
     fill_in I18n.t("activerecord.attributes.article.body"), with: "body"
     click_button I18n.t("helpers.submit.update")
 
     expect(page).to have_content("new article")
-    expect(page).to have_link("tag1")
-    expect(page).to have_link("tag2")
+    tags.each do |tag|
+      expect(page).to have_link(tag, href: articles_by_tag_path(tag: tag))
+    end
     expect(page).to have_content("body")
 
     click_link I18n.t("articles.update_histories")
@@ -30,7 +34,7 @@ feature "EditArticles", :type => :feature do
     expect(page).to have_content("-old article")
     expect(page).to have_content("+new article")
     expect(page).to have_content("-old_tag")
-    expect(page).to have_content("+tag1, tag2")
+    expect(page).to have_content("+#{tags.join(', ')}")
     expect(page).to have_content("-old body")
     expect(page).to have_content("+body")
     logout
