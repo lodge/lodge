@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'devise'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -20,7 +21,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
-Capybara.javascript_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, timeout: 60)
 end
@@ -49,7 +49,10 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.include Rails.application.routes.url_helpers
+
   config.include Warden::Test::Helpers, type: :feature
+  config.include Devise::TestHelpers, type: :controller
 
   Capybara.configure do |config|
     config.default_driver = :poltergeist
