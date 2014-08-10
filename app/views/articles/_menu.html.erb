@@ -1,0 +1,10 @@
+<%= link_to '#', class: "dropdown-toggle", "data-toggle" => "dropdown" do %>
+  <span class="glyphicon glyphicon-pencil"></span>
+  <i class="caret"></i>
+<% end %>
+<ul class="dropdown-menu" role="menu">
+  <li role="presentation">
+    <%= link_to tco(:new_post), new_article_path  %>
+    <%= link_to tco(:draft_list), '#' %>
+  </li>
+</ul>

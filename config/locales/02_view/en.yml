@@ -37,6 +37,8 @@ en:
     back: Back
     freeze: Freeze
     more_display: More
+    new_post: New post
+    draft_list: Drafts
     feed_article_list_title: Listing articles of your feed.
     recent_article_list_title: Listing recent articles.
     article_search: Search articles by title
