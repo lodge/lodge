@@ -111,6 +111,7 @@ ja:
     tags_hint: (カンマ区切り)
     tags_example: 例) Ruby, Git, Linux, MySQL, ...
     body_hint: (Markdownが利用できます)
+    publish: 公開する
     comments_title: コメント一覧
     comment_form_title: コメントの投稿
     preview: プレビュー

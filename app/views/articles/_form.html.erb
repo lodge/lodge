@@ -27,6 +27,13 @@
     <%= render partial: "layouts/editor", locals: {form: f} %>
   </div>
   <div class="preview-area markdown"></div>
+  <% if @article.new_record? %>
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :published? %> <%= tc 'publish' %>
+      <label>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :lock_version %>
