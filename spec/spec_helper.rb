@@ -14,21 +14,7 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'capybara/rspec'
-require 'devise'
-
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
 RSpec.configure do |config|
-  config.include Rails.application.routes.url_helpers
-  config.include Capybara::DSL
-  config.include Devise::TestHelpers, :type => :controller
-  config.extend ControllerMacros, :type => :controller
-
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
   # These two settings work together to allow you to limit a spec run

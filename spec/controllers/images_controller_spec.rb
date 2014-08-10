@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ImagesController, :type => :controller do
-  sign_in
+  let(:user) { FactoryGirl.create(:user) }
+  before do
+    sign_in user
+  end
 
   describe '.create' do
     render_views
