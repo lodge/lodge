@@ -15,6 +15,26 @@ RSpec.describe Article, :type => :model do
 
   it_should_behave_like 'having markdownable', :body
 
+  describe :draft? do
+    context "when new record" do
+      subject { FactoryGirl.build(:article) }
+
+      it { should be_draft }
+    end
+
+    context "when draft record" do
+      subject { FactoryGirl.create(:draft) }
+
+      it { should be_draft }
+    end
+
+    context "when published record" do
+      subject { FactoryGirl.create(:article) }
+
+      it { should_not be_draft }
+    end
+  end
+
   describe :save do
     let(:article) { FactoryGirl.create(:article) }
     before do

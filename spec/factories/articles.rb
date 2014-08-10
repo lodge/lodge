@@ -4,14 +4,11 @@ FactoryGirl.define do
   factory :article do
     title "title"
     body "body"
+    published true
     user
 
-    factory :article_with_three_notifications do
-      after_build do |article|
-        3.times do
-          article.notifications << FactoryGirl.build(:article_notification)
-        end
-      end
+    factory :draft do
+      published false
     end
 
     trait :with_stock do |article|

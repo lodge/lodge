@@ -33,6 +33,7 @@ en:
     updated_at: Updated at
     stock: Stock
     unstock: Unstock
+    publish: Publish
     comment: Comments
     back: Back
     freeze: Freeze

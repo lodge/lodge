@@ -27,10 +27,10 @@
     <%= render partial: "layouts/editor", locals: {form: f} %>
   </div>
   <div class="preview-area markdown"></div>
-  <% if @article.new_record? %>
+  <% if @article.draft? %>
     <div class="checkbox">
       <label>
-        <%= f.check_box :published? %> <%= tc 'publish' %>
+        <%= f.check_box :published %> <%= tc 'publish' %>
       <label>
     </div>
   <% end %>

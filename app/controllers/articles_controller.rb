@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article
+      .published
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
       .order(:updated_at => :desc)
@@ -16,6 +17,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def feed
     @articles = Article
+      .published
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
       .tagged_with(current_user.following_tag_list, any: true)
@@ -27,6 +29,7 @@ class ArticlesController < ApplicationController
   def search
     query = "%#{params[:query].gsub(/([%_])/){"\\" + $1}}%"
     @articles = Article.where("title like ?", query)
+        .published
         .page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
   end
 
@@ -132,7 +135,7 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:user_id, :title, :body, :tag_list, :lock_version)
+    params.require(:article).permit(:user_id, :title, :body, :tag_list, :published, :lock_version)
   end
 
   def preview_params
