@@ -44,7 +44,7 @@ class Article < ActiveRecord::Base
       new_title: title,
       new_tags: tag_list.to_s,
       new_body: body,
-    )
+    ) unless draft?
   end
 
   def create_notification
