@@ -7,7 +7,7 @@ class Article < ActiveRecord::Base
   has_many :update_histories
   has_many :notifications
   has_many :article_notifications
-  before_update :create_history
+  before_update :create_history, unless: :draft?
   before_update :create_notification
   has_many :stocked_users,
     -> {order "stocks.updated_at desc"},
@@ -44,7 +44,7 @@ class Article < ActiveRecord::Base
       new_title: title,
       new_tags: tag_list.to_s,
       new_body: body,
-    ) unless draft?
+    )
   end
 
   def create_notification
