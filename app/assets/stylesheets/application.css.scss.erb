@@ -41,6 +41,9 @@ body {
   .col-xs-8 .row {
     margin-right: 0;
   }
+  .dropdown .dropdown-menu {
+    @include border-radius($border-radius-base);
+  }
 }
 
 .dropdown-toggle {
@@ -57,17 +60,14 @@ body {
 .dropdown .dropdown-menu.user-info {
   padding: 19px;
   width: 400px;
-  @include border-radius($border-radius-base);
 }
 .dropdown .dropdown-menu.notification {
   width: 480px;
-  @include border-radius($border-radius-base);
 }
 .dropdown .dropdown-menu.user-menu {
   padding: 0;
   width: 150px;
   overflow: hidden;
-  @include border-radius($border-radius-base);
 
   a {
     padding: 10px;

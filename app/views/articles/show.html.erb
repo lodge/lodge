@@ -9,7 +9,10 @@
       </div>
     <% end %>
   
-    <h1><%= @article.title %></h1>
+    <h1>
+      <% if @article.draft? %><i class="glyphicon glyphicon-pencil"></i><% end %>
+      <%= @article.title %>
+    </h1>
     <hr />
   </div>
 

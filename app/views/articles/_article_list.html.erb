@@ -24,7 +24,10 @@
     <% articles.each do |article| %>
       <tr>
         <td class="article-title-column">
-          <p><%= link_to article.title, article, title: article.title %></p>
+          <p>
+            <% if article.draft? %><i class="glyphicon glyphicon-pencil"></i><% end %>
+            <%= link_to article.title, article, title: article.title %>
+          </p>
         </td>
         <td class="article-tags-column">
           <% article.tags.each do |tag| %>
