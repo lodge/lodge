@@ -22,6 +22,7 @@ class Article < ActiveRecord::Base
   alias_method :__save, :save
 
   scope :published, -> { where(published: true) }
+  scope :draft, -> { where(published: false) }
 
   def draft?
     new_record? || !published?
