@@ -61,8 +61,8 @@ gem 'autoprefixer-rails', '~> 2.2'
 gem 'compass-rails', '~> 2.0'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2', '~> 0.2'
-gem 'carrierwave'
-gem 'jquery-fileupload-rails'
+gem 'carrierwave', '~> 0.10'
+gem 'jquery-fileupload-rails', '~> 0.4'
 
 group :development do
   gem 'bullet'
