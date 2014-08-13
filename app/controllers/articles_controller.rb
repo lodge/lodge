@@ -34,7 +34,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/stocks
   # GET /articles/stocks.json
-  def by_stocks
+  def stocked
     @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
     render :index
   end
