@@ -21,12 +21,15 @@ Rails.application.routes.draw do
     end
   end
 
-  match "articles/preview", :to => 'articles#preview', :via => :post
   match "articles/stocks", :to => 'articles#by_stocks', :via => :get, :as => :articles_by_stocks
-  match "articles/search", :to => 'articles#search', :via => :get
   match "articles/feed", :to => 'articles#feed', :via => :get, :as => :articles_feed
 
   resources :articles do
+    collection do
+      post :preview
+      get :search
+    end
+
     member do
       post "stock"
       post "unstock"

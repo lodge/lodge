@@ -81,7 +81,7 @@
     <div>
       <% if current_user %>
         <div class="row">
-          <%= form_tag articles_search_path, method: :get, id: "article-search-area", role: "search" do %>
+          <%= form_tag search_articles_path, method: :get, id: "article-search-area", role: "search" do %>
             <div class="input-group col-xs-4 col-xs-offset-5">
               <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
               <span class="input-group-btn">
