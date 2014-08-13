@@ -22,7 +22,7 @@
           <span>|</span>
           <span><%= tco :updated_at %>: <%= @article.updated_at %></span>
           <span>-</span>
-          <span><%= link_to "#{tc(:update_histories)}(#{@article.update_histories.size})", update_histories_path(@article) %></span>
+          <span><%= link_to "#{tc(:update_histories)}(#{@article.update_histories.size})", article_update_histories_path(@article) %></span>
         <% end %>
       </div>
       <% @article.tags.each do |tag| %>

@@ -1,9 +1,6 @@
 # coding: utf-8
 Rails.application.routes.draw do
 
-  match "articles/:article_id/update_histories", to: 'update_histories#list', via: :get, as: :update_histories
-  resources :update_histories, only: [:show]
-
   devise_for :users, controllers: {
     registrations: 'custom_devise/registrations',
     sessions: 'custom_devise/sessions',
@@ -34,6 +31,12 @@ Rails.application.routes.draw do
     member do
       post "stock"
       post "unstock"
+    end
+  end
+
+  resources :update_histories, only: [:show] do
+    collection do
+      get :article, action: :list, path: "article/:article_id"
     end
   end
 
