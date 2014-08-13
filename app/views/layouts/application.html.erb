@@ -108,7 +108,7 @@
                 <li><u><%= link_to tco(:feed_article_list_title), feed_articles_path, data: {active: true}%></u></li>
                 <li><u><%= link_to tco(:recent_article_list_title), articles_path %></u></li>
                 <li><u><%= link_to tco("stocked_article_list_title"), stocked_articles_path %></u></li> 
-                <li><u><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></u></li> 
+                <li><u><%= link_to tco("user_article_list_title"), owned_articles_path(current_user.id) %></u></li> 
                 <li><u><%= link_to tco("tag_list_title"), tags_path %></u></li>
               </ul>
             </div>
@@ -157,7 +157,7 @@
               </ol>
               <% unless @user_articles.empty? %>
                 <div class="clearfix">
-                  <%= link_to tco("more_display"), articles_by_user_path(current_user.id), class: ["pull-right"] %> 
+                  <%= link_to tco("more_display"), owned_articles_path(current_user.id), class: ["pull-right"] %> 
                 </div>
               <% end %>
             </div>

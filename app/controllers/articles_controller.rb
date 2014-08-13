@@ -41,7 +41,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_user
+  def owned
     @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
     render :index
   end
