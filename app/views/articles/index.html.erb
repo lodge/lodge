@@ -5,13 +5,13 @@
   <% case action 
   when "index" %>
     <%= tco("recent_article_list_title") %>
-  <% when "by_tag" %>
+  <% when "tagged" %>
     <%= tc("list_title_by_tag", :tag => params[:tag]) %>
-  <% when "by_stocks" %>
+  <% when "stocked" %>
     <%= tco "stocked_article_list_title" %>
   <% when "search" %>
     <%= tc("list_title_by_search", :query => params[:query]) %>
-  <% when "by_user" %>
+  <% when "owned" %>
     <%= tco :user_article_list_title %>
   <% when "feed" %>
     <%= tco :feed_article_list_title %>
@@ -19,7 +19,7 @@
   </strong>
 </h3>
 
-<% if action == "by_tag" %>
+<% if action == "tagged" %>
   <%= render partial: "tags/follow", locals: {tag: @tag} %>
 <% end %>
 
@@ -34,7 +34,7 @@
     <% case action 
       when "feed" %>
         <%= tc(:feed_introduction).html_safe %>
-    <% when "by_stocks" %>
+    <% when "stocked" %>
         <%= tc(:stocks_introduction).html_safe %>
     <% end %>
   </div>

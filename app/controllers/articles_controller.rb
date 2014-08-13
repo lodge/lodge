@@ -48,7 +48,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_tag
+  def tagged
     @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
     @tag = params[:tag]
     render :index

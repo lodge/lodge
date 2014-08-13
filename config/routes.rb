@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get :stocked
       get :feed
       get :owned, path: "user/:user_id"
+      get :tagged, path: "tag/:tag"
     end
 
     member do
@@ -37,7 +38,6 @@ Rails.application.routes.draw do
   end
 
   match "articles/:id/comment", :to => 'articles#create_comment', :via => :post
-  match "articles/tag/:tag", :to => 'articles#by_tag', :via => :get, :as => :articles_by_tag, :constraints => {tag: /.+/}
   resources :comments, :only => [:create, :update, :destroy]
   resources :images, only: :create, defaults: { format: 'json' }
 

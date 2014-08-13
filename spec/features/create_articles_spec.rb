@@ -20,7 +20,7 @@ feature "CreateArticles", :type => :feature do
 
     expect(page).to have_content("new article")
     tags.each do |tag|
-      expect(page).to have_link(tag, href: articles_by_tag_path(tag: tag))
+      expect(page).to have_link(tag, href: tagged_articles_path(tag: tag))
     end
     expect(page).to have_content("body")
 
