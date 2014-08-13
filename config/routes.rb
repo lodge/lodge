@@ -21,13 +21,12 @@ Rails.application.routes.draw do
     end
   end
 
-  match "articles/feed", :to => 'articles#feed', :via => :get, :as => :articles_feed
-
   resources :articles do
     collection do
       post :preview
       get :search
       get :stocked
+      get :feed
     end
 
     member do

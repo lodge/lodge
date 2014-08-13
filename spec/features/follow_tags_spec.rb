@@ -13,7 +13,7 @@ feature "FollowTags", :type => :feature do
     click_link I18n.t("tags.follow")
     expect(page).to have_link(I18n.t("tags.unfollow"))
 
-    visit articles_feed_path
+    visit feed_articles_path
     expect(page).to have_content article.title
   end
 end

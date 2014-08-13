@@ -105,7 +105,7 @@
             <h5><strong><%= tco("menu") %></strong></h5>
             <div>
               <ul>
-                <li><u><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></u></li>
+                <li><u><%= link_to tco(:feed_article_list_title), feed_articles_path, data: {active: true}%></u></li>
                 <li><u><%= link_to tco(:recent_article_list_title), articles_path %></u></li>
                 <li><u><%= link_to tco("stocked_article_list_title"), stocked_articles_path %></u></li> 
                 <li><u><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></u></li> 
