@@ -1,54 +1,6 @@
-<% action = params[:action] %>
-<% is_index_action = action == "index" %>
-<h3>
-  <strong>
-  <% case action 
-  when "index" %>
-    <%= tco("recent_article_list_title") %>
-  <% when "tagged" %>
-    <%= tc("list_title_by_tag", :tag => params[:tag]) %>
-  <% when "stocked" %>
-    <%= tco "stocked_article_list_title" %>
-  <% when "search" %>
-    <%= tc("list_title_by_search", :query => params[:query]) %>
-  <% when "owned" %>
-    <%= tco :user_article_list_title %>
-  <% when "feed" %>
-    <%= tco :feed_article_list_title %>
-  <% end %>
-  </strong>
-</h3>
-
-<% if action == "tagged" %>
-  <%= render partial: "tags/follow", locals: {tag: @tag} %>
-<% end %>
-
-
-<p class="article-new-link-area pull-right">
-  <%= link_to tco('new'), new_article_path %>
-</p>
-
-<% if @articles.length == 0 %>
-  <p class="media">
-    <div class="media-body">
-    <% case action 
-      when "feed" %>
-        <%= tc(:feed_introduction).html_safe %>
-    <% when "stocked" %>
-        <%= tc(:stocks_introduction).html_safe %>
-    <% end %>
-  </div>
-  </p>
+<% content_for :list_title do %>
+  <%= tco("recent_article_list_title") %>
 <% end %>
 
 <%= render "article_list", articles: @articles %>
 
-<p class="article-new-link-area pull-right">
-  <%= link_to tco('new'), new_article_path %>
-</p>
-
-<% unless is_index_action %>
-  <p>
-    <%= link_to tc("to_list"), articles_path %>
-  </p>
-<% end %>

@@ -1,0 +1,13 @@
+<% content_for :list_title do %>
+  <%= tco :feed_article_list_title %>
+<% end %>
+
+<% content_for :introduction do %>
+  <%= tc(:feed_introduction).html_safe %>
+<% end %>
+
+<% content_for :back_link do %>
+  <p><%= link_to tc("to_list"), articles_path %></p>
+<% end %>
+
+<%= render "article_list", articles: @articles %>
