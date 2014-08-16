@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [:show]
+
   resources :tags, only: [:index], param: :tag do
     collection do
       get "list"
@@ -40,7 +41,6 @@ Rails.application.routes.draw do
     end
   end
 
-  match "articles/:id/comment", :to => 'articles#create_comment', :via => :post
   resources :comments, :only => [:create, :update, :destroy]
   resources :images, only: :create, defaults: { format: 'json' }
 
