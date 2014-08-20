@@ -34,21 +34,21 @@ class ArticlesController < ApplicationController
 
   # GET /articles/stocks
   # GET /articles/stocks.json
-  def by_stocks
+  def stocked
     @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
     render :index
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_user
+  def owned
     @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
     render :index
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_tag
+  def tagged
     @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
     @tag = params[:tag]
     render :index

@@ -81,7 +81,7 @@
     <div>
       <% if current_user %>
         <div class="row">
-          <%= form_tag articles_search_path, method: :get, id: "article-search-area", role: "search" do %>
+          <%= form_tag search_articles_path, method: :get, id: "article-search-area", role: "search" do %>
             <div class="input-group col-xs-4 col-xs-offset-5">
               <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
               <span class="input-group-btn">
@@ -105,10 +105,10 @@
             <h5><strong><%= tco("menu") %></strong></h5>
             <div>
               <ul>
-                <li><u><%= link_to tco(:feed_article_list_title), articles_feed_path, data: {active: true}%></u></li>
+                <li><u><%= link_to tco(:feed_article_list_title), feed_articles_path, data: {active: true}%></u></li>
                 <li><u><%= link_to tco(:recent_article_list_title), articles_path %></u></li>
-                <li><u><%= link_to tco("stocked_article_list_title"), articles_by_stocks_path %></u></li> 
-                <li><u><%= link_to tco("user_article_list_title"), articles_by_user_path(current_user.id) %></u></li> 
+                <li><u><%= link_to tco("stocked_article_list_title"), stocked_articles_path %></u></li> 
+                <li><u><%= link_to tco("user_article_list_title"), owned_articles_path(current_user.id) %></u></li> 
                 <li><u><%= link_to tco("tag_list_title"), tags_path %></u></li>
               </ul>
             </div>
@@ -140,7 +140,7 @@
               </ol>
               <% unless @stocked_articles.empty? %>
               <div class="clearfix">
-                <%= link_to tco("more_display"), articles_by_stocks_path, class: ["pull-right"] %> 
+                <%= link_to tco("more_display"), stocked_articles_path, class: ["pull-right"] %> 
               </div>
               <% end %>
             </div>
@@ -157,7 +157,7 @@
               </ol>
               <% unless @user_articles.empty? %>
                 <div class="clearfix">
-                  <%= link_to tco("more_display"), articles_by_user_path(current_user.id), class: ["pull-right"] %> 
+                  <%= link_to tco("more_display"), owned_articles_path(current_user.id), class: ["pull-right"] %> 
                 </div>
               <% end %>
             </div>
