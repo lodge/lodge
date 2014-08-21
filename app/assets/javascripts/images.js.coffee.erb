@@ -13,7 +13,7 @@ $ ->
       range.text = str
       range.select()
 
-  $('.editor-textarea').each ()->
+  $('.editor-textarea').each ->
     $(@).fileupload
       dropZone: @
       url: '<%= Rails.application.routes.url_helpers.images_path format: :json %>'
@@ -23,3 +23,5 @@ $ ->
         $.each data.files, (index, file) ->
           text = '![' + file.name + '](' + data.result.image_url + ')'
           insertAtCaret(e.target, text)
+      error: (e) =>
+        alert JSON.parse(e.responseText).image

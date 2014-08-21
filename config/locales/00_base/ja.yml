@@ -122,6 +122,7 @@ ja:
       too_short: は%{count}文字以上で入力してください。
       wrong_length: は%{count}文字で入力してください。
       other_than: "は%{count}以外の値にしてください。"
+      extension_white_list_error: "%{extension} 形式のファイルはアップロードできません。アップロード可能な形式: %{allowed_types}"
     template:
       body: 次の項目を確認してください。
       header:
