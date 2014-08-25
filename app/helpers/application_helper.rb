@@ -102,4 +102,7 @@ module ApplicationHelper
     text.gsub(/(```[^:\r\n]*):([^\n\r]+)(\r|\n)/, "#{'\1'}\n@@@#{'\2'}@@@\n")
   end
 
+  def next_uuid
+    SecureRandom.uuid
+  end
 end
