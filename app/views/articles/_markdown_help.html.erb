@@ -1,6 +1,7 @@
-<a class="toggle-markdown-help glyphicon glyphicon-question-sign" data-toggle="modal" data-target=".modal-markdown-help">Markdown</a>
+<% uuid = next_uuid %>
+<%= link_to "Markdown", "#", class: ["toggle-markdown-help", "glyphicon", "glyphicon-question-sign"], data: {toggle: "modal", target: "[data-uuid='#{uuid}']"} %>
 
-<div class="modal fade modal-markdown-help">
+<%= content_tag :div, class: ["modal", "fade", "modal-markdown-help"], data: {uuid: uuid} do %>
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -77,4 +78,4 @@
       </div>
     </div>
   </div>
-</div>
+<% end %>
