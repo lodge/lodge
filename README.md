@@ -1,4 +1,4 @@
-Lodge [![Gitter chat](https://badges.gitter.im/lodge/lodge.png)](https://gitter.im/lodge/lodge) [![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=develop)](https://travis-ci.org/lodge/lodge)
+Lodge [![Gitter chat](https://badges.gitter.im/lodge/lodge.png)](https://gitter.im/lodge/lodge) [![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=develop)](https://travis-ci.org/lodge/lodge) [![Coverage Status](https://coveralls.io/repos/lodge/lodge/badge.png)](https://coveralls.io/r/lodge/lodge)
 =====
 
 ## これは何？
