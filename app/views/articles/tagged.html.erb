@@ -1,0 +1,13 @@
+<% content_for :list_title do %>
+  <%= tc("list_title_by_tag", :tag => params[:tag]) %>
+<% end %>
+
+<% content_for :list_title_addition do %>
+  <%= render partial: "tags/follow", locals: {tag: @tag} %>
+<% end %>
+
+<% content_for :back_link do %>
+  <p><%= link_to tc("to_list"), articles_path %></p>
+<% end %>
+
+<%= render "article_list", articles: @articles %>

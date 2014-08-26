@@ -20,7 +20,6 @@ class ArticlesController < ApplicationController
       .page(params[:page]).per(PER_SIZE)
       .tagged_with(current_user.following_tag_list, any: true)
       .order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles
@@ -29,21 +28,18 @@ class ArticlesController < ApplicationController
     query = "%#{params[:query].gsub(/([%_])/){"\\" + $1}}%"
     @articles = Article.where("title like ?", query)
         .page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles/stocks
   # GET /articles/stocks.json
   def stocked
     @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def owned
     @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles/tag/1
@@ -51,7 +47,6 @@ class ArticlesController < ApplicationController
   def tagged
     @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
     @tag = params[:tag]
-    render :index
   end
 
   # GET /articles/1
