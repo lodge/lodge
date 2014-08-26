@@ -34,11 +34,3 @@ $(document).on 'click', '[role="tablist"] .preview-tab', ()->
   tabcontent.find '[role="preview"] .markdown'
     .load url,
       body: tabcontent.find('[role="editor"] textarea').val()
-
-# initialize editor context
-$ ->
-  $('[role="tablist"]').each ()->
-    tablist = $(this)
-    tabcontent = tablist.next('.tab-content')
-    tablist.find('.editor-tab').data 'target', tabcontent.find('[role="editor"]').get()
-    tablist.find('.preview-tab').data 'target', tabcontent.find('[role="preview"]').get()

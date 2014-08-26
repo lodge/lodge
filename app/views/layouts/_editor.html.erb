@@ -1,14 +1,21 @@
+<% editor_uuid = next_uuid %>
+<% preview_uuid = next_uuid %>
+
 <%= form.label :body %>
 <ul class="nav nav-tabs" role="tablist">
-  <li class="active"><a role="tab" data-toggle="tab" class="editor-tab"><%= tco :edit %></a></li>
-  <li><a role="tab" data-toggle="tab" class="preview-tab"><%= tc :preview %></a></li>
+  <li class="active">
+    <%= link_to tco(:edit), "#", role: "tab", class: "editor-tab", data: {toggle: "tab", target: "[data-uuid='#{editor_uuid}']"} %>
+  </li>
+  <li>
+    <%= link_to tc(:preview), "#", role: "tab", class: "preview-tab", data: {toggle: "tab", target: "[data-uuid='#{preview_uuid}']"} %>
+  </li>
 </ul>
 <div class="tab-content markdown-editor">
-  <div class="tab-pane active form-group" role="editor">
+  <%= content_tag :div, class: ["tab-pane", "active", "form-group"], role: "editor", data: {uuid: editor_uuid} do %>
     <%= form.text_area :body, class: ["editor-textarea", "form-control"] %>
-  </div>
-  <div class="tab-pane panel" role="preview">
+  <% end %>
+  <%= content_tag :div, class: ["tab-pane", "panel"], role: "preview", data: {uuid: preview_uuid} do %>
     <div class="preview-area markdown panel-body"></div>
-  </div>
+  <% end %>
 </div>
 <%= render 'articles/markdown_help' %>
