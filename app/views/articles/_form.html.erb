@@ -1,8 +1,9 @@
 <%= form_for(@article, html: {id: "article-form", role: "form"}) do |f| %>
 
+  <% article_errors = @article.errors %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t("errors.template.header.#{@article.errors.count == 1 ? 'one' : 'other'}", model: Article.model_name.human) %></h2>
+      <h2><%= t("errors.template.header.#{article_errors.count == 1 ? 'one' : 'other'}", model: Article.model_name.human, count: article_errors.count) %></h2>
 
       <ul>
         <% @article.errors.full_messages.each do |message| %>
