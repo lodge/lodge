@@ -2,7 +2,7 @@
 
   <% article_errors = @article.errors %>
   <% if @article.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= t("errors.template.header.#{article_errors.count == 1 ? 'one' : 'other'}", model: Article.model_name.human, count: article_errors.count) %></h2>
 
       <ul>
