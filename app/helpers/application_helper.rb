@@ -7,8 +7,8 @@ module ApplicationHelper
       title = $1 || ""
       begin
         code = CGI.unescapeHTML code
-        code = CodeRay.scan(code, language).div(:line_numbers => :table)
-        code.sub("<tr>", create_filename_row(title) + "<tr>")
+        code = CodeRay.scan(code, language).div()
+        code.sub(/^/, create_filename_row(title))
       rescue
         self.block_code(title + code, :text)
       end
@@ -20,7 +20,7 @@ module ApplicationHelper
 
     def create_filename_row(filename)
       return "" if filename.empty?
-      %!<tr class="code-filename-row"><th colspan="2">#{filename.gsub("@@@", "")}</th></tr>!
+      %!<div class="code-filename">#{filename.gsub("@@@", "")}</div>!
     end
   end
 
