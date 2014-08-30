@@ -123,13 +123,29 @@ body {
 
   blockquote {
     font-size: 1em;
+    padding: 0 10px;
+    margin-left: 20px;
+
+    > p:first-child {
+      margin-top: 0;
+    }
+  }
+
+  code {
+    font-size: 100%;
+  }
+
+  .code-filename {
   }
 
   // fix CodeRay design
   .CodeRay {
+    margin-bottom: 10px;
+
     pre {
+      font-size: 100%;
       border: none;
-      @include border-radius(0);
+      margin: 0;
     }
   }
 }
