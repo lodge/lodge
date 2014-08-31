@@ -1,0 +1,34 @@
+<% icon_only ||= false %>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  <%= gravatar(user) %>
+  <% if not icon_only %>
+    <%= user.name %>
+    <i class="caret"></i>
+  <% end %>
+</a>
+<ul class="dropdown-menu user-info" role="menu">
+  <li role="presentation">
+    <div class="media">
+      <div class="pull-left">
+        <%= gravatar(user, 80, class: ["media-object"]) %>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading"><%= user.name %></h4>
+        <br />
+        <p>
+          <strong><%= user.contribution %></strong>
+          <%= tco :contribution %>
+        </p>
+      </div>
+    </div>
+  </li>
+  <li class="divider"></li>
+  <li role="presentation">
+    <h4><%= tco :recent_article_list_title %></h4>
+    <ol>
+      <% user.recent_articles(5).each do |article| %>
+        <li><u><%= link_to article.title, article_path(article) %></u></li>
+      <% end %>
+    </ol>
+  </li>
+</ul>

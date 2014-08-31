@@ -1,0 +1,75 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      article: 記事
+      comment: コメント
+      stock: ストック
+    attributes:
+      user:
+        name: ニックネーム
+        email: メールアドレス
+        password: 新しいパスワード
+        password_confirmation: 新しいパスワード(確認)
+        current_password: 現在のパスワード
+      article:
+        title: タイトル
+        tag_list: タグ
+        body: 本文
+        lock_version: ""
+      comment:
+        body: コメント
+    errors:
+      messages:
+        record_invalid: 無効な値です。
+        article_already_updated: 記事の編集中に新たな更新がありました。お手数ですが一旦記事閲覧画面に戻ってからもう一度やり直してください。
+      models:
+        validate_common: &validate_common
+          blank: は空であってはいけません。
+          too_short: が短すぎます。
+          too_long: が長すぎます。
+          confirmation: が確認と一致していません。
+        article:
+          attributes:
+            title:
+              <<: *validate_common
+            body:
+              <<: *validate_common
+        comment:
+          attributes:
+            body:
+              <<: *validate_common
+        user:
+          attributes:
+            name:
+              <<: *validate_common
+            email:
+              <<: *validate_common
+              taken: は既に登録されています。
+            password:
+              <<: *validate_common
+            password_confirmation:
+              <<: *validate_common
+            current_password:
+              <<: *validate_common

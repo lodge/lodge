@@ -1,0 +1,2 @@
+$('a.follow-link[href="<%= escape_javascript(follow_tag_path @tag) %>"], a.follow-link[href="<%= escape_javascript(unfollow_tag_path @tag) %>"]')
+  .replaceWith('<%= escape_javascript(render partial: "tags/follow", locals: {tag: @tag}) %>');

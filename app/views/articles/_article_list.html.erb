@@ -1,6 +1,25 @@
+<h3>
+  <strong><%= yield :list_title %></strong>
+</h3>
+
+<%= yield :list_title_addition %>
+
+<p class="article-new-link-area pull-right">
+  <%= link_to tco('new'), new_article_path %>
+</p>
+
+<% if articles.length == 0 %>
+  <p class="media">
+    <div class="media-body"><%= yield :introduction %></div>
+  </p>
+<% end %>
+
 <%= paginate articles %>
 
-<table id="articles-table" class="list-table">
+<table class="list-table table article-table">
+  <colgroup span="1"></colgroup>
+  <colgroup span="4"></colgroup>
+  
   <tbody>
     <% articles.each do |article| %>
       <tr>
@@ -8,14 +27,17 @@
           <p><%= link_to article.title, article, title: article.title %></p>
         </td>
         <td class="article-tags-column">
-          <div>
-            <% article.tags.each do |tag| %>
-              <%= link_to tag.name, articles_by_tag_path(tag.name), class: :tag %>
+          <% article.tags.each do |tag| %>
+            <%= link_to tagged_articles_path(tag.name), class: :tag do %>
+              <span class="label label-default"><%= tag.name %></span>
             <% end %>
-          </div>
+          <% end %>
         </td>
-        <td><%= stock_and_comment_count(article) %></td>
-        <td><%= user_name_with_icon(article.user) %></td>
+        <td>
+          <%= render partial: "articles/stock_count", locals: {article: article} %>
+          <%= render partial: "articles/comment_count", locals: {article: article} %>
+        </td>
+        <td><div class="dropdown"><%= render partial: "users/info_dropdown", locals: {user: article.user} %></div></td>
         <td><%= article.updated_at.to_s(:date) %></td>
       </tr>
     <% end %>
@@ -23,3 +45,9 @@
 </table>
 
 <%= paginate articles %>
+
+<p class="article-new-link-area pull-right">
+  <%= link_to tco('new'), new_article_path %>
+</p>
+
+<%= yield :back_link %>

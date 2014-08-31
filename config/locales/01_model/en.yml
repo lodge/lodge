@@ -1,0 +1,74 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    models:
+      user: User
+      article: Article
+      comment: Comment
+      stock: Stock
+    attributes:
+      user:
+        name: Name
+        email: E-Mail
+        password: New password
+        password_confirmation: New password(confirmation)
+        current_password: Current password
+      article:
+        title: Title
+        tag_list: Tags
+        body: Body
+      comment:
+        body: Comment
+    errors:
+      messages:
+        record_invalid: Invalid data.
+        article_already_updated: Someone else already updated this data. Please back and re-edit!
+      models:
+        validate_common: &validate_common
+          blank: is blank.
+          too_short: is too short.
+          too_long: is too long.
+          confirmation: is not the same confirmation.
+        article:
+          attributes:
+            title:
+              <<: *validate_common
+            body:
+              <<: *validate_common
+        comment:
+          attributes:
+            body:
+              <<: *validate_common
+        user:
+          attributes:
+            name:
+              <<: *validate_common
+            email:
+              <<: *validate_common
+              taken: is taken.
+            password:
+              <<: *validate_common
+            password_confirmation:
+              <<: *validate_common
+            current_password:
+              <<: *validate_common

@@ -1,5 +1,7 @@
-<h1><%= tc :new_title %></h1>
+<p class="lead"><%= tc :new_title %></p>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', articles_path %>
+<p>
+  <%= link_to tco(:back), articles_path %>
+</p>

@@ -4,9 +4,9 @@
   <%= devise_error_messages! %>
 
   <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <%= f.email_field :email, autofocus: true, class: ["form-control"] %></div>
 
-  <div><%= f.submit "Resend unlock instructions" %></div>
+  <div><%= f.submit "Resend unlock instructions", class: ["btn", "btn-success"] %></div>
 <% end %>
 
 <%= render "users/shared/links" %>

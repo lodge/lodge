@@ -1,0 +1,253 @@
+@import "compass/css3";
+
+$border-style-base: 1px solid #ccc;
+
+body {
+  background-image: url(background.png);
+}
+
+body > .container {
+  background-color: rgba(#fff, .6);
+  @include box-shadow(lighten(#000, 40%) 1px 1px 0.8em);
+}
+
+p {
+  margin: 10px 0;
+}
+
+.navbar-text {
+  margin: 7px 5px;
+}
+.navbar-default {
+  background-image: url(header.png);
+  @include box-shadow(lighten(#000, 20%) 2px 2px 0.5em);
+  margin: 10px;
+
+  .navbar-brand {
+    font-size: 48px;
+    font-weight: bold;
+    color: $brand-primary;
+    @include text-shadow(1px 1px #cb8);
+  }
+}
+
+nav.well {
+  background-color: transparent;
+  border: 0;
+  @include box-shadow(none);
+}
+
+.panel {
+  border: $border-style-base;
+}
+
+.tab-content {
+  .editor-textarea,
+  .preview-area{
+    box-shadow: 1px -2px 3px #ddd;
+  }
+}
+
+.nav.nav-tabs {
+  margin-left: 5px;
+  border-bottom: #FDF7EF;
+
+  li {
+    margin-left: 5px;
+    > a {
+      padding: 7px 10px;
+      border: $border-style-base;
+      border-bottom: none;
+      border-radius: $border-radius-small $border-radius-small 0 0;
+
+      &:hover {
+        background-color: #fff;
+        border: $border-style-base;
+        border-bottom: none;
+      }
+    }
+
+    &.active {
+      > a {
+        box-shadow: 1px -2px 3px #ddd;
+        &.preview-tab {
+          background-image: linear-gradient(to bottom, $pane-color-base 90%, #fdf7ef);
+          background-color: transparent;
+        }
+
+        &.editor-tab {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  box-shadow: inset 1px 1px 15px -5px #fff;
+}
+
+.panel-heading {
+  h1 {
+    text-shadow: 1px 1px 6px #ccc;
+  }
+}
+
+.markdown {
+  h1 {
+    padding: 3px 10px;
+    text-shadow: 1px 1px #eee;
+  }
+
+  code {
+    border: 1px solid $pre-border-color;
+    border-radius: 3px;
+  }
+
+  .code-filename {
+    background-color: darken($pre-bg, 3);
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    padding: 3px 5px;
+  }
+
+  .CodeRay {
+    border: 1px solid $pre-border-color;
+    border-radius: 4px;
+  }
+
+  .code-filename + .CodeRay {
+    border-radius: 0 0 4px 4px;
+  }
+}
+
+.label.label-default{
+  border: 1px solid #aaa;
+  border-radius: $border-radius-small;
+  text-shadow: 1px 1px #eee;
+  &:hover {
+    color: inherit;
+  }
+}
+
+.num-of-notification {
+  display: block;
+  box-shadow: 1px 1px 3px #444;
+  font-size: 100%;
+  margin-top: -1px;
+  padding: 5px 7px;
+  
+  &.label-default {
+    &:hover {
+      color: #444;
+    }
+  }
+
+  &.label-info {
+    $bg-color: #a00;
+    background-color: $bg-color;
+    color: #fff;
+
+    &:hover {
+      background-color: darken($bg-color, 3%);
+    }
+  }
+}
+
+.notification {
+  padding: 0;
+  overflow-y: auto;
+  max-height: 500px;
+
+  > li {
+    padding: 0;
+
+    > a {
+      padding: 5px 15px;
+      white-space: normal;
+
+      &:first-child {
+        padding-top: 15px;
+      }
+
+      &:last-child {
+        padding-bottom: 15px;
+      }
+
+
+      > img,
+      > span {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 5px;
+      }
+
+      > span {
+        max-width: 350px;
+      }
+    }
+  }
+}
+
+.devise-form .new-password-area {
+  margin-bottom: 1em;
+}
+
+.pagination {
+  display: block;
+  text-align: center;
+
+  .first,
+  .prev,
+  .page,
+  .next,
+  .last {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    box-shadow: inset 1px 1px 3px #fff;
+    box-sizing: content-box;
+    display: inline-block;
+    margin: 0 5px;
+    $size: 25px;
+    height: $size;
+    line-height: $size;
+    width: $size;
+
+    &.gap {
+      border: none;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    &.current,
+    a:active {
+      box-shadow: inset 1px 1px 3px #888;
+    }
+
+    a {
+      vertical-align: middle;
+      text-decoration: none;
+      display: block;
+      width: $size;
+      height: $size;
+
+      &:hover {
+        border-radius: 3px;
+        color: inherit;
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+.table.list-table {
+  td {
+    vertical-align: middle;
+  }
+}
+
+.tag {
+  display: inline-block;
+  margin-bottom: 5px;
+}

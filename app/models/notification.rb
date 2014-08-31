@@ -26,4 +26,8 @@ class Notification < ActiveRecord::Base
     )
     NotificationTarget.import targets
   end
+
+  def localize_key_for_owner
+    "#{localize_key}_for_owner"
+  end
 end

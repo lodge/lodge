@@ -1,0 +1,23 @@
+<% if @notifications.present? %>
+  <a id="num-of-notification" href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <%= content_tag :span, class: ["num-of-notification", "label", "label-info"] do %>
+      <%= @notifications.length %>
+    <% end %>
+  </a>
+  <ul class="dropdown-menu notification" role="menu">
+    <% notifications.each do |notification| %>
+      <li role="presentation">
+        <%= link_to article_path(notification.article) do %>
+          <%= gravatar(notification.user, 40, class: ["media-object"]) %>
+          <span><%= notification_message(notification) %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <span class="navbar-text">
+    <%= content_tag :span, class: ["label", "label-default", "num-of-notification"] do %>
+      <%= @notifications.length %>
+    <% end %>
+  </span>
+<% end %>
