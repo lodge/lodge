@@ -109,25 +109,36 @@ http://lodge-sample.herokuapp.com/
 1. `bundle install --path vendor/bundle` を実行し、依存ライブラリをインストールします。
 1. `bundle exec rake db:create RAILS_ENV=production` を実行し、データベースを作成します。
 1. `bundle exec rake db:migrate RAILS_ENV=production` を実行し、テーブルを作成します。
-1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。
+1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。最低限設定が必要な項目は以下の通りです。
 
     ```ruby
-    # productionモードで動かす為には、secret_keyを設定します。
-    # `rake secret` により生成するのがオススメです。
+    ### アプリケーションのドメイン
+    LODGE_DOMAIN      = example.com
+
+    # Cookie 検証用キーの設定
+    # productionモードで動かす場合に設定（`bundle exec rake secret` で生成する）
     SECRET_KEY_BASE   = __some_random_string__
 
     # 認証キーの設定
-    # ランダムな文字列を指定します。
+    # productionモードで動かす場合に設定（`bundle exec rake secret` で生成する）
     DEVISE_SECRET_KEY = __some_random_string__
 
-    # アプリケーションのドメインを設定します。
-    LODGE_DOMAIN      = lodge-sample.herokuapp.com
+    ### メールの設定
 
-    # メールの設定します。
+    # 外部 MTA (SMTPサーバ) を利用してメール送信する場合
+    DELIVERY_METHOD   = smtp
+
+    # DELIVERY_METHOD = smtp の場合のみ
+    # 以下の設定が有効です（それ以外は無視されます）
     SMTP_ADDRESS      = smtp.gmail.com
     SMTP_PORT         = 587
     SMTP_USERNAME     = username
     SMTP_PASSWORD     = password
+    SMTP_AUTH_METHOD  = plain
+    SMTP_ENABLE_STARTTLS_AUTO = true
+
+    # テーマを設定します。
+    LODGE_THEME       = lodge
     ```
 
 ## 起動
