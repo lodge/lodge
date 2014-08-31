@@ -31,14 +31,14 @@ class ApplicationController < ActionController::Base
     return unless current_user
     popular_stocks = Stock.joins(:article)
       .where("articles.created_at > ?", 2.week.ago)
-      .group("stocks.article_id")
-      .order("count_article_id desc, articles.updated_at desc")
+      .group("stocks.article_id", "articles.updated_at")
+      .order("count_article_id desc", "articles.updated_at desc")
       .limit(RIGHT_LIST_SIZE)
       .count(:article_id)
-    popular_articles = Article.includes(:stocks).where(id: popular_stocks.keys)
+    popular_articles = Article.includes(:stocks).where(id: popular_stocks.keys.map{|x| x.first})
     @popular_articles = []
-    popular_stocks.each do |article_id, count|
-      @popular_articles << popular_articles.select {|a| a.id == article_id}.first
+    popular_stocks.each do |keys, count|
+      @popular_articles << popular_articles.select {|a| a.id == keys.first}.first
     end
   end
 

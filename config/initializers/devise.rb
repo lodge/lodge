@@ -6,9 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # config.secret_key = 'b3417bceb634b6977beea5b39605d066e944c20fae8484faca2b965a012af69cf1e0883e95b10dcad2cc698cbdd82dd57cca1bf0cae96598aa0bcfc155d6bc99'
 
-  # ランダムな文字列を指定します。
-  # `rake secret` により生成するのがオススメです。
-  config.secret_key = ''
+  config.secret_key = ENV['DEVISE_SECRET_KEY']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -17,7 +15,7 @@ Devise.setup do |config|
 
   # パスワードリセットの際に、ユーザへ送信されるメールヘッダに含まれる
   # 差出人のメールアドレスの設定です。
-  config.mailer_sender = 'lodge@no-reply.com'
+  config.mailer_sender = ENV['MAIL_SENDER']
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -237,6 +235,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :google_oauth2,
+    Rails.application.secrets.google_client_id,
+    Rails.application.secrets.google_client_secret
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

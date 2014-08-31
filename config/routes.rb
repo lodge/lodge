@@ -1,30 +1,48 @@
 # coding: utf-8
 Rails.application.routes.draw do
 
-  match "articles/:article_id/update_histories", to: 'update_histories#list', via: :get, as: :update_histories
-  resources :update_histories, only: [:show]
-
   devise_for :users, controllers: {
     registrations: 'custom_devise/registrations',
-    sessions: 'custom_devise/sessions'
+    sessions: 'custom_devise/sessions',
+    omniauth_callbacks: 'custom_devise/omniauth_callbacks',
   }
 
   resources :users, only: [:show]
 
-  match "tags", to: 'tags#index', via: :get
-  match "following_tag", to: 'following_tags#destroy', via: :delete, require: :tag_id
-  resources :following_tags, :only => [:create]
-  resources :stocks, :only => [:index, :create, :destroy]
+  resources :tags, only: [:index], param: :tag do
+    collection do
+      get "list"
+    end
+    member do
+      post "follow"
+      post "unfollow"
+    end
+  end
 
-  match "articles/preview", :to => 'articles#preview', :via => :post
-  match "articles/stocks", :to => 'articles#by_stocks', :via => :get, :as => :articles_by_stocks
-  match "articles/search", :to => 'articles#search', :via => :get
-  match "articles/feed", :to => 'articles#feed', :via => :get, :as => :articles_feed
-  resources :articles
-  match "articles/:id/comment", :to => 'articles#create_comment', :via => :post
-  match "articles/tag/:tag_name", :to => 'articles#by_tag', :via => :get, :as => :articles_by_tag, :constraints => {tag_name: /.+/}
-  match "articles/user/:user_id", :to => 'articles#by_user', :via => :get, :as => :articles_by_user
+  resources :articles do
+    collection do
+      post :preview
+      get :search
+      get :stocked
+      get :feed
+      get :owned, path: "user/:user_id"
+      get :tagged, path: "tag/:tag"
+    end
+
+    member do
+      post "stock"
+      post "unstock"
+    end
+  end
+
+  resources :update_histories, only: [:show] do
+    collection do
+      get :article, action: :list, path: "article/:article_id"
+    end
+  end
+
   resources :comments, :only => [:create, :update, :destroy]
+  resources :images, only: :create, defaults: { format: 'json' }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

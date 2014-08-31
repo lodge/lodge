@@ -1,6 +1,6 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :stock, :unstock]
   before_action :check_permission, only: [:edit, :update, :destroy]
 
   # GET /articles
@@ -15,14 +15,11 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def feed
-    following_tags = FollowingTag.includes(:tag).where(user_id: current_user.id)
-    following_tag_names = following_tags.map {|f| f.tag.name } unless following_tags.nil?
     @articles = Article
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
-      .tagged_with(following_tag_names, any: true)
+      .tagged_with(current_user.following_tag_list, any: true)
       .order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles
@@ -31,29 +28,25 @@ class ArticlesController < ApplicationController
     query = "%#{params[:query].gsub(/([%_])/){"\\" + $1}}%"
     @articles = Article.where("title like ?", query)
         .page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles/stocks
   # GET /articles/stocks.json
-  def by_stocks
+  def stocked
     @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_user
+  def owned
     @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_tag
-    @articles = Article.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag_name]).order(:updated_at => :desc)
-    @tag = Tag.find_by_name(params[:tag_name])
-    render :index
+  def tagged
+    @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
+    @tag = params[:tag]
   end
 
   # GET /articles/1
@@ -85,7 +78,6 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-    @article.tag_list = params[:article][:tags]
 
     respond_to do |format|
       if @article.save
@@ -101,11 +93,6 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    @article.old_title = @article.title
-    @article.old_body = @article.body
-    @article.old_tags = @article.tag_list.join(",")
-    @article.tag_list = params[:article][:tags]
-    @article.new_tags = @article.tag_list.join(",")
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -127,16 +114,25 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def stock
+    current_user.stock(@article)
+  end
+
+  def unstock
+    current_user.unstock(@article)
+    render :stock
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_article
-    @article = Article.includes({:comments => :user}, :stocks).find(params[:id])
+    @article = Article.includes({:comments => :user}).find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:user_id, :title, :body)
+    params.require(:article).permit(:user_id, :title, :body, :tag_list, :lock_version)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

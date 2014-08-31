@@ -1,0 +1,148 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ja:
+  common:
+    add: 追加
+    new: 新規作成
+    create: 作成
+    edit: 編集
+    update: 更新
+    delete: 削除
+    destroy: 削除
+    search: 検索
+    created_at: 作成
+    updated_at: 更新
+    stock: ストック
+    unstock: ストック解除
+    comment: コメント
+    back: 戻る
+    freeze: 凍結
+    more_display: 一覧を見る
+    feed_article_list_title: フィード
+    recent_article_list_title: 最近の記事
+    article_search: 記事をタイトルで検索
+    tag_list_title: タグ一覧
+    user_article_list_title: 投稿した記事
+    stocked_article_list_title: ストックした記事
+    popular_article_list_title: 最近の人気記事
+    are_you_sure: 本当に実行しますか？
+    menu: メニュー
+    sign_in: ログイン
+    sign_up: 新規登録
+    sign_in_by_other_means: その他の方法
+    contribution: Contribution
+    forgot_your_password: パスワードをお忘れですか？
+    didnt_receive_confirmation: 確認のメールが届きませんか？
+    sign_in_with: "%{provider} でログイン"
+    notification:
+      article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
+      comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"
+      comment_create_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' にコメントしました。"
+      comment_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' のコメントを編集しました。"
+      comment_update_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' のコメントを編集しました。"
+      stock_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' をストックしました。"
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."
+  users:
+    logged_in_as: "ログイン中:"
+    edit_profile: 編集
+    login: ログイン
+    logout: ログアウト
+    sign_up: 新規登録
+  custom_devise/sessions:
+    email: メールアドレス
+    password: パスワード
+    remember_me: ログイン状態を記憶
+  custom_devise/registrations:
+    edit_title: ユーザ情報の編集
+    name: ニックネーム
+    email: メールアドレス
+    password: 新しいパスワード(未入力であれば変更無しとなります。)
+    password_confirmation: 新しいパスワード(確認)
+    current_password: 現在のパスワード
+    freeze_account: アカウント凍結
+    account_delete_confirm: 本当に実行しますか？
+    icon: アイコン
+    icon_change: Gravatarでアイコンを変更
+  devise/confirmations:
+    resend_title: 確認メールの再送信
+    submit_button: 再送信
+  devise/passwords:
+    new_password_title: パスワードの再設定
+    submit_button: メール送信
+  articles:
+    list_title_by_tag: "'%{tag}'のタグが付けられた記事一覧"
+    list_title_by_search: "'%{query}'の検索結果"
+    update_histories: 編集履歴
+    new_title: 新規作成
+    edit_title: "'%{article_title}'の編集"
+    index_title: 目次
+    title: タイトル
+    user: ユーザ
+    to_list: すべての記事一覧へ
+    stock: ストックする
+    unstock: ストック解除
+    tags_hint: (カンマ区切り)
+    tags_example: 例) Ruby, Git, Linux, MySQL, ...
+    body_hint: (Markdownが利用できます)
+    comments_title: コメント一覧
+    comment_form_title: コメントの投稿
+    preview: プレビュー
+    stocked_users: "ストック中:"
+    follow: このタグをフォロー
+    unfollow: フォロー解除
+    feed_introduction:
+      <h3>まだタグをフォローしていません。</h3>
+      <p>
+        ここにはあなたがフォローしたタグに関連した記事のみを表示することができます。<br>
+        右のメニューから、「タグ一覧」をクリックし、興味のあるタグをフォローしてみましょう。
+      </p>
+      <p>
+        すべての記事を閲覧したい場合は、右メニューより「最新の記事」を選択してください。
+      </p>
+    stocks_introduction:
+      <h3>まだ記事をストックしていません。</h3>
+      <p>
+        ここにはあなたがストックした記事のみを表示することができます。<br>
+        各記事の一覧画面や記事の詳細画面で、記事をストックしてみましょう。
+      </p>
+      <p>
+        忙しい時や、気になった記事をあとで読みたい場合等に、<br>
+        記事をストックしておけば後からいつでも参照する事ができます。
+      </p>
+      <p>
+        すべての記事を閲覧したい場合は、右メニューより「最新の記事」を選択してください。
+      </p>
+  tags:
+    follow: フォローする
+    unfollow: フォロー解除
+  keywords:
+    list_title: 用語一覧
+    name: 名称
+    aliases: 別名
+  update_histories:
+    current_article: "'%{article_title}'の編集履歴"

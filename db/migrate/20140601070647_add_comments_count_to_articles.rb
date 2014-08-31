@@ -1,7 +1,7 @@
 class AddCommentsCountToArticles < ActiveRecord::Migration
 
   def self.up
-    add_column :articles, :comments_count, :integer, :null => false, :default => 0
+    add_column :articles, :comments_count, :integer, null: false, default: 0
   end
 
   def self.down

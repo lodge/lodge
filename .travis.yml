@@ -1,0 +1,24 @@
+language: ruby
+rvm:
+    - 1.9.3
+    - 2.0.0
+    - 2.1.2
+env:
+    - DB=sqlite
+    - DB=mysql
+    - DB=postgresql
+before_script:
+    - cp config/database.test.yml config/database.yml
+    - cp .env.example .env
+    - bundle install
+script:
+    - RAILS_ENV=test bin/rake db:create --trace
+    - RAILS_ENV=test bin/rake db:migrate --trace
+    - RAILS_ENV=test bin/rake spec --trace
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/7e569f9f53d7c2c902a9 
+  on_success: always  # options: [always|never|change] default: always
+  on_failure: always  # options: [always|never|change] default: always
+  on_start: false     # default: false

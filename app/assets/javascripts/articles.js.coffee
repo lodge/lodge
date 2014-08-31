@@ -1,38 +1,36 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  # tagging
+  bhTags = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    limit: 10,
+    dupDetector: (remoteMatch, localMatch) ->
+      remoteMatch.id == localMatch.id
+    ,
+    # prefetch: {
+    #   url: '/tags/list.json',
+    #   ttl: 5000
+    # },
+    remote: '/tags/list.json?q=%QUERY'
+  });
 
-ready = ->
-  # Markdown preview
-  (() ->
-    preview = (event) ->
-      closestForm = $(event.target).closest("form")
-      body = closestForm.find("textarea").val()
-      $.ajax({
-        url: ROOT_PATH + "articles/preview",
-        type: "post",
-        data: {body: body},
-        dataType: "text",
-        success: (data) ->
-          previewArea = closestForm.find(".preview-area")
-          previewArea.html(data)
-          previewArea.show()
-      })
+  bhTags.initialize()
 
-    input = $(".preview-button")
-    input.on "click", input.parent(), preview
-  )()
+  $("input.js-tag-names").tokenfield({
+    typeahead: [
+       {
+        hint: true,
+        highlight: true,
+        minLength: 1
+      },
+      {
+        name: 'tagName',
+        displayKey: 'name',
+        source: bhTags.ttAdapter(),
+        templates: {
+          suggestion: Handlebars.compile('<p><strong>{{name}}</strong> ({{taggings_count}})</p>')
+        }
+      }
+    ]
+  });
 
-  # Display comment edit form
-  (() ->
-    displayCommentEditForm = (event) ->
-      dt = $(event.target).closest("dt")
-      dt.next("dd").find(".comment-form").show();
-
-    editLink = $(".comment-edit-link")
-    editLink.on "click", editLink.parent(), displayCommentEditForm
-  )()
-
-# for turbolinks
-$(document).ready(ready)
-$(document).on('page:load', ready)

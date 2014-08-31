@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   has_many :comments
   has_many :update_histories
   has_many :notifications
+  has_many :article_notifications
   before_update :create_history
   before_update :create_notification
   has_many :stocked_users,
@@ -14,19 +15,26 @@ class Article < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
 
-  attr_accessor :old_title, :old_body, :old_tags, :new_tags
-
   acts_as_taggable
+  alias_method :__save, :save
+
+  def save
+    begin
+      __save
+    rescue ActiveRecord::StaleObjectError
+      errors.add :lock_version, :article_already_updated
+      false
+    end
+  end
 
   def create_history
-    UpdateHistory.create!(
-      article_id: self.id,
-      old_title: self.old_title,
-      old_tags: self.old_tags,
-      old_body: self.old_body,
-      new_title: self.title,
-      new_tags: self.new_tags,
-      new_body: self.body,
+    update_histories.create(
+      old_title: title_was,
+      old_tags: tag_list_was.to_s,
+      old_body: body_was,
+      new_title: title,
+      new_tags: tag_list.to_s,
+      new_body: body,
     )
   end
 
@@ -37,6 +45,7 @@ class Article < ActiveRecord::Base
       article_id: self.id,
     )
     notification.create_targets_for_stocked_user_by_article(self)
+    notification
   end
 
   def remove_user_notification(current_user)
@@ -47,5 +56,12 @@ class Article < ActiveRecord::Base
     notifications.each do |notification|
       notification.destroy! if notification.notification_targets.length == 0
     end
+  end
+
+  def self.tag_counts
+    ActsAsTaggableOn::Tag
+      .includes(:taggings)
+      .references(:taggings)
+      .where(taggings: {taggable_type: 'Article', context: 'tags'})
   end
 end
