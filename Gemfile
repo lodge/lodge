@@ -75,6 +75,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-its'
+  gem 'rspec-parameterized', github: 'tomykaira/rspec-parameterized'
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'

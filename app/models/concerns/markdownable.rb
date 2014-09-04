@@ -65,7 +65,7 @@ module Markdownable
     html_toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC, fenced_code_blocks: true)
     # 引用ができなくなるのを防ぐため、エスケープ後 「>」 記号だけ元に戻す。
     toc = html_toc.render(text)
-    toc = "<h1>#{tc(:index_title)}</h1> #{toc}<hr>" unless toc.blank?
+    toc = "<h1>#{I18n.t('articles.index_title')}</h1> #{toc}<hr>" unless toc.blank?
     toc
   end
 
