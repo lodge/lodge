@@ -64,15 +64,12 @@ gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
 
-ruby_versions = RUBY_VERSION.split('.')
 group :development do
   gem 'bullet'
   gem 'rack-mini-profiler'
   gem 'letter_opener'
   gem 'binding_of_caller'
-  if ruby_versions[0].to_i >= 2 then
-    gem 'better_errors'
-  end
+  gem 'better_errors'
 end
 
 group :development, :test do
@@ -81,9 +78,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'
-  if ruby_versions[0].to_i >= 2 then
-    gem 'pry-byebug'
-  end
+  gem 'pry-byebug'
   gem 'pry-rescue'
   gem 'coveralls', require: false
 end
