@@ -41,6 +41,7 @@
   </div>
 
   <div class="panel-body markdown">
+    <%= @article.body_toc.html_safe %>
     <%= @article.body_html.html_safe %>
   </div>
 </div>
