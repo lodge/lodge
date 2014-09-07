@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
     @articles = Article
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
-      .order(:updated_at => :desc)
+      .order(:created_at => :desc)
   end
 
   # GET /articles
@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
       .tagged_with(current_user.following_tag_list, any: true)
-      .order(:updated_at => :desc)
+      .order(:created_at => :desc)
   end
 
   # GET /articles
@@ -27,25 +27,25 @@ class ArticlesController < ApplicationController
   def search
     query = "%#{params[:query].gsub(/([%_])/){"\\" + $1}}%"
     @articles = Article.where("title like ?", query)
-        .page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
+        .page(params[:page]).per(PER_SIZE).order(:created_at => :desc)
   end
 
   # GET /articles/stocks
   # GET /articles/stocks.json
   def stocked
-    @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
+    @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:created_at => :desc)
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def owned
-    @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
+    @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:created_at => :desc)
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def tagged
-    @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
+    @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:created_at => :desc)
     @tag = params[:tag]
   end
 
