@@ -14,48 +14,31 @@ module Markdownable
     end
   end
 
-  class ArticlesRenderer < Redcarpet::Render::HTML
-    def initialize(extensions = {})
-      super extensions.merge(with_toc_data: true, link_attributes: { target: "_blank" })
-    end
-
-    def block_code(code, language)
-      language, filename = language.split ':'
-      filename(filename) + CodeRay.scan(code, language).div()
-    end
-
-    def paragraph(text)
-      text.gsub(/\n/, "<br>\n")
-    end
-
-  private
-
-    def filename(filename)
-      return "" if filename.blank?
-      %!<div class="code-filename">#{filename}</div>!
-    end
-  end
-
   NO_TOC_TEXT = "--no-toc"
 
   def self.markdown(text)
     html = GitHub::Markdown.render_gfm(text.sub(NO_TOC_TEXT, ''))
     doc = Nokogiri::HTML.fragment(html)
+
     doc.css('pre[lang]').each do |pre|
       lang, name = *pre['lang'].split(':', 2)
-      pre['lang'] = lang
 
-      code = Nokogiri::HTML.fragment(CodeRay.scan(pre.children.first.inner_html, lang).div)
+      code = Nokogiri::HTML.fragment(CodeRay.scan(pre.children.first.text, lang).div)
       if !name.blank?
-        header = Nokogiri::XML::Element.new 'div', doc
-        header['class'] = 'code-filename'
-        #TODO danger inner_html
-        header.inner_html = name
+        header = Nokogiri::XML::Element.new('div', doc).tap do |h|
+          h['class'] = 'code-filename'
+          h.content = name
+        end
         code.children.first.add_previous_sibling header
       end
 
       pre.replace(code)
     end
+
+    doc.css('h1,h2,h3,h4,h5,h6').each do |h|
+      h['id'] = h.text.gsub(/\s/, '-')
+    end
+
     doc.to_s
   end
 
@@ -65,9 +48,9 @@ module Markdownable
         Redcarpet::Render::HTML_TOC,
         fenced_code_blocks: true)
       .render(text)
-      .tap {|toc|
+      .tap do |toc|
         break "<h1>#{I18n.t('articles.index_title')}</h1> #{toc}<hr>" unless toc.blank?
-      }
+      end
   end
 
 end

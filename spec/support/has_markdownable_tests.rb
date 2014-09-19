@@ -10,7 +10,7 @@ RSpec.shared_examples "having markdownable" do |attr|
   describe attr_html do
 
     where(:md, :html) do
-      '#title'                    | '<h1 id="title">title</h1>'
+      '# title'                    | '<h1 id="title">title</h1>'
       "```ruby\n<a>\n```"         | /\A(?!<div class="code-filename">).*\Z/m
       "```ruby:name.rb\n<a>\n```" | /<div class="code-filename">name\.rb/
       "```ruby:name.rb\n<a>\n```" | /class="CodeRay".*<pre>&lt;a&gt;/m
@@ -25,7 +25,7 @@ RSpec.shared_examples "having markdownable" do |attr|
 
   describe attr_toc do
     where(:md, :html) do
-      "#h1\n##h2"      | /<li>.*h1.*<ul>.*<li>.*h2/m
+      "# h1\n## h2"      | /<li>.*h1.*<ul>.*<li>.*h2/m
       "--no-toc\n#h1"  | /\A\Z/m
     end
 
