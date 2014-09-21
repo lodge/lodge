@@ -1,4 +1,3 @@
-Lodge
 [![Gitter chat](https://badges.gitter.im/lodge/lodge.png)](https://gitter.im/lodge/lodge)
 [![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=develop)](https://travis-ci.org/lodge/lodge)
 [![Coverage Status](https://coveralls.io/repos/lodge/lodge/badge.png)](https://coveralls.io/r/lodge/lodge)
@@ -64,7 +63,7 @@ http://lodge-sample.herokuapp.com/
 ## インストール
 
 1. 事前準備として以下が必要ですので、インストールしておきます。
-    - Ruby 1.9以上
+    - Ruby 2.0以上
     - Gem 2.2以上
     - MySQL (MySQLを利用する場合)
     - sqlite3 (sqlite3を利用する場合)
