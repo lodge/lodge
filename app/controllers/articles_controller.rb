@@ -30,7 +30,6 @@ class ArticlesController < ApplicationController
       .includes(:user, :stocks, :tags)
       .page(params[:page]).per(PER_SIZE)
       .order(:updated_at => :desc)
-    render :index
   end
 
   # GET /articles

@@ -48,12 +48,12 @@ feature "CreateArticles", :type => :feature do
       expect(page).not_to have_content("new draft")
     end
 
-    visit articles_feed_path
+    visit feed_articles_path
     within "article" do
       expect(page).not_to have_content("new draft")
     end
 
-    visit articles_by_user_path(user)
+    visit owned_articles_path(user)
     within "article" do
       expect(page).to have_content("new draft")
     end
