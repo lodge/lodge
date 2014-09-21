@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  include Markdownable
+
   belongs_to :user
   has_many :stocks
   has_many :comments
@@ -16,6 +18,7 @@ class Article < ActiveRecord::Base
   validates :body, presence: true
 
   acts_as_taggable
+  markdownable :body
   alias_method :__save, :save
 
   def save

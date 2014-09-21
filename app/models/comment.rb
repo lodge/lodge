@@ -1,9 +1,13 @@
 class Comment < ActiveRecord::Base
+  include Markdownable
+
   belongs_to :user
   belongs_to :article
   counter_culture :article
   after_create :create_notification_by_create
   before_update :create_notification_by_update
+
+  markdownable :body
 
   validates :body, presence: true
 
