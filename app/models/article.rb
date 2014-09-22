@@ -24,6 +24,10 @@ class Article < ActiveRecord::Base
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
 
+  scope :owned_draft, ->(user) {
+    draft.where(user_id: user.id).includes(:user, :stocks, :tags).order(:updated_at => :desc)
+  }
+
   def draft?
     new_record? || !published?
   end

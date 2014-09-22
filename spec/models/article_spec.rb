@@ -35,6 +35,16 @@ RSpec.describe Article, :type => :model do
     end
   end
 
+  describe :owned_draft do
+    let(:draft1) { FactoryGirl.create(:draft) }
+    let(:draft2) { FactoryGirl.create(:draft) }
+    before { [draft1, draft2] }
+
+    subject { Article.owned_draft(draft1.user) }
+
+    it { should contain_exactly(draft1) }
+  end
+
   describe :save do
     let(:article) { FactoryGirl.create(:article) }
     before do
