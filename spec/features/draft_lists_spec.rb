@@ -5,13 +5,15 @@ feature "DraftLists", :type => :feature do
 
   background do
     login_as user, scope: :user
-    FactoryGirl.create :article, title: "article"
-    FactoryGirl.create :draft, title: "draft"
+    FactoryGirl.create :article, title: "article", user: user
+    FactoryGirl.create :draft, title: "draft", user: user
   end
 
   scenario "visit to draft list" do
     visit draft_articles_path
-    expect(page).to have_content("draft");
-    expect(page).not_to have_content("article");
+    within 'article' do
+      expect(page).to have_content("draft");
+      expect(page).not_to have_content("article");
+    end
   end
 end
