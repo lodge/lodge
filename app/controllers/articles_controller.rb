@@ -59,9 +59,9 @@ class ArticlesController < ApplicationController
 
   # POST /articles/preview
   def preview
+    preview = MarkdownPreview.new(preview_params)
     respond_to do |format|
-      response_html = ArticlesController.helpers.markdown(params[:body], false)
-      format.js { render text: response_html }
+      format.js { render text: preview.body_html }
     end
   end
 
@@ -133,6 +133,10 @@ class ArticlesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
     params.require(:article).permit(:user_id, :title, :body, :tag_list, :lock_version)
+  end
+
+  def preview_params
+    params.require(:preview).permit(:body)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
