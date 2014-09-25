@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       get :stocked
       get :feed
       get :owned, path: "user/:user_id"
-      get :tagged, path: "tag/:tag"
+      get :tagged, path: "tag/:tag", format: false, tag: /.*/
     end
 
     member do
