@@ -33,7 +33,7 @@ class Article < ActiveRecord::Base
       .order(:created_at => :desc)
   end
 
-  def self.feed_by_user(user, page=1)
+  def self.feed_list(user, page=1)
     Article
       .includes(:user, :stocks, :tags)
       .page(page).per(PER_SIZE)

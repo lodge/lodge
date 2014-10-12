@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def feed
-    @articles = Article.feed_by_user(current_user, params[:page])
+    @articles = Article.feed_list(current_user, params[:page])
   end
 
   # GET /articles
