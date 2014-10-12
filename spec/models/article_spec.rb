@@ -13,24 +13,62 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:tags) }
   it { should have_many(:article_notifications) }
 
+  shared_examples_for 'find by list' do |method_name, args|
+    pp(*args)
+    articles = Article.send(method_name, *args)
+    pp articles
+    it 'should be three articles exist.' do
+      expect(articles.size).to be_eql(3)
+    end
+    it 'should be creation order' do
+      expect(articles.first.created_at > articles.last.created_at).to be true
+    end
+  end
+
   it_should_behave_like 'having markdownable', :body
 
-  describe :recent_list do
-    context 'when three articles exist' do
-      datetime_prefix = '2014-09-24 00:00:'
+  context 'when three articles exist' do
+    user = FactoryGirl.create(:user)
+    datetime_prefix = '2014-09-24 00:00:'
+    3.times do |i|
+      FactoryGirl.create(
+        :article,
+        :with_tag,
+        user_id: user.id,
+        created_at: datetime_prefix + (10 + i).to_s,
+        updated_at: datetime_prefix + (59 - i).to_s
+      )
+    end
+
+    describe :recent_list do
+      it_should_behave_like 'find by list', 'recent_list'
+    end
+
+    describe :search do
+      it_should_behave_like 'find by list', 'search', 'title'
+    end
+
+    describe :tagged_by do
+      it_should_behave_like 'find by list', 'tagged_by', 'tag'
+    end
+
+
+    context 'with stocked user' do
       3.times do |i|
-        FactoryGirl.create(
-          :article,
-          created_at: datetime_prefix + (10 + i).to_s,
-          updated_at: datetime_prefix + (59 - i).to_s
-        )
+        FactoryGirl.create(:stock, user_id: user.id, article_id: i + 1)
       end
-      articles = Article.recent_list.reload # Can not be verified correctly If do not reload.
-      it 'should be three articles exist.' do
-        expect(articles.size).to be_eql(3)
+
+      describe :stocked_by do
+        it_should_behave_like 'find by list', 'stocked_by', user
       end
-      it 'should be creation order' do
-        expect(articles.first.created_at > articles.last.created_at).to be true
+
+      describe :owned_by do
+        it_should_behave_like 'find by list', 'owned_by', user
+      end
+
+      describe :feed_list do
+        user.follow('tag')
+        it_should_behave_like 'find by list', 'feed_list', user
       end
     end
   end
