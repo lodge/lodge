@@ -47,19 +47,19 @@ class Article < ActiveRecord::Base
         .page(page).per(PER_SIZE).order(:created_at => :desc)
   end
 
-  def self.stocked_by_user(user, page=1)
+  def self.stocked_by(user, page=1)
     user.stocked_articles
         .includes(:tags, :stocks, :user)
         .page(page).per(PER_SIZE).order(:created_at => :desc)
   end
 
-  def self.owned_by_user(user, page=1)
+  def self.owned_by(user, page=1)
     user.articles
         .includes(:tags, :stocks)
         .page(page).per(PER_SIZE).order(:created_at => :desc)
   end
 
-  def self.by_tag(tag, page=1)
+  def self.tagged_by(tag, page=1)
     Article
         .includes(:stocks, :user)
         .page(page).per(PER_SIZE).tagged_with(tag).order(:created_at => :desc)

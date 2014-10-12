@@ -24,19 +24,19 @@ class ArticlesController < ApplicationController
   # GET /articles/stocks
   # GET /articles/stocks.json
   def stocked
-    @articles = Article.stocked_by_user(current_user, params[:page])
+    @articles = Article.stocked_by(current_user, params[:page])
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def owned
-    @articles = Article.owned_by_user(current_user, params[:page])
+    @articles = Article.owned_by(current_user, params[:page])
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def tagged
-    @articles = Article.by_tag(params[:tag], params[:page])
+    @articles = Article.tagged_by(params[:tag], params[:page])
     @tag = params[:tag]
   end
 
