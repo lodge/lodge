@@ -15,7 +15,7 @@ RSpec.describe Article, :type => :model do
 
   it_should_behave_like 'having markdownable', :body
 
-  describe :newest do
+  describe :recent_list do
     before do
       articles = []
       3.times do |i|
@@ -29,7 +29,7 @@ RSpec.describe Article, :type => :model do
     end
     context 'when three articles exist' do
       it 'should get list by order by created_at.' do
-        articles = Article.newest
+        articles = Article.recent_list
         expect(articles.size).to be_eql(3)
         expect(articles.first.created_at > articles.last.created_at).to be true
       end

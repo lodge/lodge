@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.newest(params[:page])
+    @articles = Article.recent_list(params[:page])
   end
 
   # GET /articles

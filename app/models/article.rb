@@ -26,7 +26,7 @@ class Article < ActiveRecord::Base
 
   # ===== Class methods =====
 
-  def self.newest(page=1)
+  def self.recent_list(page=1)
     Article
       .includes(:user, :stocks, :tags)
       .page(page).per(PER_SIZE)
