@@ -14,9 +14,7 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:article_notifications) }
 
   shared_examples_for 'find by list' do |method_name, args|
-    pp(*args)
     articles = Article.send(method_name, *args)
-    pp articles
     it 'should be three articles exist.' do
       expect(articles.size).to be_eql(3)
     end
