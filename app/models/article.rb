@@ -24,47 +24,48 @@ class Article < ActiveRecord::Base
   markdownable :body
   alias_method :__save, :save
 
-  # Class methods
-  class << self
-    def newest(page=1)
-      Article
-        .includes(:user, :stocks, :tags)
-        .page(page).per(PER_SIZE)
-        .order(:created_at => :desc)
-    end
+  # ===== Class methods =====
 
-    def feed_by_user(user, page=1)
-      Article
-        .includes(:user, :stocks, :tags)
-        .page(page).per(PER_SIZE)
-        .tagged_with(user.following_tag_list, any: true)
-        .order(:created_at => :desc)
-    end
-
-    def search(query, page=1)
-      query = "%#{query.gsub(/([%_])/){"\\" + $1}}%"
-      Article.where("title like ?", query)
-          .page(page).per(PER_SIZE).order(:created_at => :desc)
-    end
-
-    def stocked_by_user(user, page=1)
-      user.stocked_articles
-          .includes(:tags, :stocks, :user)
-          .page(page).per(PER_SIZE).order(:created_at => :desc)
-    end
-
-    def owned_by_user(user, page=1)
-      user.articles
-          .includes(:tags, :stocks)
-          .page(page).per(PER_SIZE).order(:created_at => :desc)
-    end
-
-    def by_tag(tag, page=1)
-      Article
-          .includes(:stocks, :user)
-          .page(page).per(PER_SIZE).tagged_with(tag).order(:created_at => :desc)
-    end
+  def self.newest(page=1)
+    Article
+      .includes(:user, :stocks, :tags)
+      .page(page).per(PER_SIZE)
+      .order(:created_at => :desc)
   end
+
+  def self.feed_by_user(user, page=1)
+    Article
+      .includes(:user, :stocks, :tags)
+      .page(page).per(PER_SIZE)
+      .tagged_with(user.following_tag_list, any: true)
+      .order(:created_at => :desc)
+  end
+
+  def self.search(query, page=1)
+    query = "%#{query.gsub(/([%_])/){"\\" + $1}}%"
+    Article.where("title like ?", query)
+        .page(page).per(PER_SIZE).order(:created_at => :desc)
+  end
+
+  def self.stocked_by_user(user, page=1)
+    user.stocked_articles
+        .includes(:tags, :stocks, :user)
+        .page(page).per(PER_SIZE).order(:created_at => :desc)
+  end
+
+  def self.owned_by_user(user, page=1)
+    user.articles
+        .includes(:tags, :stocks)
+        .page(page).per(PER_SIZE).order(:created_at => :desc)
+  end
+
+  def self.by_tag(tag, page=1)
+    Article
+        .includes(:stocks, :user)
+        .page(page).per(PER_SIZE).tagged_with(tag).order(:created_at => :desc)
+  end
+
+  # ===== Instance methods =====
 
   def save
     begin
