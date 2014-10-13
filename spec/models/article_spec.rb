@@ -13,7 +13,7 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:tags) }
   it { should have_many(:article_notifications) }
 
-  shared_examples_for 'find by list' do |method_name, args|
+  shared_examples_for 'ordered list' do |method_name, args|
     # Can not load articles if not reload.
     articles = Article.send(method_name, *args).reload
     it 'should be three articles exist.' do
@@ -40,15 +40,15 @@ RSpec.describe Article, :type => :model do
     end
 
     describe :recent_list do
-      it_should_behave_like 'find by list', 'recent_list'
+      it_should_behave_like 'ordered list', 'recent_list'
     end
 
     describe :search do
-      it_should_behave_like 'find by list', 'search', 'title'
+      it_should_behave_like 'ordered list', 'search', 'title'
     end
 
     describe :tagged_by do
-      it_should_behave_like 'find by list', 'tagged_by', 'tag'
+      it_should_behave_like 'ordered list', 'tagged_by', 'tag'
     end
 
 
@@ -58,16 +58,16 @@ RSpec.describe Article, :type => :model do
       end
 
       describe :stocked_by do
-        it_should_behave_like 'find by list', 'stocked_by', user
+        it_should_behave_like 'ordered list', 'stocked_by', user
       end
 
       describe :owned_by do
-        it_should_behave_like 'find by list', 'owned_by', user
+        it_should_behave_like 'ordered list', 'owned_by', user
       end
 
       describe :feed_list do
         user.follow('tag')
-        it_should_behave_like 'find by list', 'feed_list', user
+        it_should_behave_like 'ordered list', 'feed_list', user
       end
     end
   end
