@@ -13,30 +13,34 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:tags) }
   it { should have_many(:article_notifications) }
 
-  shared_examples_for 'ordered list' do |method_name, args|
-    # Can not load articles if not reload.
-    articles = Article.send(method_name, *args).reload
-    it 'should be three articles exist.' do
-      expect(articles.size).to be_eql(3)
-    end
-    it 'should be creation order' do
-      expect(articles.first.created_at > articles.last.created_at).to be true
-    end
-  end
-
   it_should_behave_like 'having markdownable', :body
 
-  context 'when three articles exist' do
-    user = FactoryGirl.create(:user)
-    datetime_prefix = '2014-09-24 00:00:'
-    3.times do |i|
-      FactoryGirl.create(
-        :article,
-        :with_tag,
-        user_id: user.id,
-        created_at: datetime_prefix + (10 + i).to_s,
-        updated_at: datetime_prefix + (59 - i).to_s
-      )
+
+  describe "list methods" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:args) { nil }
+
+    shared_examples_for 'ordered list' do |method_name|
+      before do
+        2.times do |i|
+          article = FactoryGirl.create(:article, :with_tag,
+            user_id: user.id,
+            created_at: '2014-09-24 00:00:' + (10 + i).to_s,
+            updated_at: '2014-09-24 00:00:' + (59 - i).to_s
+          )
+          user.stock(article)
+          user.follow(article.tags.first)
+        end
+      end
+
+      subject(:articles) { Article.send(method_name, *args) }
+
+      it 'has two articles' do
+        expect(articles.each.size).to be_eql(2)
+      end
+      it 'is creation order' do
+        expect(articles.first.created_at).to be > articles.last.created_at
+      end
     end
 
     describe :recent_list do
@@ -44,31 +48,28 @@ RSpec.describe Article, :type => :model do
     end
 
     describe :search do
-      it_should_behave_like 'ordered list', 'search', 'title'
+      let(:args) { 'title' }
+      it_should_behave_like 'ordered list', 'search'
     end
 
     describe :tagged_by do
-      it_should_behave_like 'ordered list', 'tagged_by', 'tag'
+      let(:args) { 'tag' }
+      it_should_behave_like 'ordered list', 'tagged_by'
     end
 
+    describe :stocked_by do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'stocked_by'
+    end
 
-    context 'with stocked user' do
-      3.times do |i|
-        FactoryGirl.create(:stock, user_id: user.id, article_id: i + 1)
-      end
+    describe :owned_by do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'owned_by'
+    end
 
-      describe :stocked_by do
-        it_should_behave_like 'ordered list', 'stocked_by', user
-      end
-
-      describe :owned_by do
-        it_should_behave_like 'ordered list', 'owned_by', user
-      end
-
-      describe :feed_list do
-        user.follow('tag')
-        it_should_behave_like 'ordered list', 'feed_list', user
-      end
+    describe :feed_list do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'feed_list'
     end
   end
 
