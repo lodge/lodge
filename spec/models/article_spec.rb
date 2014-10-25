@@ -15,6 +15,64 @@ RSpec.describe Article, :type => :model do
 
   it_should_behave_like 'having markdownable', :body
 
+
+  describe "list methods" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:args) { nil }
+
+    shared_examples_for 'ordered list' do |method_name|
+      before do
+        2.times do |i|
+          article = FactoryGirl.create(:article, :with_tag,
+            user_id: user.id,
+            created_at: '2014-09-24 00:00:' + (10 + i).to_s,
+            updated_at: '2014-09-24 00:00:' + (59 - i).to_s
+          )
+          user.stock(article)
+          user.follow(article.tags.first)
+        end
+      end
+
+      subject(:articles) { Article.send(method_name, *args) }
+
+      it 'has two articles' do
+        expect(articles.each.size).to be_eql(2)
+      end
+      it 'is creation order' do
+        expect(articles.first.created_at).to be > articles.last.created_at
+      end
+    end
+
+    describe :recent_list do
+      it_should_behave_like 'ordered list', 'recent_list'
+    end
+
+    describe :search do
+      let(:args) { 'title' }
+      it_should_behave_like 'ordered list', 'search'
+    end
+
+    describe :tagged_by do
+      let(:args) { 'tag' }
+      it_should_behave_like 'ordered list', 'tagged_by'
+    end
+
+    describe :stocked_by do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'stocked_by'
+    end
+
+    describe :owned_by do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'owned_by'
+    end
+
+    describe :feed_list do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'feed_list'
+    end
+  end
+
   describe :save do
     let(:article) { FactoryGirl.create(:article) }
     before do

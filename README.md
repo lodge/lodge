@@ -1,5 +1,5 @@
 [![Gitter chat](https://badges.gitter.im/lodge/lodge.png)](https://gitter.im/lodge/lodge)
-[![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=develop)](https://travis-ci.org/lodge/lodge)
+[![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=release)](https://travis-ci.org/lodge/lodge)
 [![Coverage Status](https://coveralls.io/repos/lodge/lodge/badge.png)](https://coveralls.io/r/lodge/lodge)
 [![Code Climate](https://codeclimate.com/github/lodge/lodge/badges/gpa.svg)](https://codeclimate.com/github/lodge/lodge)
 
