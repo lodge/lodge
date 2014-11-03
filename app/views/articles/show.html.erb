@@ -53,9 +53,9 @@
   <% else %>
     <% @article.comments.each do |comment| %>
       <li class="list-group-item">
-        <div class="list-group-item-heading">
-          <div class="dropdown"><%= render partial: "users/info_dropdown", locals: {user: comment.user} %></div>
-          <span class="comment-info pull-right">
+        <div class="comment-info list-group-item-heading">
+          <div class="comment-info dropdown"><%= render partial: "users/info_dropdown", locals: {user: comment.user} %></div>
+          <div class="comment-info date-time">
             <%= comment.updated_at %>
             <% if comment.user == current_user %> 
               |
@@ -63,7 +63,7 @@
               |
               <%= link_to tco('destroy'), comment, method: :delete, data: { confirm: tco(:are_you_sure)} %>
             <% end %>
-          </span>
+          </div>
         </div>
         <div class="list-group-body markdown">
           <%= markdown(comment.body).html_safe %>
