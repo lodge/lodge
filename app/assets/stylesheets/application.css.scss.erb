@@ -82,6 +82,12 @@ body {
 
 .markdown {
 
+  line-height: 1.3em;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 16px;
+  }
+
   h1 { font-size: $font-size-h1 * 0.7; }
   h2 { font-size: $font-size-h2 * 0.7; }
   h3 { font-size: $font-size-h3 * 0.7; }
@@ -107,6 +113,21 @@ body {
   }
   h4, h5, h6 {
     text-decoration: underline;
+  }
+
+  p {
+    margin-bottom: 14px;
+  }
+
+  table {
+    border: 1px solid $gray-light collapse;
+    margin: 14px 0;
+
+    th, td {
+      border: 1px solid $gray-light;
+      padding: 5px;
+    }
+
   }
 
   img {
@@ -144,6 +165,7 @@ body {
 
     pre {
       font-size: 100%;
+      line-height: 1.2em;
       border: none;
       margin: 0;
     }
