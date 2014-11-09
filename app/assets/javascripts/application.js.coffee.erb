@@ -33,4 +33,4 @@ $(document).on 'click', '[role="tablist"] .preview-tab', ()->
 
   tabcontent.find '[role="preview"] .markdown'
     .load url,
-      'preview[body]': tabcontent.find('[role="editor"] textarea').val()
+      body: tabcontent.find('[role="editor"] textarea').val()

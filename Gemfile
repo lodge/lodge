@@ -6,7 +6,7 @@ gem 'nokogiri', '~> 1.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass-rails', '4.0.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.5'
 # Use CoffeeScript for .js.coffee assets and views
@@ -45,7 +45,6 @@ gem 'foreigner', '~> 1.6'
 gem 'railroady', '~> 1.1'
 gem 'acts-as-taggable-on', '~> 3.3'
 gem 'redcarpet', '~> 3.1'
-gem 'github-markdown', '~> 0.6'
 gem 'thin', '~> 1.6'
 gem 'kaminari', '~> 0.16'
 gem 'coderay', '~> 1.1'

@@ -13,9 +13,6 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:tags) }
   it { should have_many(:article_notifications) }
 
-  it_should_behave_like 'having markdownable', :body
-
-
   describe "list methods" do
     let(:user) { FactoryGirl.create(:user) }
     let(:args) { nil }

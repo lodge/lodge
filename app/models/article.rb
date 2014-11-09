@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  include Markdownable
+
   # TODO: sould use ".env"
   LodgeSettings = Settings.lodge
   PER_SIZE = LodgeSettings.per_size
@@ -21,7 +21,6 @@ class Article < ActiveRecord::Base
   validates :body, presence: true
 
   acts_as_taggable
-  markdownable :body
   alias_method :__save, :save
 
   # ===== Class methods =====
