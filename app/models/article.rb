@@ -1,4 +1,9 @@
 class Article < ActiveRecord::Base
+
+  # TODO: sould use ".env"
+  LodgeSettings = Settings.lodge
+  PER_SIZE = LodgeSettings.per_size
+
   belongs_to :user
   has_many :stocks
   has_many :comments
@@ -17,6 +22,49 @@ class Article < ActiveRecord::Base
 
   acts_as_taggable
   alias_method :__save, :save
+
+  # ===== Class methods =====
+
+  def self.recent_list(page=1)
+    Article
+      .includes(:user, :stocks, :tags)
+      .page(page).per(PER_SIZE)
+      .order(:created_at => :desc)
+  end
+
+  def self.feed_list(user, page=1)
+    Article
+      .includes(:user, :stocks, :tags)
+      .page(page).per(PER_SIZE)
+      .tagged_with(user.following_tag_list, any: true)
+      .order(:created_at => :desc)
+  end
+
+  def self.search(query, page=1)
+    query = "%#{query.gsub(/([%_])/){"\\" + $1}}%"
+    Article.where("title like ?", query)
+        .page(page).per(PER_SIZE).order(:created_at => :desc)
+  end
+
+  def self.stocked_by(user, page=1)
+    user.stocked_articles
+        .includes(:tags, :stocks, :user)
+        .page(page).per(PER_SIZE).order(:created_at => :desc)
+  end
+
+  def self.owned_by(user, page=1)
+    user.articles
+        .includes(:tags, :stocks)
+        .page(page).per(PER_SIZE).order(:created_at => :desc)
+  end
+
+  def self.tagged_by(tag, page=1)
+    Article
+        .includes(:stocks, :user)
+        .page(page).per(PER_SIZE).tagged_with(tag).order(:created_at => :desc)
+  end
+
+  # ===== Instance methods =====
 
   def save
     begin

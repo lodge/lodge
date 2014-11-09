@@ -41,3 +41,5 @@ public/uploads/
 
 # Mac finder artifacts
 .DS_Store
+
+coverage/
