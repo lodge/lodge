@@ -1,5 +1,14 @@
 ## Change Log
 
+### v0.10.1 (2014/11/09 14:05 +00:00)
+- [#127](https://github.com/lodge/lodge/pull/127) Fix markdown style (@m-yamashita)
+- [#126](https://github.com/lodge/lodge/pull/126) Revert gfm (@m-yamashita)
+- [#124](https://github.com/lodge/lodge/pull/124) Fix paths in order to subdirectory operation. (@lodge)
+- [#125](https://github.com/lodge/lodge/pull/125) Fix application module name. (@lodge)
+- [#115](https://github.com/lodge/lodge/pull/115) Fix articles order (@kakusuke, @m-yamashita, @shiena)
+- [#119](https://github.com/lodge/lodge/pull/119) Markdown を GFM ベースに (@kakusuke)
+- [#114](https://github.com/lodge/lodge/pull/114) v0.10.1 は release-0.10.1 ブランチで作業する (@kakusuke)
+
 ### v0.10.0 (2014/08/31 10:55 +00:00)
 - [#110](https://github.com/lodge/lodge/pull/110) Release 0.10.0 (@m-yamashita, @kakusuke, @comutt, @yuki24, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s, @kakipo, @kami30k)
 - [#108](https://github.com/lodge/lodge/pull/108) Markdown周りのスタイルやコードブロック内の処理を変更。 (@m-yamashita)
