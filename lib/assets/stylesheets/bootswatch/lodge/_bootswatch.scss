@@ -18,6 +18,7 @@ p {
 .navbar-text {
   margin: 7px 5px;
 }
+
 .navbar-default {
   background-image: url(header.png);
   @include box-shadow(lighten(#000, 20%) 2px 2px 0.5em);
@@ -26,9 +27,19 @@ p {
   .navbar-brand {
     font-size: 48px;
     font-weight: bold;
+    white-space: nowrap;
     color: $brand-primary;
     @include text-shadow(1px 1px #cb8);
   }
+
+  a {
+    color: #531;
+  }
+}
+
+.navbar-right {
+  float: right !important;
+  margin-right: -15px;
 }
 
 nav.well {
@@ -132,7 +143,7 @@ nav.well {
 }
 
 .num-of-notification {
-  display: block;
+  display: inline-block;
   box-shadow: 1px 1px 3px #444;
   font-size: 100%;
   margin-top: -1px;
