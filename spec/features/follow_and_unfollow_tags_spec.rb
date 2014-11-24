@@ -11,7 +11,7 @@ feature "FollowAndUnFollowTags", :type => :feature do
   scenario "follow tag on tag show page" do
     visit tagged_articles_path(tag: article.tag_list.first)
 
-    click_link I18n.t("articles.follow")
+    all(:link_or_button, I18n.t("tags.follow")).first.click
     expect(page).to have_link I18n.t("tags.unfollow")
   end
 
@@ -30,7 +30,7 @@ feature "FollowAndUnFollowTags", :type => :feature do
     user.follow article.tag_list.first
     visit tagged_articles_path(tag: article.tag_list.first)
 
-    click_link I18n.t("articles.unfollow")
+    all(:link_or_button, I18n.t("tags.unfollow")).first.click
     expect(page).to have_link I18n.t("tags.follow")
   end
 
