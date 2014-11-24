@@ -140,6 +140,7 @@ en:
   tags:
     follow: Follow
     unfollow: Unfollow
+    tagging_size: "%{size} articles"
   keywords:
     list_title: Keywords
     name: Name

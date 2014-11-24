@@ -1,5 +1,9 @@
 <% if current_user.follow?(tag) %>
-  <%= link_to tc(:unfollow), unfollow_tag_path(tag), method: :post, class: "follow-link", remote: true %>
+  <%= link_to unfollow_tag_path(tag), method: :post, class: "follow-link", remote: true do %>
+    <%= image_tag "stocked.png" %><span><%= t "tags.unfollow" %></span>
+  <% end %>
 <% else %>
-  <%= link_to tc(:follow), follow_tag_path(tag), method: :post, class: "follow-link", remote: true %>
+  <%= link_to follow_tag_path(tag), method: :post, class: "follow-link", remote: true do %>
+    <%= image_tag "unstocked.png" %><span><%= t "tags.follow" %></span>
+  <% end %>
 <% end %>
