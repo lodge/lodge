@@ -9,12 +9,26 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   #before_action :read_tags, except: [:sign_in, :sign_up]
+  before_action :read_recent_feed, except: [:sign_in, :sign_up]
+  before_action :read_recent_articles, except: [:sign_in, :sign_up]
   before_action :read_stocks, except: [:sign_in, :sign_up]
   before_action :read_notifications, except: [:sign_in, :sign_up]
   before_action :read_user_articles, except: [:sign_in, :sign_up]
   before_action :read_popular_articles, except: [:sign_in, :sign_up]
+  before_action :read_recent_tags, except: [:sign_in, :sign_up]
   before_action :load_pre_url
   before_action :set_pre_url, except: [:new, :edit, :show, :create, :update, :destroy, :sign_up, :preview, :list]
+
+  def read_recent_feed
+    @recent_feed = Article.tagged_with(current_user.following_tag_list, any: true)
+      .order(:created_at => :desc).limit(RIGHT_LIST_SIZE)
+  end
+
+  def read_recent_articles
+    @recent_articles = []
+    return unless current_user
+    @recent_articles = Article.order("created_at DESC").limit(RIGHT_LIST_SIZE)
+  end
 
   def read_stocks
     @stocked_articles = []
@@ -42,9 +56,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def read_tags
+  def read_recent_tags
+    @recent_tags = []
     return unless current_user
-    @tags = Article.new.tag_counts_on(:tags).order("count DESC")
+    @recent_tags = Article.new.tag_counts_on(:tags).order("id DESC").limit(RIGHT_LIST_SIZE)
   end
 
   def read_notifications

@@ -1,11 +1,8 @@
 <% icon_only ||= false %>
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  <%= gravatar(user) %>
-  <% if not icon_only %>
-    <%= user.name %>
-    <i class="caret"></i>
-  <% end %>
-</a>
+<%= gravatar(user, 20, class: ["header-user-icon", "dropdown-toggle"], "data-toggle" => "dropdown") %>
+<% if not icon_only %>
+  <%= link_to user.name, "#", class: ["header-user-name", "dropdown-toggle"], "data-toggle" => "dropdown" %>
+<% end %>
 <ul class="dropdown-menu user-info" role="menu">
   <li role="presentation">
     <div class="media">

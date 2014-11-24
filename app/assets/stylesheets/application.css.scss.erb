@@ -52,6 +52,17 @@ h6 {
   .col-xs-8 .row {
     margin-right: 0;
   }
+
+  .header-user-icon {
+    cursor: pointer;
+  }
+
+  .header-user-name {
+    display: inline-block;
+    padding-left: 0;
+    text-decoration: underline;
+  }
+
 }
 
 .dropdown-toggle {
@@ -83,6 +94,46 @@ h6 {
   a {
     padding: 10px;
     background-clip: padding-box;
+  }
+}
+
+.caret {
+  margin: -2px 0 0 3px;
+  border-width: 8px 5px 0px 5px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.global-menu-list {
+
+  .dropdown {
+    > a {
+      color: #eee;
+      text-decoration: underline;
+    }
+    .caret {
+      color: #eee;
+    }
+  }
+
+  .dropdown-toggle:hover {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    color: #333;
+    padding: 15px;
+    width: 400px;
+
+    ol {
+      padding-left: 35px;
+    }
+
+    a {
+      background-clip: padding-box;
+    }
   }
 }
 
@@ -187,6 +238,16 @@ h6 {
   min-height: 320px;
   .tab-pane, .editor-textarea, .markdown {
     min-height: 320px;
+  }
+}
+
+.article-new-link-area {
+  margin: 0;
+}
+
+.recent-tag-list {
+  span {
+    display: none;
   }
 }
 
