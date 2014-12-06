@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   before_action :set_pre_url, except: [:new, :edit, :show, :create, :update, :destroy, :sign_up, :preview, :list]
 
   def read_recent_feed
+    return unless current_user
     @recent_feed = Article.tagged_with(current_user.following_tag_list, any: true)
       .order(:created_at => :desc).limit(RIGHT_LIST_SIZE)
   end
