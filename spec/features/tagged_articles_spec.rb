@@ -10,6 +10,7 @@ feature "TaggedArticles", :type => :feature do
 
   scenario "access to articles tagged abnormal page" do
     visit article_path(article)
+    find('article')
     within 'article' do
       click_link tag
     end
