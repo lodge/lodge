@@ -140,98 +140,97 @@
                 <p class="navbar-text">
                   <% if user_signed_in? %>
                     <strong class="num-of-contribution"><%= current_user.contribution %></strong> <%= tco :contribution %>
-                <% end %>
-              </p>
+                  <% end %>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <% # Page Body %>
-    <div class="container-fluid">
+      <% # Page Body %>
+      <div class="container-fluid">
 
-      <% # Notification area %>
-      <div class="row">
-        <div>
-          <% if notice %>
-            <p id="notice" class="alert alert-success"><%= notice %></p>
+        <% # Notification area %>
+        <div class="row">
+          <div>
+            <% if notice %>
+              <p id="notice" class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+              <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <% # Search area %>
+          <% if current_user %>
+            <%= form_tag search_articles_path, method: :get, id: "article-search-area", role: "search" do %>
+              <div class="input-group col-xs-4 col-xs-offset-5">
+                <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
+                <span class="input-group-btn">
+                  <%= button_tag "", type: "submit", class: ["btn", "btn-default", "glyphicon", "glyphicon-search"] %>
+                </span>
+              </div>
+            <% end %>
           <% end %>
-          <% if alert %>
-            <p class="alert alert-danger"><%= alert %></p>
+
+          <hr />
+
+          <% # Contents area %>
+          <div class="col-xs-9">
+            <article>
+              <%= yield %>
+            </article>
+          </div>
+
+          <% # Right area %>
+          <% if current_user %>
+            <nav class="col-xs-3">
+              <% # Post new article %>
+              <p class="article-new-link-area">
+                <%= link_to t('articles.new_title'), new_article_path, class: ["btn", "btn-block", "btn-success"] %>
+              </p>
+
+              <% # Pupular article list %>
+              <h5><strong><%= tco("popular_article_list_title") %></strong></h5>
+              <div>
+                <ol>
+                  <% @popular_articles.each do |article| %>
+                    <li>
+                      <u><%= link_to article.title, article_path(article) %></u>
+                      <%= render partial: "articles/stock_count", locals: {article: article} %> 
+                    </li>
+                  <% end %>
+                </ol>
+              </div>
+
+              <hr />
+
+              <% # Recent tag list %>
+              <h5><strong><%= tco("recent_tag_list_title") %></strong></h5>
+              <div>
+                <ol class="recent-tag-list">
+                  <% @recent_tags.each do |tag| %>
+                    <li>
+                      <u><%= link_to tag.name, tagged_articles_path(tag.name) %></u>
+                      <%= render partial: "tags/follow", locals: {tag: tag.name} %>
+                    </li>
+                  <% end %>
+                </ol>
+                <% unless @user_articles.empty? %>
+                  <div class="clearfix">
+                    <%= link_to tco("more_display"), tags_path %>
+                  </div>
+                <% end %>
+              </div>
+            </nav>
           <% end %>
         </div>
       </div>
-
-      <div class="row">
-
-        <% # Search area %>
-        <% if current_user %>
-          <%= form_tag search_articles_path, method: :get, id: "article-search-area", role: "search" do %>
-            <div class="input-group col-xs-4 col-xs-offset-5">
-              <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
-              <span class="input-group-btn">
-                <%= button_tag "", type: "submit", class: ["btn", "btn-default", "glyphicon", "glyphicon-search"] %>
-              </span>
-            </div>
-          <% end %>
-        <% end %>
-
-        <hr />
-
-        <% # Contents area %>
-        <div class="col-xs-9">
-          <article>
-            <%= yield %>
-          </article>
-        </div>
-
-        <% # Right area %>
-        <% if current_user %>
-          <nav class="col-xs-3">
-            <% # Post new article %>
-            <p class="article-new-link-area">
-              <%= link_to t('articles.new_title'), new_article_path, class: ["btn", "btn-block", "btn-success"] %>
-            </p>
-
-            <% # Pupular article list %>
-            <h5><strong><%= tco("popular_article_list_title") %></strong></h5>
-            <div>
-              <ol>
-                <% @popular_articles.each do |article| %>
-                  <li>
-                    <u><%= link_to article.title, article_path(article) %></u>
-                    <%= render partial: "articles/stock_count", locals: {article: article} %> 
-                  </li>
-                <% end %>
-              </ol>
-            </div>
-
-            <hr />
-
-            <% # Recent tag list %>
-            <h5><strong><%= tco("recent_tag_list_title") %></strong></h5>
-            <div>
-              <ol class="recent-tag-list">
-                <% @recent_tags.each do |tag| %>
-                  <li>
-                    <u><%= link_to tag.name, tagged_articles_path(tag.name) %></u>
-                    <%= render partial: "tags/follow", locals: {tag: tag.name} %>
-                  </li>
-                <% end %>
-              </ol>
-              <% unless @user_articles.empty? %>
-                <div class="clearfix">
-                  <%= link_to tco("more_display"), tags_path %>
-                </div>
-              <% end %>
-            </div>
-          </nav>
-        <% end %>
-      </div>
     </div>
-  </div>
-</div>
 
-</body>
+  </body>
 </html>
