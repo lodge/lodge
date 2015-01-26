@@ -14,8 +14,8 @@ Rails.application.routes.draw do
       get "list"
     end
     member do
-      post "follow"
-      post "unfollow"
+      post "follow", format: false, tag: /.*/
+      post "unfollow", format: false, tag: /.*/
     end
   end
 
