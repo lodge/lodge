@@ -50,7 +50,7 @@ gem 'kaminari', '~> 0.16'
 gem 'coderay', '~> 1.1'
 gem 'coderay_bash', '~> 1.0'
 gem 'diffy', '~> 3.0'
-gem 'yaml_db', git: 'https://github.com/jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
+gem 'yaml_db'
 gem 'activerecord-import', '~> 0.5'
 gem 'counter_culture', '~> 0.1'
 gem 'rails_config', '~> 0.4'
@@ -75,7 +75,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-its'
-  gem 'rspec-parameterized', github: 'tomykaira/rspec-parameterized'
+  gem 'rspec-parameterized'
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'
@@ -90,6 +90,7 @@ group :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'rspec-parameterized'
 end
 
 # Include database gems for the adapters found in the database
