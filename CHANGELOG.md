@@ -1,6 +1,9 @@
 ## Change Log
 
-### v0.10.1 (2014/11/09 14:05 +00:00)
+### v0.10.2 (2015/04/25 06:03 +00:00)
+- [#128](https://github.com/lodge/lodge/pull/128) Release 0.10.1 (@m-yamashita, @kakusuke, @comutt, @yuki24, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s, @kakipo, @kami30k)
+
+### v0.10.1 (2014/11/09 14:19 +00:00)
 - [#127](https://github.com/lodge/lodge/pull/127) Fix markdown style (@m-yamashita)
 - [#126](https://github.com/lodge/lodge/pull/126) Revert gfm (@m-yamashita)
 - [#124](https://github.com/lodge/lodge/pull/124) Fix paths in order to subdirectory operation. (@lodge)
@@ -29,10 +32,14 @@
 - [#85](https://github.com/lodge/lodge/pull/85) タグフォローのAjax化 (@kakusuke)
 - [#84](https://github.com/lodge/lodge/pull/84) ストックのAjax化 (@kakusuke)
 - [#83](https://github.com/lodge/lodge/pull/83) Article リファクタリング (@kakusuke)
-- [#81 verified](https://github.com/lodge/lodge/pull/81 verified) verified code and running in development mode (@kakusuke)
+- [#81
+
+verified](https://github.com/lodge/lodge/pull/81
+
+verified) verified code and running in development mode (@kakusuke)
 - [#79](https://github.com/lodge/lodge/pull/79) Bundle warnings の修正 (@tasuku-s)
 - [#77](https://github.com/lodge/lodge/pull/77) jquery-turbolinks の導入 (@kakusuke)
-- [#72](https://github.com/lodge/lodge/pull/72) better_errors gemを追加 再テストにてオールグリーンを確認 (@dddaisuke)
+- [#72](https://github.com/lodge/lodge/pull/72) better_errors gemを追加 再テストにてオールグリーンを確認 (@dddaisuke, @comutt, @m-yamashita, @kakusuke, @joe-re)
 - [#78](https://github.com/lodge/lodge/pull/78) 「編集履歴」がときたまコケる現象に対処 (@kakusuke)
 - [#76](https://github.com/lodge/lodge/pull/76) Travis ruby db matrix testing (@comutt)
 - [#75](https://github.com/lodge/lodge/pull/75) 多分だいぶ安定したはず (@kakusuke, @comutt)
