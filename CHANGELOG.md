@@ -1,6 +1,11 @@
 ## Change Log
 
-### v0.10.2 (2015/04/25 06:03 +00:00)
+### v0.10.3 (2015/04/28 12:30 +00:00)
+- [#136](https://github.com/lodge/lodge/pull/136) Fix tag including period (@m-yamashita, @kakusuke)
+
+### v0.10.2 (2015/04/27 02:54 +00:00)
+- [#135](https://github.com/lodge/lodge/pull/135) Release 0.10.2 (@m-yamashita)
+- [#134](https://github.com/lodge/lodge/pull/134) Fix rails version. (@m-yamashita)
 - [#128](https://github.com/lodge/lodge/pull/128) Release 0.10.1 (@m-yamashita, @kakusuke, @comutt, @yuki24, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s, @kakipo, @kami30k)
 
 ### v0.10.1 (2014/11/09 14:19 +00:00)
