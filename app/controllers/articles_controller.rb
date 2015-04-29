@@ -1,7 +1,10 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :stock, :unstock]
-  before_action :check_permission, only: [:destroy]
+  before_action :set_article, only: [
+    :show, :edit, :update, :destroy, :stock, :unstock
+  ]
+  before_action :check_update_permission, only: [:edit, :update]
+  before_action :check_destroy_permission, only: [:destroy]
 
   # GET /articles
   # GET /articles.json
@@ -43,7 +46,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @stock = Stock.find_by(:article_id => @article.id, :user_id => current_user.id)
+    @stock = Stock.find_by(article_id: @article.id, user_id: current_user.id)
     @stocked_users = @article.stocked_users
     @article.remove_user_notification(current_user)
   end
@@ -124,12 +127,21 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:user_id, :title, :body, :tag_list, :lock_version)
+    params.require(:article).permit(:user_id, :title, :body, :tag_list, :lock_version, :is_public_editable)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def check_permission
-    return if @article.user_id == current_user.id
+  def check_update_permission
+    return if owner? || @article.is_public_editable
     redirect_to articles_url
+  end
+
+  def check_destroy_permission
+    return if owner?
+    redirect_to articles_url
+  end
+
+  def owner?
+    @article.user_id == current_user.id
   end
 end

@@ -68,6 +68,10 @@ class Article < ActiveRecord::Base
 
   # ===== Instance methods =====
 
+  def last_updated_user
+    UpdateHistory.includes(:user).order(created_at: :desc).first.user
+  end
+
   def save
     begin
       __save
@@ -91,7 +95,7 @@ class Article < ActiveRecord::Base
 
   def create_notification
     notification = ArticleNotification.create!(
-      user_id: self.user_id,
+      user_id: self.update_user_id,
       state: :update,
       article_id: self.id,
     )

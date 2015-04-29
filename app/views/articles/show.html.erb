@@ -1,42 +1,50 @@
 <div class="panel">
 
-  <div class="panel-heading clearfix">
-    <% if @article.user == current_user %>
-      <div class="pull-right clearfix">
+  <div class="article-header-area panel-heading clearfix">
+    <div class="pull-right clearfix">
+      <% is_owner = @article.user_id == current_user.id %>
+      <% if is_owner || @article.is_public_editable %>
         <%= link_to tco('edit'), edit_article_path(@article) %>
+      <% end %>
+      <% if @article.update_histories.size > 0 %>
+        <% histories_title = ! is_owner && ! @article.is_public_editable ? tc(:update_histories) : '' %>
+        <%= link_to "#{histories_title}(#{@article.update_histories.size})", article_update_histories_path(@article) %>
+      <% end %>
+      <% if is_owner %>
         |
         <%= link_to tco('destroy'), @article, method: :delete, data: { confirm: tco(:are_you_sure)} %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   
     <h1><%= @article.title %></h1>
-    <hr />
+    <hr class='article-title-underline' />
   </div>
 
   
-  <div class="panel-body">
+  <div class="article-detail-area panel-body">
+    <div class="text-right">
+      <%= tco :created_at  %>:
+      <span class="dropdown">
+        <%= render partial: "users/info_dropdown", locals: {user: @article.user} %> -
+      </span>
+      <%= @article.created_at %>
+      <% if @article.update_histories.size > 0 %>
+        |
+        <%= tco :updated_at  %>:
+        <span class="dropdown">
+          <%= render partial: "users/info_dropdown", locals: { user: @article.last_updated_user } %> -
+        </span>
+        <%= @article.updated_at %>
+      <% end %>
+    </div>
     <div class="pull-right text-right">
-      <div>
-        <span><%= tco :created_at %>: <%= @article.created_at %></span>
-        <% if @article.update_histories.size > 0 %>
-          <span>|</span>
-          <span><%= tco :updated_at %>: <%= @article.updated_at %></span>
-          <span>-</span>
-          <span><%= link_to "#{tc(:update_histories)}(#{@article.update_histories.size})", article_update_histories_path(@article) %></span>
-        <% end %>
-      </div>
       <% @article.tags.each do |tag| %>
         <%= link_to tag.name, tagged_articles_path(tag.name), class: ["label", "label-default"] %>
       <% end %>
-      <div class="dropdown">
-        <%= render partial: "users/info_dropdown", locals: {user: @article.user} %>
-      </div>
+      <%= render partial: "articles/stock_users", locals: {article: @article} %>
+      <%= render partial: "articles/stock_text", locals: {article: @article} %>
       <%= render partial: "articles/stock_count", locals: {article: @article} %>
       <%= render partial: "articles/comment_count", locals: {article: @article} %>
-      <%= render partial: "articles/stock_users", locals: {article: @article} %>
-      <p>
-        <%= render partial: "articles/stock_text", locals: {article: @article} %>
-      </p>
     </div>
   </div>
 
@@ -45,7 +53,7 @@
   </div>
 </div>
 
-<p class="lead"><%= tc :comments_title %></p>
+<h2 id="comment-list-title" class="lead"><%= tc :comments_title %></h2>
 
 <ul class="list-group">
   <% if @article.comments.blank? %>
@@ -76,7 +84,7 @@
   <% end %>
 </ul>
 
-<p class="lead"><%= tc :comment_form_title %></p>
+<h2 class="lead"><%= tc :comment_form_title %></h2>
 <%= render 'comments/form', hide: false, comment: Comment.new %>
 
 <p>

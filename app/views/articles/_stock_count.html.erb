@@ -1,9 +1,9 @@
 <% if current_user.stock?(article) %>
-  <%= link_to unstock_article_path(article), method: :post, class: "stock-link", remote: true do %>
-    <%= image_tag "stocked.png" %><%= article.stocks.size %>
+  <%= link_to unstock_article_path(article), method: :post, class: "stock-link", remote: true do -%>
+    <%= image_tag "stocked.png" %><%= article.stocks.size -%>
   <% end %>
 <% else %>
-  <%= link_to stock_article_path(article), method: :post, class: "stock-link", remote: true do %>
-    <%= image_tag "unstocked.png" %><%= article.stocks.size %>
+  <%= link_to stock_article_path(article), method: :post, class: "stock-link", remote: true do -%>
+    <%= image_tag "unstocked.png" %><%= article.stocks.size -%>
   <% end %>
 <% end %>
