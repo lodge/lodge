@@ -17,24 +17,20 @@
 #= require jquery.turbolinks
 #= require jquery_ujs
 #= require bootstrap
+#= require jquery-fileupload/basic
 #= require turbolinks
+#= require typeahead.bundle
+#= require handlebars
+#= require bootstrap-tokenfield
 #= require_tree .
 
 
 # Markdown preview
 $(document).on 'click', '[role="tablist"] .preview-tab', ()->
-  url = '<%= Rails.application.routes.url_helpers.articles_preview_path %>'
+  url = '<%= asset_path Rails.application.routes.url_helpers.preview_articles_path %>'
   tablist = $(this).closest '[role="tablist"]'
   tabcontent = tablist.next('.tab-content')
 
   tabcontent.find '[role="preview"] .markdown'
     .load url,
       body: tabcontent.find('[role="editor"] textarea').val()
-
-# initialize editor context
-$ ->
-  $('[role="tablist"]').each ()->
-    tablist = $(this)
-    tabcontent = tablist.next('.tab-content')
-    tablist.find('.editor-tab').data 'target', tabcontent.find('[role="editor"]').get()
-    tablist.find('.preview-tab').data 'target', tabcontent.find('[role="preview"]').get()

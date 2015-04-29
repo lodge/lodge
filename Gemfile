@@ -4,9 +4,9 @@ source 'https://rubygems.org'
 gem 'nokogiri', '~> 1.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1'
+gem 'rails', '4.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0'
+gem 'sass-rails', '4.0.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.5'
 # Use CoffeeScript for .js.coffee assets and views
@@ -50,7 +50,7 @@ gem 'kaminari', '~> 0.16'
 gem 'coderay', '~> 1.1'
 gem 'coderay_bash', '~> 1.0'
 gem 'diffy', '~> 3.0'
-gem 'yaml_db', git: 'https://github.com/jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
+gem 'yaml_db'
 gem 'activerecord-import', '~> 0.5'
 gem 'counter_culture', '~> 0.1'
 gem 'rails_config', '~> 0.4'
@@ -61,26 +61,27 @@ gem 'autoprefixer-rails', '~> 2.2'
 gem 'compass-rails', '~> 2.0'
 #gem 'whenever', :require => false
 gem 'omniauth-google-oauth2', '~> 0.2'
+gem 'carrierwave', '~> 0.10'
+gem 'jquery-fileupload-rails', '~> 0.4'
 
 group :development do
   gem 'bullet'
   gem 'rack-mini-profiler'
   gem 'letter_opener'
-  gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
-ruby_versions = RUBY_VERSION.split('.')
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-its'
+  gem 'rspec-parameterized'
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'
-  if ruby_versions[0].to_i >= 2 then
-    gem 'pry-byebug'
-  end
+  gem 'pry-byebug'
   gem 'pry-rescue'
+  gem 'coveralls', require: false
 end
 
 group :test do
@@ -88,6 +89,8 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'launchy'
+  gem 'rspec-parameterized'
 end
 
 # Include database gems for the adapters found in the database

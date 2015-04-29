@@ -1,9 +1,6 @@
 # coding: utf-8
 Rails.application.routes.draw do
 
-  match "articles/:article_id/update_histories", to: 'update_histories#list', via: :get, as: :update_histories
-  resources :update_histories, only: [:show]
-
   devise_for :users, controllers: {
     registrations: 'custom_devise/registrations',
     sessions: 'custom_devise/sessions',
@@ -11,29 +8,41 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [:show]
+
   resources :tags, only: [:index], param: :tag do
+    collection do
+      get "list"
+    end
     member do
-      post "follow"
-      post "unfollow"
+      post "follow", format: false, tag: /.*/
+      post "unfollow", format: false, tag: /.*/
     end
   end
 
-  match "articles/preview", :to => 'articles#preview', :via => :post
-  match "articles/stocks", :to => 'articles#by_stocks', :via => :get, :as => :articles_by_stocks
-  match "articles/search", :to => 'articles#search', :via => :get
-  match "articles/feed", :to => 'articles#feed', :via => :get, :as => :articles_feed
-
   resources :articles do
+    collection do
+      post :preview
+      get :search
+      get :stocked
+      get :feed
+      get :owned, path: "user/:user_id"
+      get :tagged, path: "tag/:tag", format: false, tag: /.*/
+    end
+
     member do
       post "stock"
       post "unstock"
     end
   end
 
-  match "articles/:id/comment", :to => 'articles#create_comment', :via => :post
-  match "articles/tag/:tag", :to => 'articles#by_tag', :via => :get, :as => :articles_by_tag, :constraints => {tag: /.+/}
-  match "articles/user/:user_id", :to => 'articles#by_user', :via => :get, :as => :articles_by_user
+  resources :update_histories, only: [:show] do
+    collection do
+      get :article, action: :list, path: "article/:article_id"
+    end
+  end
+
   resources :comments, :only => [:create, :update, :destroy]
+  resources :images, only: :create, defaults: { format: 'json' }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -6,52 +6,38 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article
-      .includes(:user, :stocks, :tags)
-      .page(params[:page]).per(PER_SIZE)
-      .order(:updated_at => :desc)
+    @articles = Article.recent_list(params[:page])
   end
 
   # GET /articles
   # GET /articles.json
   def feed
-    @articles = Article
-      .includes(:user, :stocks, :tags)
-      .page(params[:page]).per(PER_SIZE)
-      .tagged_with(current_user.following_tag_list, any: true)
-      .order(:updated_at => :desc)
-    render :index
+    @articles = Article.feed_list(current_user, params[:page])
   end
 
   # GET /articles
   # GET /articles.json
   def search
-    query = "%#{params[:query].gsub(/([%_])/){"\\" + $1}}%"
-    @articles = Article.where("title like ?", query)
-        .page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
+    @articles = Article.search(params[:query], params[:page])
   end
 
   # GET /articles/stocks
   # GET /articles/stocks.json
-  def by_stocks
-    @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
+  def stocked
+    @articles = Article.stocked_by(current_user, params[:page])
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_user
-    @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
-    render :index
+  def owned
+    @articles = Article.owned_by(current_user, params[:page])
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
-  def by_tag
-    @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
+  def tagged
+    @articles = Article.tagged_by(params[:tag], params[:page])
     @tag = params[:tag]
-    render :index
   end
 
   # GET /articles/1

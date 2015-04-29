@@ -16,12 +16,17 @@
 
   <div>
     <%= f.submit tco(:sign_in), class: ["btn", "btn-success"] %>
-    <%- if devise_mapping.omniauthable? %>
-      <h3><%= tco(:sign_in_by_other_means) %></h3>
-      <%- resource_class.omniauth_providers.each do |provider| %>
-        <li><%= link_to tco(:sign_in_with, provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %></li>
+    <% # TODO: リリースの為の一時的な対応。後でちゃんとした方法に実装し直す必要あり。 %>
+    <% unless ENV["GOOGLE_CLIENT_ID"].blank? %>
+      <%- if devise_mapping.omniauthable? %>
+        <h3><%= tco(:sign_in_by_other_means) %></h3>
+        <ul>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <li><%= link_to tco(:sign_in_with, provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %></li>
+          <% end -%>
+        </ul>
       <% end -%>
-    <% end -%>
+    <% end %>
   </div>
 <% end %>
 

@@ -10,3 +10,51 @@
     width: 60%;
   }
 }
+
+.comment-info {
+  &.list-group-item-heading {
+    margin-bottom: 1.5em;
+  }
+
+  &.dropdown {
+    float: left;
+  }
+
+  &.date-time {
+    text-align: right;
+  }
+}
+
+.form-editor {
+  position: relative;
+
+  .toggle-markdown-help {
+    cursor: pointer;
+    position: absolute;
+    top: 28px;
+    right: 0;
+
+    &:before {
+      padding-right: 5px;
+      vertical-align: middle;
+    }
+  }
+
+  .modal-markdown-help {
+    .modal-body {
+      overflow: auto;
+      max-height: 400px;
+
+      table {
+        th {
+          padding: 10px;
+          text-align: center;
+        }
+
+        td {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

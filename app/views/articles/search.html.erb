@@ -1,0 +1,9 @@
+<% content_for :list_title do %>
+  <%= tc("list_title_by_search", :query => params[:query]) %>
+<% end %>
+
+<% content_for :back_link do %>
+  <p><%= link_to tc("to_list"), articles_path %></p>
+<% end %>
+
+<%= render "article_list", articles: @articles %>

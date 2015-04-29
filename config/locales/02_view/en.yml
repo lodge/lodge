@@ -41,6 +41,7 @@ en:
     recent_article_list_title: Listing recent articles.
     article_search: Search articles by title
     tag_list_title: Tags
+    recent_tag_list_title: Recent tags
     user_article_list_title: Your posts
     stocked_article_list_title: Stocks
     popular_article_list_title: Recent popular
@@ -140,6 +141,7 @@ en:
   tags:
     follow: Follow
     unfollow: Unfollow
+    tagging_size: "%{size} articles"
   keywords:
     list_title: Keywords
     name: Name

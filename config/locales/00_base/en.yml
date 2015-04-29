@@ -130,6 +130,7 @@ en:
         one: is the wrong length (should be 1 character)
         other: is the wrong length (should be %{count} characters)
       other_than: "must be other than %{count}"
+      extension_white_list_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
     template:
       body: ! 'There were problems with the following fields:'
       header:
