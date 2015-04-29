@@ -1,6 +1,10 @@
 ## Change Log
 
-### v0.10.3 (2015/04/28 12:30 +00:00)
+### v0.11.0 (2015/04/29 23:15 +00:00)
+- [#140](https://github.com/lodge/lodge/pull/140) Add pubic edit feature. (@m-yamashita, @comutt, @yuki24, @kakusuke, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s)
+
+### v0.10.3 (2015/04/29 01:20 +00:00)
+- [#138](https://github.com/lodge/lodge/pull/138) Release 0.10.3 (@m-yamashita, @kakusuke)
 - [#136](https://github.com/lodge/lodge/pull/136) Fix tag including period (@m-yamashita, @kakusuke)
 
 ### v0.10.2 (2015/04/27 02:54 +00:00)
