@@ -28,9 +28,9 @@
       <% @article.tags.each do |tag| %>
         <%= link_to tag.name, tagged_articles_path(tag.name), class: ["label", "label-default"] %>
       <% end %>
-      <span class="dropdown">
+      <div class="dropdown">
         <%= render partial: "users/info_dropdown", locals: {user: @article.user} %>
-      </span>
+      </div>
       <%= render partial: "articles/stock_count", locals: {article: @article} %>
       <%= render partial: "articles/comment_count", locals: {article: @article} %>
       <%= render partial: "articles/stock_users", locals: {article: @article} %>

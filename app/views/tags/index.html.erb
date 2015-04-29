@@ -11,7 +11,7 @@
     <% @tags.each do |tag| %>
       <tr>
         <td><%= link_to tag.name, tagged_articles_path(tag.name), title: tag.name %></td>
-        <td class="counts-column text-right"><%= tag.taggings.size %></td>
+        <td class="counts-column text-right"><%= tc(:tagging_size, size: tag.taggings.size) %></td>
         <td class="follow-column text-right">
           <%= render partial: "tags/follow", locals: {tag: tag.name} %>
         </td>

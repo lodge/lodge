@@ -4,10 +4,6 @@
 
 <%= yield :list_title_addition %>
 
-<p class="article-new-link-area pull-right">
-  <%= link_to tco('new'), new_article_path %>
-</p>
-
 <% if articles.length == 0 %>
   <p class="media">
     <div class="media-body"><%= yield :introduction %></div>
@@ -45,9 +41,5 @@
 </table>
 
 <%= paginate articles %>
-
-<p class="article-new-link-area pull-right">
-  <%= link_to tco('new'), new_article_path %>
-</p>
 
 <%= yield :back_link %>

@@ -10,7 +10,7 @@ feature "FollowTags", :type => :feature do
 
   scenario "stock article" do
     visit tags_path
-    click_link I18n.t("tags.follow")
+    all(:link_or_button, I18n.t("tags.follow")).first.click
     expect(page).to have_link(I18n.t("tags.unfollow"))
 
     visit feed_articles_path
