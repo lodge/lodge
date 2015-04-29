@@ -20,6 +20,8 @@ class Article < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
 
+  attr_accessor :update_user_id
+
   acts_as_taggable
   alias_method :__save, :save
 
@@ -66,6 +68,10 @@ class Article < ActiveRecord::Base
 
   # ===== Instance methods =====
 
+  def last_updated_user
+    UpdateHistory.includes(:user).order(created_at: :desc).first.user
+  end
+
   def save
     begin
       __save
@@ -77,6 +83,7 @@ class Article < ActiveRecord::Base
 
   def create_history
     update_histories.create(
+      user_id: update_user_id,
       old_title: title_was,
       old_tags: tag_list_was.to_s,
       old_body: body_was,
@@ -88,7 +95,7 @@ class Article < ActiveRecord::Base
 
   def create_notification
     notification = ArticleNotification.create!(
-      user_id: self.user_id,
+      user_id: self.update_user_id,
       state: :update,
       article_id: self.id,
     )

@@ -1,5 +1,5 @@
 <% if current_user.stock?(article) %>
-  <%= link_to tc(:unstock), unstock_article_path(article), method: :post, class: "stock-text-link", remote: true %>
+  <%= link_to tc(:unstock), unstock_article_path(article), method: :post, class: "stock-text-link", remote: true -%>
 <% else %>
-  <%= link_to tc(:stock), stock_article_path(article), method: :post, class: "stock-text-link", remote: true %>
+  <%= link_to tc(:stock), stock_article_path(article), method: :post, class: "stock-text-link", remote: true -%>
 <% end %>
