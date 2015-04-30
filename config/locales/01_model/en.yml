@@ -37,6 +37,8 @@ en:
         title: Title
         tag_list: Tags
         body: Body
+        lock_version: ""
+        is_public_editable: 共同編集可
       comment:
         body: Comment
     errors:

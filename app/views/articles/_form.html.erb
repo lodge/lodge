@@ -28,7 +28,17 @@
   </div>
   <div class="preview-area markdown"></div>
   <div class="actions">
-    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% is_edit ||= false %>
+    <% if is_edit == false || @article.user_id == current_user.id %>
+      <div>
+        <%= f.check_box :is_public_editable %>
+        <%= f.label :is_public_editable %>
+      </div>
+    <% end %>
+
+    <% unless is_edit %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% end %>
     <%= f.hidden_field :lock_version %>
     <%= f.submit class: ["btn", "btn-success"] %>
   </div>

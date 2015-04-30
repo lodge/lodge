@@ -1,6 +1,6 @@
 <p class="lead"><%= tc :edit_title, article_title: @article.title %></p>
 
-<%= render 'form' %>
+<%= render partial: 'form', locals: {is_edit: true}  %>
 
 <p>
   <%= link_to tco(:back), @article %>
