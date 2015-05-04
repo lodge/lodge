@@ -14,6 +14,7 @@ script:
     - RAILS_ENV=test bin/rake db:create --trace
     - RAILS_ENV=test bin/rake db:migrate --trace
     - RAILS_ENV=test bin/rake spec --trace
+    - RAILS_ENV=test bin/rake emoji
 notifications:
   webhooks:
     urls:

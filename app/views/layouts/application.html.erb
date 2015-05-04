@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% if params[:controller] == "articles" && [:show, :edit].include?(params[:action].to_sym)   %>
+    <% if params[:controller] == "articles" && [:show, :edit].include?(params[:action].to_sym) %>
       <title><%= @article.title %> - Lodge</title>
     <% else %>
       <title>Lodge</title>
@@ -14,6 +14,9 @@
     <%= javascript_include_tag 'externals/html5shiv', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'externals/respond.min', 'data-turbolinks-track' => true %>
     <![endif]-->
+    <%= stylesheet_link_tag "pygments-css/#{ENV['SYNTAX_HIGHLIGHT_THEME']}", media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag controller.controller_name, media: "all" %>
+    <%= javascript_include_tag controller.controller_name %>
   </head>
   <body>
 

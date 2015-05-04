@@ -1,55 +1,26 @@
 module ApplicationHelper
   NO_TOC_TEXT = "--no-toc"
 
-  class ArticlesRenderer < Redcarpet::Render::HTML
-    def block_code(code, language)
-      code.sub!(/(@@@[^\n]+@@@\n)/, "")
-      title = $1 || ""
-      begin
-        code = CGI.unescapeHTML code
-        code = CodeRay.scan(code, language).div()
-        code.sub(/^/, create_filename_row(title))
-      rescue
-        self.block_code(title + code, :text)
-      end
-    end
-
-    def initialize(extensions = {})
-      super extensions.merge(link_attributes: { target: "_blank" })
-    end
-
-    def create_filename_row(filename)
-      return "" if filename.empty?
-      %!<div class="code-filename">#{filename.gsub("@@@", "")}</div>!
-    end
+  def markdown(markdown)
+    processor = Qiita::Markdown::Processor.new
+    result = processor.call(markdown)
+    result[:output].to_html
   end
 
-  def markdown_toc(text)
-    return "" if text.match(/^#{NO_TOC_TEXT}/)
-    html_toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC, fenced_code_blocks: true)
-    # 引用ができなくなるのを防ぐため、エスケープ後 「>」 記号だけ元に戻す。
-    toc = html_toc.render(text)
-    toc = "<h1>#{tc(:index_title)}</h1> #{toc}<hr>" unless toc.blank?
-    toc
-  end
-
-  def markdown(text, with_toc=true)
-    renderer = ArticlesRenderer.new(with_toc_data: true)
-    markdown = Redcarpet::Markdown.new(
-      renderer,
-      autolink: true,
-      space_after_headers: false,
-      fenced_code_blocks: true,
-      tables: true,
-      strikethrough: true,
-      superscript: true
-    )
-    # 引用ができなくなるのを防ぐため、エスケープ後 「>」 記号だけ元に戻す。
-    text = html_escape(text).gsub("&gt;", ">").gsub(/\r?\n/, "  \n")
-    toc = with_toc ? markdown_toc(text) : ""
-    text.sub!(/^#{NO_TOC_TEXT}/, "")
-    html = markdown.render(parse_filename(text)).gsub("&amp;", "&")
-    toc + html
+  def markdown_toc(markdown)
+    without_code_block_markdown = Lodge::Markdown::CodeBlockEraser.erase(markdown)
+    toc_renderer = Qiita::Markdown::Greenmat::HTMLToCRenderer.new
+    markdown = ::Greenmat::Markdown.new(toc_renderer)
+    
+    pipeline_context = { asset_root: "#{root_path}images", base_url: root_path }
+    pipeline_filters = [
+      HTML::Pipeline::EmojiFilter,
+      Lodge::Markdown::Filters::TOC
+    ]
+    pipeline = HTML::Pipeline.new(pipeline_filters, pipeline_context)
+    result = pipeline.call(markdown.render(without_code_block_markdown))
+    return "" if result[:output].nil?
+    result[:output].to_html
   end
 
   def user_name_with_icon(user)

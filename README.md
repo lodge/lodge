@@ -140,6 +140,16 @@ http://lodge-sample.herokuapp.com/
     LODGE_THEME       = lodge
     ```
 
+## 絵文字の準備
+
+[github/gemoji](https://github.com/github/gemoji)を利用して各種絵文字を利用できます。
+
+絵文字をダウンロードする為、以下のコマンドを実行します。
+
+```bash
+bundle exec rake emoji
+```
+
 ## 起動
 
 1. カレントディレクトリを移動します。

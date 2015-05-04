@@ -54,7 +54,7 @@ class ArticlesController < ApplicationController
   # POST /articles/preview
   def preview
     respond_to do |format|
-      response_html = ArticlesController.helpers.markdown(params[:body], false)
+      response_html = ArticlesController.helpers.markdown(params[:body])
       format.js { render text: response_html }
     end
   end

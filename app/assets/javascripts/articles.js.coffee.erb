@@ -34,3 +34,15 @@ $ ->
     ]
   })
 
+  # ToC toggle
+  $(document).on 'click', '.markdown-toc h1', (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    e.stopImmediatePropagation()
+    $tocArea = $(this).parent()
+    $ul = $(this).siblings('ul')
+    $ul.toggle()
+    if $ul.is(':visible')
+      $tocArea.css('width', 'inherit')
+    else
+      $tocArea.css('width', '')
