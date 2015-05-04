@@ -1,0 +1,7 @@
+# Remove any languages you don't want analyzed.
+languages:
+   Ruby: true
+   JavaScript: true
+# For all languages, we support a standard set of Glob patterns.
+exclude_paths:
+  - public/assets/application-*.js
