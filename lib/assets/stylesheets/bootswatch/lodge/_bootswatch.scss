@@ -15,6 +15,10 @@ p {
   margin: 10px 0;
 }
 
+hr {
+  border-color: #ddd;
+}
+
 .navbar-text {
   margin: 7px 5px;
 }
@@ -115,20 +119,27 @@ nav.well {
     border-radius: 3px;
   }
 
-  .code-filename {
-    background-color: darken($pre-bg, 3);
-    border: 1px solid #ccc;
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
-    padding: 3px 5px;
+  .code-frame {
+    .code-lang {
+      background-color: darken($pre-bg, 3);
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      padding: 3px 5px;
+    }
+
+    .highlight {
+      border: 1px solid $pre-border-color;
+      border-radius: 4px;
+    }
+
+    pre {
+      margin: 0;
+      border: none;
+    }
   }
 
-  .CodeRay {
-    border: 1px solid $pre-border-color;
-    border-radius: 4px;
-  }
-
-  .code-filename + .CodeRay {
+  .code-lang + .highlight {
     border-radius: 0 0 4px 4px;
   }
 }

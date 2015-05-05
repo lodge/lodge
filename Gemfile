@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-
-gem 'nokogiri', '~> 1.6'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1'
 # Use SCSS for stylesheets
@@ -44,11 +41,8 @@ gem 'awesome_print', '~> 1.2'
 gem 'foreigner', '~> 1.6'
 gem 'railroady', '~> 1.1'
 gem 'acts-as-taggable-on', '~> 3.3'
-gem 'redcarpet', '~> 3.1'
 gem 'thin', '~> 1.6'
 gem 'kaminari', '~> 0.16'
-gem 'coderay', '~> 1.1'
-gem 'coderay_bash', '~> 1.0'
 gem 'diffy', '~> 3.0'
 gem 'yaml_db'
 gem 'activerecord-import', '~> 0.5'
@@ -63,6 +57,7 @@ gem 'compass-rails', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
+gem 'qiita-markdown'
 
 group :development do
   gem 'bullet'
@@ -91,6 +86,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'rspec-parameterized'
+  gem "codeclimate-test-reporter", group: :test, require: nil
 end
 
 # Include database gems for the adapters found in the database

@@ -1,6 +1,11 @@
 ## Change Log
 
-### v0.11.0 (2015/04/29 23:15 +00:00)
+### v0.11.1 (2015/05/05 07:10 +00:00)
+- [#143](https://github.com/lodge/lodge/pull/143) Change markdown parser to qiita-markdown. (@m-yamashita)
+- [#142](https://github.com/lodge/lodge/pull/142) Add setting for codeclimate (@m-yamashita)
+
+### v0.11.0 (2015/04/30 00:15 +00:00)
+- [#141](https://github.com/lodge/lodge/pull/141) Release 0.11.0 (@m-yamashita, @comutt, @yuki24, @kakusuke, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s)
 - [#140](https://github.com/lodge/lodge/pull/140) Add pubic edit feature. (@m-yamashita, @comutt, @yuki24, @kakusuke, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s)
 
 ### v0.10.3 (2015/04/29 01:20 +00:00)

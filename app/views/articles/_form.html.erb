@@ -26,7 +26,7 @@
   <div class="form-group form-editor">
     <%= render partial: "layouts/editor", locals: {form: f} %>
   </div>
-  <div class="preview-area markdown"></div>
+  <div class="preview-area markdown codehilite"></div>
   <div class="actions">
     <% is_edit ||= false %>
     <% if is_edit == false || @article.user_id == current_user.id %>
