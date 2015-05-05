@@ -41,8 +41,9 @@ $ ->
     e.stopImmediatePropagation()
     $tocArea = $(this).parent()
     $ul = $(this).siblings('ul')
-    $ul.toggle()
     if $ul.is(':visible')
-      $tocArea.css('width', 'inherit')
+      $ul.hide()
+      $tocArea.attr('data-opened', 'false')
     else
-      $tocArea.css('width', '')
+      $ul.show()
+      $tocArea.attr('data-opened', 'true')

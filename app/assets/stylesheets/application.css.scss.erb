@@ -159,15 +159,17 @@ h1 {
 }
 
 .markdown .markdown-toc {
-  width: 70px;
   border: 1px solid $gray-light;
   @include border-radius($border-radius-base);
+  width: 70px;
+
   h1 {
     background-color: lighten($gray-light, 10%);
     box-shadow: inset 1px 1px 15px -5px #fff;
-    @include border-radius($border-radius-base);
     font-size: $font-size-h3 * 0.7;
     margin: 0;
+    @include border-radius($border-radius-base);
+
     &:hover {
       background-color: lighten($gray-light, 15%);
       cursor: pointer;
@@ -175,8 +177,21 @@ h1 {
   }
 
   > ul {
-    display: none;
     margin-top: 15px;
+    display: none;
+  }
+
+  &[data-opened="true"] {
+    width: inherit;
+
+    h1 {
+      border-radius: 4px 4px 0 0;
+      border-bottom: 1px solid $gray-light;
+    }
+
+    > ul {
+      display: block;
+    }
   }
 }
 
