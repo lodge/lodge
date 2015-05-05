@@ -13,6 +13,7 @@ module Lodge
           toc_area.add_child(toc_heading)
           toc_area.add_child(doc.children.first)
           doc.children.first.replace(toc_area_fragment)
+          doc.children << Nokogiri::HTML.fragment("<hr>")
         end
 
         private
