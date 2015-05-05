@@ -12,7 +12,7 @@
  *
  *= require css/bootstrap-tokenfield
  *= require css/tokenfield-typeahead
- *= require_tree .
+ *= require_tree ./custom_devise
  *= require_self
  */
 
@@ -148,6 +148,53 @@ h6 {
   top: auto;
 }
 
+h1 {
+  .emoji {
+    vertical-align: middle;
+  }
+}
+
+.emoji {
+  vertical-align: text-bottom;
+}
+
+.markdown .markdown-toc {
+  border: 1px solid $gray-light;
+  @include border-radius($border-radius-base);
+  width: 70px;
+
+  h1 {
+    background-color: lighten($gray-light, 10%);
+    box-shadow: inset 1px 1px 15px -5px #fff;
+    font-size: $font-size-h3 * 0.7;
+    margin: 0;
+    @include border-radius($border-radius-base);
+
+    &:hover {
+      background-color: lighten($gray-light, 15%);
+      cursor: pointer;
+    }
+  }
+
+  > ul {
+    margin-top: 15px;
+    display: none;
+  }
+
+  &[data-opened="true"] {
+    width: inherit;
+
+    h1 {
+      border-radius: 4px 4px 0 0;
+      border-bottom: 1px solid $gray-light;
+    }
+
+    > ul {
+      display: block;
+    }
+  }
+}
+
 .markdown {
 
   line-height: 1.3em;
@@ -227,17 +274,6 @@ h6 {
   .code-filename {
   }
 
-  // fix CodeRay design
-  .CodeRay {
-    margin-bottom: 10px;
-
-    pre {
-      font-size: 100%;
-      line-height: 1.2em;
-      border: none;
-      margin: 0;
-    }
-  }
 }
 
 .markdown-editor.tab-content {

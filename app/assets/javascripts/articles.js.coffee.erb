@@ -34,3 +34,16 @@ $ ->
     ]
   })
 
+  # ToC toggle
+  $(document).on 'click', '.markdown-toc h1', (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    e.stopImmediatePropagation()
+    $tocArea = $(this).parent()
+    $ul = $(this).siblings('ul')
+    if $ul.is(':visible')
+      $ul.hide()
+      $tocArea.attr('data-opened', 'false')
+    else
+      $ul.show()
+      $tocArea.attr('data-opened', 'true')
