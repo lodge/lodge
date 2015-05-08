@@ -10,7 +10,7 @@ module ApplicationHelper
   def markdown_toc(markdown)
     without_code_block_markdown = Lodge::Markdown::CodeBlockEraser.erase(markdown)
     toc_renderer = Qiita::Markdown::Greenmat::HTMLToCRenderer.new
-    markdown = ::Greenmat::Markdown.new(toc_renderer)
+    markdown = ::Greenmat::Markdown.new(toc_renderer, no_intra_emphasis: true)
     
     pipeline_context = { asset_root: "#{root_path}images", base_url: root_path }
     pipeline_filters = [
