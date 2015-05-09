@@ -8,7 +8,6 @@ module Lodge
           if /^```/ === line
             is_code = !is_code 
           else
-            pp line if is_code
             new_lines << line if !is_code
           end
         end

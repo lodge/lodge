@@ -24,14 +24,14 @@
   <div class="article-detail-area panel-body">
     <div class="text-right">
       <%= tco :created_at  %>:
-      <span class="dropdown">
+      <span class="dropdown created-by">
         <%= render partial: "users/info_dropdown", locals: {user: @article.user} %> -
       </span>
       <%= @article.created_at %>
       <% if @article.update_histories.size > 0 %>
         |
         <%= tco :updated_at  %>:
-        <span class="dropdown">
+        <span class="dropdown updated-by">
           <%= render partial: "users/info_dropdown", locals: { user: @article.last_updated_user } %> -
         </span>
         <%= @article.updated_at %>

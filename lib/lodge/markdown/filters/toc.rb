@@ -7,16 +7,13 @@ module Lodge
         def call
           return if doc.children.blank?
           toc_area_fragment = Nokogiri::HTML.fragment(%Q[<div class="#{CSS_CLASS_NAME}">])
-          pp I18n.t('articles.index_title')
           toc_heading = Nokogiri::HTML.fragment(%Q[<h1>#{I18n.t('articles.index_title')}</h1>])
           toc_area = toc_area_fragment.at('div')
           toc_area.add_child(toc_heading)
           toc_area.add_child(doc.children.first)
           doc.children.first.replace(toc_area_fragment)
-          doc.children << Nokogiri::HTML.fragment("<hr>")
+          doc.children << Nokogiri::HTML.fragment('<hr>')
         end
-
-        private
       end
     end
   end
