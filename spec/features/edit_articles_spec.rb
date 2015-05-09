@@ -101,4 +101,36 @@ feature 'Edit articles', type: :feature do
       end
     end
   end
+
+  context 'when multiple articles' do
+    let(:article1_attrs) do
+      { title: 'old article1', tag_list: '1', body: 'old body' }
+    end
+    let(:article2_attrs) do
+      { title: 'old article2', tag_list: '2', body: 'old body' }
+    end
+    let(:article1) { FactoryGirl.create(:article, article1_attrs) }
+    let(:article2) { FactoryGirl.create(:article, article2_attrs) }
+
+    let(:user1) { FactoryGirl.create(:user) }
+    let(:user2) { FactoryGirl.create(:user) }
+
+    background do
+      article1.update(update_user_id: user1.id)
+      article2.update(update_user_id: user2.id)
+      login_as user1, scope: :user
+    end
+
+    scenario 'Update articles for each other users' do
+      visit article_path(article1)
+      within '.article-detail-area' do
+        expect(find('.updated-by')).to have_content user1.name
+      end
+
+      visit article_path(article2)
+      within '.article-detail-area' do
+        expect(find('.updated-by')).to have_content user2.name
+      end
+    end
+  end
 end
