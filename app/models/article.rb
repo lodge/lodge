@@ -69,7 +69,7 @@ class Article < ActiveRecord::Base
   # ===== Instance methods =====
 
   def last_updated_user
-    UpdateHistory.includes(:user).order(created_at: :desc).first.user
+    update_histories.order(created_at: :desc).first.user
   end
 
   def save
