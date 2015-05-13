@@ -56,6 +56,7 @@ en:
     sign_in_with: "Sign in with %{provider}"
     notification:
       article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
+      article_update_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' を編集しました。"
       comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"
       comment_create_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' にコメントしました。"
       comment_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' のコメントを編集しました。"
