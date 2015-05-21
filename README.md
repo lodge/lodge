@@ -106,8 +106,6 @@ http://lodge-sample.herokuapp.com/
     ```
 
 1. `bundle install --path vendor/bundle` を実行し、依存ライブラリをインストールします。
-1. `bundle exec rake db:create RAILS_ENV=production` を実行し、データベースを作成します。
-1. `bundle exec rake db:migrate RAILS_ENV=production` を実行し、テーブルを作成します。
 1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。最低限設定が必要な項目は以下の通りです。
 
     ```ruby
@@ -139,6 +137,8 @@ http://lodge-sample.herokuapp.com/
     # テーマを設定します。
     LODGE_THEME       = lodge
     ```
+1. `bundle exec rake db:create RAILS_ENV=production` を実行し、データベースを作成します。
+1. `bundle exec rake db:migrate RAILS_ENV=production` を実行し、テーブルを作成します。
 
 ## 絵文字の準備
 
