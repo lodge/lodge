@@ -1,6 +1,17 @@
 ## Change Log
 
-### v0.11.0 (2015/04/29 23:15 +00:00)
+### v0.11.2 (2015/05/09 10:36 +00:00)
+- [#148](https://github.com/lodge/lodge/pull/148) 記事の最終更新者が、全記事内で共通になってしまう不具合の修正 (@m-yamashita)
+- [#147](https://github.com/lodge/lodge/pull/147) Fix ui and styles (@m-yamashita)
+- [#146](https://github.com/lodge/lodge/pull/146) 不要な pp があるせいで環境によってはエラーとなってしまうバグを修正 (@m-yamashita)
+
+### v0.11.1 (2015/05/05 08:11 +00:00)
+- [#144](https://github.com/lodge/lodge/pull/144) Release 0.11.1 (@m-yamashita)
+- [#143](https://github.com/lodge/lodge/pull/143) Change markdown parser to qiita-markdown. (@m-yamashita)
+- [#142](https://github.com/lodge/lodge/pull/142) Add setting for codeclimate (@m-yamashita)
+
+### v0.11.0 (2015/04/30 00:15 +00:00)
+- [#141](https://github.com/lodge/lodge/pull/141) Release 0.11.0 (@m-yamashita, @comutt, @yuki24, @kakusuke, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s)
 - [#140](https://github.com/lodge/lodge/pull/140) Add pubic edit feature. (@m-yamashita, @comutt, @yuki24, @kakusuke, @yasuhiroki, @shiena, @dddaisuke, @joe-re, @tasuku-s)
 
 ### v0.10.3 (2015/04/29 01:20 +00:00)
