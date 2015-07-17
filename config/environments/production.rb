@@ -101,4 +101,6 @@ Rails.application.configure do
     :authentication       => ENV["SMTP_AUTH_METHOD"].to_sym,
     :enable_starttls_auto => ENV["SMTP_ENABLE_STARTTLS_AUTO"],
   }
+
+  config.action_mailer.smtp_settings[:openssl_verify_mode] = ENV["SMTP_OPENSSL_VERIFY_MODE"] if ENV["SMTP_OPENSSL_VERIFY_MODE"].present?
 end
