@@ -15,8 +15,8 @@
     <%= javascript_include_tag 'externals/respond.min', 'data-turbolinks-track' => true %>
     <![endif]-->
     <%= stylesheet_link_tag "pygments-css/#{ENV['SYNTAX_HIGHLIGHT_THEME']}", media: 'all', 'data-turbolinks-track' => true %>
-    <%= stylesheet_link_tag controller.controller_name, media: "all" %>
-    <%= javascript_include_tag controller.controller_name %>
+    <%= controller_stylesheet_link_tag %>
+    <%= controller_javascript_include_tag %>
   </head>
   <body>
 
@@ -27,7 +27,8 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-xs-4">
-              <h1 class="navbar-header"><%= link_to "Lodge", root_path, class: ["nav", "navbar-brand"] %></h1>
+              <% title_link_url = (ENV['TITLE_LINK_URL'] == 'articles') ? articles_path : root_path %>
+              <h1 class="navbar-header"><%= link_to "Lodge", title_link_url, class: ["nav", "navbar-brand"] %></h1>
             </div>
             <div class="col-xs-8">
               <div class="row">

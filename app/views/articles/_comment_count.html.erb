@@ -1,3 +1,3 @@
 <%= content_tag :span, title: tco(:comment) do %>
-  <a href="#comment-list-title"><%= image_tag "comment.png" %><%= article.comments.size %></a>
+  <%= link_to "#{image_tag('comment.png')}#{article.comments.size}".html_safe, "#{article_path(article.id)}#comment-list-title" %>
 <% end %>
