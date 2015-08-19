@@ -30,6 +30,11 @@ gem 'spring',        group: :development
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8'
 
+# Use sunspot as the search engine.
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+gem 'progress_bar'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

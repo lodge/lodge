@@ -25,7 +25,23 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def search
-    @articles = Article.search(params[:query], params[:page])
+    words = params[:query].split(' ')
+    query = words.select{ |w| w !~ /^tag:/ }.join('')
+    pp query
+    article_search = Article.search do
+      fulltext query do
+        highlight :body
+      end
+      tags = (words.map do |w|
+        next if w == 'tag:' || w !~ /^tag:/
+        w.sub('tag:', '').downcase
+      end).compact
+      tags = [] if tags.nil?
+      with(:tags).all_of(tags)
+      paginate :page => params[:page], :per_page => LodgeSettings.per_size
+    end
+    result = article_search.results
+    @articles = result
   end
 
   # GET /articles/stocks
