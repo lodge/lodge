@@ -1,5 +1,20 @@
 # Change Log
 
+## [v0.11.4](https://github.com/lodge/lodge/tree/HEAD)
+
+[Full Changelog](https://github.com/lodge/lodge/compare/v0.11.4...HEAD)
+
+**Closed issues:**
+
+- メール送信時のCertificate Verify Failed対策 [\#156](https://github.com/lodge/lodge/issues/156)
+
+## [v0.11.4](https://github.com/lodge/lodge/tree/v0.11.4) (2015-08-19)
+[Full Changelog](https://github.com/lodge/lodge/compare/v0.11.3...v0.11.4)
+
+**Merged pull requests:**
+
+- Fix lodge libraries. [\#164](https://github.com/lodge/lodge/pull/164) ([m-yamashita](https://github.com/m-yamashita))
+
 ## [v0.11.3](https://github.com/lodge/lodge/tree/v0.11.3) (2015-08-12)
 [Full Changelog](https://github.com/lodge/lodge/compare/v0.11.2...v0.11.3)
 
@@ -9,6 +24,7 @@
 
 **Merged pull requests:**
 
+- Release v0.11.3 [\#163](https://github.com/lodge/lodge/pull/163) ([m-yamashita](https://github.com/m-yamashita))
 - Add settings into the .env for configuring url to the header title link. [\#162](https://github.com/lodge/lodge/pull/162) ([m-yamashita](https://github.com/m-yamashita))
 - Add pipeline filter for opening link with new browser tab. [\#161](https://github.com/lodge/lodge/pull/161) ([m-yamashita](https://github.com/m-yamashita))
 - Add localized message. [\#160](https://github.com/lodge/lodge/pull/160) ([m-yamashita](https://github.com/m-yamashita))
@@ -120,6 +136,8 @@
 - テストコード作成 [\#22](https://github.com/lodge/lodge/issues/22)
 - タグ入力補完\(新規作成/編集時\) [\#7](https://github.com/lodge/lodge/issues/7)
 - Markdown記法のマニュアルを表示できる機能 [\#6](https://github.com/lodge/lodge/issues/6)
+- 投稿時にDnDで画像を添付できるような機能を追加 [\#94](https://github.com/lodge/lodge/pull/94) ([kakusuke](https://github.com/kakusuke))
+- Modified Gemfile [\#87](https://github.com/lodge/lodge/pull/87) ([comutt](https://github.com/comutt))
 
 **Fixed bugs:**
 
@@ -145,12 +163,10 @@
 - add extension white list [\#101](https://github.com/lodge/lodge/pull/101) ([kakusuke](https://github.com/kakusuke))
 - 記事一覧のリファクタ [\#99](https://github.com/lodge/lodge/pull/99) ([kakusuke](https://github.com/kakusuke))
 - config/routes.rb の構造化 [\#98](https://github.com/lodge/lodge/pull/98) ([kakusuke](https://github.com/kakusuke))
-- 投稿時にDnDで画像を添付できるような機能を追加 [\#94](https://github.com/lodge/lodge/pull/94) ([kakusuke](https://github.com/kakusuke))
 - Markdown記法のヘルプを表示できる機能を追加 [\#93](https://github.com/lodge/lodge/pull/93) ([kami30k](https://github.com/kami30k))
 - タグ入力補完機能の実装 [\#92](https://github.com/lodge/lodge/pull/92) ([kakipo](https://github.com/kakipo))
 - Bootstrapのバージョンアップに伴うフォントを読み込めなくなる不具合への対応 [\#91](https://github.com/lodge/lodge/pull/91) ([kakusuke](https://github.com/kakusuke))
 - アダプタのバージョン固定 [\#88](https://github.com/lodge/lodge/pull/88) ([kakusuke](https://github.com/kakusuke))
-- Modified Gemfile [\#87](https://github.com/lodge/lodge/pull/87) ([comutt](https://github.com/comutt))
 - Removed and ignored db/schema.rb \(fixes \#82\) [\#86](https://github.com/lodge/lodge/pull/86) ([comutt](https://github.com/comutt))
 - タグフォローのAjax化 [\#85](https://github.com/lodge/lodge/pull/85) ([kakusuke](https://github.com/kakusuke))
 - ストックのAjax化 [\#84](https://github.com/lodge/lodge/pull/84) ([kakusuke](https://github.com/kakusuke))
