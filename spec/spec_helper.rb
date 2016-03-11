@@ -14,12 +14,24 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
 require 'coveralls'
 Coveralls.wear!('rails')
+
+
+# Fix "undefined method" to matchers of shoulda-matchers
+# These code came from https://github.com/thoughtbot/shoulda/issues/203#issuecomment-187430142
+require 'active_support/test_case'
+require 'action_controller'
+require "shoulda/matchers"
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 
 RSpec.configure do |config|
 # The settings below are suggested to provide a good initial experience
