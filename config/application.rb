@@ -22,5 +22,10 @@ module Lodge
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.time_zone = "Tokyo"
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.browserify_rails.commandline_options = '-t [ babelify --presets [ es2015 ] ]'
+    config.react.jsx_transform_options = {
+      optional: ["es7.classProperties"]
+    }
   end
 end
