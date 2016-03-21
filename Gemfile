@@ -58,6 +58,7 @@ gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
 gem 'qiita-markdown'
+gem 'browserify-rails'
 gem 'react-rails', '~> 1.6.0'
 
 group :development do
