@@ -1,0 +1,1 @@
+window.marked = require('marked');
