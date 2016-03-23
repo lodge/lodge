@@ -1,7 +1,7 @@
 <%= form.label :body %>
 <%= react_component('Editor', {
-  markdown: form.object.body,
-  id: "#{form.object_name}_body",
-  nameAttr: "#{form.object_name}[body]"
+  defaultValue: form.object.body,
+  objectName: form.object_name,
+  fieldName: 'body'
 }) %>
 <%= render 'articles/markdown_help' %>
