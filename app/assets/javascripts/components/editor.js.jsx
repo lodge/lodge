@@ -1,16 +1,28 @@
 class Editor extends React.Component {
+  static propTypes = {
+    markdown: React.PropTypes.string,
+    id: React.PropTypes.string.isRequired,
+    nameAttr: React.PropTypes.string.isRequired
+  }
+
   state = {
-    markdown: ''
+    markdown: this.props.markdown || ''
   }
   updateMarkdown = (markdown) => {
     this.setState({ markdown: markdown });
   }
 
   render() {
+    let markdown = this.state.markdown;
     return (
-      <div>
-        <EditorMarkdown onChange={ this.updateMarkdown } />
-        <EditorPreview markdown={ this.state.markdown } />
+      <div className="markdown-editor row">
+        <EditorMarkdown
+          id={ this.props.id }
+          nameAttr={ this.props.nameAttr }
+          onChange={ this.updateMarkdown }>
+          { markdown }
+        </EditorMarkdown>
+        <EditorPreview markdown={ markdown } />
       </div>
     );
   }
@@ -18,6 +30,8 @@ class Editor extends React.Component {
 
 class EditorMarkdown extends React.Component {
   static propTypes = {
+    id: React.PropTypes.string.isRequired,
+    nameAttr: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired
   }
 
@@ -27,7 +41,14 @@ class EditorMarkdown extends React.Component {
 
   render() {
     return (
-      <textarea onChange={ this._onChange } />
+      <div className="col-xs-6">
+        <textarea
+          id={ this.props.id }
+          className="editor-textarea form-control"
+          name={ this.props.nameAttr }
+          value={ this.props.children }
+          onChange={ this._onChange } />
+      </div>
     );
   }
 }
@@ -43,7 +64,9 @@ class EditorPreview extends React.Component {
 
   render() {
     return (
-      <div dangerouslySetInnerHTML={ this.rawMarkup() } />
+      <div
+        className="markdown codehilite col-xs-6"
+        dangerouslySetInnerHTML={ this.rawMarkup() } />
     );
   }
 }
