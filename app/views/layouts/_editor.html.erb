@@ -2,6 +2,7 @@
 <%= react_component('Editor', {
   defaultValue: form.object.body,
   objectName: form.object_name,
-  fieldName: 'body'
+  fieldName: 'body',
+  url: preview_articles_path
 }) %>
 <%= render 'articles/markdown_help' %>
