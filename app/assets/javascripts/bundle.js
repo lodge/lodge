@@ -1,1 +1,1 @@
-window.marked = require('marked');
+window.request = require('axios');
