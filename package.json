@@ -7,6 +7,7 @@
     "browserify-incremental": "^3.1.0"
   },
   "dependencies": {
-    "axios": "^0.9.1"
+    "axios": "^0.9.1",
+    "lodash.throttle": "^4.0.1"
   }
 }
