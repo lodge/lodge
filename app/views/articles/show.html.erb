@@ -52,8 +52,8 @@
   </div>
 
   <div class="panel-body markdown codehilite">
-    <%= markdown_toc(@article.body).html_safe %>
-    <%= markdown(@article.body).html_safe %>
+    <%== markdown_toc(@article.body) %>
+    <%== markdown(@article.body) %>
   </div>
 </div>
 
@@ -78,7 +78,7 @@
           </div>
         </div>
         <div class="list-group-body markdown codehilite">
-          <%= markdown(comment.body).html_safe %>
+          <%== markdown(comment.body) %>
         </div>
         <% if comment.user == current_user %> 
           <%= render 'comments/form', hide: true, comment: comment %>

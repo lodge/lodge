@@ -5,7 +5,7 @@ module ApplicationHelper
     processor = Qiita::Markdown::Processor.new
     processor.filters << Lodge::Markdown::Filters::TargetBlankLink
     result = processor.call(markdown)
-    result[:output].to_html
+    result[:output]
   end
 
   def markdown_toc(markdown_text)
@@ -21,8 +21,7 @@ module ApplicationHelper
     ]
     pipeline = HTML::Pipeline.new(pipeline_filters, pipeline_context)
     result = pipeline.call(markdown.render(without_code_block_markdown))
-    return '' if result[:output].nil?
-    result[:output].to_html
+    result[:output]
   end
 
   def user_name_with_icon(user)
