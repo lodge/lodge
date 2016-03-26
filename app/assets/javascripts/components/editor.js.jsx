@@ -1,3 +1,5 @@
+const AUTO_PREVIEW_INTERVAL = 1000;
+
 class Editor extends React.Component {
   static propTypes = {
     defaultValue: React.PropTypes.string,
@@ -5,7 +7,14 @@ class Editor extends React.Component {
     fieldName: React.PropTypes.string.isRequired,
     url: React.PropTypes.string.isRequired
   }
-  state = { html: '' }
+  constructor(props) {
+    super(props);
+
+    this.state = { html: '' }
+    this.preview = throttle(this.preview, AUTO_PREVIEW_INTERVAL, {
+      leading: false
+    });
+  }
   componentDidMount() {
     this.preview(this.props.defaultValue);
   }
