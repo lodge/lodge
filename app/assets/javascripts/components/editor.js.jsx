@@ -30,9 +30,11 @@ class Editor extends React.Component {
   handleChange = (e) => {
     this.preview(e.target.value);
   }
+  handleMouseMove = (e) => {
+    this.matchTheHeight(e);
+  }
   handleMouseUp = (e) => {
-    const height = e.target.offsetHeight;
-    this.setState({ height });
+    this.matchTheHeight(e);
   }
   compile = (rawMarkdown) => {
     const token = document.querySelector('meta[name=csrf-token]').content;
@@ -55,6 +57,10 @@ class Editor extends React.Component {
       this.setState({ html: rawMarkdown });
     });
   }
+  matchTheHeight = (e) => {
+    const height = e.target.offsetHeight;
+    this.setState({ height });
+  }
 
   render() {
     const { html, height } = this.state;
@@ -64,6 +70,7 @@ class Editor extends React.Component {
       <div className={ `${className} row` }>
         <EditorMarkdown { ...this.props }
           onChange={ this.handleChange }
+          onMouseMove={ this.handleMouseMove }
           onMouseUp={ this.handleMouseUp } />
         <EditorPreview className={ className }
           html={ html }
@@ -75,6 +82,7 @@ class Editor extends React.Component {
 
 const EditorMarkdown = ({
   onChange,
+  onMouseMove,
   onMouseUp,
   className,
   objectName,
@@ -88,6 +96,7 @@ const EditorMarkdown = ({
       name={ `${objectName}[${fieldName}]` }
       defaultValue={ defaultValue }
       onChange={ onChange }
+      onMouseMove={ onMouseMove }
       onMouseUp={ onMouseUp } />
   </div>
 );
