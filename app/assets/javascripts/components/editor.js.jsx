@@ -2,6 +2,7 @@ const AUTO_PREVIEW_INTERVAL = 1000;
 
 class Editor extends React.Component {
   static propTypes = {
+    className: React.PropTypes.string.isRequired,
     defaultValue: React.PropTypes.string,
     objectName: React.PropTypes.string.isRequired,
     fieldName: React.PropTypes.string.isRequired,
@@ -10,20 +11,31 @@ class Editor extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { html: '' }
+    this.state = {
+      html: '',
+      height: 0
+    }
     this.preview = throttle(this.preview, AUTO_PREVIEW_INTERVAL, {
       leading: false
     });
   }
   componentDidMount() {
+    const className = `.${this.props.className}__textarea`;
+    const height = document.querySelector(className).offsetHeight;
+    this.setState({ height });
+
     this.preview(this.props.defaultValue);
   }
 
   handleChange = (e) => {
     this.preview(e.target.value);
   }
+  handleMouseUp = (e) => {
+    const height = e.target.offsetHeight;
+    this.setState({ height });
+  }
   compile = (rawMarkdown) => {
-    let token = document.querySelector('meta[name=csrf-token]').content;
+    const token = document.querySelector('meta[name=csrf-token]').content;
 
     return request.post(this.props.url, {
       body: rawMarkdown,
@@ -45,12 +57,17 @@ class Editor extends React.Component {
   }
 
   render() {
-    let { html } = this.state;
+    const { html, height } = this.state;
+    const { className } = this.props;
+
     return (
-      <div className="markdown-editor row">
+      <div className={ `${className} row` }>
         <EditorMarkdown { ...this.props }
-          onChange={ this.handleChange } />
-        <EditorPreview html={ html } />
+          onChange={ this.handleChange }
+          onMouseUp={ this.handleMouseUp } />
+        <EditorPreview className={ className }
+          html={ html }
+          height={ height } />
       </div>
     );
   }
@@ -58,6 +75,8 @@ class Editor extends React.Component {
 
 const EditorMarkdown = ({
   onChange,
+  onMouseUp,
+  className,
   objectName,
   fieldName,
   defaultValue
@@ -65,17 +84,21 @@ const EditorMarkdown = ({
   <div className="col-xs-6">
     <textarea
       id={ `${objectName}_${fieldName}` }
-      className="editor-textarea form-control"
+      className={ `${className}__textarea editor-textarea form-control` }
       name={ `${objectName}[${fieldName}]` }
       defaultValue={ defaultValue }
-      onChange={ onChange } />
+      onChange={ onChange }
+      onMouseUp={ onMouseUp } />
   </div>
 );
 
 const EditorPreview = ({
-  html
+  className,
+  html,
+  height
 }) => (
-  <div className="markdown codehilite col-xs-6"
+  <div className={ `${className}__previewarea markdown codehilite col-xs-6` }
+    style={ { height } }
     dangerouslySetInnerHTML={
       { __html: html }
     } />
