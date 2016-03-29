@@ -5,18 +5,18 @@ rvm:
     - 2.3.0
     - ruby-head
 env:
-    - DB=sqlite
-    - DB=mysql
-    - DB=postgresql
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
 before_script:
-    - cp config/database.test.yml config/database.yml
-    - cp .env.example .env
-    - bundle install
+  - cp config/database.test.yml config/database.yml
+  - cp .env.example .env
+  - bundle install
 script:
-    - RAILS_ENV=test bin/rake db:create --trace
-    - RAILS_ENV=test bin/rake db:migrate --trace
-    - RAILS_ENV=test bin/rake emoji
-    - RAILS_ENV=test bin/rake spec --trace
+  - bin/rake db:create --trace
+  - bin/rake db:migrate --trace
+  - bin/rake emoji
+  - bin/rake spec --trace
 notifications:
   webhooks:
     urls:
