@@ -11,7 +11,7 @@ feature 'Edit articles', type: :feature do
       fill_in I18n.t('activerecord.attributes.article.title'), with: new_title
       fill_in_autocomplete('#article_tag_list', new_tags.join(','))
       fill_in I18n.t('activerecord.attributes.article.body'), with: new_body
-      click_button I18n.t('helpers.submit.update')
+      find_button(I18n.t('helpers.submit.update')).click
 
       expect(page).to have_content(new_title)
       new_tags.each do |tag|
