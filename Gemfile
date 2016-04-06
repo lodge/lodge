@@ -101,7 +101,7 @@ if File.exist?(database_file)
     adapters.each do |adapter|
       case adapter
       when 'mysql2'
-        gem "mysql2", '~> 0.3'
+        gem "mysql2", '~> 0.3.20'
       when /postgresql/
         gem "pg", '~> 0.17'
       when /sqlite3/
