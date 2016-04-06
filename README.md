@@ -63,7 +63,7 @@ http://lodge-sample.herokuapp.com/
 ## インストール
 
 1. 事前準備として以下が必要ですので、インストールしておきます。
-    - Ruby 2.0以上
+    - Ruby 2.1
     - Gem 2.2以上
     - MySQL (MySQLを利用する場合)
     - sqlite3 (sqlite3を利用する場合)
