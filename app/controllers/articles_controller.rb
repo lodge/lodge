@@ -19,28 +19,35 @@ class ArticlesController < ApplicationController
   end
 
   def draft
-    @articles = Article.owned_draft(current_user).page(params[:page]).per(PER_SIZE)
+    @articles = Article.owned_draft(current_user)
+      .page(params[:page])
+      .per(PER_SIZE)
   end
 
   # GET /articles
   # GET /articles.json
   def search
-    words = params[:query].split(' ')
-    query = words.select{ |w| w !~ /^tag:/ }.join('')
-    pp query
+    query = parse_query
+    p query
     article_search = Article.search do
-      fulltext query do
-        highlight :body
-      end
-      tags = (words.map do |w|
-        next if w == 'tag:' || w !~ /^tag:/
-        w.sub('tag:', '').downcase
-      end).compact
-      tags = [] if tags.nil?
-      with(:tags).all_of(tags)
+      fulltext query[:text]
+      with(:tags).all_of(query[:tags]) if query[:tags].present?
+      with(:user, query[:users].first) if query[:users].present?
+      order_by(:created_at, :desc)
       paginate :page => params[:page], :per_page => LodgeSettings.per_size
     end
     result = article_search.results
+    unless query[:stocked].nil?
+      result.select! do |r|
+        if query[:stocked]
+          r.stocks.pluck(:user_id).include?(current_user.id)
+        elsif query[:stocked] == false
+          r.stocks.pluck(:user_id).exclude?(current_user.id)
+        else
+          r
+        end
+      end
+    end
     @articles = result
   end
 
@@ -163,5 +170,33 @@ class ArticlesController < ApplicationController
 
   def owner?
     @article.user_id == current_user.id
+  end
+
+  def parse_query
+    p_query = params[:query].dup
+    query = {}
+    # tags
+    query[:tags] = p_query.scan(/tag: *\w+/).map do |t|
+      t.sub(/tag: */, '').downcase
+    end
+    p_query.gsub!(/tag: *\w+/, '')
+
+    # user
+    query[:users] = p_query.scan(/user: *\w+/).map do |u|
+      u.sub(/user: */, '').downcase
+    end
+    p_query.gsub!(/user: *\w+/, '')
+
+    # stocked
+    if (matched = p_query.match(/stocked: *(true|false)/)).present?
+      query[:stocked] = (matched[1] == 'true')
+    else
+      query[:stocked] = nil
+    end
+    p_query.gsub!(/stocked: *\w+/, '')
+
+    # text
+    query[:text] = p_query
+    query
   end
 end

@@ -34,11 +34,18 @@ class Article < ActiveRecord::Base
   # ===== SunSpot =====
   searchable do
     text :title, :body, :stored => true
+    text :comments do
+      comments.map { |comment| comment.body }
+    end
+    string :user do
+      user.name.downcase
+    end
     string :tags, :multiple => true do
       tags.map do |t|
         t.name.downcase
       end
     end
+    time :created_at
   end
 
   # ===== Class methods =====
