@@ -8,6 +8,7 @@ RSpec.describe UpdateHistory, :type => :model do
 
     before do
       article.title = "modify title"
+      article.update_user_id = article.user_id
     end
 
     it "is created" do
@@ -20,6 +21,7 @@ RSpec.describe UpdateHistory, :type => :model do
 
     before do
       draft.title = "modify title"
+      draft.update_user_id = draft.user_id
     end
 
     it "is created" do
