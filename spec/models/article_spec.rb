@@ -70,6 +70,36 @@ RSpec.describe Article, :type => :model do
     end
   end
 
+  describe :draft? do
+    context "when new record" do
+      subject { FactoryGirl.build(:article) }
+
+      it { should be_draft }
+    end
+
+    context "when draft record" do
+      subject { FactoryGirl.create(:draft) }
+
+      it { should be_draft }
+    end
+
+    context "when published record" do
+      subject { FactoryGirl.create(:article) }
+
+      it { should_not be_draft }
+    end
+  end
+
+  describe :owned_draft do
+    let(:draft1) { FactoryGirl.create(:draft) }
+    let(:draft2) { FactoryGirl.create(:draft) }
+    before { [draft1, draft2] }
+
+    subject { Article.owned_draft(draft1.user) }
+
+    it { should contain_exactly(draft1) }
+  end
+
   describe :save do
     let(:article) { FactoryGirl.create(:article) }
     let(:before_user) { FactoryGirl.create(:user) }

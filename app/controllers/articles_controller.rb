@@ -18,6 +18,10 @@ class ArticlesController < ApplicationController
     @articles = Article.feed_list(current_user, params[:page])
   end
 
+  def draft
+    @articles = Article.owned_draft(current_user).page(params[:page]).per(PER_SIZE)
+  end
+
   # GET /articles
   # GET /articles.json
   def search
@@ -127,7 +131,7 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:user_id, :title, :body, :tag_list, :lock_version, :is_public_editable)
+    params.require(:article).permit(:user_id, :title, :body, :tag_list, :published, :lock_version, :is_public_editable)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

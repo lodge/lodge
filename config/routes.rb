@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get :feed
       get :owned, path: "user/:user_id"
       get :tagged, path: "tag/:tag", format: false, tag: /.*/
+      get "draft"
     end
 
     member do

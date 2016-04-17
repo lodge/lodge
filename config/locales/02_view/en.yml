@@ -33,10 +33,13 @@ en:
     updated_at: Updated at
     stock: Stock
     unstock: Unstock
+    publish: Publish
     comment: Comments
     back: Back
     freeze: Freeze
     more_display: More
+    new_post: New post
+    draft_list: Drafts
     feed_article_list_title: Listing articles of your feed.
     recent_article_list_title: Listing recent articles.
     article_search: Search articles by title
@@ -111,6 +114,7 @@ en:
     tags_hint: 
     tags_example: Ruby, Git, Linux, MySQL, ...
     body_hint: (Markdown)
+    publish: Publish
     comments_title: Comments
     comment_form_title: New comment
     preview: Preview

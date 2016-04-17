@@ -3,7 +3,7 @@ class Stock < ActiveRecord::Base
   belongs_to :article
   after_create :create_notification
 
-  validates_uniqueness_of :user, :scope => :article
+  validates_uniqueness_of :user_id, :scope => :article_id
 
   def create_notification
     article = self.article

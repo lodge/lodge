@@ -10,7 +10,7 @@ class Article < ActiveRecord::Base
   has_many :update_histories
   has_many :notifications
   has_many :article_notifications
-  before_update :create_history
+  before_update :create_history, unless: :draft?
   before_update :create_notification
   has_many :stocked_users,
     -> {order "stocks.updated_at desc"},
@@ -25,10 +25,17 @@ class Article < ActiveRecord::Base
   acts_as_taggable
   alias_method :__save, :save
 
+  scope :published, -> { where(published: true) }
+  scope :draft, -> { where(published: false) }
+  scope :owned_draft, ->(user) {
+    draft.where(user_id: user.id).includes(:user, :stocks, :tags).order(:updated_at => :desc)
+  }
+
   # ===== Class methods =====
 
   def self.recent_list(page=1)
     Article
+      .published
       .includes(:user, :stocks, :tags)
       .page(page).per(PER_SIZE)
       .order(:created_at => :desc)
@@ -36,6 +43,7 @@ class Article < ActiveRecord::Base
 
   def self.feed_list(user, page=1)
     Article
+      .published
       .includes(:user, :stocks, :tags)
       .page(page).per(PER_SIZE)
       .tagged_with(user.following_tag_list, any: true)
@@ -45,7 +53,8 @@ class Article < ActiveRecord::Base
   def self.search(query, page=1)
     query = "%#{query.gsub(/([%_])/){"\\" + $1}}%"
     Article.where("title like ?", query)
-        .page(page).per(PER_SIZE).order(:created_at => :desc)
+      .published
+      .page(page).per(PER_SIZE).order(:created_at => :desc)
   end
 
   def self.stocked_by(user, page=1)
@@ -70,6 +79,10 @@ class Article < ActiveRecord::Base
 
   def last_updated_user
     update_histories.order(created_at: :desc).first.user
+  end
+
+  def draft?
+    new_record? || !published?
   end
 
   def save

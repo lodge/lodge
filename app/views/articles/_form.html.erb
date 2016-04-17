@@ -27,6 +27,13 @@
     <%= render partial: "layouts/editor", locals: {form: f} %>
   </div>
   <div class="preview-area markdown codehilite"></div>
+  <% if @article.draft? %>
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :published %> <%= tc 'publish' %>
+      <label>
+    </div>
+  <% end %>
   <div class="actions">
     <% is_edit ||= false %>
     <% if is_edit == false || @article.user_id == current_user.id %>
