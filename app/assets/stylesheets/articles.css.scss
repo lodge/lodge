@@ -11,6 +11,29 @@
   }
 }
 
+.article-title-underline {
+  border-color: #ddd;
+  margin: 0;
+}
+
+.article-detail-area {
+  line-height: 2em;
+}
+
+.comment-info {
+  &.list-group-item-heading {
+    margin-bottom: 1.5em;
+  }
+
+  &.dropdown {
+    float: left;
+  }
+
+  &.date-time {
+    text-align: right;
+  }
+}
+
 .form-editor {
   position: relative;
 
@@ -29,7 +52,6 @@
   .modal-markdown-help {
     .modal-body {
       overflow: auto;
-      max-height: 400px;
 
       table {
         th {

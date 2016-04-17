@@ -44,6 +44,7 @@ en:
     recent_article_list_title: Listing recent articles.
     article_search: Search articles by title
     tag_list_title: Tags
+    recent_tag_list_title: Recent tags
     user_article_list_title: Your posts
     stocked_article_list_title: Stocks
     popular_article_list_title: Recent popular
@@ -58,6 +59,7 @@ en:
     sign_in_with: "Sign in with %{provider}"
     notification:
       article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
+      article_update_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' を編集しました。"
       comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"
       comment_create_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' にコメントしました。"
       comment_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' のコメントを編集しました。"
@@ -144,6 +146,7 @@ en:
   tags:
     follow: Follow
     unfollow: Unfollow
+    tagging_size: "%{size} articles"
   keywords:
     list_title: Keywords
     name: Name

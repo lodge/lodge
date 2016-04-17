@@ -1,12 +1,9 @@
 source 'https://rubygems.org'
 
-
-gem 'nokogiri', '~> 1.6'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1'
+gem 'rails', '4.1.14'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0'
+gem 'sass-rails', '4.0.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.5'
 # Use CoffeeScript for .js.coffee assets and views
@@ -44,17 +41,13 @@ gem 'awesome_print', '~> 1.2'
 gem 'foreigner', '~> 1.6'
 gem 'railroady', '~> 1.1'
 gem 'acts-as-taggable-on', '~> 3.3'
-gem 'redcarpet', '~> 3.1'
-gem 'github-markdown', '~> 0.6'
 gem 'thin', '~> 1.6'
 gem 'kaminari', '~> 0.16'
-gem 'coderay', '~> 1.1'
-gem 'coderay_bash', '~> 1.0'
 gem 'diffy', '~> 3.0'
-gem 'yaml_db', git: 'https://github.com/jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
+gem 'yaml_db'
 gem 'activerecord-import', '~> 0.5'
 gem 'counter_culture', '~> 0.1'
-gem 'rails_config', '~> 0.4'
+gem 'config', '~> 1.0.0'
 gem 'dotenv-rails', '~> 0.11'
 gem 'bootstrap-sass', '~> 3.2'
 gem 'bootswatch-rails', '~> 3.2'
@@ -64,6 +57,7 @@ gem 'compass-rails', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
+gem 'qiita-markdown'
 
 group :development do
   gem 'bullet'
@@ -76,7 +70,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-its'
-  gem 'rspec-parameterized', github: 'tomykaira/rspec-parameterized'
+  gem 'rspec-parameterized'
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'
@@ -91,6 +85,8 @@ group :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'rspec-parameterized'
+  gem "codeclimate-test-reporter", group: :test, require: nil
 end
 
 # Include database gems for the adapters found in the database
@@ -105,7 +101,7 @@ if File.exist?(database_file)
     adapters.each do |adapter|
       case adapter
       when 'mysql2'
-        gem "mysql2", '~> 0.3'
+        gem "mysql2", '~> 0.3.20'
       when /postgresql/
         gem "pg", '~> 0.17'
       when /sqlite3/

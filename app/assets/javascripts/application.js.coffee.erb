@@ -27,10 +27,10 @@
 
 # Markdown preview
 $(document).on 'click', '[role="tablist"] .preview-tab', ()->
-  url = '<%= Rails.application.routes.url_helpers.preview_articles_path %>'
+  url = '<%= asset_path Rails.application.routes.url_helpers.preview_articles_path %>'
   tablist = $(this).closest '[role="tablist"]'
   tabcontent = tablist.next('.tab-content')
 
   tabcontent.find '[role="preview"] .markdown'
     .load url,
-      'preview[body]': tabcontent.find('[role="editor"] textarea').val()
+      body: tabcontent.find('[role="editor"] textarea').val()

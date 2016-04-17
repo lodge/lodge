@@ -1,27 +1,21 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :stock, :unstock]
-  before_action :check_permission, only: [:edit, :update, :destroy]
+  before_action :set_article, only: [
+    :show, :edit, :update, :destroy, :stock, :unstock
+  ]
+  before_action :check_update_permission, only: [:edit, :update]
+  before_action :check_destroy_permission, only: [:destroy]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article
-      .published
-      .includes(:user, :stocks, :tags)
-      .page(params[:page]).per(PER_SIZE)
-      .order(:updated_at => :desc)
+    @articles = Article.recent_list(params[:page])
   end
 
   # GET /articles
   # GET /articles.json
   def feed
-    @articles = Article
-      .published
-      .includes(:user, :stocks, :tags)
-      .page(params[:page]).per(PER_SIZE)
-      .tagged_with(current_user.following_tag_list, any: true)
-      .order(:updated_at => :desc)
+    @articles = Article.feed_list(current_user, params[:page])
   end
 
   def draft
@@ -31,44 +25,41 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def search
-    query = "%#{params[:query].gsub(/([%_])/){"\\" + $1}}%"
-    @articles = Article.where("title like ?", query)
-        .published
-        .page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
+    @articles = Article.search(params[:query], params[:page])
   end
 
   # GET /articles/stocks
   # GET /articles/stocks.json
   def stocked
-    @articles = current_user.stocked_articles.includes(:tags, :stocks, :user).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
+    @articles = Article.stocked_by(current_user, params[:page])
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def owned
-    @articles = current_user.articles.includes(:tags, :stocks).page(params[:page]).per(PER_SIZE).order(:updated_at => :desc)
+    @articles = Article.owned_by(current_user, params[:page])
   end
 
   # GET /articles/tag/1
   # GET /articles/tag/1.json
   def tagged
-    @articles = Article.includes(:stocks, :user).page(params[:page]).per(PER_SIZE).tagged_with(params[:tag]).order(:updated_at => :desc)
+    @articles = Article.tagged_by(params[:tag], params[:page])
     @tag = params[:tag]
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @stock = Stock.find_by(:article_id => @article.id, :user_id => current_user.id)
+    @stock = Stock.find_by(article_id: @article.id, user_id: current_user.id)
     @stocked_users = @article.stocked_users
     @article.remove_user_notification(current_user)
   end
 
   # POST /articles/preview
   def preview
-    preview = MarkdownPreview.new(preview_params)
     respond_to do |format|
-      format.js { render text: preview.body_html }
+      response_html = ArticlesController.helpers.markdown(params[:body])
+      format.js { render text: response_html }
     end
   end
 
@@ -101,6 +92,7 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
+      @article.update_user_id = current_user.id
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
@@ -139,16 +131,21 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:user_id, :title, :body, :tag_list, :published, :lock_version)
-  end
-
-  def preview_params
-    params.require(:preview).permit(:body)
+    params.require(:article).permit(:user_id, :title, :body, :tag_list, :published, :lock_version, :is_public_editable)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def check_permission
-    return if @article.user_id == current_user.id
+  def check_update_permission
+    return if owner? || @article.is_public_editable
     redirect_to articles_url
+  end
+
+  def check_destroy_permission
+    return if owner?
+    redirect_to articles_url
+  end
+
+  def owner?
+    @article.user_id == current_user.id
   end
 end

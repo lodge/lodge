@@ -43,6 +43,7 @@ ja:
     recent_article_list_title: 最近の記事
     article_search: 記事をタイトルで検索
     tag_list_title: タグ一覧
+    recent_tag_list_title: 最近追加されたタグ一覧
     user_article_list_title: 投稿した記事
     stocked_article_list_title: ストックした記事
     popular_article_list_title: 最近の人気記事
@@ -57,6 +58,7 @@ ja:
     sign_in_with: "%{provider} でログイン"
     notification:
       article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
+      article_update_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' を編集しました。"
       comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"
       comment_create_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' にコメントしました。"
       comment_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' のコメントを編集しました。"
@@ -100,7 +102,7 @@ ja:
     list_title_by_tag: "'%{tag}'のタグが付けられた記事一覧"
     list_title_by_search: "'%{query}'の検索結果"
     update_histories: 編集履歴
-    new_title: 新規作成
+    new_title: 記事の新規作成
     edit_title: "'%{article_title}'の編集"
     index_title: 目次
     title: タイトル
@@ -143,6 +145,7 @@ ja:
   tags:
     follow: フォローする
     unfollow: フォロー解除
+    tagging_size: "投稿数: %{size}"
   keywords:
     list_title: 用語一覧
     name: 名称

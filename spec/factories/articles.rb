@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :article do
-    title "title"
+    sequence(:title) { |n| "title_#{n}" }
     body "body"
     published true
     user

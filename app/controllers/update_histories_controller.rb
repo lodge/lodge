@@ -5,7 +5,7 @@ class UpdateHistoriesController < ApplicationController
   # GET /update_histories.json
   def list
     @article = Article.find(params[:article_id])
-    @update_histories = UpdateHistory.where(article_id: @article.id)
+    @update_histories = UpdateHistory.where(article_id: @article.id).order(created_at: :desc)
   end
 
   # GET /update_histories/1

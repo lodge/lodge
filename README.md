@@ -1,6 +1,6 @@
 [![Gitter chat](https://badges.gitter.im/lodge/lodge.png)](https://gitter.im/lodge/lodge)
-[![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=develop)](https://travis-ci.org/lodge/lodge)
-[![Coverage Status](https://coveralls.io/repos/lodge/lodge/badge.png)](https://coveralls.io/r/lodge/lodge)
+[![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=release)](https://travis-ci.org/lodge/lodge)
+[![Coverage Status](https://coveralls.io/repos/lodge/lodge/badge.png?branch=release)](https://coveralls.io/r/lodge/lodge?branch=release)
 [![Code Climate](https://codeclimate.com/github/lodge/lodge/badges/gpa.svg)](https://codeclimate.com/github/lodge/lodge)
 
 =====
@@ -63,7 +63,7 @@ http://lodge-sample.herokuapp.com/
 ## インストール
 
 1. 事前準備として以下が必要ですので、インストールしておきます。
-    - Ruby 2.0以上
+    - Ruby 2.1
     - Gem 2.2以上
     - MySQL (MySQLを利用する場合)
     - sqlite3 (sqlite3を利用する場合)
@@ -106,8 +106,6 @@ http://lodge-sample.herokuapp.com/
     ```
 
 1. `bundle install --path vendor/bundle` を実行し、依存ライブラリをインストールします。
-1. `bundle exec rake db:create RAILS_ENV=production` を実行し、データベースを作成します。
-1. `bundle exec rake db:migrate RAILS_ENV=production` を実行し、テーブルを作成します。
 1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。最低限設定が必要な項目は以下の通りです。
 
     ```ruby
@@ -139,6 +137,18 @@ http://lodge-sample.herokuapp.com/
     # テーマを設定します。
     LODGE_THEME       = lodge
     ```
+1. `bundle exec rake db:create RAILS_ENV=production` を実行し、データベースを作成します。
+1. `bundle exec rake db:migrate RAILS_ENV=production` を実行し、テーブルを作成します。
+
+## 絵文字の準備
+
+[github/gemoji](https://github.com/github/gemoji)を利用して各種絵文字を利用できます。
+
+絵文字をダウンロードする為、以下のコマンドを実行します。
+
+```bash
+bundle exec rake emoji
+```
 
 ## 起動
 
@@ -223,3 +233,4 @@ http://lodge-sample.herokuapp.com/
 まだまだ拙いLodgeの開発を手助けしていただける方を大募集中です。
 新機能の開発や改善はもちろん、ソースのリファクタリングからテストの記述、
 果てはマニュアル改善まで、どうぞ遠慮無くpull request頂ければと思います。
+開発前に[開発ガイド](https://github.com/lodge/lodge/wiki/開発ガイド)に目を通して頂けると幸いです。

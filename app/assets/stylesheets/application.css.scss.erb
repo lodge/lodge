@@ -12,7 +12,7 @@
  *
  *= require css/bootstrap-tokenfield
  *= require css/tokenfield-typeahead
- *= require_tree .
+ *= require_tree ./custom_devise
  *= require_self
  */
 
@@ -25,6 +25,17 @@
 body {
   word-wrap: break-word;
   word-break: break-all;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
 .actions {
@@ -41,6 +52,17 @@ body {
   .col-xs-8 .row {
     margin-right: 0;
   }
+
+  .header-user-icon {
+    cursor: pointer;
+  }
+
+  .header-user-name {
+    display: inline-block;
+    padding-left: 0;
+    text-decoration: underline;
+  }
+
   .dropdown .dropdown-menu {
     @include border-radius($border-radius-base);
   }
@@ -75,19 +97,119 @@ body {
   }
 }
 
+.caret {
+  margin: -2px 0 0 3px;
+  border-width: 8px 5px 0px 5px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+[data-toggle=dropdown] {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.global-menu-list {
+
+  .dropdown {
+    > a {
+      color: #eee;
+      text-decoration: underline;
+    }
+    .caret {
+      color: #eee;
+    }
+  }
+
+  .dropdown-toggle:hover {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    color: #333;
+    padding: 15px;
+    width: 400px;
+
+    ol {
+      padding-left: 35px;
+    }
+
+    a {
+      background-clip: padding-box;
+    }
+  }
+}
+
 // bootstrap bug fix
 .input-group-btn .btn.glyphicon {
   top: auto;
 }
 
+.emoji {
+  vertical-align: text-bottom;
+}
+
+.markdown .markdown-toc {
+  border: 1px solid $gray-light;
+  @include border-radius($border-radius-base);
+  width: 70px;
+
+  h1 {
+    background-color: lighten($gray-light, 10%);
+    box-shadow: inset 1px 1px 15px -5px #fff;
+    font-size: $font-size-h3 * 0.7;
+    margin: 0;
+    @include border-radius($border-radius-base);
+
+    &:hover {
+      background-color: lighten($gray-light, 15%);
+      cursor: pointer;
+    }
+  }
+
+  > ul {
+    margin-top: 15px;
+    display: none;
+  }
+
+  &[data-opened="true"] {
+    width: inherit;
+
+    h1 {
+      border-radius: 4px 4px 0 0;
+      border-bottom: 1px solid $gray-light;
+    }
+
+    > ul {
+      display: block;
+    }
+  }
+}
+
 .markdown {
 
-  h1 { font-size: $font-size-h1 * 0.7; }
-  h2 { font-size: $font-size-h2 * 0.7; }
-  h3 { font-size: $font-size-h3 * 0.7; }
-  h4 { font-size: $font-size-h4 * 0.7; }
-  h5 { font-size: $font-size-h5 * 0.7; }
-  h6 { font-size: $font-size-h6 * 0.7; }
+  $markdown-font-size-h1: $font-size-h1 * 0.7;
+  $markdown-font-size-h2: $font-size-h2 * 0.7;
+  $markdown-font-size-h3: $font-size-h3 * 0.7;
+  $markdown-font-size-h4: $font-size-h4 * 0.7;
+  $markdown-font-size-h5: $font-size-h5 * 0.7;
+  $markdown-font-size-h6: $font-size-h6 * 0.7;
+
+  line-height: 1.3em;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 16px;
+  }
+
+  h1 { font-size: $markdown-font-size-h1; }
+  h2 { font-size: $markdown-font-size-h2; }
+  h3 { font-size: $markdown-font-size-h3; }
+  h4 { font-size: $markdown-font-size-h4; }
+  h5 { font-size: $markdown-font-size-h5; }
+  h6 { font-size: $markdown-font-size-h6; }
 
   h1 { line-height: $font-size-h1 * 0.9; }
   h2 { line-height: $font-size-h2 * 0.9; }
@@ -95,6 +217,13 @@ body {
   h4 { line-height: $font-size-h4 * 0.9; }
   h5 { line-height: $font-size-h5 * 0.9; }
   h6 { line-height: $font-size-h6 * 0.9; }
+
+  h1 .emoji { width: $markdown-font-size-h1; height: $markdown-font-size-h1; }
+  h2 .emoji { width: $markdown-font-size-h2; height: $markdown-font-size-h2; }
+  h3 .emoji { width: $markdown-font-size-h3; height: $markdown-font-size-h3; }
+  h4 .emoji { width: $markdown-font-size-h4; height: $markdown-font-size-h4; }
+  h5 .emoji { width: $markdown-font-size-h5; height: $markdown-font-size-h5; }
+  h6 .emoji { width: $markdown-font-size-h6; height: $markdown-font-size-h6; }
 
   h1 {
     background-color: rgba($gray-light, 0.6);
@@ -107,6 +236,21 @@ body {
   }
   h4, h5, h6 {
     text-decoration: underline;
+  }
+
+  p {
+    margin-bottom: 14px;
+  }
+
+  table {
+    border: 1px solid $gray-light collapse;
+    margin: 14px 0;
+
+    th, td {
+      border: 1px solid $gray-light;
+      padding: 5px;
+    }
+
   }
 
   img {
@@ -138,22 +282,22 @@ body {
   .code-filename {
   }
 
-  // fix CodeRay design
-  .CodeRay {
-    margin-bottom: 10px;
-
-    pre {
-      font-size: 100%;
-      border: none;
-      margin: 0;
-    }
-  }
 }
 
 .markdown-editor.tab-content {
   min-height: 320px;
   .tab-pane, .editor-textarea, .markdown {
     min-height: 320px;
+  }
+}
+
+.article-new-link-area {
+  margin: 0;
+}
+
+.recent-tag-list {
+  span {
+    display: none;
   }
 }
 
@@ -180,3 +324,8 @@ body {
 
 @import "bootswatch/<%= ENV["LODGE_THEME"] %>/bootswatch";
 
+// twitter-tokenfield
+.twitter-typeahead .tt-input {
+  height: 20px;
+  padding: 5px;
+}

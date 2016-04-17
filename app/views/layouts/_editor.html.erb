@@ -15,7 +15,7 @@
     <%= form.text_area :body, class: ["editor-textarea", "form-control"] %>
   <% end %>
   <%= content_tag :div, class: ["tab-pane", "panel"], role: "preview", data: {uuid: preview_uuid} do %>
-    <div class="preview-area markdown panel-body"></div>
+    <div class="preview-area markdown panel-body codehilite"></div>
   <% end %>
 </div>
 <%= render 'articles/markdown_help' %>

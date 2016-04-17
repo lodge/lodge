@@ -14,6 +14,7 @@
             <% end %>
           </div>
         </td>
+        <td class="dropdown"><%= render partial: "users/info_dropdown", locals: { user: update_history.user } %></td>
         <td><%= update_history.updated_at %></td>
       </tr>
     <% end %>

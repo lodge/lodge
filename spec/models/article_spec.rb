@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Article, :type => :model do
   it { should validate_presence_of(:title) }
-  it { should ensure_length_of(:title).is_at_most(100) }
+  it { should validate_length_of(:title).is_at_most(100) }
 
   it { should validate_presence_of(:body) }
 
@@ -13,7 +13,62 @@ RSpec.describe Article, :type => :model do
   it { should have_many(:tags) }
   it { should have_many(:article_notifications) }
 
-  it_should_behave_like 'having markdownable', :body
+  describe "list methods" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:args) { nil }
+
+    shared_examples_for 'ordered list' do |method_name|
+      before do
+        2.times do |i|
+          article = FactoryGirl.create(:article, :with_tag,
+            user_id: user.id,
+            created_at: '2014-09-24 00:00:' + (10 + i).to_s,
+            updated_at: '2014-09-24 00:00:' + (59 - i).to_s
+          )
+          user.stock(article)
+          user.follow(article.tags.first)
+        end
+      end
+
+      subject(:articles) { Article.send(method_name, *args) }
+
+      it 'has two articles' do
+        expect(articles.each.size).to be_eql(2)
+      end
+      it 'is creation order' do
+        expect(articles.first.created_at).to be > articles.last.created_at
+      end
+    end
+
+    describe :recent_list do
+      it_should_behave_like 'ordered list', 'recent_list'
+    end
+
+    describe :search do
+      let(:args) { 'title' }
+      it_should_behave_like 'ordered list', 'search'
+    end
+
+    describe :tagged_by do
+      let(:args) { 'tag' }
+      it_should_behave_like 'ordered list', 'tagged_by'
+    end
+
+    describe :stocked_by do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'stocked_by'
+    end
+
+    describe :owned_by do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'owned_by'
+    end
+
+    describe :feed_list do
+      let(:args) { user }
+      it_should_behave_like 'ordered list', 'feed_list'
+    end
+  end
 
   describe :draft? do
     context "when new record" do
@@ -47,8 +102,12 @@ RSpec.describe Article, :type => :model do
 
   describe :save do
     let(:article) { FactoryGirl.create(:article) }
+    let(:before_user) { FactoryGirl.create(:user) }
+    let(:after_user) { FactoryGirl.create(:user) }
+
     before do
       article.title = "edited title"
+      article.update_user_id = before_user.id
     end
 
     context "when article is free" do
@@ -63,6 +122,7 @@ RSpec.describe Article, :type => :model do
         same_article.title = "new title"
         same_article.body = "new body"
         same_article.tag_list = "newtag1,newtag2"
+        same_article.update_user_id = after_user.id
         same_article.save
         article.save
       end
@@ -75,11 +135,13 @@ RSpec.describe Article, :type => :model do
 
   describe :create_history do
     let(:article) { FactoryGirl.create(:article, title: "old title", body: "old body", tag_list: "oldtag") }
+    let(:user) { FactoryGirl.create(:user) }
 
     before do
       article.title = "new title"
       article.body = "new body"
       article.tag_list = "newtag1,newtag2"
+      article.update_user_id = user.id
     end
 
     it "should create new update_history" do
@@ -104,6 +166,11 @@ RSpec.describe Article, :type => :model do
 
   describe :create_notification do
     let(:article) { FactoryGirl.create(:article) }
+    let(:user) { FactoryGirl.create(:user) }
+
+    before do
+      article.update_user_id = user.id
+    end
 
     it "should create new notification" do
       expect { article.create_notification }.to change(Notification, :count).by(1)

@@ -38,6 +38,7 @@ ja:
         tag_list: タグ
         body: 本文
         lock_version: ""
+        is_public_editable: 共同編集を許可
       comment:
         body: コメント
     errors:
