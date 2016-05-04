@@ -5,18 +5,31 @@ rvm:
     - 2.3.0
     - ruby-head
 env:
-    - DB=sqlite
-    - DB=mysql
-    - DB=postgresql
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
 before_script:
-    - cp config/database.test.yml config/database.yml
-    - cp .env.example .env
-    - bundle install
+  - cp config/database.test.yml config/database.yml
+  - cp .env.example .env
+  - mkdir travis-phantomjs
+  - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+  - tar -xvf $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs
+  - export PATH=$PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
+  - phantomjs --version
+  - bundle install
+  - npm install
 script:
-    - RAILS_ENV=test bin/rake db:create --trace
-    - RAILS_ENV=test bin/rake db:migrate --trace
-    - RAILS_ENV=test bin/rake emoji
-    - RAILS_ENV=test bin/rake spec --trace
+  - bin/rake db:create --trace
+  - bin/rake db:migrate --trace
+  - bin/rake emoji
+  - bin/rake assets:precompile
+  - bin/rake spec --trace
+cache:
+  bundler: true
+  directories:
+    - public/assets
+    - tmp/cache/assets
+    - node_modules
 notifications:
   webhooks:
     urls:

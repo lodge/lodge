@@ -72,4 +72,6 @@ Rails.application.configure do
   }
 
   config.action_mailer.smtp_settings[:openssl_verify_mode] = ENV["SMTP_OPENSSL_VERIFY_MODE"] if ENV["SMTP_OPENSSL_VERIFY_MODE"].present?
+
+  config.react.variant = :development
 end

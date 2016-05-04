@@ -22,15 +22,7 @@
 #= require typeahead.bundle
 #= require handlebars
 #= require bootstrap-tokenfield
+#= require react
+#= require react_ujs
+#= require components
 #= require_tree .
-
-
-# Markdown preview
-$(document).on 'click', '[role="tablist"] .preview-tab', ()->
-  url = '<%= asset_path Rails.application.routes.url_helpers.preview_articles_path %>'
-  tablist = $(this).closest '[role="tablist"]'
-  tabcontent = tablist.next('.tab-content')
-
-  tabcontent.find '[role="preview"] .markdown'
-    .load url,
-      body: tabcontent.find('[role="editor"] textarea').val()

@@ -19,7 +19,7 @@ feature "CreateArticles", :type => :feature do
       fill_in_autocomplete("#article_tag_list", tags.join(","))
       fill_in I18n.t("activerecord.attributes.article.body"), with: "body"
       check I18n.t("articles.publish")
-      click_button I18n.t("helpers.submit.create")
+      find_button(I18n.t("helpers.submit.create")).click
     }.to change(Article, :count).by(1)
 
     expect(page).to have_content(new_article_title)
@@ -28,10 +28,10 @@ feature "CreateArticles", :type => :feature do
     end
     expect(page).to have_content("body")
 
-    click_link I18n.t("common.user_article_list_title")
+    find_link(I18n.t("common.user_article_list_title")).trigger('click')
     expect(page).to have_link(new_article_title)
 
-    click_link I18n.t("common.recent_article_list_title")
+    find_link(I18n.t("common.recent_article_list_title")).trigger('click')
     expect(page).to have_link(new_article_title)
   end
 

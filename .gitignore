@@ -44,3 +44,5 @@ public/images/emoji
 .DS_Store
 
 coverage/
+
+node_modules/
