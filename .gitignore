@@ -21,15 +21,17 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+/tmp/*
+!/tmp/.gitkeep
 
+# Ignore configs
 /config/database.yml
+.env
+/solr
 
+# Ignore bundler files.
 /Gemfile.lock
 /vendor/bundle
-lodge_development
-lodge_test
-lodge_production
 
 config/settings.local.yml
 config/settings/*.local.yml
@@ -38,7 +40,6 @@ config/environments/*.local.yml
 public/uploads/
 public/images/emoji
 
-.env
 
 # Mac finder artifacts
 .DS_Store
