@@ -26,9 +26,11 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   # GET /articles.json
+  # !!!!Can not unit test this action.!!!!
+  # ref) https://github.com/sunspot/sunspot/wiki/RSpec-and-Sunspot#unit-tests-should-not-touch-solr-if-you-want-to-test-solr-do-so-in-integration-tests-with-something-like-steak-or-cucumber
+  # :nocov:
   def search
     query = parse_query
-    p query
     article_search = Article.search do
       fulltext query[:text]
       with(:tags).all_of(query[:tags]) if query[:tags].present?
@@ -50,6 +52,7 @@ class ArticlesController < ApplicationController
     end
     @articles = result
   end
+  # :nocov:
 
   # GET /articles/stocks
   # GET /articles/stocks.json
@@ -172,6 +175,7 @@ class ArticlesController < ApplicationController
     @article.user_id == current_user.id
   end
 
+  # :nocov:
   def parse_query
     p_query = params[:query].dup
     query = {}
@@ -199,4 +203,5 @@ class ArticlesController < ApplicationController
     query[:text] = p_query
     query
   end
+  # :nocov:
 end

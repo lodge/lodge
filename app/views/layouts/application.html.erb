@@ -123,7 +123,7 @@
                     <% # Posted article list %>
                     <li class="dropdown">
                       <u></u>
-                      <%= link_to tco("user_article_list_title"), owned_articles_path(current_user.id) %><i class="caret dropdown-toggle" data-toggle="dropdown"></i>
+                      <%= link_to tco("user_article_list_title"), owned_articles_path %><i class="caret dropdown-toggle" data-toggle="dropdown"></i>
                       <div class="dropdown-menu" role="menu">
                         <h5><strong><%= tco("user_article_list_title") %></strong></h5>
                         <ol>
@@ -133,7 +133,7 @@
                         </ol>
                         <% unless @user_articles.empty? %>
                           <div class="clearfix">
-                            <%= link_to tco("more_display"), owned_articles_path(current_user.id), class: ["pull-right"] %> 
+                            <%= link_to tco("more_display"), owned_articles_path, class: ["pull-right"] %> 
                           </div>
                         <% end %>
                       </div>

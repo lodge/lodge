@@ -18,8 +18,13 @@
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
+require 'simplecov'
 require 'coveralls'
-Coveralls.wear!('rails')
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+])
+SimpleCov.start
 
 RSpec.configure do |config|
 # The settings below are suggested to provide a good initial experience

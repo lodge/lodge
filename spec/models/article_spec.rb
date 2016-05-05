@@ -44,11 +44,6 @@ RSpec.describe Article, :type => :model do
       it_should_behave_like 'ordered list', 'recent_list'
     end
 
-    describe :search do
-      let(:args) { 'title' }
-      it_should_behave_like 'ordered list', 'search'
-    end
-
     describe :tagged_by do
       let(:args) { 'tag' }
       it_should_behave_like 'ordered list', 'tagged_by'

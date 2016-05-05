@@ -21,7 +21,9 @@ gem 'jbuilder', '~> 2.1'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc',          group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+# Spring speeds up development by
+# keeping your application running in the background.
+# Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
@@ -58,7 +60,7 @@ gem 'bootstrap-sass', '~> 3.2'
 gem 'bootswatch-rails', '~> 3.2'
 gem 'autoprefixer-rails', '~> 2.2'
 gem 'compass-rails', '~> 2.0'
-#gem 'whenever', :require => false
+# gem 'whenever', :require => false
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
@@ -85,39 +87,42 @@ group :development, :test do
 end
 
 group :test do
+  gem 'spring-commands-rspec'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'rspec-parameterized'
-  gem "codeclimate-test-reporter", group: :test, require: nil
+  gem 'codeclimate-test-reporter', group: :test, require: nil
 end
 
 # Include database gems for the adapters found in the database
 # configuration file
 require 'erb'
 require 'yaml'
-database_file = File.join(File.dirname(__FILE__), "config/database.yml")
+database_file = File.join(File.dirname(__FILE__), 'config/database.yml')
 if File.exist?(database_file)
-  database_config = YAML::load(ERB.new(IO.read(database_file)).result)
-  adapters = database_config.values.map {|c| c['adapter']}.compact.uniq
+  database_config = YAML.load(ERB.new(IO.read(database_file)).result)
+  adapters = database_config.values.map { |c| c['adapter'] }.compact.uniq
   if adapters.any?
     adapters.each do |adapter|
       case adapter
       when 'mysql2'
-        gem "mysql2", '~> 0.3.20'
+        gem 'mysql2', '~> 0.3.20'
       when /postgresql/
-        gem "pg", '~> 0.17'
+        gem 'pg', '~> 0.17'
       when /sqlite3/
-        gem "sqlite3", '~> 1.3'
+        gem 'sqlite3', '~> 1.3'
       else
-        warn("Unknown database adapter `#{adapter}` found in config/database.yml")
+        warn(
+          "Unknown database adapter `#{adapter}` found in config/database.yml"
+        )
       end
     end
   else
-    warn("No adapter found in config/database.yml, please configure it first")
+    warn('No adapter found in config/database.yml, please configure it first')
   end
 else
-  warn("Please configure your config/database.yml first")
+  warn('Please configure your config/database.yml first')
 end
