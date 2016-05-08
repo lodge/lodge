@@ -105,7 +105,7 @@ http://lodge-sample.herokuapp.com/
       pool: 5
     ```
 
-1. `bundle install --path vendor/bundle` を実行し、依存ライブラリをインストールします。
+1. `bundle install` を実行し、依存ライブラリをインストールします。
 1. `.env.example` を `.env` としてコピーし、必要な環境変数を設定します。各コメントを参考に設定してください。最低限設定が必要な項目は以下の通りです。
 
     ```ruby
