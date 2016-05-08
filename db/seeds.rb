@@ -1,3 +1,4 @@
+require 'forgery'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -13,23 +14,24 @@ User.create(email: 'user03@example.com', name: 'Meyer', password: 'password', co
 User.create(email: 'user04@example.com', name: 'Ward', password: 'password', confirmed_at: now)
 User.create(email: 'user05@example.com', name: 'Zafiriou', password: 'password', confirmed_at: now)
 
-
-20.times do |index|
-  Article.create(title: "test #{index}", body: "# body #{index}", user_id: 1, tag_list: ["Rails", "Ruby"]);
+def create_dummy_articles(offset, dest)
+  titles = Forgery(:lorem_ipsum).sentences(151).split(/(?:\.) /)
+  paragraphs = Forgery(:lorem_ipsum).paragraphs(51).split("\n\n")
+  offset.upto dest do |index|
+    time = index.minutes.since
+    Article.create(
+      user_id: (1..5).to_a.sample,
+      title: titles.sample,
+      body: [
+        paragraphs.sample,
+        paragraphs.sample,
+        paragraphs.sample
+      ].join("\n\n"),
+      tag_list: [Forgery('basic').color, Forgery('basic').color],
+      created_at: time,
+      updated_at: time
+    )
+  end
 end
 
-21.upto 40 do |index|
-  Article.create(title: "test #{index}", body: "# body #{index}", user_id: 2, tag_list: ["Git"]);
-end
-
-41.upto 60 do |index|
-  Article.create(title: "test #{index}", body: "# body #{index}", user_id: 3, tag_list: ["Java", "PHP", "Go", "Python"]);
-end
-
-61.upto 80 do |index|
-  Article.create(title: "test #{index}", body: "# body #{index}", user_id: 4, tag_list: ["Google", "Amazon"]);
-end
-
-81.upto 100 do |index|
-  Article.create(title: "test #{index}", body: "# body #{index}", user_id: 5, tag_list: ["Java", "PHP", "Go", "Python"]);
-end
+create_dummy_articles(1, 100)

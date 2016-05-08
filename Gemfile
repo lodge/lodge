@@ -75,10 +75,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'rspec-its'
-  gem 'rspec-parameterized'
-  gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
@@ -87,6 +83,11 @@ group :development, :test do
 end
 
 group :test do
+  gem 'forgery'
+  gem 'rspec-rails'
+  gem 'rspec-its'
+  gem 'rspec-parameterized'
+  gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'capybara'
