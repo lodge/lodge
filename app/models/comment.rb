@@ -5,6 +5,10 @@ class Comment < ActiveRecord::Base
   after_create :create_notification_by_create
   before_update :create_notification_by_update
 
+  # Reindex to Sunspot.
+  after_save :reindex_article_for_sunspot
+  after_destroy :reindex_article_for_sunspot
+
   validates :body, presence: true
 
   def create_notification(state)
@@ -31,5 +35,11 @@ class Comment < ActiveRecord::Base
     notifications.each do |notification|
       notification.destroy! if notification.notification_targets.length == 0
     end
+  end
+
+  def reindex_article_for_sunspot
+    ap article
+    Sunspot.index article
+    Sunspot.commit
   end
 end
