@@ -67,13 +67,6 @@ class Article < ActiveRecord::Base
       .order(:created_at => :desc)
   end
 
-  # def self.search(query, page=1)
-  #   query = "%#{query.gsub(/([%_])/){"\\" + $1}}%"
-  #   Article.where("title like ?", query)
-  #     .published
-  #     .page(page).per(PER_SIZE).order(:created_at => :desc)
-  # end
-
   def self.stocked_by(user, page=1)
     user.stocked_articles
         .includes(:tags, :stocks, :user)
