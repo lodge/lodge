@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/lodge/lodge/badge.png?branch=release)](https://coveralls.io/r/lodge/lodge?branch=release)
 [![Code Climate](https://codeclimate.com/github/lodge/lodge/badges/gpa.svg)](https://codeclimate.com/github/lodge/lodge)
 
-=====
+----
 
 ## これは何？
 
@@ -23,7 +23,7 @@ __イントラネット限定でも使える、ナレッジ/ノウハウ情報�
 - ストック機能により、お気に入りの記事やあとで見たい記事等を手軽に保存
 - 記事に複数のタグをつけて管理
 - タグをフォローすることによる個人ごとのフィードのカスタマイズ表示
-- 記事タイトルによる簡単な検索
+- 全文検索や各種クエリなどを利用した高度な検索機能
 - 導入までの手軽さ(すぐにインストールできます)
 - コメント、Contribution、通知機能等によるコミュニケーションやナレッジ共有活動の活性化
 - 編集履歴機能により記事の変更点を差分表示
@@ -41,24 +41,6 @@ __イントラネット限定でも使える、ナレッジ/ノウハウ情報�
 記事閲覧画面
 
 ![記事閲覧画面](./lodge02.png)
-
-## デモ
-
-以下のURLから、実際に体験できます。
-
-http://lodge-sample.herokuapp.com/
-
-お試し用のユーザ名は以下、パスワードは全て `password` でログインできます。
-
-- `user01@example.com`
-- `user02@example.com`
-- `user03@example.com`
-- `user04@example.com`
-- `user05@example.com`
-
-また、新規ユーザ登録もメールアドレスから行えます。
-
-※但し、上記サイトは自体はpublicなので、ご登録の際にはご注意ください。
 
 ## インストール
 
@@ -150,36 +132,98 @@ http://lodge-sample.herokuapp.com/
 bundle exec rake emoji
 ```
 
-## 起動
+## 全文検索エンジンの準備
+
+以下を実行し、全文検索エンジンのセットアップを行います。
+
+```bash
+./setup/sunspot-solr/setup-sunspot-solor.sh
+```
+
+上記により、solrの基本設定及び初回のIndex構築が行われます。
+
+### インデックスの手動更新(再作成)について
+
+新規構築から利用する場合は通常必要ありませんが、
+既存のLodgeからのアップデートを行った場合のインデックス作成や、
+何らかの原因で検索インデックスを再構築したくなることがあった場合は、
+Solrサーバが起動した状態で下記コマンドを実行することで再構築することができます。
+
+```bash
+bin/rake sunspot:reindex RAILS_ENV=production
+```
+
+## Lodge(及びSolrサーバ)の起動
 
 1. カレントディレクトリを移動します。
-
-   ```
-   cd <lodgeをクローンしたディレクトリ>
-   ```
-
-1. サーバを起動します。
-  * Unicorn を使う場合
-
+    
+    ```bash
+    cd <lodgeをクローンしたディレクトリ>
     ```
-    bundle exec unicorn -c config/unicorn.rb -E production
+    
+1. 全文検索用のSolrサーバを起動します。
+    
+    ```bash
+    bin/rake sunspot:solr:start RAILS_ENV=production
     ```
-  * Thin を使う場合
-
-    ```
-    bundle exec rails server thin -e production
-    ```
-  * WEBrick を使う場合
-
-    ```
-    bundle exec rails server -e production
-    ```
+    
+    - もし上記で起動できない場合は…
+        
+        前回の起動プロセスなどが残っている可能性がありますので、
+        
+        ```bash
+        bin/rake sunspot:solr:restart RAILS_ENV=production
+        ```
+        
+        を何度か実行してみてください。
+        
+1. Railsサーバを起動します。
+    * Unicorn を使う場合
+        
+        ```bash
+        bundle exec unicorn -c config/unicorn.rb -E production
+        ```
+        
+    * Thin を使う場合
+        
+        ```bash
+        bundle exec rails server thin -e production
+        ```
+        
+    * WEBrick を使う場合
+        
+        ```bash
+        bundle exec rails server -e production
+        ```
+        
 1. ブラウザで http://localhost:3000 にアクセスできたら起動成功です
 1. ログファイルは以下の場所に吐き出されます
-  * Unicorn の場合
-    * `<lodgeをクローンしたディレクトリ>/log/unicorn.production.log`
-  * Thin, WEBrick の場合
-    * `<lodgeをクローンしたディレクトリ>/log/production.log`
+    * Unicorn の場合
+        * `<lodgeをクローンしたディレクトリ>/log/unicorn.production.log`
+    * Thin, WEBrick の場合
+        * `<lodgeをクローンしたディレクトリ>/log/production.log`
+
+### 注意
+
+Solrサーバを起動することにより、ポート `8983` にSolrの管理コンソールが起動し、
+ブラウザからアクセスできる状態となってしまいます。
+
+その為、悪意あるユーザがアクセスしてしまうことが懸念される場合、
+以下のような対応が必要となるでしょう。
+
+#### nginxを利用
+
+フロントにnginxなどを立てておき、リバースプロキシ等を設定しアクセスを制限する。
+
+#### Solrサーバーを個別に立てる
+
+Solrサーバを別のサーバや立てておき、そちらに接続しにいく形にします。
+その場合は、[Sunspot公式サイト](https://github.com/sunspot/sunspot#configuration)に従い、
+`config/sunspot.yml` を適切な値へ設定してください。
+
+またこのようにSolrサーバを別に構築する場合は、膨大な記事数等がある場合に、
+検索や記事作成/更新時のパフォーマンスが著しく低下してしまうような場合にも有効です。
+(ただ、通常はそこまでの規模になることはほぼ無いであろうと考えられます。)
 
 ## Vagrant up
 
