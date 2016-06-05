@@ -180,16 +180,16 @@ class ArticlesController < ApplicationController
     p_query = params[:query].dup
     query = {}
     # tags
-    query[:tags] = p_query.scan(/tag: *\w+/).map do |t|
+    query[:tags] = p_query.scan(/tag: *[^ :]+/).map do |t|
       t.sub(/tag: */, '').downcase
     end
-    p_query.gsub!(/tag: *\w+/, '')
+    p_query.gsub!(/tag: *[^ :]+/, '')
 
     # user
-    query[:users] = p_query.scan(/user: *\w+/).map do |u|
+    query[:users] = p_query.scan(/user: *[^ :]+/).map do |u|
       u.sub(/user: */, '').downcase
     end
-    p_query.gsub!(/user: *\w+/, '')
+    p_query.gsub!(/user: *[^ :]+/, '')
 
     # stocked
     if (matched = p_query.match(/stocked: *(true|false)/)).present?
@@ -197,10 +197,11 @@ class ArticlesController < ApplicationController
     else
       query[:stocked] = nil
     end
-    p_query.gsub!(/stocked: *\w+/, '')
+    p_query.gsub!(/stocked: *[^ :]+/, '')
 
     # text
     query[:text] = p_query
+    p query
     query
   end
   # :nocov:
