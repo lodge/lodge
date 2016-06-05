@@ -53,7 +53,11 @@ feature 'Edit articles', type: :feature do
   context 'when public article' do
     let(:article) do
       FactoryGirl.create(
-        :article, title: 'old article', tag_list: 'old_tag', body: 'old body'
+        :article,
+        title: 'old article',
+        tag_list: 'old_tag',
+        body: 'old body',
+        is_public_editable: true
       )
     end
     let(:stocked_user) { FactoryGirl.create(:user) }

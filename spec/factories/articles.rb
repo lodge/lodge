@@ -3,17 +3,20 @@
 FactoryGirl.define do
   factory :article do
     sequence(:title) { |n| "title_#{n}" }
-    body "body"
+    body 'body'
     published true
+    is_public_editable false
+    sequence(:created_at) { |n| n.minute.since }
+    sequence(:updated_at) { |n| n.minute.since }
     user
 
     factory :draft do
       published false
     end
 
-    trait :with_stock do |article|
-      after(:build) do |article|
-        article.stocks << FactoryGirl.create(:stock)
+    trait :with_stock do
+      after(:create) do |a|
+        a.stocks.create(user_id: a.user.id)
       end
     end
 

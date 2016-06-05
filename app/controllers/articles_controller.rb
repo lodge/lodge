@@ -19,14 +19,40 @@ class ArticlesController < ApplicationController
   end
 
   def draft
-    @articles = Article.owned_draft(current_user).page(params[:page]).per(PER_SIZE)
+    @articles = Article.owned_draft(current_user)
+      .page(params[:page])
+      .per(PER_SIZE)
   end
 
   # GET /articles
   # GET /articles.json
+  # !!!!Can not unit test this action.!!!!
+  # ref) https://github.com/sunspot/sunspot/wiki/RSpec-and-Sunspot#unit-tests-should-not-touch-solr-if-you-want-to-test-solr-do-so-in-integration-tests-with-something-like-steak-or-cucumber
+  # :nocov:
   def search
-    @articles = Article.search(params[:query], params[:page])
+    query = parse_query
+    article_search = Article.search do
+      fulltext query[:text]
+      with(:tags).all_of(query[:tags]) if query[:tags].present?
+      with(:user, query[:users].first) if query[:users].present?
+      order_by(:created_at, :desc)
+      paginate :page => params[:page], :per_page => LodgeSettings.per_size
+    end
+    result = article_search.results
+    unless query[:stocked].nil?
+      result.select! do |r|
+        if query[:stocked]
+          r.stocks.pluck(:user_id).include?(current_user.id)
+        elsif query[:stocked] == false
+          r.stocks.pluck(:user_id).exclude?(current_user.id)
+        else
+          r
+        end
+      end
+    end
+    @articles = result
   end
+  # :nocov:
 
   # GET /articles/stocks
   # GET /articles/stocks.json
@@ -148,4 +174,35 @@ class ArticlesController < ApplicationController
   def owner?
     @article.user_id == current_user.id
   end
+
+  # :nocov:
+  def parse_query
+    p_query = params[:query].dup
+    query = {}
+    # tags
+    query[:tags] = p_query.scan(/tag: *[^ :]+/).map do |t|
+      t.sub(/tag: */, '').downcase
+    end
+    p_query.gsub!(/tag: *[^ :]+/, '')
+
+    # user
+    query[:users] = p_query.scan(/user: *[^ :]+/).map do |u|
+      u.sub(/user: */, '').downcase
+    end
+    p_query.gsub!(/user: *[^ :]+/, '')
+
+    # stocked
+    if (matched = p_query.match(/stocked: *(true|false)/)).present?
+      query[:stocked] = (matched[1] == 'true')
+    else
+      query[:stocked] = nil
+    end
+    p_query.gsub!(/stocked: *[^ :]+/, '')
+
+    # text
+    query[:text] = p_query
+    p query
+    query
+  end
+  # :nocov:
 end

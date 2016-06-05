@@ -9,5 +9,9 @@ FactoryGirl.define do
     email
     password "password"
     confirmed_at Time.zone.now
+
+    trait :with_following_tag do
+      following_tag_list ['tag']
+    end
   end
 end
