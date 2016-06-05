@@ -43,6 +43,17 @@ en:
     feed_article_list_title: Listing articles of your feed.
     recent_article_list_title: Listing recent articles.
     article_search: Search articles by title
+    article_search_query_help_md: |
+      ### Search query
+
+      - `Ruby` : Find articles by word of `Ruby` for title, body, and comment by fulltext-search.
+      - `user: Kiske` : Find articles by created by username of `Kiske`(not case-sensitive).
+      - `tag: Markdown` : Find articles by attached tag of `Markdown` ( `tag` is available to multiple specifies).
+      - `stocked: true` : Find your stocked articles.
+      - `stocked: false` : Find your not stocked articles.
+
+      ※ Queries is `AND` conditions when multiple specified.
+
     tag_list_title: Tags
     recent_tag_list_title: Recent tags
     user_article_list_title: Your posts
@@ -58,13 +69,13 @@ en:
     didnt_receive_confirmation: Didn't receive confirmation instructions?
     sign_in_with: "Sign in with %{provider}"
     notification:
-      article_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' を編集しました。"
-      article_update_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' を編集しました。"
-      comment_create: "%{user_name} さんがあなたのストックした記事 '%{article_title}' にコメントしました。"
-      comment_create_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' にコメントしました。"
-      comment_update: "%{user_name} さんがあなたのストックした記事 '%{article_title}' のコメントを編集しました。"
-      comment_update_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' のコメントを編集しました。"
-      stock_for_owner: "%{user_name} さんがあなたの書いた記事 '%{article_title}' をストックしました。"
+      article_update: "Updated your stocked article \"%{article_title}\" by %{user_name} ."
+      article_update_for_owner: "Updated your wrote article \"%{article_title}\" by %{user_name} ."
+      comment_create: "Added comment to your stocked article \"%{article_title}\" by %{user_name} ."
+      comment_create_for_owner: "Added comment to your wrote article \"%{article_title}\" by %{user_name} ."
+      comment_update: "Updated comment in your stocked article \"%{article_title}\" by %{user_name} ."
+      comment_update_for_owner: "Updated comment in your wrote article \"%{article_title}\" by %{user_name} ."
+      stock_for_owner: "Stocked your article to '%{article_title}' by %{user_name} ."
   views:
     pagination:
       first: "&laquo;"

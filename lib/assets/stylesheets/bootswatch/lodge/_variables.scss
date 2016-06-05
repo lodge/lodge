@@ -292,7 +292,7 @@ $tooltip-arrow-color: $tooltip-bg;
 
 // Popovers
 $popover-bg: #fff;
-$popover-max-width: 276px;
+$popover-max-width: 100%;
 $popover-border-color: rgba(0,0,0,.2);
 $popover-fallback-border-color: #ccc;
 $popover-title-bg: darken($popover-bg, 3%);

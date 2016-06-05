@@ -33,6 +33,7 @@ ja:
     updated_at: 更新
     stock: ストック
     unstock: ストック解除
+    publish: 公開
     comment: コメント
     back: 戻る
     freeze: 凍結
@@ -41,7 +42,18 @@ ja:
     draft_list: 下書き一覧
     feed_article_list_title: フィード
     recent_article_list_title: 最近の記事
-    article_search: 記事をタイトルで検索
+    article_search: 記事の検索
+    article_search_query_help_md: |
+      ### 検索クエリ
+
+      - `Ruby` : `Ruby` という単語をタイトル、本文、コメントから全文検索します。
+      - `user: Kiske` : `Kiske` というユーザが作成した記事のみを抽出(大文字小文字区別なし)
+      - `tag: Markdown` : `Markdown` というタグのついた記事のみを抽出します( `tag` は複数回指定可)。
+      - `stocked: true` : ストックしている記事のみを抽出
+      - `stocked: false` : ストックしていない記事のみを抽出
+
+      ※ 各クエリは複数指定した場合すべてAND検索となります。
+
     tag_list_title: タグ一覧
     recent_tag_list_title: 最近追加されたタグ一覧
     user_article_list_title: 投稿した記事
@@ -120,7 +132,7 @@ ja:
     stocked_users: "ストック中:"
     follow: このタグをフォロー
     unfollow: フォロー解除
-    feed_introduction:
+    feed_introduction: |
       <h3>まだタグをフォローしていません。</h3>
       <p>
         ここにはあなたがフォローしたタグに関連した記事のみを表示することができます。<br>
@@ -129,7 +141,7 @@ ja:
       <p>
         すべての記事を閲覧したい場合は、右メニューより「最新の記事」を選択してください。
       </p>
-    stocks_introduction:
+    stocks_introduction: |
       <h3>まだ記事をストックしていません。</h3>
       <p>
         ここにはあなたがストックした記事のみを表示することができます。<br>

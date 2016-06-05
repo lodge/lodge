@@ -172,8 +172,8 @@
           <% # Search area %>
           <% if current_user %>
             <%= form_tag search_articles_path, method: :get, id: "article-search-area", role: "search" do %>
-              <div class="input-group col-xs-4 col-xs-offset-5">
-                <%= text_field_tag "query", params[:query], class: ["form-control"], placeholder: tco("article_search") %> 
+              <div class="input-group col-xs-6 col-xs-offset-3">
+                <%= text_field_tag "query", params[:query], class: ["form-control", "search-query-help"], data: { content: markdown(tco('article_search_query_help_md')) }, placeholder: tco("article_search") %> 
                 <span class="input-group-btn">
                   <%= button_tag "", type: "submit", class: ["btn", "btn-default", "glyphicon", "glyphicon-search"] %>
                 </span>

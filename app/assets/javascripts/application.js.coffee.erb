@@ -34,3 +34,12 @@ $(document).on 'click', '[role="tablist"] .preview-tab', ()->
   tabcontent.find '[role="preview"] .markdown'
     .load url,
       body: tabcontent.find('[role="editor"] textarea').val()
+
+# Help popup of article search query
+$ ->
+  $('.search-query-help').popover({
+    trigger: 'focus'
+    placement: 'bottom'
+    container: 'body'
+    html: true
+  })
