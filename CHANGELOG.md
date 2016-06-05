@@ -1,18 +1,44 @@
 # Change Log
 
-## [v0.11.4](https://github.com/lodge/lodge/tree/HEAD)
+## [v0.12.0](https://github.com/lodge/lodge/tree/v0.12.0) (2016-06-05)
+[Full Changelog](https://github.com/lodge/lodge/compare/v0.11.4...v0.12.0)
 
-[Full Changelog](https://github.com/lodge/lodge/compare/v0.11.4...HEAD)
+**Implemented enhancements:**
+
+- 下書き機能 [\#15](https://github.com/lodge/lodge/issues/15)
+- 絵文字 [\#10](https://github.com/lodge/lodge/issues/10)
+- 検索タイプを指定して、タグ名やユーザ名等でも検索できるようにしたい。 [\#5](https://github.com/lodge/lodge/issues/5)
+
+**Fixed bugs:**
+
+- 記事を他者が更新した際に通知メッセージが正しく表示されない [\#150](https://github.com/lodge/lodge/issues/150)
+
+**Closed issues:**
+
+- input json [\#177](https://github.com/lodge/lodge/issues/177)
+- NoMethodError: undefined method `name' for nil:NilClass [\#171](https://github.com/lodge/lodge/issues/171)
+- ドラッグ＆ドロップ以外で画像を添付することはできますか？ [\#170](https://github.com/lodge/lodge/issues/170)
+- 共同編集機能のエラー？ [\#167](https://github.com/lodge/lodge/issues/167)
+- ブランチ毎のBadgeの運用方法を考える [\#55](https://github.com/lodge/lodge/issues/55)
+- ヘッダーナビゲーションの再考 [\#28](https://github.com/lodge/lodge/issues/28)
+
+**Merged pull requests:**
+
+- Develop: ruby 2.1, mysql2 ~\> 0.3.20  [\#175](https://github.com/lodge/lodge/pull/175) ([kkdd](https://github.com/kkdd))
+- Update rails to 4.1.14 [\#172](https://github.com/lodge/lodge/pull/172) ([tanaka0x](https://github.com/tanaka0x))
+- 全文検索機能の実装 [\#165](https://github.com/lodge/lodge/pull/165) ([m-yamashita](https://github.com/m-yamashita))
+- 下書き機能実装 [\#97](https://github.com/lodge/lodge/pull/97) ([kakusuke](https://github.com/kakusuke))
+
+## [v0.11.4](https://github.com/lodge/lodge/tree/v0.11.4) (2015-08-30)
+[Full Changelog](https://github.com/lodge/lodge/compare/v0.11.3...v0.11.4)
 
 **Closed issues:**
 
 - メール送信時のCertificate Verify Failed対策 [\#156](https://github.com/lodge/lodge/issues/156)
 
-## [v0.11.4](https://github.com/lodge/lodge/tree/v0.11.4) (2015-08-19)
-[Full Changelog](https://github.com/lodge/lodge/compare/v0.11.3...v0.11.4)
-
 **Merged pull requests:**
 
+- Release 0.11.4 [\#166](https://github.com/lodge/lodge/pull/166) ([m-yamashita](https://github.com/m-yamashita))
 - Fix lodge libraries. [\#164](https://github.com/lodge/lodge/pull/164) ([m-yamashita](https://github.com/m-yamashita))
 
 ## [v0.11.3](https://github.com/lodge/lodge/tree/v0.11.3) (2015-08-12)
@@ -163,7 +189,7 @@
 - add extension white list [\#101](https://github.com/lodge/lodge/pull/101) ([kakusuke](https://github.com/kakusuke))
 - 記事一覧のリファクタ [\#99](https://github.com/lodge/lodge/pull/99) ([kakusuke](https://github.com/kakusuke))
 - config/routes.rb の構造化 [\#98](https://github.com/lodge/lodge/pull/98) ([kakusuke](https://github.com/kakusuke))
-- Markdown記法のヘルプを表示できる機能を追加 [\#93](https://github.com/lodge/lodge/pull/93) ([kami30k](https://github.com/kami30k))
+- Markdown記法のヘルプを表示できる機能を追加 [\#93](https://github.com/lodge/lodge/pull/93) ([kami-zh](https://github.com/kami-zh))
 - タグ入力補完機能の実装 [\#92](https://github.com/lodge/lodge/pull/92) ([kakipo](https://github.com/kakipo))
 - Bootstrapのバージョンアップに伴うフォントを読み込めなくなる不具合への対応 [\#91](https://github.com/lodge/lodge/pull/91) ([kakusuke](https://github.com/kakusuke))
 - アダプタのバージョン固定 [\#88](https://github.com/lodge/lodge/pull/88) ([kakusuke](https://github.com/kakusuke))
