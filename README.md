@@ -54,7 +54,7 @@ __イントラネット限定でも使える、ナレッジ/ノウハウ情報�
 1. まずは本プロジェクトをcloneしてきます。
 
     ```bash
-    git clone https://github.com/m-yamashita/lodge.git
+    git clone https://github.com/lodge/lodge.git
     ```
 
 1. カレントディレクトリを移動します
