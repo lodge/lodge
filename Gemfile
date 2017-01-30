@@ -64,7 +64,8 @@ gem 'compass-rails', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
-gem 'qiita-markdown'
+gem 'qiita-markdown', '~> 0.14.0'
+gem 'gemoji', '~> 2.0'
 
 group :development do
   gem 'bullet'
