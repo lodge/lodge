@@ -64,7 +64,8 @@ gem 'compass-rails', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
-gem 'qiita-markdown'
+gem 'qiita-markdown', '~> 0.14.0'
+gem 'gemoji', '~> 2.0'
 
 group :development do
   gem 'bullet'
@@ -94,8 +95,7 @@ group :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'rspec-parameterized'
-  gem 'codeclimate-test-reporter', group: :test, require: nil
+  gem 'codeclimate-test-reporter', '~> 0.6.0', group: :test, require: nil
 end
 
 # Include database gems for the adapters found in the database
