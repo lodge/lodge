@@ -137,7 +137,7 @@ bundle exec rake emoji
 以下を実行し、全文検索エンジンのセットアップを行います。
 
 ```bash
-./setup/sunspot-solr/setup-sunspot-solor.sh
+./setup/sunspot-solr/setup-sunspot-solr.sh
 ```
 
 上記により、solrの基本設定及び初回のIndex構築が行われます。
