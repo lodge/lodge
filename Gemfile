@@ -95,7 +95,6 @@ group :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'rspec-parameterized'
   gem 'codeclimate-test-reporter', '~> 0.6.0', group: :test, require: nil
 end
 
