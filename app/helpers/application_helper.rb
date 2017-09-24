@@ -2,7 +2,7 @@ module ApplicationHelper
   NO_TOC_TEXT = '--no-toc'
 
   def markdown(markdown)
-    processor = Qiita::Markdown::Processor.new
+    processor = Qiita::Markdown::Processor.new(hostname: ENV['LODGE_DOMAIN'])
     processor.filters << Lodge::Markdown::Filters::TargetBlankLink
     result = processor.call(markdown)
     result[:output].to_html
