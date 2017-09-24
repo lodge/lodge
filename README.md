@@ -1,4 +1,3 @@
-[![Gitter chat](https://badges.gitter.im/lodge/lodge.png)](https://gitter.im/lodge/lodge)
 [![Build Status](https://travis-ci.org/lodge/lodge.svg?branch=release)](https://travis-ci.org/lodge/lodge)
 [![Coverage Status](https://coveralls.io/repos/lodge/lodge/badge.png?branch=release)](https://coveralls.io/r/lodge/lodge?branch=release)
 [![Code Climate](https://codeclimate.com/github/lodge/lodge/badges/gpa.svg)](https://codeclimate.com/github/lodge/lodge)
@@ -20,6 +19,7 @@ __イントラネット限定でも使える、ナレッジ/ノウハウ情報�
 - Markdown記法による直感的かつ簡単な記述でサクサク書ける
 - コードのシンタックスハイライト機能
 - 投稿前に確認できるプレビュー機能
+- Drag & Dropによる画像アップロード
 - ストック機能により、お気に入りの記事やあとで見たい記事等を手軽に保存
 - 記事に複数のタグをつけて管理
 - タグをフォローすることによる個人ごとのフィードのカスタマイズ表示
@@ -45,11 +45,11 @@ __イントラネット限定でも使える、ナレッジ/ノウハウ情報�
 ## インストール
 
 1. 事前準備として以下が必要ですので、インストールしておきます。
-    - Ruby 2.1, 2.2, 2.3
-    - Gem 2.2以上
-    - MySQL (MySQLを利用する場合)
-    - sqlite3 (sqlite3を利用する場合)
-    - Bundler
+    - Ruby 2.4
+    - Gem 2.6以上
+        - Bundler
+    - MySQL
+    - cmake
 
 1. まずは本プロジェクトをcloneしてきます。
 
@@ -59,30 +59,24 @@ __イントラネット限定でも使える、ナレッジ/ノウハウ情報�
 
 1. カレントディレクトリを移動します
 
-   ```
-   cd lodge
-   ```
+    ```
+    cd lodge
+    ```
 
 1. Bundler をインストールします
 
-   ```
-   gem install bundler
-   ```
+    ```
+    gem install bundler
+    ```
 
-1. `config/database.example.yml` を `config/database.yml` としてコピーし、以下のように編集します(SQLite3もしくはMySQLをご利用になる場合はコメントアウトを外して設定すると楽です)。
+1. `config/database.example.yml` を `config/database.yml` としてコピーし、以下のように編集します。
 
     ```yml
     default: &default
-    #  # === sqlite3 ===
-    #  adapter: sqlite3
-    #  encoding: utf8
-    #  pool: 5
-    
-      # === mysql ===
       adapter: mysql2
-      host: localhost
-      username: your_mysql_user_name
-      password: your_mysql_password
+      host: <your_database_host>
+      username: <your_mysql_user_name>
+      password: <your_mysql_password>
       encoding: utf8
       pool: 5
     ```
@@ -224,51 +218,6 @@ Solrサーバを別のサーバや立てておき、そちらに接続しにい�
 またこのようにSolrサーバを別に構築する場合は、膨大な記事数等がある場合に、
 検索や記事作成/更新時のパフォーマンスが著しく低下してしまうような場合にも有効です。
 (ただ、通常はそこまでの規模になることはほぼ無いであろうと考えられます。)
-
-## Vagrant up
-
-[VirtualBox](https://www.virtualbox.org/) と [Vagrant](http://www.vagrantup.com/) を使って、
-``vagrant up`` することで、VM上に手早く開発環境を用意することができます。
-
-### 手順
-
-1. VirtualBox をインストール
-1. Vagrant をインストール
-1. ``vagrant plugin install vagrant-vbguest``
-1. ``vagrant plugin install vagrant-librarian-chef``
-1. ``vagrant plugin install vagrant-vmware-fusion``
-1. ``vagrant plugin install vagrant-gatling-rsync``
-1. ``vagrant plugin uninstall vagrant-vmware-fusion``
-    * vagrant-gatling-rsync をインストールするために必要だが、VMWare のライセンスを持っていないとエラーになるため削除します
-1. ``git clone https://github.com/m-yamashita/lodge``
-1. ``cd lodge``
-1. ``vagrant up``
-1. VMが起動するまで待つ
-1. ``vagrant gatling-rsync-auto``
-    * ホスト上の ``git clone`` したソースコードを自動的にVM上の ``/vagrant`` に同期するために必要です
-    * ``vagrant rsync-auto`` がなぜか ``rsync__exclude`` を使ってくれないため、 ``vagrant-gatling-rsync`` を利用します
-    * [公式ドキュメントのNFSの項目](https://docs.vagrantup.com/v2/synced-folders/nfs.html) に書かれていますが、VirtualBox の共有フォルダはパフォーマンスが悪いため使用していません。
-
-      > In some cases the default shared folder implementations (such as VirtualBox shared folders) have high performance penalties. 
-
-1. http://localhost:3000/ にアクセスして Lodge の画面を見ることができたら成功です
-
-### 諸々の情報
-
-* アクセス URL
-    * http://localhost:3000/
-* DB
-    * MySQL
-* メールサーバ
-    * VM 内の Postfix
-* Lodge の起動スクリプト
-    * ``/etc/init.d/lodge`` （Unicorn を起動）
-* RAILS_ROOT
-    * ``/vagrant``
-* RAILS_ENV
-    * ``development``
-* ログ
-    * ``/vagrant/log/unicorn.development.log``
 
 ## 最後に
 

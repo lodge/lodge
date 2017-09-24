@@ -1,14 +1,10 @@
 language: ruby
 rvm:
-    - 2.1
-    - 2.2
-    - 2.3.0
-    - 2.3.1
+    - 2.4.0
+    - 2.4.1
     # - ruby-head
 env:
-    - DB=sqlite
     - DB=mysql
-    - DB=postgresql
 before_script:
     - cp config/database.test.yml config/database.yml
     - cp .env.example .env

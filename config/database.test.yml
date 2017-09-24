@@ -1,16 +1,8 @@
 # We currently support 3 databases
 
-sqlite: &sqlite
-  adapter: sqlite3
-
 mysql: &mysql
   adapter: mysql2
   username: root
-  password:
-
-postgresql: &postgresql
-  adapter: postgresql
-  username: postgres
   password:
 
 # Switch a database by ENV['DB'].
