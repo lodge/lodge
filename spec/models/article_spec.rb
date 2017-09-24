@@ -180,7 +180,7 @@ RSpec.describe Article, :type => :model do
     end
 
     it "should create update-notification" do
-      expect(article.create_notification.state).to be_eql(:update)
+      expect(article.create_notification.state).to be_eql('update')
     end
   end
 
