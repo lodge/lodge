@@ -43,7 +43,7 @@ gem 'progress_bar'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'devise', '~> 3.2'
+gem 'devise', '~> 4.3'
 gem 'awesome_print', '~> 1.2'
 gem 'foreigner', '~> 1.6'
 gem 'railroady', '~> 1.1'
