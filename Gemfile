@@ -45,7 +45,6 @@ gem 'progress_bar'
 
 gem 'devise', '~> 4.3'
 gem 'awesome_print', '~> 1.2'
-gem 'foreigner', '~> 1.6'
 gem 'railroady', '~> 1.1'
 gem 'acts-as-taggable-on', '~> 3.3'
 gem 'thin', '~> 1.6'
