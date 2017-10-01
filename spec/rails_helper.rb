@@ -55,7 +55,7 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
 
   config.include Warden::Test::Helpers, type: :feature
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   Capybara.configure do |capybara_config|
     capybara_config.default_driver = :poltergeist

@@ -22,5 +22,6 @@ module Lodge
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.time_zone = "Tokyo"
     config.autoload_paths += %W(#{config.root}/lib)
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
