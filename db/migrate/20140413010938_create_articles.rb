@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration
       t.string :title, null: false, limit: 100
       t.text :body, null: false, default: nil
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_foreign_key :articles, :users, on_delete: :cascade

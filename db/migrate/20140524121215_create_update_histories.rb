@@ -9,7 +9,7 @@ class CreateUpdateHistories < ActiveRecord::Migration
       t.string :old_tags
       t.text :old_body, null: false
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_foreign_key :update_histories, :articles, on_delete: :cascade

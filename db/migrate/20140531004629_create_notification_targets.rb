@@ -4,7 +4,7 @@ class CreateNotificationTargets < ActiveRecord::Migration
       t.references :user, null: false, index: true
       t.references :notification, null: false, index: true
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_foreign_key :notification_targets, :users, on_delete: :cascade

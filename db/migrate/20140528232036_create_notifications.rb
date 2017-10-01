@@ -6,7 +6,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.string  :type, null: false   # for STI
       t.string  :state, null: false  # create, update, destroy
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_foreign_key :notifications, :users, on_delete: :cascade

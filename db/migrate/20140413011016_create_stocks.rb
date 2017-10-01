@@ -4,7 +4,7 @@ class CreateStocks < ActiveRecord::Migration
       t.references :user, null: false, index: true
       t.references :article, null: false, index: true
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_foreign_key :stocks, :users, on_delete: :cascade

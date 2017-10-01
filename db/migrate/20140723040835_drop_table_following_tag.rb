@@ -9,7 +9,7 @@ class DropTableFollowingTag < ActiveRecord::Migration
       t.references :user, null: false, index: true
       t.references :tag, null: false, index: true
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_foreign_key :following_tags, :users, on_delete: :cascade
