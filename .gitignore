@@ -27,7 +27,6 @@
 /solr
 
 # Ignore bundler files.
-/Gemfile.lock
 /vendor/bundle
 
 config/settings.local.yml
