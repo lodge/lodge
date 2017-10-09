@@ -1,6 +1,6 @@
 production:
-  solr:
-    hostname: localhost
+  solr: &solr-prod
+    hostname: solr
     port: 8983
     log_level: WARNING
     path: /solr/production
@@ -9,15 +9,13 @@ production:
 
 development:
   solr:
-    hostname: localhost
-    port: 8982
+    <<: *solr-prod
     log_level: INFO
     path: /solr/development
 
 test:
   solr:
+    <<: *solr-prod
     hostname: localhost
-    port: 8981
-    log_level: WARNING
     path: /solr/test
     
