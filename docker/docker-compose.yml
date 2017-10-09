@@ -25,7 +25,7 @@ services:
     ports:
       - '8983:8983'
     volumes:
-      - solr:/opt/docker-solr/server/solr
+      - solr:/opt/solr/server/solr
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -43,31 +43,32 @@ services:
     ports:
       - '3000:3000'
     command: bundle exec unicorn -c config/unicorn.rb
-    stop_signal: SIGQUIT
     environment:
-      RAILS_ENV: production
       DATABASE_URL: <Your database's url>
       MYSQL_USERNAME: <Your database's username>
       MYSQL_PASSWORD: <Your database's password>
       SECRET_KEY_BASE: <Some random string>
       DEVISE_SECRET_KEY: <Some random string>
+      LODGE_DOMAIN: <Your lodge domain>
+      MAIL_SENDER: <Your email address>
+      SMTP_ADDRESS: <Your smtp server address>
+      SMTP_USERNAME: <Your smtp username>
+      SMTP_PASSWORD: <Your smtp password>
+
+      DELIVERY_METHOD: smtp
+      RAILS_ENV: production
+      SMTP_PORT: 587
       SOLR_URL: http://solr:8983/solr/production
       GOOGLE_CLIENT_ID: 
       GOOGLE_CLIENT_SECRET: 
-      LODGE_DOMAIN: <Your lodge domain>
-      DELIVERY_METHOD: smtp
-      MAIL_SENDER: <Your email address>
-      SMTP_ADDRESS: <Your smtp server address>
-      SMTP_PORT: 587
-      SMTP_USERNAME: <Your smtp username>
-      SMTP_PASSWORD: <Your smtp password>
       SMTP_AUTH_METHOD: plain
       SMTP_ENABLE_STARTTLS_AUTO: 'true'
       SMTP_OPENSSL_VERIFY_MODE: none
       LODGE_THEME: lodge
       SYNTAX_HIGHLIGHT_THEME: pastie
     volumes:
-      - rails:/app
+      - rails:/app/rails/public
+      - rails:/app/rails/vendor/bundle
       - solr:/opt/solr
     links:
       - solr
