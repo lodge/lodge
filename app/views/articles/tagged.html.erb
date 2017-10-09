@@ -1,5 +1,5 @@
 <% content_for :list_title do %>
-  <%= tc("list_title_by_tag", :tag => params[:tag]) %>
+  <%= tc("list_title_by_tag", :tag => params[:tag].force_encoding(Encoding::UTF_8)) %>
 <% end %>
 
 <% content_for :list_title_addition do %>

@@ -29,7 +29,7 @@ class TagsController < ApplicationController
 private
 
   def set_tag
-    @tag = params[:tag]
+    @tag = params[:tag].force_encoding(Encoding::UTF_8)
   end
 
 
