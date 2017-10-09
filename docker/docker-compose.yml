@@ -1,0 +1,73 @@
+version: '2'
+
+volumes:
+  rails:
+    driver: 'local'
+  solr:
+    driver: 'local'
+
+services:
+  nginx:
+    build: containers/nginx
+    stop_signal: SIGQUIT
+    ports:
+      - '80:80'
+    volumes_from:
+      - rails
+    links:
+      - rails
+
+  solr:
+    build:
+      context: containers/solr
+      args:
+        ENV: production
+    ports:
+      - '8983:8983'
+    volumes:
+      - solr:/opt/docker-solr/server/solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - production
+      - /opt/solr/server/solr/configsets/sunspot
+    environment:
+      SOLR_HOME: /opt/solr/server/solr
+
+  rails:
+    build:
+      context: ..
+      dockerfile: ./docker/containers/rails/Dockerfile
+      args:
+        BUNDLE_OPTION: --without development test
+    ports:
+      - '3000:3000'
+    command: bundle exec unicorn -c config/unicorn.rb
+    stop_signal: SIGQUIT
+    environment:
+      RAILS_ENV: production
+      DATABASE_URL: <Your database's url>
+      MYSQL_USERNAME: <Your database's username>
+      MYSQL_PASSWORD: <Your database's password>
+      SECRET_KEY_BASE: <Some random string>
+      DEVISE_SECRET_KEY: <Some random string>
+      SOLR_URL: http://solr:8983/solr/production
+      GOOGLE_CLIENT_ID: 
+      GOOGLE_CLIENT_SECRET: 
+      LODGE_DOMAIN: <Your lodge domain>
+      DELIVERY_METHOD: smtp
+      MAIL_SENDER: <Your email address>
+      SMTP_ADDRESS: <Your smtp server address>
+      SMTP_PORT: 587
+      SMTP_USERNAME: <Your smtp username>
+      SMTP_PASSWORD: <Your smtp password>
+      SMTP_AUTH_METHOD: plain
+      SMTP_ENABLE_STARTTLS_AUTO: 'true'
+      SMTP_OPENSSL_VERIFY_MODE: none
+      LODGE_THEME: lodge
+      SYNTAX_HIGHLIGHT_THEME: pastie
+    volumes:
+      - rails:/app
+      - solr:/opt/solr
+    links:
+      - solr
