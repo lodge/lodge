@@ -13,6 +13,7 @@ services:
       - '3306:3306'
     volumes:
       - mysql2:/var/lib/mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --innodb-large-prefix --innodb-file-format=barracuda --innodb-file-per-table
 
   solr:
     user: solr

@@ -8,10 +8,17 @@ before_script:
     - cp .env.example .env
     - bundle install
 script:
-    - RAILS_ENV=test bin/rake db:create --trace
-    - RAILS_ENV=test bin/rake db:migrate --trace
-    - RAILS_ENV=test bin/rake emoji
-    - RAILS_ENV=test bin/rake spec --trace
+  # To resolve: Mysql2::Error: Specified key was too long; max key length is 767 bytes
+  - echo '[mysqld]' | sudo sh -c 'cat >>  /etc/mysql/my.cnf'
+  - echo 'innodb_file_format=Barracuda' | sudo sh -c 'cat >>  /etc/mysql/my.cnf'
+  - echo 'innodb_file_per_table=1' | sudo sh -c 'cat >>  /etc/mysql/my.cnf'
+  - echo 'innodb_large_prefix=1' | sudo sh -c 'cat >>  /etc/mysql/my.cnf'
+  - sudo service mysql restart
+
+  - RAILS_ENV=test bin/rake db:create --trace
+  - RAILS_ENV=test bin/rake db:migrate --trace
+  - RAILS_ENV=test bin/rake emoji
+  - RAILS_ENV=test bin/rake spec --trace
 notifications:
   webhooks:
     urls:

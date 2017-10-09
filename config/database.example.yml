@@ -9,7 +9,9 @@ default: &default
   host: localhost
   username: root
   password: 
-  encoding: utf8
+  charset: utf8mb4
+  encoding: utf8mb4
+  collation: utf8mb4_general_ci
   pool: 5
 
 development:
