@@ -24,8 +24,3 @@ RUN \
 ADD . $APP_ROOT/
 RUN rm -rf ${APP_ROOT}/docker
 
-RUN rake emoji
-RUN rake acts_as_taggable_on_engine:install:migrations
-
-EXPOSE 3000
-
