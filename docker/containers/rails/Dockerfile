@@ -23,4 +23,5 @@ RUN \
 
 ADD . $APP_ROOT/
 RUN rm -rf ${APP_ROOT}/docker
+RUN mkdir ${APP_ROOT}/log
 
