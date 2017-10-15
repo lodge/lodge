@@ -17,13 +17,11 @@ Indexのサイズもそれに伴い増やしておく必要があることです
 - character_set_results: utf8mb4
 - character_set_server: utf8mb4
 - character_set_filesystem: utf8mb4
-- skip-character-set-client-handshake: 1
 
 ### DB Parameter Group
 
 下記の通り設定する。
 
-- innodb_file_per_table: 1
 - innodb_file_format: Barracuda
 - innodb_large_prefix: 1
 
@@ -145,13 +143,30 @@ docker run -it <RailsのイメージID> bash
 
 ```bash
 # 環境変数でDB情報を設定
+export RAILS_ENV=production
 export DB_HOST=<Your database hostname>
 export DB_USERNAME=<Your database username>
 export DB_PASSWORD=<Your database password>
 
 # DBの準備
 bundle exec rake db:create
+```
+
+上記で改めてECSのデプロイをすることで、コンテナが立ち上がるようになりますので、
+再度SSHし、今度は下記の要領で最後の処理を行います。
+
+```bash
+# RailsのコンテナIDを調べる
+docker ps
+
+# 起動中のコンテナにログイン
+docker exec -it <RailsのイメージID> bash
+```
+
+```
+# DBのマイグレーションと絵文字の追加
 bundle exec rake db:migrate
 bundle exec rake emoji
 ```
 
+上記で準備完了となります。
