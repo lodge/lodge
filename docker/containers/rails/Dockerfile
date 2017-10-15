@@ -15,7 +15,7 @@ WORKDIR $APP_ROOT
 
 COPY ./Gemfile $APP_ROOT/
 COPY ./Gemfile.lock $APP_ROOT/
-COPY config/database.example.yml $APP_ROOT/config/database.yml
+COPY config/database.docker.yml $APP_ROOT/config/database.yml
 
 RUN \
   bundle config --local without test development doc && \
