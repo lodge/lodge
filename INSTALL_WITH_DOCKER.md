@@ -77,7 +77,6 @@ docker-compose build
 docker-compose run rails bundle exec rake db:create
 docker-compose run rails bundle exec rake db:migrate
 docker-compose run rails bundle exec rake emoji
-docker-compose run rails bundle exec rake acts_as_taggable_on_engine:install:migrations
 ```
 
 下記コマンドで起動します。
@@ -106,7 +105,6 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml run rails bundle exec rake db:create
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml run rails bundle exec rake db:migrate
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml run rails bundle exec rake emoji
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml run rails bundle exec rake acts_as_taggable_on_engine:install:migrations
 ```
 
 下記コマンドで開発モードで起動します。

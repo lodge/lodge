@@ -42,11 +42,11 @@ services:
         BUNDLE_OPTION: --without development test
     ports:
       - '3000:3000'
-    command: bundle exec unicorn -c config/unicorn.rb
+    command: bundle exec unicorn -c config/unicorn.rb -E production
     environment:
-      DATABASE_URL: <Your database's url>
-      MYSQL_USERNAME: <Your database's username>
-      MYSQL_PASSWORD: <Your database's password>
+      DB_HOST: <Your database's hostname>
+      DB_USERNAME: <Your database's username>
+      DB_PASSWORD: <Your database's password>
       SECRET_KEY_BASE: <Some random string>
       DEVISE_SECRET_KEY: <Some random string>
       LODGE_DOMAIN: <Your lodge domain>
@@ -68,7 +68,6 @@ services:
       SYNTAX_HIGHLIGHT_THEME: pastie
     volumes:
       - rails:/app/rails/public
-      - rails:/app/rails/vendor/bundle
       - solr:/opt/solr
     links:
       - solr

@@ -32,8 +32,9 @@ services:
         BUNDLE_OPTION: ''
     command: bundle exec rails s -b 0.0.0.0 -p 3000
     environment:
-      DATABASE_URL: 'mysql2://root:melody@mysql2:3306'
-      MYSQL_PASSWORD: 'melody'
+      DB_HOST: mysql2
+      DB_USERNAME: root
+      DB_PASSWORD: melody
       SECRET_KEY_BASE: 50ac642852ac6a26792156fb01bd8b0a30e9c5cdfcc98687a1756659ec2fddc79fc0f8280bd3d116bd5e32de9a960c64ab51cf441d6a5b8d5b56fdf1c17e02c3
       DEVISE_SECRET_KEY: a7b20b50c26be8c6315bb56248bcb7e354dfe8498cabc098a479c03fe006264cec53462392182c4c9332b17d000d9b7b55c8057bfc2bcc1d75e93eb23b1dad36
       LODGE_DOMAIN: localhost
