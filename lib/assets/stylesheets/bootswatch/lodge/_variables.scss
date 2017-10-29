@@ -38,8 +38,8 @@ $brand-danger: #d9534f;
 // Scaffolding
 //$body-bg: #fff;
 $text-color: $gray-dark;
-$link-color: $brand-primary;
-$link-hover-color: darken($link-color, 15%);
+$link-color: lighten($brand-primary, 5%);
+$link-hover-color: darken($link-color, 5%);
 
 // Typography
 //$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
