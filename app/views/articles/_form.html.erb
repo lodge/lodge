@@ -20,7 +20,7 @@
 
   <div class="form-group">
     <%= f.label :tag_list %><br>
-    <%= f.text_field :tag_list, class: ["form-control", "js-tag-names"] %>
+    <%= f.text_field :tag_list, value: @article.tag_list.join(','), class: ["form-control", "js-tag-names"] %>
   </div>
 
   <div class="form-group form-editor">
