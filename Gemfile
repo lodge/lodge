@@ -98,32 +98,37 @@ group :test do
   gem 'codeclimate-test-reporter', group: :test, require: nil
 end
 
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
+
 # Include database gems for the adapters found in the database
 # configuration file
 require 'erb'
 require 'yaml'
-database_file = File.join(File.dirname(__FILE__), 'config/database.yml')
-if File.exist?(database_file)
-  database_config = YAML.load(ERB.new(IO.read(database_file)).result)
-  adapters = database_config.values.map { |c| c['adapter'] }.compact.uniq
-  if adapters.any?
-    adapters.each do |adapter|
-      case adapter
-      when 'mysql2'
-        gem 'mysql2', '~> 0.3.20'
-      when /postgresql/
-        gem 'pg', '~> 0.17'
-      when /sqlite3/
-        gem 'sqlite3', '~> 1.3'
-      else
-        warn(
-          "Unknown database adapter `#{adapter}` found in config/database.yml"
-        )
-      end
-    end
-  else
-    warn('No adapter found in config/database.yml, please configure it first')
-  end
-else
-  warn('Please configure your config/database.yml first')
-end
+# database_file = File.join(File.dirname(__FILE__), 'config/database.yml')
+# if File.exist?(database_file)
+#   database_config = YAML.load(ERB.new(IO.read(database_file)).result)
+#   adapters = database_config.values.map { |c| c['adapter'] }.compact.uniq
+#   if adapters.any?
+#     adapters.each do |adapter|
+#       case adapter
+#       when 'mysql2'
+#         gem 'mysql2', '~> 0.3.20'
+#       when /postgresql/
+#         gem 'pg', '~> 0.17'
+#       when /sqlite3/
+#         gem 'sqlite3', '~> 1.3'
+#       else
+#         warn(
+#           "Unknown database adapter `#{adapter}` found in config/database.yml"
+#         )
+#       end
+#     end
+#   else
+#     warn('No adapter found in config/database.yml, please configure it first')
+#   end
+# else
+#   warn('Please configure your config/database.yml first')
+# end
