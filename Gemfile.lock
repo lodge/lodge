@@ -148,7 +148,7 @@ GEM
       activerecord (>= 3.0.0)
     forgery (0.7.0)
     fssm (0.2.10)
-    gemoji (3.0.0)
+    gemoji (2.1.0)
     github-linguist (4.8.18)
       charlock_holmes (~> 0.7.3)
       escape_utils (~> 1.1.0)
@@ -228,6 +228,7 @@ GEM
     orm_adapter (0.5.0)
     parser (2.5.3.0)
       ast (~> 2.4.0)
+    pg (0.21.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
@@ -280,6 +281,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.14)
       sprockets-rails (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (4.1.14)
       actionpack (= 4.1.14)
       activesupport (= 4.1.14)
@@ -431,6 +437,7 @@ DEPENDENCIES
   factory_girl_rails
   foreigner (~> 1.6)
   forgery
+  gemoji (~> 2.0)
   jbuilder (~> 2.1)
   jquery-fileupload-rails (~> 0.4)
   jquery-rails (~> 3.1)
@@ -439,6 +446,7 @@ DEPENDENCIES
   launchy
   letter_opener
   omniauth-google-oauth2 (~> 0.2)
+  pg (~> 0.18)
   poltergeist
   progress_bar
   pry
@@ -449,6 +457,7 @@ DEPENDENCIES
   rack-mini-profiler
   railroady (~> 1.1)
   rails (= 4.1.14)
+  rails_12factor
   rspec-its
   rspec-parameterized
   rspec-rails
@@ -466,4 +475,4 @@ DEPENDENCIES
   yaml_db
 
 BUNDLED WITH
-   1.16.4
+   1.17.3
