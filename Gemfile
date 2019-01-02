@@ -43,6 +43,7 @@ gem 'progress_bar'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'gemoji', '~> 2.0'
 gem 'devise', '~> 3.2'
 gem 'awesome_print', '~> 1.2'
 gem 'foreigner', '~> 1.6'
@@ -65,6 +66,7 @@ gem 'omniauth-google-oauth2', '~> 0.2'
 gem 'carrierwave', '~> 0.10'
 gem 'jquery-fileupload-rails', '~> 0.4'
 gem 'qiita-markdown'
+gem 'pg', '~> 0.18'
 
 group :development do
   gem 'bullet'
@@ -100,7 +102,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg'
 end
 
 # Include database gems for the adapters found in the database
