@@ -40,3 +40,4 @@ production:
   <<: *default
   #database: lodge_production
   database: lodge_production
+  url: <%= ENV['DATABASE_URL'] %>
