@@ -431,7 +431,7 @@ DEPENDENCIES
   counter_culture (~> 0.1)
   coveralls
   database_cleaner
-  devise (~> 3.2)
+  devise
   diffy (~> 3.0)
   dotenv-rails (~> 0.11)
   factory_girl_rails
