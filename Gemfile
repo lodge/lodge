@@ -44,7 +44,7 @@ gem 'progress_bar'
 # gem 'debugger', group: [:development, :test]
 
 gem 'gemoji', '~> 2.0'
-gem 'devise', '~> 3.2'
+gem 'devise'
 gem 'awesome_print', '~> 1.2'
 gem 'foreigner', '~> 1.6'
 gem 'railroady', '~> 1.1'
