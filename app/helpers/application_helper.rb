@@ -33,7 +33,7 @@ module ApplicationHelper
 
   def gravatar(user, size = 20, opt = {})
     opt = { class: ['user-icon'] }.merge(opt)
-    url = 'http://www.gravatar.com/avatar/' + user.gravatar + '?size=' + size.to_s
+    url = 'https://www.gravatar.com/avatar/' + user.gravatar + '?size=' + size.to_s
     image_tag url, opt.merge(title: user.name, 'data-user-id' => user.id)
   end
 
