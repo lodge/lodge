@@ -5,3 +5,9 @@ require File.expand_path('../config/application', __FILE__)
 load 'tasks/emoji.rake'
 
 Rails.application.load_tasks
+
+require File.expand_path('../rake/common.rb', __FILE__)
+
+Dir.glob('rake/tasks/*.rake').each do |r|
+  load r
+end
